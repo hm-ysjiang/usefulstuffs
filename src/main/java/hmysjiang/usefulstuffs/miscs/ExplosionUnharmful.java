@@ -108,4 +108,9 @@ public class ExplosionUnharmful extends Explosion {
 		}
 	}
 	
+	public void explode(){
+		this.doExplosionA();
+		this.doExplosionB();
+	}
+	
 }
