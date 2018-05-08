@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs;
 
 import hmysjiang.usefulstuffs.handlers.*;
 import hmysjiang.usefulstuffs.init.*;
+import hmysjiang.usefulstuffs.miscs.DmgSrcExcalibur;
 import hmysjiang.usefulstuffs.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -19,6 +20,9 @@ public class UsefulStuffs {
 	
 	@SidedProxy(clientSide = "hmysjiang.usefulstuffs.proxy.ClientProxy", serverSide = "hmysjiang.usefulstuffs.proxy.ServerProxy")
 	public static CommonProxy proxy;
+	
+	
+	public static final DmgSrcExcalibur dmgsrcExcalibur = new DmgSrcExcalibur();
 	
 	
 	@EventHandler

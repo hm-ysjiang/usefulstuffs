@@ -8,6 +8,7 @@ public class Reference {
 	public static final String ACCEPTED_MCVERSION = "[1.10.2]";
 	
 	public static enum ModItems{
+		MAGICAL_WAND("magical_wand", "ItemMagicalWand"),
 		EXCALIBUR("excalibur", "ItemExcalibur");
 		
 		private String unlocalizedName;

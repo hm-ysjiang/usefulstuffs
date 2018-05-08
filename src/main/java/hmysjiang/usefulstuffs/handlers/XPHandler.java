@@ -2,6 +2,8 @@ package hmysjiang.usefulstuffs.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+//Currently not used
+
 /***
  * The code below is from romelo333/notenoughwands
  */

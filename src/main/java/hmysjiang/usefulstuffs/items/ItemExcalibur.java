@@ -1,43 +1,54 @@
 package hmysjiang.usefulstuffs.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.handlers.AchievementHandler;
 import hmysjiang.usefulstuffs.handlers.EnumHandler.ExcaliburType;
-import net.minecraft.block.properties.PropertyBool;
+import hmysjiang.usefulstuffs.miscs.ExplosionUnharmful;
+import hmysjiang.usefulstuffs.miscs.MathStuff;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemExcalibur extends ItemSword {
 	
-	private static final int HARVESTLEVEL = 0;
-	private static final int MAXUSES = 1628;
-	private static final float EFFICIENCY = 0F;
-	private static final float DAMAGE = 7.5F;
-	private static final int ENCHANTABILITY = 14;
-	private static final int FULLCHARGETICK = 50;
+	/***
+	 * The time for player to fully charge the sword
+	 */
+	private static final int FULLCHARGETICK = 3*10;
+	private static final int ATTACKRANGE = 32;
 	
 	private int chargeTicks;
+	private List<BlockPos> affectedBlockPositions;
+	private List<Entity> affectedEntityList;
 	
 
 	public ItemExcalibur() {
-		super(EnumHelper.addToolMaterial(Reference.MOD_ID + "excalibur", HARVESTLEVEL, MAXUSES, EFFICIENCY, DAMAGE, ENCHANTABILITY));
+		super(EnumHelper.addToolMaterial(Reference.MOD_ID + "excalibur", 0, 0, 0F, 7.5F, 14));
 		setUnlocalizedName(Reference.ModItems.EXCALIBUR.getUnlocalizedName());
 		setRegistryName(Reference.ModItems.EXCALIBUR.getRegistryName());
 		this.setHasSubtypes(true);
 		setMaxDamage(0);
 		
 		this.chargeTicks = 0;
+		this.affectedBlockPositions = new ArrayList<BlockPos>();
+		this.affectedEntityList = new ArrayList<Entity>();
 	}
 	
 	@Override
@@ -64,8 +75,7 @@ public class ItemExcalibur extends ItemSword {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-		super.addInformation(stack, playerIn, tooltip, advanced);
-		tooltip.add("excalibur.tooltip");
+		tooltip.add(I18n.format("excalibur.tooltip"));
 	}
 	
 	@Override
@@ -80,28 +90,55 @@ public class ItemExcalibur extends ItemSword {
 					this.chargeTicks++;
 			}
 		}
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand); 
 	}
 	
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		World world = entityLiving.getEntityWorld();
 		if (!world.isRemote) {
-			if (stack.getItem() instanceof ItemExcalibur) {
-				if (entityLiving instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer)entityLiving;
-					if (this.chargeTicks == FULLCHARGETICK && player.experienceTotal >= 40) {
-						System.out.println(String.format("%s swang The Excalibur!", player.getName()));
-						this.chargeTicks = 0;
-						player.experienceTotal -=40;
-						player.getHeldItem(EnumHand.MAIN_HAND).setItemDamage(0);
-					}
-					return super.onEntitySwing(entityLiving, stack);
-				}	
+			if (stack.getItem() instanceof ItemExcalibur && entityLiving instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer)entityLiving;
+				if (this.chargeTicks == FULLCHARGETICK) {
+					excalibur(player);
+					this.chargeTicks = 0;
+					player.getHeldItem(EnumHand.MAIN_HAND).setItemDamage(0);
+				}
 			}
 			return super.onEntitySwing(entityLiving, stack);
 		}
 		return true;
+	}
+
+	/***
+	 * The main part of Excalibur
+	 * @param player
+	 */
+	private void excalibur(EntityPlayer player) {
+		World world = player.worldObj;
+		Vec3d playerEyePos = new Vec3d(player.posX, player.posY+1.5, player.posZ);
+		Vec3d gaze = player.getLookVec();
+		Vec3d vecH = new Vec3d(gaze.xCoord, 0, gaze.zCoord).normalize().scale(ATTACKRANGE+5);
+		for (int angle = 90;angle>=0;angle-=6) {
+			Vec3d direction = MathStuff.getPointByAngle(angle, vecH.xCoord, 32, vecH.zCoord).normalize();
+			for (int i = 5;i<=ATTACKRANGE;i+=3) {
+				Vec3d p = playerEyePos.add(direction.scale(i));
+				affectedBlockPositions.add(new BlockPos(p));
+			}
+		}
+		
+		for (BlockPos pos:affectedBlockPositions) {
+			new ExplosionUnharmful(world, 3.0F, pos.getX(), pos.getY(), pos.getZ()).explode();
+			
+			affectedEntityList.addAll(world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(new BlockPos(pos.getX()-3, pos.getY()-3, pos.getZ()-3), new BlockPos(pos.getX()+4, pos.getY()+4, pos.getZ()+4))));
+		}
+		
+		for (Entity entity:affectedEntityList)
+			entity.attackEntityFrom(UsefulStuffs.dmgsrcExcalibur, 20.0F);
+		
+			
+		affectedBlockPositions.clear();
+		affectedEntityList.clear();
 	}
 	
 }
