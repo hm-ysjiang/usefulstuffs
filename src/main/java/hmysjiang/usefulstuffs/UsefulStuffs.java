@@ -1,9 +1,11 @@
 package hmysjiang.usefulstuffs;
 
+import hmysjiang.usefulstuffs.entitys.projectiles.EntityLightBulb;
 import hmysjiang.usefulstuffs.handlers.*;
 import hmysjiang.usefulstuffs.init.*;
 import hmysjiang.usefulstuffs.miscs.DmgSrcExcalibur;
 import hmysjiang.usefulstuffs.proxy.CommonProxy;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -11,6 +13,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_MCVERSION)
 public class UsefulStuffs {
@@ -31,6 +34,10 @@ public class UsefulStuffs {
 		
 		ModItems.init();
 		ModItems.register();
+		ModBlocks.init();
+		ModBlocks.register();
+		ModEntities.register();
+		
 		
 		proxy.registerRenders();
 	}

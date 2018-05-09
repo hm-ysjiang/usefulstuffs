@@ -10,6 +10,8 @@ public class ClientProxy implements CommonProxy {
 	@Override
 	public void registerRenders() {
 		ModItems.registerRenders();
+		ModBlocks.registerRenders();
+		ModEntities.registerRenders();
 	}
 
 	@Override

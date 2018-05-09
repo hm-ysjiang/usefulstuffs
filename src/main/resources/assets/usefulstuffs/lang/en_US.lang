@@ -2,5 +2,6 @@ item.excalibur.uncharged.name=Excalibur
 item.excalibur.charged.name=Excalibur
 
 excalibur.tooltip=Definitely a MOE-ish girl.
+light_shooter.tooltip=Ammo: %1$s/%2$s
 
 death.attack.usefulstuffs.excalibur.player=%1$s was pulled into %2$s 's fate of promised victory
