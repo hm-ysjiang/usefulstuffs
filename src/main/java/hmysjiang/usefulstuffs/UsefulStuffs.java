@@ -3,9 +3,11 @@ package hmysjiang.usefulstuffs;
 import hmysjiang.usefulstuffs.entitys.projectiles.EntityLightBulb;
 import hmysjiang.usefulstuffs.handlers.*;
 import hmysjiang.usefulstuffs.init.*;
+import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
 import hmysjiang.usefulstuffs.miscs.DmgSrcExcalibur;
 import hmysjiang.usefulstuffs.proxy.CommonProxy;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -44,6 +46,8 @@ public class UsefulStuffs {
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(hmysjiang.usefulstuffs.handlers.EventHandler.class);
+		
 		proxy.registerModelBakeryVariants();
 	}
 	
