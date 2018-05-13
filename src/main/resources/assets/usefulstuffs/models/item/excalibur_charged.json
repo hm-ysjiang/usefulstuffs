@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 {
     "parent": "item/handheld",
     "textures": {
         "layer0": "usefulstuffs:items/excalibur_charged"
     }
 }
+=======
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "usefulstuffs:items/excalibur_charged"
+    }
+}
+>>>>>>> Git init

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 {
     "parent": "usefulstuffs:block/well"
+=======
+{
+    "parent": "usefulstuffs:block/well"
+>>>>>>> Git init
 }

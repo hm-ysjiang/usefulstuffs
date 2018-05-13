@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "variants": {
         "normal": {
@@ -5,3 +6,12 @@
         }
     }
 }
+=======
+{
+    "variants": {
+        "normal": {
+            "model": "usefulstuffs:well"
+        }
+    }
+}
+>>>>>>> Git init

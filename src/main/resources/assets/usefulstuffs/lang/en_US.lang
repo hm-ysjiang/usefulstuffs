@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 item.usefulstuffs.excalibur.uncharged.name=Excalibur
 item.usefulstuffs.excalibur.charged.name=Excalibur
 item.usefulstuffs.light_shooter.name=Light Shooter
@@ -15,4 +16,23 @@ usefulstuffs.light_shooter.tooltip_c=Automatically load when pick up Light Bulbs
 usefulstuffs.well.tooltip_1=TransferRate:%s/t
 usefulstuffs.well.tooltip_2=Automatically fill the 3x3 area around it
 
+=======
+item.usefulstuffs.excalibur.uncharged.name=Excalibur
+item.usefulstuffs.excalibur.charged.name=Excalibur
+item.usefulstuffs.light_shooter.name=Light Shooter
+item.usefulstuffs.light_shooter_collector.name=Light Shooter
+item.usefulstuffs.gaebolg.name=Gáe Bolg
+
+tile.usefulstuffs.light_bulb.name=Light Bulb
+tile.usefulstuffs.well.name=Well of Water Fall
+
+usefulstuffs.excalibur.tooltip=Definitely a MOE-ish girl.
+usefulstuffs.light_shooter.tooltip_1=Ammo: %1$s/%2$s
+usefulstuffs.light_shooter.tooltip_2=Right click to launch
+usefulstuffs.light_shooter.tooltip_3=Shift-Right click to load Light Bulbs
+usefulstuffs.light_shooter.tooltip_c=Automatically load when pick up Light Bulbs
+usefulstuffs.well.tooltip_1=TransferRate:%s/t
+usefulstuffs.well.tooltip_2=Automatically fill the 3x3 area around it
+
+>>>>>>> Git init
 death.attack.usefulstuffs.excalibur.player=%1$s was pulled into %2$s 's fate of promised victory
