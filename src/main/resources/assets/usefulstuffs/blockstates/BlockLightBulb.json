@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
     "variants": {
         "normal": {
@@ -6,12 +5,3 @@
         }
     }
 }
-=======
-{
-    "variants": {
-        "normal": {
-            "model": "usefulstuffs:light_bulb"
-        }
-    }
-}
->>>>>>> Git init

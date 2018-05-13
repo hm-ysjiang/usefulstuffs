@@ -26,6 +26,8 @@ public class TileEntityWell extends TileEntity implements ITickable {
 	public TileEntityWell() {
 		tankWater = new WaterTank(CAPACITY);
 		transRate = 500;
+		if (!this.worldObj.isRemote)
+			System.out.println("TE constructed");
 	}
 	
 	@Override

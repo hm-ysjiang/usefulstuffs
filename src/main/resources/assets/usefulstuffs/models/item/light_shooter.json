@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 {
     "parent": "item/handheld",
     "textures": {
         "layer0": "items/bow_pulling_2"
     }
 }
-=======
-{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "items/bow_pulling_2"
-    }
-}
->>>>>>> Git init

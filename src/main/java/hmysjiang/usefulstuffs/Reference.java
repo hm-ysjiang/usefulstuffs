@@ -36,7 +36,8 @@ public class Reference {
 	
 	public static enum ModBlocks{
 		LIGHT_BULB("light_bulb", "BlockLightBulb"),
-		WELL("well", "BlockWell");
+		WELL("well", "BlockWell"),
+		RAIN_DETECTOR("rain_detector", "BlockRainDetector");
 		
 		private String unlocalizedName;
 		private String registryName;
