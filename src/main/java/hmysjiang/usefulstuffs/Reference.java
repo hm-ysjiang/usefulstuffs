@@ -1,5 +1,7 @@
 package hmysjiang.usefulstuffs;
 
+import net.minecraft.util.ResourceLocation;
+
 public class Reference {
 	
 	public static final String MOD_ID = "usefulstuffs";
@@ -11,7 +13,8 @@ public class Reference {
 		MAGICAL_WAND("magical_wand", "ItemMagicalWand"),
 		EXCALIBUR("excalibur", "ItemExcalibur"),
 		LIGHT_SHOOTER("light_shooter", "ItemLightShooter"),
-		LIGHT_SHOOTER_COLLECTOR("light_shooter_collector", "ItemLightShooterCollector");
+		LIGHT_SHOOTER_COLLECTOR("light_shooter_collector", "ItemLightShooterCollector"),
+		GAEBOLG("gaebolg", "ItemGaeBolg");
 		
 		private String unlocalizedName;
 		private String registryName;
@@ -22,7 +25,7 @@ public class Reference {
 		}
 		
 		public String getUnlocalizedName() {
-			return this.unlocalizedName;
+			return MOD_ID+"."+this.unlocalizedName;
 		}
 		
 		public String getRegistryName() {
@@ -32,7 +35,8 @@ public class Reference {
 	}
 	
 	public static enum ModBlocks{
-		LIGHT_BULB("light_bulb", "BlockLightBulb");
+		LIGHT_BULB("light_bulb", "BlockLightBulb"),
+		WELL("well", "BlockWell");
 		
 		private String unlocalizedName;
 		private String registryName;
@@ -43,7 +47,7 @@ public class Reference {
 		}
 		
 		public String getUnlocalizedName() {
-			return this.unlocalizedName;
+			return MOD_ID+"."+this.unlocalizedName;
 		}
 		
 		public String getRegistryName() {
@@ -53,7 +57,8 @@ public class Reference {
 	}
 	
 	public static enum ModEntities{
-		LIGHT_BULB(0);
+		LIGHT_BULB(0),
+		GAEBOLG(1);
 		
 		private int ID;
 		

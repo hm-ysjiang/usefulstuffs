@@ -1,6 +1,6 @@
 package hmysjiang.usefulstuffs.renders;
 
-import hmysjiang.usefulstuffs.entitys.projectiles.EntityLightBulb;
+import hmysjiang.usefulstuffs.entity.projectiles.EntityLightBulb;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;

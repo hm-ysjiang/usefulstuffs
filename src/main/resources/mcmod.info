@@ -2,8 +2,8 @@
 {
   "modid": "usefulstuffs",
   "name": "Useful Stuffs",
-  "version": "1.0alpha",
-  "mcversion": "1.10.2",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
   "updateUrl": "",
   "authorList": ["hmysjiang"]
 }

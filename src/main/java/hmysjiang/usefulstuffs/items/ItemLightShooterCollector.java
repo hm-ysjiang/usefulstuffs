@@ -20,7 +20,7 @@ public class ItemLightShooterCollector extends ItemLightShooter {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		super.addInformation(stack, playerIn, tooltip, advanced);
-		tooltip.add(I18n.format("light_shooter.tooltip_c"));
+		tooltip.add(I18n.format("usefulstuffs.light_shooter.tooltip_c"));
 	}
 	
 }

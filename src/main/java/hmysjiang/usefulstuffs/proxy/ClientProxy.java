@@ -5,7 +5,7 @@ import hmysjiang.usefulstuffs.init.*;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.util.ResourceLocation;
 
-public class ClientProxy implements CommonProxy {
+public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenders() {

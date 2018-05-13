@@ -3,7 +3,7 @@ package hmysjiang.usefulstuffs.items;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.entitys.projectiles.EntityLightBulb;
+import hmysjiang.usefulstuffs.entity.projectiles.EntityLightBulb;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
@@ -43,9 +43,9 @@ public class ItemLightShooter extends Item {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(KEY_AMMO)) {
-			tooltip.add(I18n.format("light_shooter.tooltip_1", String.valueOf(stack.getTagCompound().getInteger(KEY_AMMO)), String.valueOf(this.MAX_AMMO)));
-			tooltip.add(I18n.format("light_shooter.tooltip_2"));
-			tooltip.add(I18n.format("light_shooter.tooltip_3"));
+			tooltip.add(I18n.format("usefulstuffs.light_shooter.tooltip_1", String.valueOf(stack.getTagCompound().getInteger(KEY_AMMO)), String.valueOf(this.MAX_AMMO)));
+			tooltip.add(I18n.format("usefulstuffs.light_shooter.tooltip_2"));
+			tooltip.add(I18n.format("usefulstuffs.light_shooter.tooltip_3"));
 		}
 	}
 	
@@ -99,7 +99,8 @@ public class ItemLightShooter extends Item {
 			NBTTagCompound nbtcompound = itemStackIn.getTagCompound();
 			if (nbtcompound.getInteger(KEY_AMMO) > 0) {
 				EntityLightBulb entity = new EntityLightBulb(worldIn, playerIn);
-				entity.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+				entity.setThrowableHeading(playerIn.getLookVec().xCoord, playerIn.getLookVec().yCoord, playerIn.getLookVec().zCoord, 1.5F, 0);
+//				entity.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
 				worldIn.spawnEntityInWorld(entity);
 				
 				nbtcompound.setInteger(KEY_AMMO, nbtcompound.getInteger(KEY_AMMO)-1);

@@ -7,6 +7,7 @@ import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.handlers.AchievementHandler;
 import hmysjiang.usefulstuffs.handlers.EnumHandler.ExcaliburType;
+import hmysjiang.usefulstuffs.init.ModDamageSources;
 import hmysjiang.usefulstuffs.miscs.ExplosionUnharmful;
 import hmysjiang.usefulstuffs.miscs.MathStuff;
 import net.minecraft.client.resources.I18n;
@@ -75,7 +76,7 @@ public class ItemExcalibur extends ItemSword {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-		tooltip.add(I18n.format("excalibur.tooltip"));
+		tooltip.add(I18n.format("usefulstuffs.excalibur.tooltip"));
 	}
 	
 	@Override
@@ -99,7 +100,7 @@ public class ItemExcalibur extends ItemSword {
 		if (!world.isRemote) {
 			if (stack.getItem() instanceof ItemExcalibur && entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer)entityLiving;
-				if (this.chargeTicks == FULLCHARGETICK) {
+				if (player.getHeldItem(EnumHand.MAIN_HAND).getItemDamage() == 1) {
 					excalibur(player);
 					this.chargeTicks = 0;
 					player.getHeldItem(EnumHand.MAIN_HAND).setItemDamage(0);
@@ -134,7 +135,7 @@ public class ItemExcalibur extends ItemSword {
 		}
 		
 		for (Entity entity:affectedEntityList)
-			entity.attackEntityFrom(UsefulStuffs.dmgsrcExcalibur, 20.0F);
+			entity.attackEntityFrom(ModDamageSources.dmgsrcExcalibur, 20.0F);
 		
 			
 		affectedBlockPositions.clear();
