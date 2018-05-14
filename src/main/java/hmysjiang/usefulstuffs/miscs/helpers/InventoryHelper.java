@@ -1,11 +1,11 @@
-package hmysjiang.usefulstuffs.miscs;
+package hmysjiang.usefulstuffs.miscs.helpers;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class InventoryCheck {
+public class InventoryHelper {
 	
 	/***
 	 * Return the ItemStack object looking for in player's main inventory, null if not found

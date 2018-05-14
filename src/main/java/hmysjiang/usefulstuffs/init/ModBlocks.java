@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.BlockLightBulb;
+import hmysjiang.usefulstuffs.blocks.BlockRainDetector;
 import hmysjiang.usefulstuffs.blocks.BlockWell;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -15,16 +16,18 @@ public class ModBlocks {
 	
 	public static Block lightbulb;
 	public static Block well;
+	public static Block rain_detector;
 	
 	public static void init() {
 		lightbulb = new BlockLightBulb();
 		well = new BlockWell();
+		rain_detector = new BlockRainDetector();
 	}
 	
 	public static void register() {
 		registerBlock(lightbulb);
 		registerBlock(well);
-		
+		registerBlock(rain_detector);
 	}
 	
 	public static void registerBlock(Block block) {
@@ -37,6 +40,7 @@ public class ModBlocks {
 	public static void registerRenders() {
 		registerRender(lightbulb);
 		registerRender(well);
+		registerRender(rain_detector);
 	}
 	
 	private static void registerRender(Block block) {

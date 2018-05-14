@@ -9,7 +9,7 @@ import hmysjiang.usefulstuffs.handlers.AchievementHandler;
 import hmysjiang.usefulstuffs.handlers.EnumHandler.ExcaliburType;
 import hmysjiang.usefulstuffs.init.ModDamageSources;
 import hmysjiang.usefulstuffs.miscs.ExplosionUnharmful;
-import hmysjiang.usefulstuffs.miscs.MathStuff;
+import hmysjiang.usefulstuffs.miscs.helpers.MathHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -121,7 +121,7 @@ public class ItemExcalibur extends ItemSword {
 		Vec3d gaze = player.getLookVec();
 		Vec3d vecH = new Vec3d(gaze.xCoord, 0, gaze.zCoord).normalize().scale(ATTACKRANGE+5);
 		for (int angle = 90;angle>=0;angle-=6) {
-			Vec3d direction = MathStuff.getPointByAngle(angle, vecH.xCoord, 32, vecH.zCoord).normalize();
+			Vec3d direction = MathHelper.getPointByAngle(angle, vecH.xCoord, 32, vecH.zCoord).normalize();
 			for (int i = 5;i<=ATTACKRANGE;i+=3) {
 				Vec3d p = playerEyePos.add(direction.scale(i));
 				affectedBlockPositions.add(new BlockPos(p));

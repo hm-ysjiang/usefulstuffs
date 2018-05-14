@@ -4,7 +4,7 @@ import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
 import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
-import hmysjiang.usefulstuffs.miscs.InventoryCheck;
+import hmysjiang.usefulstuffs.miscs.helpers.InventoryHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -21,7 +21,7 @@ public class EventHandler {
 		ItemStack stack = event.getItem().getEntityItem();
 		if (!stack.isItemEqual(new ItemStack(Item.getItemFromBlock(ModBlocks.lightbulb))))
 			return;
-		ItemStack light_shooter_c = InventoryCheck.findItemStackInPlayerMainInventory(player, ModItems.lightshooter_c);
+		ItemStack light_shooter_c = InventoryHelper.findItemStackInPlayerMainInventory(player, ModItems.lightshooter_c);
 		if (light_shooter_c != null) {
 			NBTTagCompound nbtcompound = light_shooter_c.getTagCompound();
 			int spare = ItemLightShooter.getMaxAmmo() - nbtcompound.getInteger("Ammo");

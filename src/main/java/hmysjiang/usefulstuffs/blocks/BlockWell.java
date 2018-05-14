@@ -29,11 +29,6 @@ public class BlockWell extends Block implements ITileEntityProvider {
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
-	
-	@Override
-	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.TRANSLUCENT;
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {

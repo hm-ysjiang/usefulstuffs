@@ -6,6 +6,7 @@ item.usefulstuffs.gaebolg.name=Gáe Bolg
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
 tile.usefulstuffs.well.name=Well of Water Fall
+tile.usefulstuffs.rain_detector.name=Rain Detector
 
 usefulstuffs.excalibur.tooltip=Definitely a MOE-ish girl.
 usefulstuffs.light_shooter.tooltip_1=Ammo: %1$s/%2$s

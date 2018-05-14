@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "raining=false": { "model": "usefulstuffs:rain_detector_unactivated" },
+        "raining=true": { "model": "usefulstuffs:rain_detector_activated" }
+    }
+}

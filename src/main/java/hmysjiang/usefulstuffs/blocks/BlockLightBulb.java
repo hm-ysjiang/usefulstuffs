@@ -4,6 +4,7 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -23,7 +24,7 @@ public class BlockLightBulb extends Block {
 		setUnlocalizedName(Reference.ModBlocks.LIGHT_BULB.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.LIGHT_BULB.getRegistryName());
 		setLightLevel(1.0F);
-		
+		setSoundType(SoundType.CLOTH);
 	}
 	
 	@Override

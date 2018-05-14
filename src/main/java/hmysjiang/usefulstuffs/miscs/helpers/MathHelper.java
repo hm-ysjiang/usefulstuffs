@@ -1,8 +1,8 @@
-package hmysjiang.usefulstuffs.miscs;
+package hmysjiang.usefulstuffs.miscs.helpers;
 
 import net.minecraft.util.math.Vec3d;
 
-public class MathStuff {
+public class MathHelper {
 	
 	public static final double RAD2DEG = Math.PI/180;
 
