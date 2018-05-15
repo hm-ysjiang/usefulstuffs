@@ -12,11 +12,13 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -31,7 +33,7 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 		setUnlocalizedName(Reference.ModBlocks.RAIN_DETECTOR.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.RAIN_DETECTOR.getRegistryName());
 		this.setDefaultState(this.blockState.getBaseState().withProperty(RAINING, Boolean.valueOf(false)));
-		this.setHardness(2.0F);
+		this.setHardness(1.0F);
 	}
 	
 	@Override
@@ -54,11 +56,13 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 			if (world.getBlockState(pos).getValue(RAINING)) {
 				if (!world.isRaining()) {
 					world.setBlockState(pos, this.getDefaultState());
+					world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.6F);
 				}
 			}
 			else {
 				if (world.isRaining()) {
 					world.setBlockState(pos, this.getDefaultState().withProperty(RAINING, Boolean.valueOf(true)));
+					world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.6F);
 				}
 			}
 		}

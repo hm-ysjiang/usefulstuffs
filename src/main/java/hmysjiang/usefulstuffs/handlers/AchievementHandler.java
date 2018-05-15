@@ -15,7 +15,7 @@ public class AchievementHandler {
 	
 	private static List<Achievement> achievements = new ArrayList<Achievement>();
 	
-	public static Achievement achievementExcalibur = createAchievement("excalibur", 0, 0, ModItems.excalibur);
+//	public static Achievement achievementExcalibur = createAchievement("excalibur", 0, 0, ModItems.excalibur);
 	
 	public static void register() {
 		Achievement[] achievementArray = new Achievement[achievements.size()];

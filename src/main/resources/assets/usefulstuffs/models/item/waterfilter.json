@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "usefulstuffs:items/excalibur_charged"
+        "layer0": "usefulstuffs:items/umbrella_filter"
     }
 }

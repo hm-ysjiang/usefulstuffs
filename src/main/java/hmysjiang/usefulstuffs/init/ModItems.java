@@ -1,12 +1,8 @@
 package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.handlers.EnumHandler.ExcaliburType;
-import hmysjiang.usefulstuffs.items.ItemExcalibur;
-import hmysjiang.usefulstuffs.items.ItemGaeBolg;
-import hmysjiang.usefulstuffs.items.ItemLightShooter;
-import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
-import hmysjiang.usefulstuffs.items.ItemMagicalWand;
+import hmysjiang.usefulstuffs.items.*;
+import hmysjiang.usefulstuffs.items.crafting.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -16,35 +12,33 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ModItems {
 	
 	public static Item helper;
-	public static Item excalibur;
 	public static Item lightshooter;
 	public static Item lightshooter_c;
-	public static Item gaebolg;
+	public static Item waterfilter;
+	public static Item umbrella;
 	
 	public static void init() {
-		excalibur = new ItemExcalibur();
 		helper = new ItemMagicalWand();
 		lightshooter = new ItemLightShooter();
 		lightshooter_c = new ItemLightShooterCollector();
-		gaebolg = new ItemGaeBolg();
+		waterfilter = new ItemWaterBlackListFilter();
+		umbrella = new ItemUmbrella();
 	}
 	
 	public static void register() {
 		GameRegistry.register(helper);
-		GameRegistry.register(excalibur);
 		GameRegistry.register(lightshooter);
 		GameRegistry.register(lightshooter_c);
-		GameRegistry.register(gaebolg);
+		GameRegistry.register(waterfilter);
+		GameRegistry.register(umbrella);
 	}
 	
 	public static void registerRenders() {
 		registerRender(helper);
 		registerRender(lightshooter);
 		registerRender(lightshooter_c);
-		registerRender(gaebolg);
-		for (int i = 0;i<ExcaliburType.values().length;i++) {
-			registerRender(excalibur, i, "excalibur_" + ExcaliburType.values()[i].getName());
-		}
+		registerRender(waterfilter);
+		registerRender(umbrella);
 	}
 	
 	private static void registerRender(Item item) {

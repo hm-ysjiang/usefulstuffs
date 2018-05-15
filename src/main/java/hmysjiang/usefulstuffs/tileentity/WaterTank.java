@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.miscs;
+package hmysjiang.usefulstuffs.tileentity;
 
 import javax.annotation.Nullable;
 

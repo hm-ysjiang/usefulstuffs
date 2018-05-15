@@ -11,10 +11,10 @@ public class Reference {
 	
 	public static enum ModItems{
 		MAGICAL_WAND("magical_wand", "ItemMagicalWand"),
-		EXCALIBUR("excalibur", "ItemExcalibur"),
 		LIGHT_SHOOTER("light_shooter", "ItemLightShooter"),
 		LIGHT_SHOOTER_COLLECTOR("light_shooter_collector", "ItemLightShooterCollector"),
-		GAEBOLG("gaebolg", "ItemGaeBolg");
+		WATERFILTER("waterfilter", "ItemWaterFilter"),
+		UMBRELLA("umbrella", "ItemUmbrella");
 		
 		private String unlocalizedName;
 		private String registryName;
@@ -58,8 +58,7 @@ public class Reference {
 	}
 	
 	public static enum ModEntities{
-		LIGHT_BULB(0),
-		GAEBOLG(1);
+		LIGHT_BULB(0);
 		
 		private int ID;
 		

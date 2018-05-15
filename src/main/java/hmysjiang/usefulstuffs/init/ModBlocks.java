@@ -1,9 +1,7 @@
 package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.blocks.BlockLightBulb;
-import hmysjiang.usefulstuffs.blocks.BlockRainDetector;
-import hmysjiang.usefulstuffs.blocks.BlockWell;
+import hmysjiang.usefulstuffs.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;

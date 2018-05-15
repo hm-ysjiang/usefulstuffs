@@ -2,10 +2,9 @@ package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
-import hmysjiang.usefulstuffs.entity.projectiles.EntityGaeBolg;
-import hmysjiang.usefulstuffs.entity.projectiles.EntityLightBulb;
-import hmysjiang.usefulstuffs.renders.RenderGaeBolg;
-import hmysjiang.usefulstuffs.renders.RenderLightBulb;
+import hmysjiang.usefulstuffs.entity.*;
+import hmysjiang.usefulstuffs.entity.projectiles.*;
+import hmysjiang.usefulstuffs.renders.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,7 +17,6 @@ public class ModEntities {
 
 	public static void register() {
 		EntityRegistry.registerModEntity(EntityLightBulb.class, I18n.format("entity.light_bulb.name"), Reference.ModEntities.LIGHT_BULB.getID(), UsefulStuffs.instance, 64, 10, true);
-		EntityRegistry.registerModEntity(EntityGaeBolg.class, I18n.format("entity.gaebolg.name"), Reference.ModEntities.GAEBOLG.getID(), UsefulStuffs.instance, 64, 10, true);
 		
 	}
 	
@@ -28,14 +26,6 @@ public class ModEntities {
 			@Override
 			public Render createRenderFor(RenderManager manager) {
 				return new RenderLightBulb(manager, Minecraft.getMinecraft().getRenderItem());
-			}
-		});
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntityGaeBolg.class, new IRenderFactory() {
-
-			@Override
-			public Render createRenderFor(RenderManager manager) {
-				return new RenderGaeBolg(manager);
 			}
 		});
 	}
