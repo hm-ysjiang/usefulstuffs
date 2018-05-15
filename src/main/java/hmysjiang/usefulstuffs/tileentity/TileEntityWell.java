@@ -1,21 +1,18 @@
 package hmysjiang.usefulstuffs.tileentity;
 
+import java.util.ArrayList;
+
 import hmysjiang.usefulstuffs.init.ModBlocks;
+import hmysjiang.usefulstuffs.init.ModItems;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.IWorldNameable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityWell extends TileEntity implements ITickable {
 	
@@ -23,10 +20,12 @@ public class TileEntityWell extends TileEntity implements ITickable {
 	private int transRate;
 	
 	private WaterTank tankWater;
+	private FilteredItemStackHandler handler;
 	
 	public TileEntityWell() {
 		tankWater = new WaterTank(CAPACITY);
 		transRate = 500;
+		handler = new FilteredItemStackHandler().setFilteredItem(ModItems.waterfilter);
 	}
 	
 	@Override

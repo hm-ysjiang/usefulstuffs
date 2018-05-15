@@ -4,6 +4,7 @@ package hmysjiang.usefulstuffs.blocks;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.tileentity.TileEntityWell;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -14,6 +15,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockWell extends Block implements ITileEntityProvider {
@@ -46,10 +50,15 @@ public class BlockWell extends Block implements ITileEntityProvider {
 		tooltip.add(I18n.format("usefulstuffs.well.tooltip_1", new TileEntityWell().getTransferRate()));
 		tooltip.add(I18n.format("usefulstuffs.well.tooltip_2"));
 	}
-	
+
 	@Override
-	public String getHarvestTool(IBlockState state) {
-		return null;
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (heldItem.getItem() == ModItems.waterfilter) {
+			//insert / extract filter
+			return true;
+		}
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
 	}
 
 }
