@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.items;
 
 import hmysjiang.usefulstuffs.Reference;
+import net.minecraft.block.BlockLog;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,16 @@ public class ItemMagicalWand extends Item {
 	public ItemMagicalWand() {
 		setUnlocalizedName(Reference.ModItems.MAGICAL_WAND.getUnlocalizedName());
 		setRegistryName(Reference.ModItems.MAGICAL_WAND.getRegistryName());
+	}
+	
+	@Override
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+			System.out.println(worldIn.getBlockState(pos).getBlock().getClass());
+			System.out.println(worldIn.getBlockState(pos).getBlock() instanceof BlockLog);
+		}
+		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 	
 }

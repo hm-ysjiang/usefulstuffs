@@ -36,4 +36,8 @@ public class WorldHelper {
 		return null;
 	}
 	
+	public static boolean hasNoBlockBelow(World world, BlockPos pos) {
+		return world.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.AIR;
+	}
+	
 }

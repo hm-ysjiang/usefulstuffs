@@ -1,7 +1,6 @@
 package hmysjiang.usefulstuffs.proxy;
 
-import hmysjiang.usefulstuffs.tileentity.TileEntityRainDetector;
-import hmysjiang.usefulstuffs.tileentity.TileEntityWell;
+import hmysjiang.usefulstuffs.tileentity.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -15,6 +14,7 @@ public class CommonProxy {
 	public void registerTileEntity() {
 		GameRegistry.registerTileEntity(TileEntityWell.class, "usefulstuffs:well_of_waterfall");
 		GameRegistry.registerTileEntity(TileEntityRainDetector.class, "usefulstuffs:rain_detector");
+		GameRegistry.registerTileEntity(TileEntityCampfire.class, "usefulstuffs:campfire");
 	}
 	
 }
