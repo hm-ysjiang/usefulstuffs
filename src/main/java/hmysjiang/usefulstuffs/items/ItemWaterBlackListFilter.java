@@ -21,6 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 	
@@ -42,6 +43,9 @@ public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(KEY_BLOCKS)) {
 			NBTTagList list = stack.getTagCompound().getTagList(KEY_BLOCKS, Constants.NBT.TAG_INT_ARRAY);
 			int[] arr = new int[] {world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), side.getIndex()};
+			for (int i = 0 ; i<list.tagCount() ; i++) 
+				if (list.getIntArrayAt(i)[0] == arr[0] && list.getIntArrayAt(i)[1] == arr[1] && list.getIntArrayAt(i)[2] == arr[2] && list.getIntArrayAt(i)[3] == arr[3] && list.getIntArrayAt(i)[4] == arr[4])
+					return;
 			NBTTagIntArray data = new NBTTagIntArray(arr);
 			list.appendTag(data);
 			stack.getTagCompound().setTag(KEY_BLOCKS, list);
@@ -84,7 +88,7 @@ public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 					for (EnumFacing facing:EnumFacing.values())
 						if (facing.getIndex() == data[4])
 							side = facing;
-					tooltip.add(side.name()+" of Block "+blockname+"("+data[1]+", "+data[2]+", "+data[3]+") in dimension id "+data[4]);
+					tooltip.add(side.name()+" of Block "+blockname+"("+data[1]+", "+data[2]+", "+data[3]+") in dimension id "+data[0]);
 					if (i != list.tagCount()-1)
 						tooltip.add("------");
 				}

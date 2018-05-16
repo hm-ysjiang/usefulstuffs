@@ -6,6 +6,7 @@ item.usefulstuffs.waterfilter.name=Water Filter
 tile.usefulstuffs.light_bulb.name=Light Bulb
 tile.usefulstuffs.well.name=Well of Water Fall
 tile.usefulstuffs.rain_detector.name=Rain Detector
+tile.usefulstuffs.campfire.name=Campfire of Traveller's Wisdom
 
 usefulstuffs.ingredient.tooltip=Crafting ingredient
 usefulstuffs.light_shooter.tooltip_1=Ammo: %1$s/%2$s
@@ -13,7 +14,7 @@ usefulstuffs.light_shooter.tooltip_2=Right click to launch
 usefulstuffs.light_shooter.tooltip_3=Shift-Right click to load Light Bulbs
 usefulstuffs.light_shooter.tooltip_c=Automatically load when pick up Light Bulbs
 usefulstuffs.well.tooltip_1=TransferRate:%smB per tick*side
-usefulstuffs.well.tooltip_2=Automatically fill the 3x3 area around it
+usefulstuffs.well.tooltip_2=Automatically fill the 7x7 area around it
 usefulstuffs.waterfilter.tooltip_1=Install to a Well of Water Fall to prevent it from sending water to certain sides of blocks
 usefulstuffs.waterfilter.tooltip_2=Shift+Right click to bind a side of the block
 usefulstuffs.waterfilter.tooltip_3=Right click on a Well to install

@@ -15,17 +15,20 @@ public class ModBlocks {
 	public static Block lightbulb;
 	public static Block well;
 	public static Block rain_detector;
+	public static Block campfire;
 	
 	public static void init() {
 		lightbulb = new BlockLightBulb();
 		well = new BlockWell();
 		rain_detector = new BlockRainDetector();
+		campfire = new BlockCampfire();
 	}
 	
 	public static void register() {
 		registerBlock(lightbulb);
 		registerBlock(well);
 		registerBlock(rain_detector);
+		registerBlock(campfire);
 	}
 	
 	public static void registerBlock(Block block) {
@@ -39,6 +42,7 @@ public class ModBlocks {
 		registerRender(lightbulb);
 		registerRender(well);
 		registerRender(rain_detector);
+		registerRender(campfire);
 	}
 	
 	private static void registerRender(Block block) {

@@ -60,8 +60,8 @@ public class TileEntityWell extends TileEntity implements ITickable {
 		if (!worldObj.isRemote) {
 			List<int[]> blacklist = getFilteredBlocks();
 			boolean filtered;
-			for (int x = -2;x<=2;x++) {
-				for (int z = -2;z<=2;z++) {
+			for (int x = -3;x<=3;x++) {
+				for (int z = -3;z<=3;z++) {
 					BlockPos bpos = new BlockPos(pos.getX()+x, pos.getY(), pos.getZ()+z);
 					TileEntity tile = worldObj.getTileEntity(bpos);
 					if (tile != null && worldObj.getBlockState(bpos) != ModBlocks.well.getDefaultState()) { 
