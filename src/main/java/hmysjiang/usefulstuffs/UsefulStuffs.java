@@ -46,6 +46,7 @@ public class UsefulStuffs {
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
 //		ModEvents.register();
+		RecipeHandler.register();
 		
 		proxy.registerModelBakeryVariants();
 	}

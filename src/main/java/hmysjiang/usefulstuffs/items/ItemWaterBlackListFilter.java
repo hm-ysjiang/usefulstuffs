@@ -1,7 +1,14 @@
 package hmysjiang.usefulstuffs.items;
 
+import java.util.List;
+
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModBlocks;
+import hmysjiang.usefulstuffs.miscs.helpers.WorldHelper;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,25 +29,28 @@ public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 	public ItemWaterBlackListFilter() {
 		setUnlocalizedName(Reference.ModItems.WATERFILTER.getUnlocalizedName());
 		setRegistryName(Reference.ModItems.WATERFILTER.getRegistryName());
+		setMaxStackSize(1);
 	}
 
 	@Override
 	public NBTTagList getBoundBlockListFromNBT(ItemStack stack) {
-		return (stack.hasTagCompound() && stack.getTagCompound().hasKey(KEY_BLOCKS)) ? stack.getTagCompound().getTagList(KEY_BLOCKS, Constants.NBT.TAG_COMPOUND) : new NBTTagList() ;
+		return (stack.hasTagCompound() && stack.getTagCompound().hasKey(KEY_BLOCKS)) ? stack.getTagCompound().getTagList(KEY_BLOCKS, Constants.NBT.TAG_INT_ARRAY) : new NBTTagList() ;
 	}
 
 	@Override
-	public void addBlockToListInNBT(EntityPlayer player, BlockPos pos, ItemStack stack, EnumFacing side) {
+	public void addBlockToListInNBT(World world, BlockPos pos, ItemStack stack, EnumFacing side) {
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(KEY_BLOCKS)) {
-			NBTTagList list = stack.getTagCompound().getTagList(KEY_BLOCKS, Constants.NBT.TAG_COMPOUND);
-			NBTTagIntArray data = new NBTTagIntArray(new int[] {player.dimension, pos.getX(), pos.getY(), pos.getZ(), side.getIndex()});
+			NBTTagList list = stack.getTagCompound().getTagList(KEY_BLOCKS, Constants.NBT.TAG_INT_ARRAY);
+			int[] arr = new int[] {world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), side.getIndex()};
+			NBTTagIntArray data = new NBTTagIntArray(arr);
 			list.appendTag(data);
 			stack.getTagCompound().setTag(KEY_BLOCKS, list);
 		}
 		else {
 			NBTTagCompound compound = new NBTTagCompound();
 			NBTTagList list = new NBTTagList();
-			NBTTagIntArray data = new NBTTagIntArray(new int[] {player.dimension, pos.getX(), pos.getY(), pos.getZ(), side.getIndex()});
+			int[] arr = new int[] {world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), side.getIndex()};
+			NBTTagIntArray data = new NBTTagIntArray(arr);
 			list.appendTag(data);
 			compound.setTag(KEY_BLOCKS, list);
 			stack.setTagCompound(compound);
@@ -50,11 +60,39 @@ public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (playerIn.isSneaking() && worldIn.getBlockState(pos) == ModBlocks.well.getDefaultState()) {
-			addBlockToListInNBT(playerIn, pos, stack, facing);
+		if (playerIn.isSneaking() && worldIn.getBlockState(pos) != ModBlocks.well.getDefaultState()) {
+			addBlockToListInNBT(worldIn, pos, stack, facing);
 			return EnumActionResult.SUCCESS;
 		}
 		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+		tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_1"));
+		tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_2"));
+		tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_3"));
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(KEY_BLOCKS)) {
+			if (GuiScreen.isShiftKeyDown()) {
+				tooltip.add("------");
+				NBTTagList list = getBoundBlockListFromNBT(stack);
+				for (int i = 0 ; i<list.tagCount() ; i++) { 
+					int[] data = list.getIntArrayAt(i);
+					World world = WorldHelper.getWorldFromId(data[0]);
+					String blockname = world.getBlockState(new BlockPos(data[1], data[2], data[3])).getBlock().getUnlocalizedName();
+					EnumFacing side = EnumFacing.DOWN;
+					for (EnumFacing facing:EnumFacing.values())
+						if (facing.getIndex() == data[4])
+							side = facing;
+					tooltip.add(side.name()+" of Block "+blockname+"("+data[1]+", "+data[2]+", "+data[3]+") in dimension id "+data[4]);
+					if (i != list.tagCount()-1)
+						tooltip.add("------");
+				}
+			}
+			else 
+				tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_4"));
+		}
+		super.addInformation(stack, playerIn, tooltip, advanced);
 	}
 	
 }

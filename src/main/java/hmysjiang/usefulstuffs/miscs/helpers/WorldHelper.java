@@ -3,6 +3,8 @@ package hmysjiang.usefulstuffs.miscs.helpers;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 
 public class WorldHelper {
 
@@ -23,6 +25,15 @@ public class WorldHelper {
 	
 	public static boolean isWorldRainingOrGoingTo(World worldIn) {
 		return worldIn.rainingStrength > 0;
+	}
+	
+	public static World getWorldFromId(int id) {
+		for (WorldServer world:DimensionManager.getWorlds()) {
+			if (world.provider.getDimension() == id) {
+				return world;
+			}
+		}
+		return null;
 	}
 	
 }
