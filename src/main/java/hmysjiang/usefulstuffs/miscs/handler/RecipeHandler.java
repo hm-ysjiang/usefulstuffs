@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.handlers;
+package hmysjiang.usefulstuffs.miscs.handler;
 
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.item.ItemStack;

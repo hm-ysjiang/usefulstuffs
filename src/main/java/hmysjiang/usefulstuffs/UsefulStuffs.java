@@ -1,9 +1,10 @@
 package hmysjiang.usefulstuffs;
 
 import hmysjiang.usefulstuffs.entity.projectiles.EntityLightBulb;
-import hmysjiang.usefulstuffs.handlers.*;
 import hmysjiang.usefulstuffs.init.*;
 import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
+import hmysjiang.usefulstuffs.miscs.handler.*;
+import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.proxy.CommonProxy;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,6 +38,8 @@ public class UsefulStuffs {
 		ModBlocks.init();
 		ModBlocks.register();
 		ModEntities.register();
+		
+		PacketHandler.init();
 		
 		
 		proxy.registerRenders();

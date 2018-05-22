@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.miscs.helpers;
+package hmysjiang.usefulstuffs.miscs.helper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,5 +1,6 @@
 package hmysjiang.usefulstuffs;
 
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 
 public class Reference {
@@ -59,7 +60,8 @@ public class Reference {
 	}
 	
 	public static enum ModEntities{
-		LIGHT_BULB(0);
+		LIGHT_BULB(0),
+		FAIRY_LIGHT(1);
 		
 		private int ID;
 		

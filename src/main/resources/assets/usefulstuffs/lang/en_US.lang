@@ -19,3 +19,6 @@ usefulstuffs.waterfilter.tooltip_1=Install to a Well of Water Fall to prevent it
 usefulstuffs.waterfilter.tooltip_2=Shift+Right click to bind a side of the block
 usefulstuffs.waterfilter.tooltip_3=Right click on a Well to install
 usefulstuffs.waterfilter.tooltip_4=<Hold Shift for details>
+
+entity.usefulstuffs.light_bulb.name=LightBulb
+entity.usefulstuffs.fairy_light.name=FairyLight

@@ -1,7 +1,7 @@
 package hmysjiang.usefulstuffs.blocks;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.miscs.helpers.WorldHelper;
+import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
 import hmysjiang.usefulstuffs.tileentity.TileEntityRainDetector;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;

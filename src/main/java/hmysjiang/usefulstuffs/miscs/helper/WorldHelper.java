@@ -1,7 +1,9 @@
-package hmysjiang.usefulstuffs.miscs.helpers;
+package hmysjiang.usefulstuffs.miscs.helper;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -38,6 +40,23 @@ public class WorldHelper {
 	
 	public static boolean hasNoBlockBelow(World world, BlockPos pos) {
 		return world.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.AIR;
+	}
+	
+	public static void updateLightInArea(World worldIn, double posX, double posY, double posZ) {
+		worldIn.markBlockRangeForRenderUpdate(MathHelper.floor_double(posX)-14, MathHelper.floor_double(posY)-14, MathHelper.floor_double(posZ)-14, MathHelper.floor_double(posX)+14, MathHelper.floor_double(posY)+14, MathHelper.floor_double(posZ)+14);
+		worldIn.notifyBlockUpdate(new BlockPos(posX, posY, posZ), worldIn.getBlockState(new BlockPos(posX, posY, posZ)), worldIn.getBlockState(new BlockPos(posX, posY, posZ)), 8);
+		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
+				posX, posY + 1, posZ));
+		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
+				posX, posY - 1, posZ));
+		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
+				posX + 1, posY, posZ));
+		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
+				posX - 1, posY, posZ));
+		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
+				posX, posY, posZ + 1));
+		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
+				posX, posY, posZ - 1));
 	}
 	
 }
