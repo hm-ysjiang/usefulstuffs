@@ -8,7 +8,6 @@ import hmysjiang.usefulstuffs.entity.projectiles.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;

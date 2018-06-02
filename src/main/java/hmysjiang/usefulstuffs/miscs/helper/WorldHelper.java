@@ -43,8 +43,8 @@ public class WorldHelper {
 	}
 	
 	public static void updateLightInArea(World worldIn, double posX, double posY, double posZ) {
-		worldIn.markBlockRangeForRenderUpdate(MathHelper.floor_double(posX)-14, MathHelper.floor_double(posY)-14, MathHelper.floor_double(posZ)-14, MathHelper.floor_double(posX)+14, MathHelper.floor_double(posY)+14, MathHelper.floor_double(posZ)+14);
-		worldIn.notifyBlockUpdate(new BlockPos(posX, posY, posZ), worldIn.getBlockState(new BlockPos(posX, posY, posZ)), worldIn.getBlockState(new BlockPos(posX, posY, posZ)), 8);
+//		worldIn.markBlockRangeForRenderUpdate(new BlockPos(posX, posY, posZ), new BlockPos(posX, posY, posZ));
+//		worldIn.notifyBlockUpdate(new BlockPos(posX, posY, posZ), worldIn.getBlockState(new BlockPos(posX, posY, posZ)), worldIn.getBlockState(new BlockPos(posX, posY, posZ)), 8);
 		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
 				posX, posY + 1, posZ));
 		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
@@ -57,6 +57,17 @@ public class WorldHelper {
 				posX, posY, posZ + 1));
 		worldIn.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(
 				posX, posY, posZ - 1));
+	}
+	
+	public static BlockPos[] getAdjacentBlockPos(BlockPos pos) {
+		return new BlockPos[] {
+				new BlockPos(pos.getX()+1, pos.getY(), pos.getZ()),
+				new BlockPos(pos.getX()-1, pos.getY(), pos.getZ()),
+				new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()),
+				new BlockPos(pos.getX(), pos.getY()-1, pos.getZ()),
+				new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1),
+				new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1)
+				};
 	}
 	
 }

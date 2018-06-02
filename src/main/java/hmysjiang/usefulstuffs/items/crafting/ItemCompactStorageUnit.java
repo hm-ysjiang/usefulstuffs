@@ -8,12 +8,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.client.config.GuiConfigEntries.ChatColorEntry;
 
-public class ItemUmbrella extends ItemIngredient {
+public class ItemCompactStorageUnit extends ItemIngredient {
 	
-	public ItemUmbrella() {
-		setUnlocalizedName(Reference.ModItems.UMBRELLA.getUnlocalizedName());
-		setRegistryName(Reference.ModItems.UMBRELLA.getRegistryName());
+	public ItemCompactStorageUnit() {
+		setUnlocalizedName(Reference.ModItems.CSU.getUnlocalizedName());
+		setRegistryName(Reference.ModItems.CSU.getRegistryName());
 	}
 	
 }

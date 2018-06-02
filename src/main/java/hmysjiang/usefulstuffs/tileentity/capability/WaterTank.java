@@ -1,7 +1,5 @@
 package hmysjiang.usefulstuffs.tileentity.capability;
 
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;

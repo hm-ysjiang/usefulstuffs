@@ -3,7 +3,6 @@ package hmysjiang.usefulstuffs.tileentity.capability;
 import java.util.ArrayList;
 import java.util.List;
 
-import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;

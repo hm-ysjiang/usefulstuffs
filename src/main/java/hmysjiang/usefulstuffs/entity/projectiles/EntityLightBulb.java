@@ -1,13 +1,10 @@
-
 package hmysjiang.usefulstuffs.entity.projectiles;
 
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;

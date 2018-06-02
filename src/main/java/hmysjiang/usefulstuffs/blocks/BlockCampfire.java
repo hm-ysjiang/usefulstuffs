@@ -1,6 +1,5 @@
 package hmysjiang.usefulstuffs.blocks;
 
-import java.util.Iterator;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
@@ -12,6 +11,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -22,8 +22,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -87,6 +87,13 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileEntityCampfire();
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+		super.addInformation(stack, player, tooltip, advanced);
+		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.campfire.tooltip_1"));
+		tooltip.add(TextFormatting.YELLOW + I18n.format("usefulstuffs.campfire.tooltip_2"));
 	}
 
 }

@@ -15,6 +15,8 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityWell.class, "usefulstuffs:well_of_waterfall");
 		GameRegistry.registerTileEntity(TileEntityRainDetector.class, "usefulstuffs:rain_detector");
 		GameRegistry.registerTileEntity(TileEntityCampfire.class, "usefulstuffs:campfire");
+		GameRegistry.registerTileEntity(TileEntityLantern.class, "usefulstuffs:lantern");
+		GameRegistry.registerTileEntity(TileEntityFilingCabinet.class, "usefulstuffs:filing_cabinet");
 	}
 	
 }

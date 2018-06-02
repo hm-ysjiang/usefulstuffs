@@ -2,11 +2,9 @@ package hmysjiang.usefulstuffs.tileentity;
 
 import java.util.List;
 
-import hmysjiang.usefulstuffs.blocks.BlockCampfire;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

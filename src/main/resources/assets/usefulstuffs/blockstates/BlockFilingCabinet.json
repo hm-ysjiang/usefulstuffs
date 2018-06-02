@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "usefulstuffs:filing_cabinet", "y": 180},
+        "facing=south": { "model": "usefulstuffs:filing_cabinet"},
+        "facing=west":  { "model": "usefulstuffs:filing_cabinet", "y": 90},
+        "facing=east":  { "model": "usefulstuffs:filing_cabinet", "y": 270}
+    }
+}

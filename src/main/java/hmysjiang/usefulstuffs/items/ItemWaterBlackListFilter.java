@@ -7,8 +7,6 @@ import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,9 +17,9 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 	
@@ -73,9 +71,9 @@ public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-		tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_1"));
-		tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_2"));
-		tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_3"));
+		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.waterfilter.tooltip_1"));
+		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.waterfilter.tooltip_2"));
+		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.waterfilter.tooltip_3"));
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(KEY_BLOCKS)) {
 			if (GuiScreen.isShiftKeyDown()) {
 				tooltip.add("------");
@@ -94,7 +92,7 @@ public class ItemWaterBlackListFilter extends Item implements IBlockBindable {
 				}
 			}
 			else 
-				tooltip.add(I18n.format("usefulstuffs.waterfilter.tooltip_4"));
+				tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.details.tooltip"));
 		}
 		super.addInformation(stack, playerIn, tooltip, advanced);
 	}

@@ -1,12 +1,11 @@
-
 package hmysjiang.usefulstuffs.blocks;
 
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.tileentity.FilteredItemStackHandler;
 import hmysjiang.usefulstuffs.tileentity.TileEntityWell;
+import hmysjiang.usefulstuffs.tileentity.capability.FilteredItemStackHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -14,12 +13,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -51,8 +50,8 @@ public class BlockWell extends Block implements ITileEntityProvider {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		super.addInformation(stack, player, tooltip, advanced);
-		tooltip.add(I18n.format("usefulstuffs.well.tooltip_1", new TileEntityWell().getTransferRate()));
-		tooltip.add(I18n.format("usefulstuffs.well.tooltip_2"));
+		tooltip.add(I18n.format("usefulstuffs.well.tooltip_1"));
+		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.well.tooltip_2", new TileEntityWell().getTransferRate()));
 	}
 	
 	@Override

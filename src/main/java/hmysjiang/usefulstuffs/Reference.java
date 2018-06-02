@@ -15,7 +15,10 @@ public class Reference {
 		LIGHT_SHOOTER("light_shooter", "ItemLightShooter"),
 		LIGHT_SHOOTER_COLLECTOR("light_shooter_collector", "ItemLightShooterCollector"),
 		WATERFILTER("waterfilter", "ItemWaterFilter"),
-		UMBRELLA("umbrella", "ItemUmbrella");
+		UMBRELLA("umbrella", "ItemUmbrella"),
+		CSU("compact_storage_unit", "ItemCSU"),
+		QUIVER("quiver", "ItemQuiver"),
+		BOW_AND_QUIVER("bow_and_quiver", "ItemBowAndQuiver");
 		
 		private String unlocalizedName;
 		private String registryName;
@@ -39,7 +42,9 @@ public class Reference {
 		LIGHT_BULB("light_bulb", "BlockLightBulb"),
 		WELL("well", "BlockWell"),
 		RAIN_DETECTOR("rain_detector", "BlockRainDetector"),
-		CAMPFIRE("campfire", "BlockCampfire");
+		CAMPFIRE("campfire", "BlockCampfire"),
+		LANTERN("lantern", "BlockLantern"),
+		FILING_CABINET("filing_cabinet", "BlockFilingCabinet");
 		
 		private String unlocalizedName;
 		private String registryName;
