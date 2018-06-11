@@ -17,8 +17,6 @@ public class ModItems {
 	public static Item waterfilter;
 	public static Item umbrella;
 	public static Item csu;
-	public static Item quiver;
-	public static Item bow_and_quiver;
 	
 	public static void init() {
 //		helper = new ItemMagicalWand();
@@ -27,8 +25,6 @@ public class ModItems {
 		waterfilter = new ItemWaterBlackListFilter();
 		umbrella = new ItemUmbrella();
 		csu = new ItemCompactStorageUnit();
-		quiver = new ItemQuiver();
-		bow_and_quiver = new ItemBowQuiver();
 	}
 	
 	public static void register() {
@@ -38,8 +34,6 @@ public class ModItems {
 		GameRegistry.register(waterfilter);
 		GameRegistry.register(umbrella);
 		GameRegistry.register(csu);
-		GameRegistry.register(quiver);
-		GameRegistry.register(bow_and_quiver);
 	}
 	
 	public static void registerRenders() {
@@ -49,8 +43,6 @@ public class ModItems {
 		registerRender(waterfilter);
 		registerRender(umbrella);
 		registerRender(csu);
-		registerRender(quiver);
-		registerRender(bow_and_quiver);
 	}
 	
 	private static void registerRender(Item item) {

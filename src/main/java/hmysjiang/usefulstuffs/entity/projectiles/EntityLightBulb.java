@@ -4,7 +4,11 @@ import hmysjiang.usefulstuffs.init.ModBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -20,7 +24,6 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 
 	public EntityLightBulb(World worldIn, EntityLivingBase throwerIn) {
 		super(worldIn, throwerIn);
-		this.worldObj = worldIn;
 	}
 	
 	public EntityLightBulb(World worldIn, double x, double y, double z) {
@@ -31,16 +34,15 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 	protected void onImpact(RayTraceResult result) {
 		if (!this.worldObj.isRemote) {
 			if (result.typeOfHit == Type.BLOCK) {
-				boolean placed = false;
-				Vec3d motion = new Vec3d(motionX, motionY, motionZ).normalize().scale(0.1D);
+				Vec3d motion = new Vec3d(motionX, motionY, motionZ).normalize().scale(0.05D);
 				Vec3d pos = this.getPositionVector();
-				do {
-					pos.subtract(motion);
-					if (worldObj.getBlockState(new BlockPos(pos)).getMaterial() == Material.AIR) {
-						worldObj.setBlockState(new BlockPos(pos), ModBlocks.lightbulb.getDefaultState());
-						placed = true;
-					}
-				}while(!placed);
+				pos.subtract(motion);
+				if (worldObj.getBlockState(new BlockPos(pos)).getBlock().isReplaceable(worldObj, new BlockPos(pos))) {
+					worldObj.setBlockState(new BlockPos(pos), ModBlocks.lightbulb.getDefaultState());
+				}
+				else {
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, pos.xCoord, pos.yCoord, pos.zCoord, new ItemStack(ModBlocks.lightbulb, 1)));
+				}
 				
 				this.setDead();
 			}

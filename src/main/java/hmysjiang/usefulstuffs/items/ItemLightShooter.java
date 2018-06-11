@@ -86,7 +86,7 @@ public class ItemLightShooter extends Item {
 		if (cd > 0) {
 			cd--;
 			if (cd == 0)
-				worldIn.playSound((EntityPlayer) entityIn, entityIn.getPosition(), SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.PLAYERS, 3.0F, 1.0F);
+				worldIn.playSound((EntityPlayer) entityIn, entityIn.getPosition(), SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class ItemLightShooter extends Item {
 	}
 	
 	protected void launchAmmo(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.PLAYERS, 3.0F, 1.0F);
+		worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		if (!worldIn.isRemote) {
 			NBTTagCompound nbtcompound = itemStackIn.getTagCompound();
 			if (nbtcompound.getInteger(KEY_AMMO) > 0) {
@@ -138,7 +138,6 @@ public class ItemLightShooter extends Item {
 				}
 			}
 		}
-		
 	}
 	
 	public static int getMaxAmmo() {

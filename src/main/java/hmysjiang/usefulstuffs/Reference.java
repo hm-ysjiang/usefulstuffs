@@ -11,21 +11,17 @@ public class Reference {
 	public static final String ACCEPTED_MCVERSION = "[1.10.2]";
 	
 	public static enum ModItems{
-		MAGICAL_WAND("magical_wand", "ItemMagicalWand"),
-		LIGHT_SHOOTER("light_shooter", "ItemLightShooter"),
-		LIGHT_SHOOTER_COLLECTOR("light_shooter_collector", "ItemLightShooterCollector"),
-		WATERFILTER("waterfilter", "ItemWaterFilter"),
-		UMBRELLA("umbrella", "ItemUmbrella"),
-		CSU("compact_storage_unit", "ItemCSU"),
-		QUIVER("quiver", "ItemQuiver"),
-		BOW_AND_QUIVER("bow_and_quiver", "ItemBowAndQuiver");
+		MAGICAL_WAND("magical_wand"),
+		LIGHT_SHOOTER("light_shooter"),
+		LIGHT_SHOOTER_COLLECTOR("light_shooter_collector"),
+		WATERFILTER("waterfilter"),
+		UMBRELLA("umbrella"),
+		CSU("compact_storage_unit");
 		
 		private String unlocalizedName;
-		private String registryName;
 		
-		ModItems(String unlocalizedName, String registryName) {
+		ModItems(String unlocalizedName) {
 			this.unlocalizedName = unlocalizedName;
-			this.registryName = registryName;
 		}
 		
 		public String getUnlocalizedName() {
@@ -33,25 +29,23 @@ public class Reference {
 		}
 		
 		public String getRegistryName() {
-			return this.registryName;
+			return this.unlocalizedName;
 		}
 		
 	}
 	
 	public static enum ModBlocks{
-		LIGHT_BULB("light_bulb", "BlockLightBulb"),
-		WELL("well", "BlockWell"),
-		RAIN_DETECTOR("rain_detector", "BlockRainDetector"),
-		CAMPFIRE("campfire", "BlockCampfire"),
-		LANTERN("lantern", "BlockLantern"),
-		FILING_CABINET("filing_cabinet", "BlockFilingCabinet");
+		LIGHT_BULB("light_bulb"),
+		WELL("well"),
+		RAIN_DETECTOR("rain_detector"),
+		CAMPFIRE("campfire"),
+		LANTERN("lantern"),
+		FILING_CABINET("filing_cabinet");
 		
 		private String unlocalizedName;
-		private String registryName;
 		
-		ModBlocks(String unlocalizedName, String registryName) {
+		ModBlocks(String unlocalizedName) {
 			this.unlocalizedName = unlocalizedName;
-			this.registryName = registryName;
 		}
 		
 		public String getUnlocalizedName() {
@@ -59,7 +53,7 @@ public class Reference {
 		}
 		
 		public String getRegistryName() {
-			return this.registryName;
+			return this.unlocalizedName;
 		}
 		
 	}
