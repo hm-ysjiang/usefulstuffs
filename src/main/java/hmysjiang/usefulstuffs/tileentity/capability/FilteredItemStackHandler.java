@@ -24,8 +24,10 @@ public class FilteredItemStackHandler extends ItemStackHandler {
 		return this.filter;
 	}
 	
-	public FilteredItemStackHandler setFilteredItem(Item item) {
-		this.filter.add(item);
+	public FilteredItemStackHandler setFilteredItem(Item... items) {
+		for (Item item:items) {
+			filter.add(item);
+		}
 		return this;
 	}
 	
@@ -36,7 +38,7 @@ public class FilteredItemStackHandler extends ItemStackHandler {
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 		for (Item item:filter) 
-			if (stack.isItemEqual(new ItemStack(item)))
+			if (stack.isItemEqualIgnoreDurability(new ItemStack(item)))
 				return super.insertItem(slot, stack, simulate);
 		return stack;
 	}

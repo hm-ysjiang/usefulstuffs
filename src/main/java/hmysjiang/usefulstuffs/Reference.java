@@ -16,7 +16,11 @@ public class Reference {
 		LIGHT_SHOOTER_COLLECTOR("light_shooter_collector"),
 		WATERFILTER("waterfilter"),
 		UMBRELLA("umbrella"),
-		CSU("compact_storage_unit");
+		CSU("compact_storage_unit"),
+		HAND_GUN("gun_hand"),
+		BULLET("bullet"),
+		BULLET_HEAD("bullet_head"),
+		BENTO("bento");
 		
 		private String unlocalizedName;
 		
@@ -60,7 +64,8 @@ public class Reference {
 	
 	public static enum ModEntities{
 		LIGHT_BULB(0),
-		FAIRY_LIGHT(1);
+		FAIRY_LIGHT(1),
+		BULLET(2);
 		
 		private int ID;
 		

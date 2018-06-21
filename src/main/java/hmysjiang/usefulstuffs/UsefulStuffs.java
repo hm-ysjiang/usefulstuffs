@@ -45,6 +45,7 @@ public class UsefulStuffs {
 		ModEvents.register();
 		ModCraftingRecipes.register();
 		
+		proxy.init();
 		proxy.registerModelBakeryVariants();
 	}
 	

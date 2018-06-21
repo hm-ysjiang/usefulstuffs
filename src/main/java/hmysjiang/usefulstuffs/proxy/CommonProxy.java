@@ -1,9 +1,16 @@
 package hmysjiang.usefulstuffs.proxy;
 
+import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.client.gui.GUIHandler;
 import hmysjiang.usefulstuffs.tileentity.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
+	
+	public static void init() {
+		NetworkRegistry.INSTANCE.registerGuiHandler(UsefulStuffs.instance, new GUIHandler());
+	}
 	
 	public void registerRenders() {
 	}

@@ -17,6 +17,7 @@ public class ModEntities {
 	public static void register() {
 		EntityRegistry.registerModEntity(EntityLightBulb.class, "light_bulb", Reference.ModEntities.LIGHT_BULB.getID(), UsefulStuffs.instance, 64, 10, true);
 		EntityRegistry.registerModEntity(EntityFairyLight.class, "fairy_light", Reference.ModEntities.FAIRY_LIGHT.getID(), UsefulStuffs.instance, 64, 10, true);
+		EntityRegistry.registerModEntity(EntityBullet.class, "bullet", Reference.ModEntities.BULLET.getID(), UsefulStuffs.instance, 64, 10, true);
 	}
 	
 	public static void registerRenders() {
@@ -33,6 +34,14 @@ public class ModEntities {
 			@Override
 			public Render createRenderFor(RenderManager manager) {
 				return new RenderFairyLight(manager);
+			}
+		});
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, new IRenderFactory() {
+
+			@Override
+			public Render createRenderFor(RenderManager manager) {
+				return new RenderBullet(manager);
 			}
 		});
 	}

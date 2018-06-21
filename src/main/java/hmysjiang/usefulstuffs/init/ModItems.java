@@ -1,8 +1,17 @@
 package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.items.*;
-import hmysjiang.usefulstuffs.items.crafting.*;
+import hmysjiang.usefulstuffs.items.ItemBento;
+import hmysjiang.usefulstuffs.items.ItemLightShooter;
+import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
+import hmysjiang.usefulstuffs.items.ItemWaterBlackListFilter;
+import hmysjiang.usefulstuffs.items.crafting.ItemBullethead;
+import hmysjiang.usefulstuffs.items.crafting.ItemCompactStorageUnit;
+import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
+import hmysjiang.usefulstuffs.items.gun.ItemBullet;
+import hmysjiang.usefulstuffs.items.gun.ItemHandGun;
+import hmysjiang.usefulstuffs.items.variants.EnumBulletHead;
+import hmysjiang.usefulstuffs.items.variants.EnumBulletVariants;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -17,6 +26,10 @@ public class ModItems {
 	public static Item waterfilter;
 	public static Item umbrella;
 	public static Item csu;
+	public static Item bullet;
+	public static Item hand_gun;
+	public static Item bento;
+	public static Item bullet_head;
 	
 	public static void init() {
 //		helper = new ItemMagicalWand();
@@ -25,6 +38,10 @@ public class ModItems {
 		waterfilter = new ItemWaterBlackListFilter();
 		umbrella = new ItemUmbrella();
 		csu = new ItemCompactStorageUnit();
+		bullet = new ItemBullet();
+		bullet_head = new ItemBullethead();
+		hand_gun = new ItemHandGun();
+		bento = new ItemBento();
 	}
 	
 	public static void register() {
@@ -34,6 +51,10 @@ public class ModItems {
 		GameRegistry.register(waterfilter);
 		GameRegistry.register(umbrella);
 		GameRegistry.register(csu);
+		GameRegistry.register(bullet);
+		GameRegistry.register(bullet_head);
+		GameRegistry.register(hand_gun);
+		GameRegistry.register(bento);
 	}
 	
 	public static void registerRenders() {
@@ -43,6 +64,16 @@ public class ModItems {
 		registerRender(waterfilter);
 		registerRender(umbrella);
 		registerRender(csu);
+		
+		for (int i = 0 ; i<EnumBulletVariants.values().length ; i++) {
+			registerRender(bullet, i, "bullet_" + EnumBulletVariants.values()[i].getName());
+		}
+		for (int i = 0 ; i<EnumBulletHead.values().length ; i++) {
+			registerRender(bullet, i, "bullet_head_" + EnumBulletVariants.values()[i].getName());
+		}
+		
+		registerRender(hand_gun);
+		registerRender(bento);
 	}
 	
 	private static void registerRender(Item item) {

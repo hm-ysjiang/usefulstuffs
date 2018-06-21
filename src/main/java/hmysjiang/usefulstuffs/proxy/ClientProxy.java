@@ -16,7 +16,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerModelBakeryVariants() {
-//		ModelBakery.registerItemVariants(ModItems.excalibur, new ResourceLocation(Reference.MOD_ID, "excalibur_uncharged"), new ResourceLocation(Reference.MOD_ID, "excalibur_charged"));
+		ModelBakery.registerItemVariants(ModItems.bullet, new ResourceLocation(Reference.MOD_ID, "bullet_shell"), new ResourceLocation(Reference.MOD_ID, "bullet_normal"));
 	}
 
 }
