@@ -1,9 +1,8 @@
 package hmysjiang.usefulstuffs.proxy;
 
-import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.init.*;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.util.ResourceLocation;
+import hmysjiang.usefulstuffs.init.ModBlocks;
+import hmysjiang.usefulstuffs.init.ModEntities;
+import hmysjiang.usefulstuffs.init.ModItems;
 
 public class ClientProxy extends CommonProxy {
 
@@ -16,7 +15,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerModelBakeryVariants() {
-		ModelBakery.registerItemVariants(ModItems.bullet, new ResourceLocation(Reference.MOD_ID, "bullet_shell"), new ResourceLocation(Reference.MOD_ID, "bullet_normal"));
+//		ModelBakery.registerItemVariants(ModItems.bullet, new ResourceLocation(Reference.MOD_ID, "bullet_shell"), new ResourceLocation(Reference.MOD_ID, "bullet_normal"));
 	}
 
 }

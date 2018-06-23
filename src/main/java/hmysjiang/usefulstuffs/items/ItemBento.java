@@ -1,8 +1,11 @@
 package hmysjiang.usefulstuffs.items;
 
+import java.util.List;
+
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.client.gui.GUIHandler;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +20,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -113,6 +117,12 @@ public class ItemBento extends Item {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+		tooltip.add(I18n.format("usefulstuffs.bento.tooltip_1"));
+		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.bento.tooltip_2"));
 	}
 
 }

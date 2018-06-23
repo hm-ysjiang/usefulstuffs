@@ -24,6 +24,9 @@ public class PlayerCraftingListener {
 			else if (!player.hasAchievement(AchievementHandler.achievementRainDetector) && crafting.isItemEqual(new ItemStack(ModBlocks.rain_detector))) {
 				player.addStat(AchievementHandler.achievementRainDetector);
 			}
+			else if (!player.hasAchievement(AchievementHandler.achievementBuildingWand) && crafting.isItemEqual(new ItemStack(ModItems.building_wand))) {
+				player.addStat(AchievementHandler.achievementBuildingWand);
+			}
 		}
 	}
 	

@@ -1,8 +1,11 @@
 package hmysjiang.usefulstuffs.miscs.helper;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -68,6 +71,60 @@ public class WorldHelper {
 				new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1),
 				new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1)
 				};
+	}
+	
+	public static Object[] getBlockPosFacingEntityLookingAt(EntityLivingBase entity, int range) {
+		Vec3d entityEyePos = entity.getPositionVector().add(new Vec3d(0, entity.getEyeHeight(), 0));
+		Vec3d startPos = new Vec3d(entityEyePos.xCoord, entityEyePos.yCoord, entityEyePos.zCoord);
+		Vec3d gaze = entity.getLookVec().scale(0.05D);
+		BlockPos prev = new BlockPos(entityEyePos);
+		for (int i = 1 ; i<=range*20 ; i++) {
+			BlockPos pos = new BlockPos(startPos.add(gaze.scale(i)));
+			if (entity.worldObj.getBlockState(pos).getMaterial() != Material.AIR) {
+				return new Object[] {pos, getRelationBetweenAdjacentBlocks(pos, prev)};
+			}
+			if (!pos.equals(prev)) {
+				prev = new BlockPos(startPos.add(gaze.scale(i)));
+			}
+		}
+		return null;
+	}
+	
+	public static EnumFacing getRelationBetweenAdjacentBlocks(BlockPos dominant, BlockPos recessive) {
+		if (dominant.getX() != recessive.getX()) {
+			if (dominant.getY() != recessive.getY() || dominant.getZ() != recessive.getZ()) return null;
+			if (dominant.getX() > recessive.getX()) return EnumFacing.WEST;
+			else return EnumFacing.EAST;
+		}
+		else if (dominant.getY() != recessive.getY()) {
+			if (dominant.getX() != recessive.getX() || dominant.getZ() != recessive.getZ()) return null;
+			if (dominant.getY() > recessive.getY()) return EnumFacing.DOWN;
+			else return EnumFacing.UP;
+		}
+		else if (dominant.getZ() != recessive.getZ()) {
+			if (dominant.getX() != recessive.getX() || dominant.getY() != recessive.getY()) return null;
+			if (dominant.getZ() > recessive.getZ()) return EnumFacing.NORTH;
+			else return EnumFacing.SOUTH;
+		}
+		else return null;
+	}
+	
+	public static BlockPos getPositionFromPosAndFacing(BlockPos pos, EnumFacing facing) {
+		switch(facing) {
+		case WEST:
+			return new BlockPos(pos.getX()-1, pos.getY(), pos.getZ());
+		case EAST:
+			return new BlockPos(pos.getX()+1, pos.getY(), pos.getZ());
+		case NORTH:
+			return new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1);
+		case SOUTH:
+			return new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1);
+		case UP:
+			return new BlockPos(pos.getX(), pos.getY()+1, pos.getZ());
+		case DOWN:
+			return new BlockPos(pos.getX(), pos.getY()-1, pos.getZ());
+		default: return null;
+		}
 	}
 	
 }

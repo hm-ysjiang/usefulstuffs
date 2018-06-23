@@ -3,6 +3,10 @@ item.usefulstuffs.light_shooter_collector.name=Light Shooter
 item.usefulstuffs.umbrella.name=Umbrella
 item.usefulstuffs.waterfilter.name=Water Filter
 item.usefulstuffs.compact_storage_unit.name=Compact Storage Unit
+item.usefulstuffs.bento.name=Bento Box
+item.usefulstuffs.building_wand.name=Building Wand
+item.usefulstuffs.building_wand_infinite.name=Infinite Building Wand
+item.usefulstuffs.building_wizard.name=Building Wizard
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
 tile.usefulstuffs.well.name=Well of Water Fall
@@ -29,6 +33,13 @@ usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
 usefulstuffs.filing_cabinet.tooltip_2=1080 slots for unstackable items
 usefulstuffs.filing_cabinet.tooltip_3=GUI implementing, still interactable through other mods
 usefulstuffs.rain_detector.tooltip=Look at the recipe and its model, %1$sTOTALLY-MAKE-SENSE
+usefulstuffs.bento.tooltip_1=Holds 6 stacks of food
+usefulstuffs.bento.tooltip_2=Seems to not return the bowls...
+usefulstuffs.building_wand.tooltip_1=Place blocks from the block player looking at to player
+usefulstuffs.building_wand.tooltip_2=Put block in offhand to specify blocks to be placed
+usefulstuffs.building_wand.tooltip_normal=MaxRange: 16 blocks
+usefulstuffs.building_wand.tooltip_infinite=MaxRange: 32 blocks, %1$sUnlimited durability
+
 
 entity.usefulstuffs.light_bulb.name=LightBulb
 entity.usefulstuffs.fairy_light.name=FairyLight
@@ -39,3 +50,5 @@ achievement.light_shooter=Light up the world
 achievement.light_shooter.desc=Pew Pew Pew
 achievement.rain_detector=Genius.
 achievement.rain_detector.desc=The rain drops fall on the umbrella, umbrella hits the button, which triggers the signal.TOTALLY MAKE SENSE
+achievement.building_wand=Belated Blessing
+achievement.building_wand.desc=For building purpose, like Greek Temples or etc.

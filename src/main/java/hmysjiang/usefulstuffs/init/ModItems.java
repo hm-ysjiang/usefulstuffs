@@ -1,17 +1,8 @@
 package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.items.ItemBento;
-import hmysjiang.usefulstuffs.items.ItemLightShooter;
-import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
-import hmysjiang.usefulstuffs.items.ItemWaterBlackListFilter;
-import hmysjiang.usefulstuffs.items.crafting.ItemBullethead;
-import hmysjiang.usefulstuffs.items.crafting.ItemCompactStorageUnit;
-import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
-import hmysjiang.usefulstuffs.items.gun.ItemBullet;
-import hmysjiang.usefulstuffs.items.gun.ItemHandGun;
-import hmysjiang.usefulstuffs.items.variants.EnumBulletHead;
-import hmysjiang.usefulstuffs.items.variants.EnumBulletVariants;
+import hmysjiang.usefulstuffs.items.*;
+import hmysjiang.usefulstuffs.items.crafting.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -20,60 +11,62 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModItems {
 	
-//	public static Item helper;
+	public static Item helper;
 	public static Item lightshooter;
 	public static Item lightshooter_c;
 	public static Item waterfilter;
 	public static Item umbrella;
 	public static Item csu;
-	public static Item bullet;
-	public static Item hand_gun;
 	public static Item bento;
-	public static Item bullet_head;
+	public static Item building_wand;
+	public static Item building_wand_infinite;
+	public static Item building_wizard;
+	
+	private static final boolean TEST_MODE = true;
 	
 	public static void init() {
-//		helper = new ItemMagicalWand();
+		if (TEST_MODE)
+			helper = new ItemMagicalWand();
 		lightshooter = new ItemLightShooter();
 		lightshooter_c = new ItemLightShooterCollector();
 		waterfilter = new ItemWaterBlackListFilter();
 		umbrella = new ItemUmbrella();
 		csu = new ItemCompactStorageUnit();
-		bullet = new ItemBullet();
-		bullet_head = new ItemBullethead();
-		hand_gun = new ItemHandGun();
 		bento = new ItemBento();
+		building_wand = new ItemBuildingWand(Reference.ModItems.BUILDING_WAND.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND.getRegistryName());
+		building_wand_infinite = new ItemBuildingWandInfinite(Reference.ModItems.BUILDING_WAND_INFINITE.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND_INFINITE.getRegistryName());
+		building_wizard = new ItemBuildingWizard();
+		
 	}
 	
 	public static void register() {
-//		GameRegistry.register(helper);
+		if (TEST_MODE)
+			GameRegistry.register(helper);
 		GameRegistry.register(lightshooter);
 		GameRegistry.register(lightshooter_c);
 		GameRegistry.register(waterfilter);
 		GameRegistry.register(umbrella);
 		GameRegistry.register(csu);
-		GameRegistry.register(bullet);
-		GameRegistry.register(bullet_head);
-		GameRegistry.register(hand_gun);
 		GameRegistry.register(bento);
+		GameRegistry.register(building_wand);
+		GameRegistry.register(building_wand_infinite);
+		GameRegistry.register(building_wizard);
+		
 	}
 	
 	public static void registerRenders() {
-//		registerRender(helper);
+		if (TEST_MODE)
+			registerRender(helper);
 		registerRender(lightshooter);
 		registerRender(lightshooter_c);
 		registerRender(waterfilter);
 		registerRender(umbrella);
 		registerRender(csu);
-		
-		for (int i = 0 ; i<EnumBulletVariants.values().length ; i++) {
-			registerRender(bullet, i, "bullet_" + EnumBulletVariants.values()[i].getName());
-		}
-		for (int i = 0 ; i<EnumBulletHead.values().length ; i++) {
-			registerRender(bullet, i, "bullet_head_" + EnumBulletVariants.values()[i].getName());
-		}
-		
-		registerRender(hand_gun);
 		registerRender(bento);
+		registerRender(building_wand);
+		registerRender(building_wand_infinite);
+		registerRender(building_wizard);
+		
 	}
 	
 	private static void registerRender(Item item) {

@@ -22,7 +22,7 @@ public class LightBulbPickup {
 		EntityItem item = event.getItem();
 		ItemStack stack = item.getEntityItem();
 		if (stack.isItemEqual(new ItemStack(ModBlocks.lightbulb))) {
-			ItemStack collector = InventoryHelper.findItemStackInPlayerInventory(player, ModItems.lightshooter_c);
+			ItemStack collector = InventoryHelper.findStackInPlayerInventory(player, new ItemStack(ModItems.lightshooter_c));
 			if (collector != null) {
 				NBTTagCompound nbtcompound = collector.getTagCompound();
 				int spare = ItemLightShooter.getMaxAmmo() - nbtcompound.getInteger("Ammo");

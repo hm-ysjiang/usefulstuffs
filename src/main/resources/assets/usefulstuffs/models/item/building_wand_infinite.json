@@ -1,0 +1,6 @@
+{
+    "parent": "usefulstuffs:item/building_wand",
+    "textures": {
+        "layer0": "usefulstuffs:items/building_wand_infinite"
+    }
+}

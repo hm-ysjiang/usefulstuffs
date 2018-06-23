@@ -1,13 +1,10 @@
 package hmysjiang.usefulstuffs;
 
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
-
 public class Reference {
 	
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "1.0alpha";
+	public static final String VERSION = "1.1.0";
 	public static final String ACCEPTED_MCVERSION = "[1.10.2]";
 	
 	public static enum ModItems{
@@ -17,10 +14,10 @@ public class Reference {
 		WATERFILTER("waterfilter"),
 		UMBRELLA("umbrella"),
 		CSU("compact_storage_unit"),
-		HAND_GUN("gun_hand"),
-		BULLET("bullet"),
-		BULLET_HEAD("bullet_head"),
-		BENTO("bento");
+		BENTO("bento"),
+		BUILDING_WAND("building_wand"),
+		BUILDING_WAND_INFINITE("building_wand_infinite"),
+		BUILDING_WIZARD("building_wizard");
 		
 		private String unlocalizedName;
 		
