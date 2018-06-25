@@ -14,6 +14,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionLily extends Potion {
 	
@@ -57,6 +59,7 @@ public class PotionLily extends Potion {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
 		TextureAtlasSprite sprite = mc.getTextureMapBlocks().getAtlasSprite(TEXTURE.toString());
@@ -67,6 +70,7 @@ public class PotionLily extends Potion {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
 		TextureAtlasSprite sprite = mc.getTextureMapBlocks().getAtlasSprite(TEXTURE.toString());

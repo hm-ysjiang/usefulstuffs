@@ -26,4 +26,6 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityFilingCabinet.class, "usefulstuffs:filing_cabinet");
 	}
 	
+	public void registerSideOnly() {}
+	
 }

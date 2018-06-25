@@ -40,12 +40,13 @@ public class UsefulStuffs {
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
+		proxy.init();
+		proxy.registerModelBakeryVariants();
+		proxy.registerSideOnly();
+		
 		ModEvents.register();
 		ModPotion.register();
 		ModCraftingRecipes.register();
-		
-		proxy.init();
-		proxy.registerModelBakeryVariants();
 	}
 	
 	@EventHandler
