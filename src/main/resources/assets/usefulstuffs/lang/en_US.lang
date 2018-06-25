@@ -40,7 +40,6 @@ usefulstuffs.building_wand.tooltip_2=Put block in offhand to specify blocks to b
 usefulstuffs.building_wand.tooltip_normal=MaxRange: 16 blocks
 usefulstuffs.building_wand.tooltip_infinite=MaxRange: 32 blocks, %1$sUnlimited durability
 
-
 entity.usefulstuffs.light_bulb.name=LightBulb
 entity.usefulstuffs.fairy_light.name=FairyLight
 
@@ -52,3 +51,8 @@ achievement.rain_detector=Genius.
 achievement.rain_detector.desc=The rain drops fall on the umbrella, umbrella hits the button, which triggers the signal.TOTALLY MAKE SENSE
 achievement.building_wand=Belated Blessing
 achievement.building_wand.desc=For building purpose, like Greek Temples or etc.
+
+potion.effect.lily=Potion of Floating LilyPad
+splash_potion.effect.lily=Splash Potion of Floating LilyPad
+lingering_potion.effect.lily=Lingering Potion of Floating LilyPad
+effect.usefulstuffs.lily=Li-ly

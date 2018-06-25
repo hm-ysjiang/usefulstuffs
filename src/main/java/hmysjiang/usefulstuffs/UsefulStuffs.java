@@ -23,8 +23,6 @@ public class UsefulStuffs {
 	public static CommonProxy proxy;
 	
 	
-	
-	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		ModItems.init();
@@ -43,6 +41,7 @@ public class UsefulStuffs {
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
 		ModEvents.register();
+		ModPotion.register();
 		ModCraftingRecipes.register();
 		
 		proxy.init();

@@ -22,10 +22,8 @@ public class ModItems {
 	public static Item building_wand_infinite;
 	public static Item building_wizard;
 	
-	private static final boolean TEST_MODE = true;
-	
 	public static void init() {
-		if (TEST_MODE)
+		if (Reference.TEST_MODE)
 			helper = new ItemMagicalWand();
 		lightshooter = new ItemLightShooter();
 		lightshooter_c = new ItemLightShooterCollector();
@@ -40,7 +38,7 @@ public class ModItems {
 	}
 	
 	public static void register() {
-		if (TEST_MODE)
+		if (Reference.TEST_MODE)
 			GameRegistry.register(helper);
 		GameRegistry.register(lightshooter);
 		GameRegistry.register(lightshooter_c);
@@ -55,7 +53,7 @@ public class ModItems {
 	}
 	
 	public static void registerRenders() {
-		if (TEST_MODE)
+		if (Reference.TEST_MODE)
 			registerRender(helper);
 		registerRender(lightshooter);
 		registerRender(lightshooter_c);

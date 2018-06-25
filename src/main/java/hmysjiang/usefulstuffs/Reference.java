@@ -4,8 +4,9 @@ public class Reference {
 	
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "1.1.0";
+	public static final String VERSION = "1.1.1";
 	public static final String ACCEPTED_MCVERSION = "[1.10.2]";
+	public static final boolean TEST_MODE = false;
 	
 	public static enum ModItems{
 		MAGICAL_WAND("magical_wand"),
