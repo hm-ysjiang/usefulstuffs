@@ -31,7 +31,6 @@ usefulstuffs.campfire.tooltip_1=Place logs in the 5*5 area beneath it to boost t
 usefulstuffs.campfire.tooltip_2=Sneak and light a log up
 usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
 usefulstuffs.filing_cabinet.tooltip_2=1080 slots for unstackable items
-usefulstuffs.filing_cabinet.tooltip_3=GUI implementing, still interactable through other mods
 usefulstuffs.rain_detector.tooltip=Look at the recipe and its model, %1$sTOTALLY-MAKE-SENSE
 usefulstuffs.bento.tooltip_1=Holds 6 stacks of food
 usefulstuffs.bento.tooltip_2=Seems to not return the bowls...
@@ -56,3 +55,6 @@ potion.effect.lily=Potion of Floating LilyPad
 splash_potion.effect.lily=Splash Potion of Floating LilyPad
 lingering_potion.effect.lily=Lingering Potion of Floating LilyPad
 effect.usefulstuffs.lily=Li-ly
+
+usefulstuffs.gui.bento.name=Bento Box
+usefulstuffs.gui.filing_cabinet.name=Bento Box

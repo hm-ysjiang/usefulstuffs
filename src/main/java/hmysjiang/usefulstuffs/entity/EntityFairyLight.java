@@ -3,8 +3,8 @@ package hmysjiang.usefulstuffs.entity;
 import javax.annotation.Nullable;
 
 import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
-import hmysjiang.usefulstuffs.network.FLDead;
 import hmysjiang.usefulstuffs.network.PacketHandler;
+import hmysjiang.usefulstuffs.network.packet.FLDead;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;

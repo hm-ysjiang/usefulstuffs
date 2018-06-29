@@ -26,6 +26,7 @@ public class ItemBuildingWand extends Item {
 	public ItemBuildingWand(String unloacalizedName, String registryName) {
 		setUnlocalizedName(unloacalizedName);
 		setRegistryName(registryName);
+		setMaxStackSize(1);
 		
 		if (!(this instanceof ItemBuildingWandInfinite)) {
 			setMaxDamage(16 * 128);

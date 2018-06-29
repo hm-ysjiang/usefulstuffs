@@ -5,7 +5,7 @@ import java.util.List;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.tileentity.TileEntityWell;
-import hmysjiang.usefulstuffs.tileentity.capability.FilteredItemStackHandler;
+import hmysjiang.usefulstuffs.tileentity.capability.ItemStackHandlerWell;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -72,7 +72,7 @@ public class BlockWell extends Block implements ITileEntityProvider {
 			}
 			else if (heldItem.isItemEqual(new ItemStack(ModItems.waterfilter))) {
 				TileEntityWell tile = (TileEntityWell) worldIn.getTileEntity(pos);
-				FilteredItemStackHandler handler = (FilteredItemStackHandler) tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+				ItemStackHandlerWell handler = (ItemStackHandlerWell) tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 				if (handler.insertItem(0, heldItem.copy(), true) == null) {
 					handler.insertItem(0, heldItem.copy(), false);
 					playerIn.inventory.deleteStack(heldItem);

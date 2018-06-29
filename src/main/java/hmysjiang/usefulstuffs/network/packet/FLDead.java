@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.network;
+package hmysjiang.usefulstuffs.network.packet;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;

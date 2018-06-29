@@ -6,7 +6,7 @@ import java.util.List;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemWaterBlackListFilter;
-import hmysjiang.usefulstuffs.tileentity.capability.FilteredItemStackHandler;
+import hmysjiang.usefulstuffs.tileentity.capability.ItemStackHandlerWell;
 import hmysjiang.usefulstuffs.tileentity.capability.WaterTank;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,12 +29,12 @@ public class TileEntityWell extends TileEntity implements ITickable {
 	
 	private int transRate;
 	private WaterTank tankWater;
-	private FilteredItemStackHandler handler;
+	private ItemStackHandlerWell handler;
 	
 	public TileEntityWell() {
 		tankWater = new WaterTank(CAPACITY);
 		transRate = 500;
-		handler = new FilteredItemStackHandler().setFilteredItem(ModItems.waterfilter);
+		handler = new ItemStackHandlerWell().setFilteredItem(ModItems.waterfilter);
 	}
 	
 	@Override

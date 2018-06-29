@@ -1,6 +1,6 @@
 package hmysjiang.usefulstuffs.tileentity;
 
-import hmysjiang.usefulstuffs.tileentity.capability.UnstackableItemStackHandler;
+import hmysjiang.usefulstuffs.tileentity.capability.ItemStackHandlerFilingCabinet;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -12,10 +12,10 @@ public class TileEntityFilingCabinet extends TileEntity implements ITickable {
 	
 	public static final String KEY_CONT = "Contents";
 	
-	private UnstackableItemStackHandler handler;
+	private ItemStackHandlerFilingCabinet handler;
 	
 	public TileEntityFilingCabinet() {
-		handler = new UnstackableItemStackHandler(1080);
+		handler = new ItemStackHandlerFilingCabinet(1080);
 	}
 	
 	@Override
@@ -40,6 +40,11 @@ public class TileEntityFilingCabinet extends TileEntity implements ITickable {
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setTag(KEY_CONT, handler.serializeNBT());
 		return super.writeToNBT(compound);
+	}
+	
+	public void sort() {
+		this.handler.sort();
+		this.markDirty();
 	}
 
 	@Override

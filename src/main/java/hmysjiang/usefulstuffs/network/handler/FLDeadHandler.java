@@ -1,6 +1,7 @@
-package hmysjiang.usefulstuffs.network;
+package hmysjiang.usefulstuffs.network.handler;
 
 import hmysjiang.usefulstuffs.entity.EntityFairyLight;
+import hmysjiang.usefulstuffs.network.packet.FLDead;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

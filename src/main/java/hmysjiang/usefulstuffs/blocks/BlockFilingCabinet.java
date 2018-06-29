@@ -3,6 +3,8 @@ package hmysjiang.usefulstuffs.blocks;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.client.gui.GUIHandler;
 import hmysjiang.usefulstuffs.tileentity.TileEntityFilingCabinet;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -17,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -50,6 +53,18 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 	}
 	
 	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile != null && tile instanceof TileEntityFilingCabinet) {
+				playerIn.openGui(UsefulStuffs.instance, GUIHandler.GUI_FILING_CABINET_1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			}
+		}
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
+	}
+	
+	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		IItemHandler handler = ((TileEntityFilingCabinet)worldIn.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for (int i = 0 ; i<handler.getSlots() ; i++)
@@ -76,10 +91,8 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		super.addInformation(stack, player, tooltip, advanced);
-		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.wip.tooltip"));
 		tooltip.add(TextFormatting.GOLD + I18n.format("usefulstuffs.filing_cabinet.tooltip_1"));
 		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.filing_cabinet.tooltip_2"));
-		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.filing_cabinet.tooltip_3"));
 	}
 	
 }

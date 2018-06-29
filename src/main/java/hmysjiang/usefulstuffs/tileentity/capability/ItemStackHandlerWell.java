@@ -7,16 +7,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class FilteredItemStackHandler extends ItemStackHandler {
+public class ItemStackHandlerWell extends ItemStackHandler {
 	
 	private List<Item> filter;
 	
-	public FilteredItemStackHandler(int size) {
+	public ItemStackHandlerWell(int size) {
 		super(size);
 		this.filter = new ArrayList<Item>();
 	}
 	
-	public FilteredItemStackHandler() {
+	public ItemStackHandlerWell() {
 		this(1);
 	}
 	
@@ -24,7 +24,7 @@ public class FilteredItemStackHandler extends ItemStackHandler {
 		return this.filter;
 	}
 	
-	public FilteredItemStackHandler setFilteredItem(Item... items) {
+	public ItemStackHandlerWell setFilteredItem(Item... items) {
 		for (Item item:items) {
 			filter.add(item);
 		}
