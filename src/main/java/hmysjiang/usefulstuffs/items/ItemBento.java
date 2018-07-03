@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,9 +23,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ItemBento extends Item {
+public class ItemBento extends ItemFood {
 	
 	public ItemBento() {
+		super(0, 0, false);
 		setUnlocalizedName(Reference.ModItems.BENTO.getUnlocalizedName());
 		setRegistryName(Reference.ModItems.BENTO.getRegistryName());
 		setMaxStackSize(1);
@@ -83,12 +83,10 @@ public class ItemBento extends Item {
         ItemStackHandler handler = new ItemStackHandler(6);
         handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
         for (int i = 0 ; i<handler.getSlots() ; i++) {
-        	if (handler.getStackInSlot(i) != null) {
+        	if (handler.getStackInSlot(i) != null && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
         		food = handler.getStackInSlot(i);
-        		food.stackSize--;
-        		if (food.stackSize == 0) {
-        			handler.setStackInSlot(i, null);
-        		}
+        		food = food.onItemUseFinish(worldIn, entityLiving);
+        		handler.setStackInSlot(i, food.stackSize == 0 ? null : food);
         		break;
         	}
         }
@@ -96,10 +94,7 @@ public class ItemBento extends Item {
         if (entityLiving instanceof EntityPlayer)
         {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
-            entityplayer.getFoodStats().addStats((ItemFood) food.getItem(), food);
-            worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
             entityplayer.addStat(StatList.getObjectUseStats(this));
-            entityplayer.addStat(StatList.getObjectUseStats(food.getItem()));
         }
         
         NBTTagCompound compound = stack.getTagCompound();
@@ -123,6 +118,40 @@ public class ItemBento extends Item {
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		tooltip.add(I18n.format("usefulstuffs.bento.tooltip_1"));
 		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.bento.tooltip_2"));
+	}
+	
+	@Override
+	public int getHealAmount(ItemStack stack) {
+		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
+        	return 0;
+        }
+        ItemStack food = null;
+        ItemStackHandler handler = new ItemStackHandler(6);
+        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+        for (int i = 0 ; i<handler.getSlots() ; i++) {
+        	if (handler.getStackInSlot(i) != null && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
+        		food = handler.getStackInSlot(i);
+        		return ((ItemFood)food.getItem()).getHealAmount(food);
+        	}
+        }
+		return super.getHealAmount(stack);
+	}
+	
+	@Override
+	public float getSaturationModifier(ItemStack stack) {
+		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
+        	return 0;
+        }
+        ItemStack food = null;
+        ItemStackHandler handler = new ItemStackHandler(6);
+        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+        for (int i = 0 ; i<handler.getSlots() ; i++) {
+        	if (handler.getStackInSlot(i) != null && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
+        		food = handler.getStackInSlot(i);
+        		return ((ItemFood)food.getItem()).getSaturationModifier(food);
+        	}
+        }
+		return super.getSaturationModifier(stack);
 	}
 
 }
