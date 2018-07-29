@@ -15,7 +15,7 @@ public class CampfireCreate {
 	public static void onInteract(PlayerInteractEvent event) {
 		EntityPlayer player = event.getEntityPlayer();
 		if (player.isSneaking() && player.getHeldItemMainhand() != null && player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(Items.FLINT_AND_STEEL))) {
-			if (player.worldObj.getBlockState(event.getPos()) == Blocks.LOG.getDefaultState()) {
+			if (player.world.getBlockState(event.getPos()) == Blocks.LOG.getDefaultState()) {
 				if (!player.capabilities.isCreativeMode) {
 					ItemStack stack = player.getHeldItemMainhand();
 					if (stack.getItemDamage() >= stack.getMaxDamage()) {
@@ -29,7 +29,7 @@ public class CampfireCreate {
 						stack.setItemDamage(stack.getItemDamage()+1);
 					}
 				}
-				player.worldObj.setBlockState(event.getPos(), ModBlocks.campfire.getDefaultState());
+				player.world.setBlockState(event.getPos(), ModBlocks.campfire.getDefaultState());
 				event.setCanceled(true);
 			}
 		}

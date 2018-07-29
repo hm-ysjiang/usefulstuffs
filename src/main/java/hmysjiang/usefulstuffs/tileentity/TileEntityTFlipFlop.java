@@ -45,16 +45,17 @@ public class TileEntityTFlipFlop extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 		if (input != null) {	//tile loaded
-			if (WorldHelper.isBlockSideBeingPowered(worldObj, pos, input) ^ buf) {
+			if (world.isSidePowered(pos.offset(input), input) ^ buf) {
 				buf = !buf;
 				if (buf) {
 					q = !q;
-					worldObj.markAndNotifyBlock(pos, worldObj.getChunkFromBlockCoords(pos), worldObj.getBlockState(pos), worldObj.getBlockState(pos), 3);
+					world.markAndNotifyBlock(pos, world.getChunkFromBlockCoords(pos), world.getBlockState(pos), world.getBlockState(pos), 3);
 				}
 			}
-			if (WorldHelper.isBlockSideBeingPowered(worldObj, pos, reset)) {
+			if (world.isSidePowered(pos.offset(reset), reset)) {
 				q = false;
-			}	
+				world.markAndNotifyBlock(pos, world.getChunkFromBlockCoords(pos), world.getBlockState(pos), world.getBlockState(pos), 3);
+			}
 		}
 	}
 	

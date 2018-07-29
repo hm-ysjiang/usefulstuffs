@@ -60,7 +60,7 @@ public class EntityFairyLight extends Entity implements IGlowable {
 		setLight();
 		
 		//This runs on the client side to check if self dead on server side
-		if (worldObj.isRemote) {
+		if (world.isRemote) {
 			if (dataManager.get(DEAD_SERVER) && !packetSend) {
 				packetSend = true;
 				PacketHandler.INSTANCE.sendToServer(new FLDead(new BlockPos(this)));
@@ -69,7 +69,7 @@ public class EntityFairyLight extends Entity implements IGlowable {
 		
 		 
 		if (!prevMotive) {
-			if (!worldObj.isRemote) {
+			if (!world.isRemote) {
 				applyMotion();
 			}
 			prevMotive = true;
@@ -105,8 +105,8 @@ public class EntityFairyLight extends Entity implements IGlowable {
 
 	@Override
 	public void setLight() {
-		this.worldObj.setLightFor(EnumSkyBlock.BLOCK, new BlockPos(this), (14*(dataManager.get(DEAD_SERVER) ? 0 : 1)));
-		WorldHelper.updateLightInArea(worldObj, posX, posY, posZ);
+		this.world.setLightFor(EnumSkyBlock.BLOCK, new BlockPos(this), (14*(dataManager.get(DEAD_SERVER) ? 0 : 1)));
+		WorldHelper.updateLightInArea(world, posX, posY, posZ);
 	}
 
 	protected void applyMotion() {

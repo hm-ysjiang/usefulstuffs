@@ -46,7 +46,7 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 			EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
 			if (playerIn.isSneaking()) 
-				playerIn.addChatMessage(new TextComponentString("Radius :"+((TileEntityCampfire)worldIn.getTileEntity(pos)).getBuffRadius()));
+				playerIn.sendMessage(new TextComponentString("Radius :"+((TileEntityCampfire)worldIn.getTileEntity(pos)).getBuffRadius()));
 		}
 		return true;
 	}
@@ -58,7 +58,7 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		worldIn.spawnEntityInWorld(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STICK, rnd.nextInt(2)+2)));
+		worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STICK, rnd.nextInt(2)+2)));
 		super.breakBlock(worldIn, pos, state);
 	}
 	

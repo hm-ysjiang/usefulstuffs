@@ -59,11 +59,13 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 		TileEntityTFlipFlop tile = (TileEntityTFlipFlop)blockAccess.getTileEntity(pos);
 		EnumFacing output = tile.getOutputSide();
 		boolean q = tile.shouldQOutput();
-		if (output == side) {
-			return q ? 15 : 0;
-		}
-		else if (output.getOpposite() == side) {
-			return q ? 0 : 15;
+		if (output != null) {
+			if (output == side) {
+				return q ? 15 : 0;
+			}
+			else if (output.getOpposite() == side) {
+				return q ? 0 : 15;
+			}	
 		}
 		return 0;
 	}
@@ -79,7 +81,7 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 	}
 	
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
 			int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}

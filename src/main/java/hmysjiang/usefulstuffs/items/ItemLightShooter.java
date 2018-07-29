@@ -104,7 +104,7 @@ public class ItemLightShooter extends Item {
 				EntityLightBulb entity = new EntityLightBulb(worldIn, playerIn);
 				entity.setThrowableHeading(playerIn.getLookVec().xCoord, playerIn.getLookVec().yCoord, playerIn.getLookVec().zCoord, 1.5F, 0);
 //				entity.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-				worldIn.spawnEntityInWorld(entity);
+				worldIn.spawnEntity(entity);
 				
 				nbtcompound.setInteger(KEY_AMMO, nbtcompound.getInteger(KEY_AMMO)-1);
 				itemStackIn.setTagCompound(nbtcompound);
@@ -115,7 +115,7 @@ public class ItemLightShooter extends Item {
 	}
 
 	protected void addAmmo(EntityPlayer playerIn, ItemStack itemStackIn) {
-		if (!playerIn.worldObj.isRemote) {
+		if (!playerIn.world.isRemote) {
 			for (ItemStack itemstack : playerIn.inventory.mainInventory) {
 				if (itemStackIn.getTagCompound().getInteger(KEY_AMMO) == MAX_AMMO)
 					break; 

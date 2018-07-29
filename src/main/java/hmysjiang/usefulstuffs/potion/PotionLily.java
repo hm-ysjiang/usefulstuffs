@@ -39,9 +39,9 @@ public class PotionLily extends Potion {
 		if (entityLivingBaseIn != null && !entityLivingBaseIn.isSneaking()) {
 			if (activeEffect != null) {
 				BlockPos entityPos = new BlockPos(entityLivingBaseIn);
-				Block blockUnder = entityLivingBaseIn.worldObj.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()-1, entityPos.getZ())).getBlock();
-				Block blockFeet = entityLivingBaseIn.worldObj.getBlockState(entityPos).getBlock();
-				Block blockHead = entityLivingBaseIn.worldObj.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()+1, entityPos.getZ())).getBlock();
+				Block blockUnder = entityLivingBaseIn.world.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()-1, entityPos.getZ())).getBlock();
+				Block blockFeet = entityLivingBaseIn.world.getBlockState(entityPos).getBlock();
+				Block blockHead = entityLivingBaseIn.world.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()+1, entityPos.getZ())).getBlock();
 				if (!(blockFeet instanceof BlockLiquid && blockHead instanceof BlockLiquid)){
 					if (blockFeet instanceof BlockLiquid) {
 						if (entityLivingBaseIn.posY%1 > 0.75) {

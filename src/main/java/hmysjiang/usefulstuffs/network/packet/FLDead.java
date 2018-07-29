@@ -48,7 +48,7 @@ public class FLDead implements IMessage {
 			int y = message.posY;
 			int z = message.posZ;
 			
-			World world = ctx.getServerHandler().playerEntity.worldObj;
+			World world = ctx.getServerHandler().playerEntity.world;
 			for (EntityFairyLight entity:world.getEntitiesWithinAABB(EntityFairyLight.class, new AxisAlignedBB(new BlockPos(x, y, z))))
 				entity.setDead();
 				

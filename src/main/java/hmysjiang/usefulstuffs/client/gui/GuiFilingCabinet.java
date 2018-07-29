@@ -67,12 +67,12 @@ public class GuiFilingCabinet extends GuiContainer {
 		if (button.id != 10) {
 			EntityPlayer player = ((ContainerFilingCabinet)this.inventorySlots).getPlayer();
 			BlockPos pos = ((ContainerFilingCabinet)this.inventorySlots).getPos();
-			PacketHandler.INSTANCE.sendToServer(new GuiButtonPressed(player.worldObj, player, pos.getX(), pos.getY(), pos.getZ(), button.id));	
+			PacketHandler.INSTANCE.sendToServer(new GuiButtonPressed(player.world, player, pos.getX(), pos.getY(), pos.getZ(), button.id));	
 		}
 		else {
 			EntityPlayer player = ((ContainerFilingCabinet)this.inventorySlots).getPlayer();
 			BlockPos pos = ((ContainerFilingCabinet)this.inventorySlots).getPos();
-			PacketHandler.INSTANCE.sendToServer(new GuiSortPressed(player.worldObj, pos));
+			PacketHandler.INSTANCE.sendToServer(new GuiSortPressed(player.world, pos));
 //			PacketHandler.INSTANCE.sendToServer(new GuiButtonPressed(player.worldObj, player, pos.getX(), pos.getY(), pos.getZ(), page));	
 		}
 		super.actionPerformed(button);

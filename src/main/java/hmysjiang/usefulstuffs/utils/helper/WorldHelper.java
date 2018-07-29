@@ -89,7 +89,7 @@ public class WorldHelper {
 		BlockPos prev = new BlockPos(entityEyePos);
 		for (int i = 1 ; i<=range*20 ; i++) {
 			BlockPos pos = new BlockPos(startPos.add(gaze.scale(i)));
-			if (entity.worldObj.getBlockState(pos).getMaterial() != Material.AIR) {
+			if (entity.world.getBlockState(pos).getMaterial() != Material.AIR) {
 				return new Object[] {pos, getRelationBetweenAdjacentBlocks(pos, prev)};
 			}
 			if (!pos.equals(prev)) {

@@ -26,7 +26,7 @@ public class ContainerFilingCabinet extends Container {
 		this.player = player;
 		this.playerInv = player.inventory;
 		this.pos = pos;
-		this.tile = (TileEntityFilingCabinet) player.worldObj.getTileEntity(pos);
+		this.tile = (TileEntityFilingCabinet) player.world.getTileEntity(pos);
 		this.page = page;
 		
 		IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

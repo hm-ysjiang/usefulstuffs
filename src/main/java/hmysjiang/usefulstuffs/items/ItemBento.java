@@ -54,7 +54,7 @@ public class ItemBento extends ItemFood {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn,
 			EnumHand hand) {
-		if (!playerIn.worldObj.isRemote && hand == EnumHand.MAIN_HAND && playerIn.isSneaking()) {
+		if (!playerIn.world.isRemote && hand == EnumHand.MAIN_HAND && playerIn.isSneaking()) {
 			playerIn.openGui(UsefulStuffs.instance, GUIHandler.GUI_BENTO, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
 			return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStackIn);
 		}

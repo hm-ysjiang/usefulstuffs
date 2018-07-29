@@ -58,18 +58,18 @@ public class TileEntityWell extends TileEntity implements ITickable {
 		}
 		
 		
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 			List<int[]> blacklist = getFilteredBlocks();
 			boolean filtered;
 			for (int x = -3;x<=3;x++) {
 				for (int z = -3;z<=3;z++) {
 					BlockPos bpos = new BlockPos(pos.getX()+x, pos.getY(), pos.getZ()+z);
-					TileEntity tile = worldObj.getTileEntity(bpos);
-					if (tile != null && worldObj.getBlockState(bpos) != ModBlocks.well.getDefaultState()) { 
+					TileEntity tile = world.getTileEntity(bpos);
+					if (tile != null && world.getBlockState(bpos) != ModBlocks.well.getDefaultState()) { 
 						for (EnumFacing facing :EnumFacing.VALUES) {
 							filtered = false;
 							for (int i = 0 ; i<blacklist.size() ; i++) {
-								if (blacklist.get(i)[0] == worldObj.provider.getDimension() && blacklist.get(i)[1] == bpos.getX() && blacklist.get(i)[2] == bpos.getY() && blacklist.get(i)[3] == bpos.getZ() && blacklist.get(i)[4] == facing.getIndex()) {
+								if (blacklist.get(i)[0] == world.provider.getDimension() && blacklist.get(i)[1] == bpos.getX() && blacklist.get(i)[2] == bpos.getY() && blacklist.get(i)[3] == bpos.getZ() && blacklist.get(i)[4] == facing.getIndex()) {
 									filtered = true;
 									break;
 								}

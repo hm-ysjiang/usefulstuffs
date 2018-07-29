@@ -32,16 +32,16 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 
 	@Override
 	protected void onImpact(RayTraceResult result) {
-		if (!this.worldObj.isRemote) {
+		if (!this.world.isRemote) {
 			if (result.typeOfHit == Type.BLOCK) {
 				Vec3d motion = new Vec3d(motionX, motionY, motionZ).normalize().scale(0.05D);
 				Vec3d pos = this.getPositionVector();
 				pos.subtract(motion);
-				if (worldObj.getBlockState(new BlockPos(pos)).getBlock().isReplaceable(worldObj, new BlockPos(pos))) {
-					worldObj.setBlockState(new BlockPos(pos), ModBlocks.lightbulb.getDefaultState());
+				if (world.getBlockState(new BlockPos(pos)).getBlock().isReplaceable(world, new BlockPos(pos))) {
+					world.setBlockState(new BlockPos(pos), ModBlocks.lightbulb.getDefaultState());
 				}
 				else {
-					worldObj.spawnEntityInWorld(new EntityItem(worldObj, pos.xCoord, pos.yCoord, pos.zCoord, new ItemStack(ModBlocks.lightbulb, 1)));
+					world.spawnEntity(new EntityItem(world, pos.xCoord, pos.yCoord, pos.zCoord, new ItemStack(ModBlocks.lightbulb, 1)));
 				}
 				
 				this.setDead();
@@ -63,7 +63,7 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 		this.motionY = y;
 		this.motionZ = z;
 
-        float f1 = MathHelper.sqrt_double(x * x + z * z);
+        float f1 = MathHelper.sqrt(x * x + z * z);
         this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
         this.rotationPitch = (float)(MathHelper.atan2(y, (double)f1) * (180D / Math.PI));
         this.prevRotationYaw = this.rotationYaw;

@@ -29,9 +29,9 @@ public class ItemLilyBelt extends Item implements IBauble {
 		if (player != null && player.getActivePotionEffect(PotionLily.instance) == null) {
 			if (!player.isSneaking()) {
 				BlockPos entityPos = new BlockPos(player);
-				Block blockUnder = player.worldObj.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()-1, entityPos.getZ())).getBlock();
-				Block blockFeet = player.worldObj.getBlockState(entityPos).getBlock();
-				Block blockHead = player.worldObj.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()+1, entityPos.getZ())).getBlock();
+				Block blockUnder = player.world.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()-1, entityPos.getZ())).getBlock();
+				Block blockFeet = player.world.getBlockState(entityPos).getBlock();
+				Block blockHead = player.world.getBlockState(new BlockPos(entityPos.getX(), entityPos.getY()+1, entityPos.getZ())).getBlock();
 				if (!(blockFeet instanceof BlockLiquid && blockHead instanceof BlockLiquid)){
 					if (blockFeet instanceof BlockLiquid) {
 						if (player.posY%1 > 0.75) {

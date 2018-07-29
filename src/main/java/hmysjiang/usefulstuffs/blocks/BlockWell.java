@@ -66,7 +66,7 @@ public class BlockWell extends Block implements ITileEntityProvider {
 					IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 					if (handler.extractItem(0, 1, true) != null) {
 						EntityItem entity = new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5, handler.extractItem(0, 1, false));
-						worldIn.spawnEntityInWorld(entity);
+						worldIn.spawnEntity(entity);
 					}
 					return true;					
 				}
@@ -107,7 +107,7 @@ public class BlockWell extends Block implements ITileEntityProvider {
 		IItemHandler handler = ((TileEntityWell)worldIn.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 		for (int i = 0 ; i<handler.getSlots() ; i++) 
 			if (handler.getStackInSlot(i) != null)
-				worldIn.spawnEntityInWorld(new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5, handler.getStackInSlot(i)));
+				worldIn.spawnEntity(new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5, handler.getStackInSlot(i)));
 		super.breakBlock(worldIn, pos, state);
 	}
 

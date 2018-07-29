@@ -52,7 +52,7 @@ public class BlockGluedBox extends Block implements ITileEntityProvider {
 				NBTTagCompound compound = ((TileEntityGluedBox)tile).getContent();
 				if (compound != null)
 					drop.setTagCompound(compound);	
-				worldIn.spawnEntityInWorld(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
+				worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
 			}
 		}
 		super.breakBlock(worldIn, pos, state);

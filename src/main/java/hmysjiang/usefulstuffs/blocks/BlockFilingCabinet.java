@@ -43,7 +43,7 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 	}
 	
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
 			int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
@@ -66,7 +66,7 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 		IItemHandler handler = ((TileEntityFilingCabinet)worldIn.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for (int i = 0 ; i<handler.getSlots() ; i++)
 			if (handler.getStackInSlot(i) != null)
-				worldIn.spawnEntityInWorld(new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, handler.getStackInSlot(i)));
+				worldIn.spawnEntity(new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, handler.getStackInSlot(i)));
 		super.breakBlock(worldIn, pos, state);
 	}
 	

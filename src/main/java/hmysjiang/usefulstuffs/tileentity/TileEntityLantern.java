@@ -42,8 +42,8 @@ public class TileEntityLantern extends TileEntity implements ITickable {
 							if (x == 0 && y == 0 && z == 0)
 								continue;
 							BlockPos bpos = new BlockPos(pos.getX()+x, pos.getY()+y, pos.getZ()+z);
-							worldObj.setLightFor(EnumSkyBlock.BLOCK, bpos, 15);
-							WorldHelper.updateLightInArea(worldObj, pos.getX(), pos.getY(), pos.getZ());	
+							world.setLightFor(EnumSkyBlock.BLOCK, bpos, 15);
+							WorldHelper.updateLightInArea(world, pos.getX(), pos.getY(), pos.getZ());	
 						}
 					}
 				}

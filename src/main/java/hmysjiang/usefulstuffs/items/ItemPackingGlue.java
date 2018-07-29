@@ -50,7 +50,7 @@ public class ItemPackingGlue extends Item {
 						raw_cost /= 4;
 					}	
 				}
-				int cost = MathHelper.ceiling_float_int(raw_cost);
+				int cost = MathHelper.ceil(raw_cost);
 				if (stack.getMaxDamage() - stack.getItemDamage() >= cost) {
 					stack.setItemDamage(stack.getItemDamage() + cost);
 					ItemStack drop = new ItemStack(ModBlocks.glued_box, 1);
@@ -66,11 +66,11 @@ public class ItemPackingGlue extends Item {
 					compound.setInteger("Meta", (state.getBlock()).getMetaFromState(state));
 					compound.setString("Name", state.getBlock().getRegistryName().toString());
 					drop.setTagCompound(compound);
-					world.spawnEntityInWorld(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
+					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
 					world.setBlockToAir(pos);
 				}
 				else {
-					player.addChatMessage(new TextComponentString("Insufficient durability! Required: " + cost));
+					player.sendMessage(new TextComponentString("Insufficient durability! Required: " + cost));
 				}
 			}
 		}

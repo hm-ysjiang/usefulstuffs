@@ -28,14 +28,14 @@ public class TileEntityCampfire extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote) {
-			if (WorldHelper.hasNoBlockBelow(worldObj, pos)) {
-				worldObj.setBlockState(pos, Blocks.AIR.getDefaultState());
-				worldObj.spawnEntityInWorld(new EntityItem(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, new ItemStack(ModBlocks.campfire)));
+		if (!world.isRemote) {
+			if (WorldHelper.hasNoBlockBelow(world, pos)) {
+				world.setBlockState(pos, Blocks.AIR.getDefaultState());
+				world.spawnEntity(new EntityItem(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, new ItemStack(ModBlocks.campfire)));
 				return;
 			}
-			buffRadius = 3 + MathHelper.ceiling_double_int(getModifierCounts()/2);
-			List<Entity> entitylist = worldObj.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(pos.getX()-buffRadius, pos.getY()-5, pos.getZ()-buffRadius, pos.getX()+buffRadius+1, pos.getY()+5, pos.getZ()+buffRadius+1));
+			buffRadius = 3 + MathHelper.ceil(getModifierCounts()/2);
+			List<Entity> entitylist = world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(pos.getX()-buffRadius, pos.getY()-5, pos.getZ()-buffRadius, pos.getX()+buffRadius+1, pos.getY()+5, pos.getZ()+buffRadius+1));
 			for (Entity entity:entitylist)
 				if (entity instanceof EntityLivingBase)
 					((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(10), 3, 1, false, false));
@@ -46,7 +46,7 @@ public class TileEntityCampfire extends TileEntity implements ITickable {
 		int count = 0;
 		for (int x = -2 ; x<=2 ; x++) 
 			for (int z = -2 ; z<=2 ; z++) 
-				if (worldObj.getBlockState(new BlockPos(pos.getX()+x, pos.getY()-1, pos.getZ()+z)).getBlock() instanceof BlockLog) 
+				if (world.getBlockState(new BlockPos(pos.getX()+x, pos.getY()-1, pos.getZ()+z)).getBlock() instanceof BlockLog) 
 					count++;
 		return count;
 	}
