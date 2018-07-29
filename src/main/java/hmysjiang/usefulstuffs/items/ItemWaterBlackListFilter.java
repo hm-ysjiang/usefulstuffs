@@ -4,7 +4,7 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModBlocks;
-import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

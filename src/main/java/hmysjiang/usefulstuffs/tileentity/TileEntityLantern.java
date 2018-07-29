@@ -3,7 +3,7 @@ package hmysjiang.usefulstuffs.tileentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;

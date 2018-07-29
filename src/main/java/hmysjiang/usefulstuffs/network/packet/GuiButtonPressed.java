@@ -1,9 +1,13 @@
 package hmysjiang.usefulstuffs.network.packet;
 
+import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class GuiButtonPressed implements IMessage {
 	public GuiButtonPressed() {}
@@ -42,6 +46,18 @@ public class GuiButtonPressed implements IMessage {
 		buf.writeInt(y);
 		buf.writeInt(z);
 		buf.writeInt(page);
+	}
+	
+	public static class Handler implements IMessageHandler<GuiButtonPressed, IMessage>{
+		public Handler() {}
+
+		@Override
+		public IMessage onMessage(GuiButtonPressed message, MessageContext ctx) {
+			World world = WorldHelper.getWorldFromId(message.world);
+			EntityPlayer player = (EntityPlayer) world.getEntityByID(message.player);
+			player.openGui(UsefulStuffs.instance, message.page, world, message.x, message.y, message.z);
+			return null;
+		}
 	}
 
 }

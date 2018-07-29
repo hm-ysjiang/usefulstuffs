@@ -4,6 +4,7 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.blocks.materials.BlockMaterials;
 import hmysjiang.usefulstuffs.client.gui.GUIHandler;
 import hmysjiang.usefulstuffs.tileentity.TileEntityFilingCabinet;
 import net.minecraft.block.BlockHorizontal;
@@ -29,7 +30,7 @@ import net.minecraftforge.items.IItemHandler;
 public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityProvider {
 	
 	public BlockFilingCabinet() {
-		super(Material.WOOD);
+		super(new BlockMaterials.FilingCabinet());
 		setUnlocalizedName(Reference.ModBlocks.FILING_CABINET.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.FILING_CABINET.getRegistryName());
 		setHardness(5.0F);
@@ -42,11 +43,6 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 	}
 	
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityFilingCabinet();
-	}
-	
-	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
 			int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
@@ -55,11 +51,12 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile != null && tile instanceof TileEntityFilingCabinet) {
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if (tile != null && tile instanceof TileEntityFilingCabinet) {
+			if (!worldIn.isRemote) {
 				playerIn.openGui(UsefulStuffs.instance, GUIHandler.GUI_FILING_CABINET_1, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			}
+			return true;
 		}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
 	}

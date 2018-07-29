@@ -8,7 +8,7 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-public class TileEntityFilingCabinet extends TileEntity implements ITickable {
+public class TileEntityFilingCabinet extends TileEntity {
 	
 	public static final String KEY_CONT = "Contents";
 	
@@ -45,11 +45,6 @@ public class TileEntityFilingCabinet extends TileEntity implements ITickable {
 	public void sort() {
 		this.handler.sort();
 		this.markDirty();
-	}
-
-	@Override
-	public void update() {
-		
 	}
 	
 }

@@ -1,8 +1,13 @@
 package hmysjiang.usefulstuffs.network.packet;
 
+import hmysjiang.usefulstuffs.entity.EntityFairyLight;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class FLDead implements IMessage {
 	public FLDead() {}
@@ -32,6 +37,23 @@ public class FLDead implements IMessage {
 		buf.writeInt(posX);
 		buf.writeInt(posY);
 		buf.writeInt(posZ);
+	}
+	
+	public static class Handler implements IMessageHandler<FLDead, IMessage> {
+		public Handler() {}
+
+		@Override
+		public IMessage onMessage(FLDead message, MessageContext ctx) {
+			int x = message.posX;
+			int y = message.posY;
+			int z = message.posZ;
+			
+			World world = ctx.getServerHandler().playerEntity.worldObj;
+			for (EntityFairyLight entity:world.getEntitiesWithinAABB(EntityFairyLight.class, new AxisAlignedBB(new BlockPos(x, y, z))))
+				entity.setDead();
+				
+			return null;
+		}
 	}
 
 }

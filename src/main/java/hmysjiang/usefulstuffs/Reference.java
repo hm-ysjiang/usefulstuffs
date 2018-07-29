@@ -4,9 +4,9 @@ public class Reference {
 	
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "1.1.2";
+	public static final String VERSION = "1.2.0";
 	public static final String ACCEPTED_MCVERSION = "[1.10.2]";
-	public static final boolean TEST_MODE = false;
+	public static final boolean TEST_MODE = true;
 	
 	public static enum ModItems{
 		MAGICAL_WAND("magical_wand"),
@@ -18,7 +18,11 @@ public class Reference {
 		BENTO("bento"),
 		BUILDING_WAND("building_wand"),
 		BUILDING_WAND_INFINITE("building_wand_infinite"),
-		BUILDING_WIZARD("building_wizard");
+		BUILDING_WIZARD("building_wizard"),
+		BODY_STORAGE("storage_body"),
+		BELT_LILY("lily_belt"),
+		BAUBLE_COMPACT("compact_bauble"),
+		PACKING_GLUE("packing_glue");
 		
 		private String unlocalizedName;
 		
@@ -42,7 +46,9 @@ public class Reference {
 		RAIN_DETECTOR("rain_detector"),
 		CAMPFIRE("campfire"),
 		LANTERN("lantern"),
-		FILING_CABINET("filing_cabinet");
+		FILING_CABINET("filing_cabinet"),
+		GLUED_BOX("glued_box"),
+		T_FLIPFLOP("t_flipflop");
 		
 		private String unlocalizedName;
 		

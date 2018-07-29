@@ -3,8 +3,8 @@ package hmysjiang.usefulstuffs.blocks;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
 import hmysjiang.usefulstuffs.tileentity.TileEntityRainDetector;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
@@ -87,14 +87,9 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		return blockState.getValue(RAINING) ? 15 : 0  ;
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityRainDetector();
-	}
 	
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityRainDetector();
 	}
 	

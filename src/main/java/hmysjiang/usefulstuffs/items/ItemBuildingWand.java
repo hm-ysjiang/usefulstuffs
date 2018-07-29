@@ -2,8 +2,8 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
-import hmysjiang.usefulstuffs.miscs.helper.InventoryHelper;
-import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
+import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

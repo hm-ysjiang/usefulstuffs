@@ -3,7 +3,7 @@ package hmysjiang.usefulstuffs.tileentity;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.init.ModBlocks;
-import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,7 +35,7 @@ public class TileEntityCampfire extends TileEntity implements ITickable {
 				return;
 			}
 			buffRadius = 3 + MathHelper.ceiling_double_int(getModifierCounts()/2);
-			List<Entity> entitylist = worldObj.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(pos.getX()-buffRadius, pos.getY()-3, pos.getZ()-buffRadius, pos.getX()+buffRadius+1, pos.getY()+4, pos.getZ()+buffRadius+1));
+			List<Entity> entitylist = worldObj.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(pos.getX()-buffRadius, pos.getY()-5, pos.getZ()-buffRadius, pos.getX()+buffRadius+1, pos.getY()+5, pos.getZ()+buffRadius+1));
 			for (Entity entity:entitylist)
 				if (entity instanceof EntityLivingBase)
 					((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(10), 3, 1, false, false));

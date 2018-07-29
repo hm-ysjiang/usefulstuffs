@@ -1,7 +1,6 @@
 package hmysjiang.usefulstuffs.client.gui;
 
-import hmysjiang.usefulstuffs.container.ContainerBento;
-import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
+import hmysjiang.usefulstuffs.container.*;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -57,8 +56,7 @@ public class GUIHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch(ID) {
 		case GUI_BENTO:
-			if (player.getHeldItemMainhand().getItem() instanceof ItemBento)
-				return new GuiBento(new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6));
+			return new GuiBento(new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6));
 		case GUI_FILING_CABINET_1:
 			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 0));
 		case GUI_FILING_CABINET_2:

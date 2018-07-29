@@ -50,8 +50,6 @@ public class ItemLightShooter extends Item {
 		}
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.light_shooter.tooltip_2"));
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.light_shooter.tooltip_3"));
-		if (!stack.isItemEqual(new ItemStack(ModItems.lightshooter_c)))
-			tooltip.add(TextFormatting.YELLOW + I18n.format("usefulstuffs.light_shooter.tooltip_4"));
 	}
 	
 	@Override

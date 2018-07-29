@@ -18,6 +18,8 @@ public class ModBlocks {
 	public static Block campfire;
 //	public static Block lantern;
 	public static Block filing_cabinet;
+	public static Block glued_box;
+	public static Block t_flipflop;
 	
 	public static void init() {
 		lightbulb = new BlockLightBulb();
@@ -26,6 +28,8 @@ public class ModBlocks {
 		campfire = new BlockCampfire();
 //		lantern = new BlockLantern();
 		filing_cabinet = new BlockFilingCabinet();
+		glued_box = new BlockGluedBox();
+		t_flipflop = new BlockTFlipFlop();
 	}
 	
 	public static void register() {
@@ -35,13 +39,8 @@ public class ModBlocks {
 		registerBlock(campfire);
 //		registerBlock(lantern);
 		registerBlock(filing_cabinet);
-	}
-	
-	public static void registerBlock(Block block) {
-		GameRegistry.register(block);
-		ItemBlock item = new ItemBlock(block);
-		item.setRegistryName(block.getRegistryName());
-		GameRegistry.register(item);
+		registerBlock(glued_box);
+		registerBlock(t_flipflop);
 	}
 	
 	public static void registerRenders() {
@@ -51,6 +50,20 @@ public class ModBlocks {
 		registerRender(campfire);
 //		registerRender(lantern);
 		registerRender(filing_cabinet);
+		registerRender(glued_box);
+		registerRender(t_flipflop);
+	}
+	
+	public static void registerBlock(Block block) {
+		GameRegistry.register(block);
+		ItemBlock item = new ItemBlock(block);
+		item.setRegistryName(block.getRegistryName());
+		GameRegistry.register(item);
+	}
+	
+	public static void registerBlock(Block block, ItemBlock item) {
+		GameRegistry.register(block);
+		GameRegistry.register(item);
 	}
 	
 	private static void registerRender(Block block) {

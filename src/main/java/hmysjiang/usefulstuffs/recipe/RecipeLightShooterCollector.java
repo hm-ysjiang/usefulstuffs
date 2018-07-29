@@ -8,9 +8,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
-public class RecipeLightShooterCollector implements IRecipe {
+public class RecipeLightShooterCollector extends ShapelessRecipes {
+
+	public RecipeLightShooterCollector(List<ItemStack> recipe) {
+		super(new ItemStack(ModItems.lightshooter_c), recipe);
+	}
 
 	@Override
 	public boolean matches(InventoryCrafting inv, World worldIn) {
@@ -62,17 +67,6 @@ public class RecipeLightShooterCollector implements IRecipe {
 		ItemStack result = new ItemStack(ModItems.lightshooter_c, 1);
 		result.setTagCompound(stackShooter.getTagCompound());
 		return result;
-	}
-
-	@Override
-	public int getRecipeSize() {
-		return 4;
-	}
-
-	@Override
-	public ItemStack getRecipeOutput() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

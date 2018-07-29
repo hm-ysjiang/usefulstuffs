@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "usefulstuffs:t_flipflop", "y": 180},
+        "facing=south": { "model": "usefulstuffs:t_flipflop"},
+        "facing=west":  { "model": "usefulstuffs:t_flipflop", "y": 90},
+        "facing=east":  { "model": "usefulstuffs:t_flipflop", "y": 270}
+    }
+}

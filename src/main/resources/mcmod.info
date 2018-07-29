@@ -5,6 +5,8 @@
   "version": "${version}",
   "mcversion": "${mcversion}",
   "updateUrl": "",
-  "authorList": ["hmysjiang"]
+  "authorList": ["hmysjiang"],
+  "requiredMods": ["Forge", "Baubles"],
+  "useDependencyInformation": "true"
 }
 ]

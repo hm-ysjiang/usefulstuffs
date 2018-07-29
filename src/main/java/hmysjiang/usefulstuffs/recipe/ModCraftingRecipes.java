@@ -1,5 +1,8 @@
 package hmysjiang.usefulstuffs.recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.potion.PotionLily;
@@ -27,7 +30,10 @@ public class ModCraftingRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.lightbulb, 8), " P ", "PGP", " P ", 'P', Blocks.GLASS_PANE, 'G', Items.GLOWSTONE_DUST);
 		//Light Shooter (+Collector)
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.lightshooter, 1), " CP", "OOR", " BO", 'C', Blocks.CHEST, 'P', Blocks.PISTON, 'O', Blocks.OBSIDIAN, 'R', Blocks.REDSTONE_TORCH, 'B', Blocks.STONE_BUTTON);
-		GameRegistry.addRecipe(new RecipeLightShooterCollector());
+		List<ItemStack> r = new ArrayList<ItemStack>();
+		r.add(new ItemStack(Blocks.HOPPER));
+		r.add(new ItemStack(ModItems.lightshooter));
+		GameRegistry.addRecipe(new RecipeLightShooterCollector(r));
 		//Well of Waterfall
 		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.well, 1), "WPW", "HCH", "HRH", 'W', Items.WATER_BUCKET, 'P', Blocks.PISTON, 'H', Blocks.HARDENED_CLAY, 'C', Items.COMPARATOR, 'R', Blocks.REDSTONE_TORCH);
 		//Rain Detector
@@ -42,6 +48,12 @@ public class ModCraftingRecipes {
 		//Building Wand
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.building_wand, 1), "W  ", " S ", "  S", 'W', ModItems.building_wizard, 'S', Items.STICK);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.building_wand_infinite, 1), new ItemStack(ModItems.building_wand, 1, 0), new ItemStack(Items.NETHER_STAR, 1));
+		//Baubles
+		////lily belt
+		////storage body
+		//Packing Glue
+		////packing glue
+		GameRegistry.addRecipe(new RecipePackingGlueReloader());
 		
 	}
 	

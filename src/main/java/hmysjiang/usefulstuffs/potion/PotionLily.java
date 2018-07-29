@@ -1,7 +1,7 @@
 package hmysjiang.usefulstuffs.potion;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.event.handler.SpriteHandler;
+import hmysjiang.usefulstuffs.event.SpriteHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;

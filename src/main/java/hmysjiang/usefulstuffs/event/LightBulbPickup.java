@@ -1,9 +1,9 @@
-package hmysjiang.usefulstuffs.event.handler;
+package hmysjiang.usefulstuffs.event;
 
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
-import hmysjiang.usefulstuffs.miscs.helper.InventoryHelper;
+import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

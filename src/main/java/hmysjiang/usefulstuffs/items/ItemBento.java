@@ -9,7 +9,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -18,7 +17,6 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
@@ -107,7 +105,7 @@ public class ItemBento extends ItemFood {
 		ItemStackHandler handler = new ItemStackHandler(6);
 		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
 		for (int i = 0 ; i<handler.getSlots() ; i++) {
-			if (handler.getStackInSlot(i) != null) {
+			if (handler.getStackInSlot(i) != null && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
 				return false;
 			}
 		}

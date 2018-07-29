@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.event.handler;
+package hmysjiang.usefulstuffs.event;
 
 import hmysjiang.usefulstuffs.Reference;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

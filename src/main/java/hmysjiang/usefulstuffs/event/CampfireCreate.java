@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.event.handler;
+package hmysjiang.usefulstuffs.event;
 
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import net.minecraft.entity.player.EntityPlayer;

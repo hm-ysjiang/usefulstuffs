@@ -1,10 +1,9 @@
 package hmysjiang.usefulstuffs.blocks;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.blocks.materials.BlockMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -18,7 +17,7 @@ public class BlockLightBulb extends Block {
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(PIXEL*6, PIXEL*6, PIXEL*6, PIXEL*10, PIXEL*10, PIXEL*10);
 
 	public BlockLightBulb() {
-		super(new Material(MapColor.GOLD));
+		super(new BlockMaterials.LightBulb());
 		setUnlocalizedName(Reference.ModBlocks.LIGHT_BULB.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.LIGHT_BULB.getRegistryName());
 		setLightLevel(1.0F);

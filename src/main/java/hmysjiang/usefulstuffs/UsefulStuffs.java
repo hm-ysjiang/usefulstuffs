@@ -1,10 +1,7 @@
 package hmysjiang.usefulstuffs;
 
-import hmysjiang.usefulstuffs.init.*;
-import hmysjiang.usefulstuffs.miscs.handler.AchievementHandler;
-import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.proxy.CommonProxy;
-import hmysjiang.usefulstuffs.recipe.ModCraftingRecipes;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -22,31 +19,28 @@ public class UsefulStuffs {
 	@SidedProxy(clientSide = "hmysjiang.usefulstuffs.proxy.ClientProxy", serverSide = "hmysjiang.usefulstuffs.proxy.ServerProxy")
 	public static CommonProxy proxy;
 	
+	public UsefulStuffs() {
+		LogHelper.info("Hello Minecraft!");
+	}
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-		ModItems.init();
-		ModItems.register();
-		ModBlocks.init();
-		ModBlocks.register();
-		ModEntities.register();
-		
+		if (Reference.TEST_MODE) {
+			LogHelper.warn("This is a testing version of UsefulStuffs that contains Items and Blocks for testing purposes"
+					+ ", which could possibly make a unrecoverable damage to your world.");
+			LogHelper.warn("If you see this message and you are not developer, REPORT TO THE AUTHOR."
+					+ "Maybe I forgot to turn off the test-mode again \\(. q .)/");
+		}
+		proxy.preInit();
 		proxy.registerRenders();
 		proxy.registerTileEntity();
-		
-		PacketHandler.init();
-		AchievementHandler.register();
 	}
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
 		proxy.init();
 		proxy.registerModelBakeryVariants();
-		proxy.registerSideOnly();
-		
-		ModEvents.register();
-		ModPotion.register();
-		ModCraftingRecipes.register();
+		proxy.registerSideOnlyEvents();
 	}
 	
 	@EventHandler

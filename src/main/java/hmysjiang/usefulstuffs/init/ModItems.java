@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.items.*;
+import hmysjiang.usefulstuffs.items.baubles.*;
 import hmysjiang.usefulstuffs.items.crafting.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -21,6 +22,9 @@ public class ModItems {
 	public static Item building_wand;
 	public static Item building_wand_infinite;
 	public static Item building_wizard;
+	public static Item belt_lily;
+	public static Item body_storage;
+	public static Item packing_glue;
 	
 	public static void init() {
 		if (Reference.TEST_MODE)
@@ -34,6 +38,9 @@ public class ModItems {
 		building_wand = new ItemBuildingWand(Reference.ModItems.BUILDING_WAND.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND.getRegistryName());
 		building_wand_infinite = new ItemBuildingWandInfinite(Reference.ModItems.BUILDING_WAND_INFINITE.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND_INFINITE.getRegistryName());
 		building_wizard = new ItemBuildingWizard();
+		belt_lily = new ItemLilyBelt();
+		body_storage = new ItemStorageBody();
+		packing_glue = new ItemPackingGlue();
 		
 	}
 	
@@ -49,6 +56,9 @@ public class ModItems {
 		GameRegistry.register(building_wand);
 		GameRegistry.register(building_wand_infinite);
 		GameRegistry.register(building_wizard);
+		GameRegistry.register(belt_lily);
+		GameRegistry.register(body_storage);
+		GameRegistry.register(packing_glue);
 		
 	}
 	
@@ -64,6 +74,9 @@ public class ModItems {
 		registerRender(building_wand);
 		registerRender(building_wand_infinite);
 		registerRender(building_wizard);
+		registerRender(belt_lily);
+		registerRender(body_storage);
+		registerRender(packing_glue);
 		
 	}
 	

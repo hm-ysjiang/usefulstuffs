@@ -1,6 +1,6 @@
 package hmysjiang.usefulstuffs.proxy;
 
-import hmysjiang.usefulstuffs.event.handler.SpriteHandler;
+import hmysjiang.usefulstuffs.event.SpriteHandler;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModEntities;
 import hmysjiang.usefulstuffs.init.ModItems;
@@ -21,9 +21,9 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-	public void registerSideOnly() {
+	public void registerSideOnlyEvents() {
 		MinecraftForge.EVENT_BUS.register(SpriteHandler.instance);
-		super.registerSideOnly();
+		super.registerSideOnlyEvents();
 	}
 
 }

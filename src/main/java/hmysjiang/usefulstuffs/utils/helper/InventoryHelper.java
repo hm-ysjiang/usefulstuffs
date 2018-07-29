@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.miscs.helper;
+package hmysjiang.usefulstuffs.utils.helper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

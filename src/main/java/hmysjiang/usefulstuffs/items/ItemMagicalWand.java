@@ -1,7 +1,11 @@
 package hmysjiang.usefulstuffs.items;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.blocks.BlockTFlipFlop;
+import hmysjiang.usefulstuffs.tileentity.TileEntityTFlipFlop;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -24,7 +28,10 @@ public class ItemMagicalWand extends Item {
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			System.out.println(playerIn.getPositionVector().toString());
+			LogHelper.info("isBlockIndirectlyGettingPowered: " + worldIn.isBlockIndirectlyGettingPowered(pos));
+			LogHelper.info("isBlockPowered: " + worldIn.isBlockPowered(pos));
+			LogHelper.info("Hit on the " + facing.getName() + " side of the block");
+			LogHelper.info("isSidePowered: " + worldIn.isSidePowered(pos, facing));
 		}
 		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}

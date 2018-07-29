@@ -1,10 +1,13 @@
 package hmysjiang.usefulstuffs.network.packet;
 
-import hmysjiang.usefulstuffs.miscs.helper.WorldHelper;
+import hmysjiang.usefulstuffs.tileentity.TileEntityFilingCabinet;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class GuiSortPressed implements IMessage {
 	public GuiSortPressed() {}
@@ -35,6 +38,18 @@ public class GuiSortPressed implements IMessage {
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
+	}
+	
+	public static class Handler implements IMessageHandler<GuiSortPressed, IMessage>{
+		public Handler() {}	
+
+		@Override
+		public IMessage onMessage(GuiSortPressed message, MessageContext ctx) {
+			World world = WorldHelper.getWorldFromId(message.world);
+			BlockPos pos = new BlockPos(message.x, message.y, message.z);
+			((TileEntityFilingCabinet)world.getTileEntity(pos)).sort();
+			return null;
+		}
 	}
 
 }

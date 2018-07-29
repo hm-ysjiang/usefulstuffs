@@ -1,8 +1,8 @@
-package hmysjiang.usefulstuffs.event.handler;
+package hmysjiang.usefulstuffs.event;
 
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.miscs.handler.AchievementHandler;
+import hmysjiang.usefulstuffs.utils.handler.AchievementHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

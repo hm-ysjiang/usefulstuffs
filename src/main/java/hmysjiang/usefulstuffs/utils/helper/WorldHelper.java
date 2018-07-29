@@ -1,8 +1,17 @@
-package hmysjiang.usefulstuffs.miscs.helper;
+package hmysjiang.usefulstuffs.utils.helper;
 
+import com.google.common.collect.ImmutableMap;
+
+import hmysjiang.usefulstuffs.items.ItemPackingGlue;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -109,22 +118,53 @@ public class WorldHelper {
 		else return null;
 	}
 	
-	public static BlockPos getPositionFromPosAndFacing(BlockPos pos, EnumFacing facing) {
-		switch(facing) {
-		case WEST:
-			return new BlockPos(pos.getX()-1, pos.getY(), pos.getZ());
-		case EAST:
-			return new BlockPos(pos.getX()+1, pos.getY(), pos.getZ());
-		case NORTH:
-			return new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1);
-		case SOUTH:
-			return new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1);
-		case UP:
-			return new BlockPos(pos.getX(), pos.getY()+1, pos.getZ());
-		case DOWN:
-			return new BlockPos(pos.getX(), pos.getY()-1, pos.getZ());
-		default: return null;
+	/***
+	 * 
+	 * @param state
+	 * @param tile
+	 * @return the durability cost to pick up a block, used in {@link ItemPackingGlue#onItemUseFirst()}
+	 */
+	public static float getBlockDataDensity(World world, BlockPos pos, IBlockState state, TileEntity tile) {
+		float den = 0;
+		if (state != null) {
+			//Block Hardness
+			float hardness = state.getBlockHardness(world, pos);
+			den += Math.log10(hardness + 2) / 0.7 * 10;
+			
+			//Block States
+			ImmutableMap<IProperty<?>, Comparable<?>> properties = state.getProperties();
+			for (IProperty<?> property : properties.keySet()) {
+				if (property instanceof PropertyBool) {
+					den += 1;
+				}
+				else if (property instanceof PropertyInteger) {
+					den += 2;
+				}
+				else if (property instanceof PropertyDirection) {
+					den += 3;
+				}
+				else {
+					den += 4;
+				}
+			}
+			
+			//Extra cost for tile entities
+			if (tile != null) {
+				den *= 2;
+			}
 		}
+		return den;
+	}
+	
+	public static boolean isBlockSideBeingPowered(World world, BlockPos pos, EnumFacing side) {
+		if (world != null && pos != null) {
+			pos = pos.offset(side);
+			Block block = world.getBlockState(pos).getBlock();
+			if (block.getStrongPower(world.getBlockState(pos), world, pos, side.getOpposite()) > 0)
+				return true;
+			return block.getWeakPower(world.getBlockState(pos), world, pos, side.getOpposite()) > 0;
+		}
+		return false;
 	}
 	
 }

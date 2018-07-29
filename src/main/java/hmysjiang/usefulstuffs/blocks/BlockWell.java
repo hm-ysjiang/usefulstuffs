@@ -10,16 +10,23 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -36,14 +43,9 @@ public class BlockWell extends Block implements ITileEntityProvider {
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityWell();
-	}
 	
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityWell();
 	}
 	
@@ -76,6 +78,22 @@ public class BlockWell extends Block implements ITileEntityProvider {
 				if (handler.insertItem(0, heldItem.copy(), true) == null) {
 					handler.insertItem(0, heldItem.copy(), false);
 					playerIn.inventory.deleteStack(heldItem);
+				}
+				return true;
+			}
+			else if (heldItem.getItem() instanceof IFluidContainerItem) {
+				ItemStack bucket = heldItem.copy();
+				//deprecated in newer version?
+				IFluidContainerItem container = (IFluidContainerItem) bucket.getItem();
+				bucket.stackSize = 1;
+				if (container.fill(bucket, new FluidStack(FluidRegistry.WATER, 1000), false) != 0) {
+					container.fill(bucket, new FluidStack(FluidRegistry.WATER, 1000), true);
+					worldIn.playSound(playerIn, pos, FluidRegistry.WATER.getFillSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+					heldItem.stackSize--;
+					if (heldItem.stackSize == 0) {
+						playerIn.inventory.deleteStack(heldItem);
+					}
+					playerIn.inventory.addItemStackToInventory(bucket);
 				}
 				return true;
 			}
