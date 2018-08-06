@@ -1,7 +1,7 @@
 package hmysjiang.usefulstuffs.network.packet;
 
 import hmysjiang.usefulstuffs.UsefulStuffs;
-import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
+import hmysjiang.usefulstuffs.utils.WorldHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

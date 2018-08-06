@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "WPW", 
+		"HCH", 
+		"HRH"
+    ],
+    "key": {
+        "W": {
+            "item": "minecraft:water_bucket"
+        },
+        "P": {
+            "item": "minecraft:piston"
+        },
+        "H": {
+            "item": "minecraft:hardened_clay"
+        },
+        "C": {
+            "item": "minecraft:comparator"
+        },
+        "R": {
+            "item": "minecraft:redstone_torch"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:well"
+    }
+}

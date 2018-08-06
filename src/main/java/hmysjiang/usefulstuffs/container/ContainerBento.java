@@ -1,9 +1,11 @@
 package hmysjiang.usefulstuffs.container;
 
-import hmysjiang.usefulstuffs.container.slot.*;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerBento extends ContainerItem {
 	
@@ -29,6 +31,19 @@ public class ContainerBento extends ContainerItem {
 		for (int x = 0; x < 9; ++x) {
 			this.addSlotToContainer(new Slot(inv, x, xPos + x * 18, yPos + 58));
 		}
+	}
+	
+	public class SlotFood extends SlotItemHandler {
+
+		public SlotFood(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+			super(itemHandler, index, xPosition, yPosition);
+		}
+		
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			return super.isItemValid(stack) && stack.getItem() instanceof ItemFood;
+		}
+
 	}
 
 }

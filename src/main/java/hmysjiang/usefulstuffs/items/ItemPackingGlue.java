@@ -3,7 +3,7 @@ package hmysjiang.usefulstuffs.items;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentXL;
 import hmysjiang.usefulstuffs.init.ModBlocks;
-import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
+import hmysjiang.usefulstuffs.utils.WorldHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
@@ -32,11 +32,12 @@ public class ItemPackingGlue extends Item {
 	}
 	
 	@Override
-	public EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos,
+	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos,
 			EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
 		if (!world.isRemote) {
 			IBlockState state = world.getBlockState(pos);
 			if (player.isSneaking() && state.getBlock() != ModBlocks.glued_box && state.getBlockHardness(world, pos) >= 0) {
+				ItemStack stack = player.getHeldItem(hand);
 				float raw_cost = WorldHelper.getBlockDataDensity(world, pos, state, world.getTileEntity(pos));
 				Integer enchLevel = EnchantmentHelper.getEnchantments(stack).get(EnchantmentXL.instance);
 				if (enchLevel != null) {
@@ -74,7 +75,7 @@ public class ItemPackingGlue extends Item {
 				}
 			}
 		}
-		return super.onItemUseFirst(stack, player, world, pos, side, hitX, hitY, hitZ, hand);
+		return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 	}
 	
 	@Override

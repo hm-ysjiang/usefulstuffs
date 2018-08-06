@@ -1,73 +1,61 @@
 package hmysjiang.usefulstuffs.init;
 
-import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.blocks.*;
+import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
+import hmysjiang.usefulstuffs.blocks.filingcabinet.BlockFilingCabinet;
+import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
+import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
+import hmysjiang.usefulstuffs.blocks.raindetector.BlockRainDetector;
+import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
+import hmysjiang.usefulstuffs.blocks.well.BlockWell;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@EventBusSubscriber
 public class ModBlocks {
 	
-	public static Block lightbulb;
-	public static Block well;
-	public static Block rain_detector;
 	public static Block campfire;
-//	public static Block lantern;
 	public static Block filing_cabinet;
 	public static Block glued_box;
+	public static Block light_bulb;
+	public static Block rain_detector;
 	public static Block t_flipflop;
+	public static Block well;
 	
 	public static void init() {
-		lightbulb = new BlockLightBulb();
-		well = new BlockWell();
-		rain_detector = new BlockRainDetector();
 		campfire = new BlockCampfire();
-//		lantern = new BlockLantern();
 		filing_cabinet = new BlockFilingCabinet();
 		glued_box = new BlockGluedBox();
+		light_bulb = new BlockLightBulb();
+		rain_detector = new BlockRainDetector();
 		t_flipflop = new BlockTFlipFlop();
+		well = new BlockWell();
 	}
 	
-	public static void register() {
-		registerBlock(lightbulb);
-		registerBlock(well);
-		registerBlock(rain_detector);
-		registerBlock(campfire);
-//		registerBlock(lantern);
-		registerBlock(filing_cabinet);
-		registerBlock(glued_box);
-		registerBlock(t_flipflop);
+	@SubscribeEvent
+	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+		event.getRegistry().register(campfire);
+		event.getRegistry().register(filing_cabinet);
+		event.getRegistry().register(glued_box);
+		event.getRegistry().register(light_bulb);
+		event.getRegistry().register(rain_detector);
+		event.getRegistry().register(t_flipflop);
+		event.getRegistry().register(well);
 	}
 	
-	public static void registerRenders() {
-		registerRender(lightbulb);
-		registerRender(well);
-		registerRender(rain_detector);
-		registerRender(campfire);
-//		registerRender(lantern);
-		registerRender(filing_cabinet);
-		registerRender(glued_box);
-		registerRender(t_flipflop);
-	}
-	
-	public static void registerBlock(Block block) {
-		GameRegistry.register(block);
-		ItemBlock item = new ItemBlock(block);
-		item.setRegistryName(block.getRegistryName());
-		GameRegistry.register(item);
-	}
-	
-	public static void registerBlock(Block block, ItemBlock item) {
-		GameRegistry.register(block);
-		GameRegistry.register(item);
-	}
-	
-	private static void registerRender(Block block) {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, block.getUnlocalizedName().substring(18)), "inventory"));
+	@SubscribeEvent
+	public static void onModelRegistry(ModelRegistryEvent event) {
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(campfire));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(filing_cabinet));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(glued_box));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(light_bulb));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(rain_detector));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(t_flipflop));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(well));
 	}
 	
 }

@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "WUP", 
+		"UUU", 
+		"SUA"
+    ],
+    "key": {
+        "W": {
+            "item": "minecraft:golden_sword",
+			"data": 0
+        },
+        "P": {
+            "item": "minecraft:golden_pickaxe",
+			"data": 0
+        },
+        "S": {
+            "item": "minecraft:golden_shovel",
+			"data": 0
+        },
+        "A": {
+            "item": "minecraft:golden_axe",
+			"data": 0
+        },
+        "U": {
+            "item": "usefulstuffs:compact_storage_unit"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:filing_cabinet"
+    }
+}

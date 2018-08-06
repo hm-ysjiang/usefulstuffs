@@ -1,0 +1,67 @@
+item.usefulstuffs.light_shooter.name=Light Shooter
+item.usefulstuffs.light_shooter_collector.name=Light Shooter
+item.usefulstuffs.umbrella.name=Umbrella
+item.usefulstuffs.waterfilter.name=Water Filter
+item.usefulstuffs.compact_storage_unit.name=Compact Storage Unit
+item.usefulstuffs.bento.name=Bento Box
+item.usefulstuffs.building_wand.name=Building Wand
+item.usefulstuffs.building_wand_infinite.name=Infinite Building Wand
+item.usefulstuffs.building_wizard.name=Building Wizard
+
+tile.usefulstuffs.light_bulb.name=Light Bulb
+tile.usefulstuffs.well.name=Well of Water Fall
+tile.usefulstuffs.rain_detector.name=Rain Detector
+tile.usefulstuffs.campfire.name=Campfire of Traveller's Wisdom
+tile.usefulstuffs.filing_cabinet.name=Filing Cabinet
+
+usefulstuffs.ingredient.tooltip=Crafting ingredient
+usefulstuffs.details.tooltip=§o<Hold Shift for details>
+usefulstuffs.wip.tooltip=§lWIP Item/Block
+usefulstuffs.light_shooter.tooltip_1=Ammo: %1$s/%2$s
+usefulstuffs.light_shooter.tooltip_2=Right click to launch
+usefulstuffs.light_shooter.tooltip_3=Shift-Right click to load Light Bulbs
+usefulstuffs.light_shooter.tooltip_c=Combined with a hopper, automatically load when Light Bulbs being picked up
+usefulstuffs.well.tooltip_1=Automatically fill the 7x7 area around it
+usefulstuffs.well.tooltip_2=TransferRate:%smB per tick*side
+usefulstuffs.waterfilter.tooltip_1=Install to a Well of Water Fall to prevent it from sending water to certain sides of blocks
+usefulstuffs.waterfilter.tooltip_2=Shift+Right click to bind a side of the block
+usefulstuffs.waterfilter.tooltip_3=Right click on a Well to install
+usefulstuffs.campfire.tooltip_1=Place logs in the 5*5 area beneath it to boost the effect
+usefulstuffs.campfire.tooltip_2=Sneak and light a log up
+usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
+usefulstuffs.filing_cabinet.tooltip_2=1080 slots for unstackable items
+usefulstuffs.rain_detector.tooltip=Look at the recipe and its model, %1$sTOTALLY-MAKE-SENSE
+usefulstuffs.bento.tooltip_1=Holds 6 stacks of food
+usefulstuffs.bento.tooltip_2=Seems to not return the bowls...
+usefulstuffs.building_wand.tooltip_1=Place blocks from the block player looking at to player
+usefulstuffs.building_wand.tooltip_2=Put block in offhand to specify blocks to be placed
+usefulstuffs.building_wand.tooltip_normal=MaxRange: 16 blocks
+usefulstuffs.building_wand.tooltip_infinite=MaxRange: 32 blocks, %1$sUnlimited durability
+usefulstuffs.glued_box.tooltip_1=Nothing is in the box
+usefulstuffs.glued_box.tooltip_2=If you get this in the game, report to the author
+usefulstuffs.glued_box.tooltip_3=Block Stored:%1$s
+
+entity.usefulstuffs.light_bulb.name=LightBulb
+entity.usefulstuffs.fairy_light.name=FairyLight
+
+achievement.light_bulb=Fancy!
+achievement.light_bulb.desc=An alternative light source
+achievement.light_shooter=Light up the world
+achievement.light_shooter.desc=Pew Pew Pew
+achievement.rain_detector=Genius.
+achievement.rain_detector.desc=The rain drops fall on the umbrella, umbrella hits the button, which triggers the signal.TOTALLY MAKE SENSE
+achievement.building_wand=Belated Blessing
+achievement.building_wand.desc=For building purpose, like Greek Temples or etc.
+
+potion.effect.lily=Potion of Floating LilyPad
+splash_potion.effect.lily=Splash Potion of Floating LilyPad
+lingering_potion.effect.lily=Lingering Potion of Floating LilyPad
+effect.usefulstuffs.lily=Li-ly
+
+usefulstuffs.gui.bento.name=Bento Box
+usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
+
+key.usefulstuffs.category=UsefulStuffs
+key.usefulstuffs.switchinv.desc=Switch Inventory
+
+enchantment.usefulstuffs.xl.name=Frugal

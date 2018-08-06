@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "W  ", 
+		" S ", 
+		"  S"
+    ],
+    "key": {
+        "W": {
+            "item": "usefulstuffs:building_wizard"
+        },
+        "S": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:building_wand"
+    }
+}

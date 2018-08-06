@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "SRS", 
+		"RCR", 
+		"SRS"
+    ],
+    "key": {
+        "C": {
+            "item": "usefulstuffs:flipflop_core"
+        },
+        "S": {
+            "item": "minecraft:stone_slab",
+			"data": 0
+        },
+        "R": {
+            "item": "minecraft:redstone"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:t_flipflop"
+    }
+}

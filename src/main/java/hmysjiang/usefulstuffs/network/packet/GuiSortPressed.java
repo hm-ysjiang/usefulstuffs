@@ -1,7 +1,7 @@
 package hmysjiang.usefulstuffs.network.packet;
 
-import hmysjiang.usefulstuffs.tileentity.TileEntityFilingCabinet;
-import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
+import hmysjiang.usefulstuffs.blocks.filingcabinet.TileEntityFilingCabinet;
+import hmysjiang.usefulstuffs.utils.WorldHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

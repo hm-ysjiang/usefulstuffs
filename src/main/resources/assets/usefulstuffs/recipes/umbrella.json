@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "WBW",
+        " S ",
+        " S "
+    ],
+    "key": {
+        "W": {
+            "item": "minecraft:wool",
+			"data": 0
+        },
+        "B": {
+            "item": "minecraft:wool",
+			"data": 11
+        },
+        "S": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:umbrella"
+    }
+}

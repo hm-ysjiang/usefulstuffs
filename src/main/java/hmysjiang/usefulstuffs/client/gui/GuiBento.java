@@ -25,7 +25,7 @@ public class GuiBento extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		this.fontRendererObj.drawString(I18n.format("usefulstuffs.gui.bento.name"), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("usefulstuffs.gui.bento.name"), 8, 6, 4210752);
 	}
 
 }

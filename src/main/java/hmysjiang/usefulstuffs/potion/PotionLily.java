@@ -1,15 +1,19 @@
 package hmysjiang.usefulstuffs.potion;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.event.SpriteHandler;
+import hmysjiang.usefulstuffs.client.SpriteHandler;
+import hmysjiang.usefulstuffs.utils.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -18,9 +22,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionLily extends Potion {
-	
 	public static Potion instance = new PotionLily();
-	public static final ResourceLocation TEXTURE = SpriteHandler.textureLily;
+	public static ResourceLocation resource = new ResourceLocation(Reference.MOD_ID, "textures/misc/lilypad.png");
 	
 	protected PotionLily() {
 		super(false, 0x17b745);
@@ -59,25 +62,23 @@ public class PotionLily extends Potion {
 		}
 	}
 	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
-		TextureAtlasSprite sprite = mc.getTextureMapBlocks().getAtlasSprite(TEXTURE.toString());
-		GuiScreen screen = mc.currentScreen;
-		if (screen != null) {
-			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-			screen.drawTexturedModalRect(x+7, y+7, sprite, 16, 16);
-		}
-	}
-	
-	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
-		TextureAtlasSprite sprite = mc.getTextureMapBlocks().getAtlasSprite(TEXTURE.toString());
+		TextureAtlasSprite sprite = SpriteHandler.lily;
 		Gui screen = mc.ingameGUI;
 		if (screen != null) {
 			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			screen.drawTexturedModalRect(x+4, y+4, sprite, 16, 16);
+		}
+	}
+	
+	@Override
+	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
+		TextureAtlasSprite sprite = SpriteHandler.lily;
+		GuiScreen screen = mc.currentScreen;
+		if (screen != null) {
+			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			screen.drawTexturedModalRect(x+7, y+7, sprite, 16, 16);
 		}
 	}
 

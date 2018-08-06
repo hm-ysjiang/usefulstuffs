@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.enchantment;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.items.ItemPackingGlue;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;

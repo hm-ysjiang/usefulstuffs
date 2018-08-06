@@ -2,11 +2,14 @@
 {
   "modid": "usefulstuffs",
   "name": "Useful Stuffs",
+  "description": "Something that may be useful to the gameplay",
   "version": "${version}",
   "mcversion": "${mcversion}",
+  "url": "",
   "updateUrl": "",
   "authorList": ["hmysjiang"],
-  "requiredMods": ["Forge", "Baubles"],
+  "dependencies": [],
+  "requiredMods": ["baubles"],
   "useDependencyInformation": "true"
 }
 ]

@@ -3,18 +3,21 @@ package hmysjiang.usefulstuffs.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
+import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 public class RecipeLightShooterCollector extends ShapelessRecipes {
 
-	public RecipeLightShooterCollector(List<ItemStack> recipe) {
-		super(new ItemStack(ModItems.lightshooter_c), recipe);
+	public RecipeLightShooterCollector(NonNullList<Ingredient> recipe) {
+		super(Reference.MOD_ID + ":recipe", new ItemStack(ModItems.light_shooter_collecter), recipe);
+		setRegistryName(Reference.MOD_ID, "recipe_lightshootercollector");
 	}
 
 	@Override
@@ -22,8 +25,8 @@ public class RecipeLightShooterCollector extends ShapelessRecipes {
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		for (int i = 0 ; i<inv.getSizeInventory() ; i++) {
 			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null) {
-				if (!stack.isItemEqual(new ItemStack(ModItems.lightshooter)) && !stack.isItemEqual(new ItemStack(Blocks.HOPPER))) {
+			if (!stack.isEmpty()) {
+				if (!stack.isItemEqual(new ItemStack(ModItems.light_shooter)) && !stack.isItemEqual(new ItemStack(Blocks.HOPPER))) {
 					return false;
 				}
 				list.add(stack);
@@ -31,7 +34,7 @@ public class RecipeLightShooterCollector extends ShapelessRecipes {
 		}
 		boolean shooter = false, hopper = false;
 		for (ItemStack stack: list) {
-			if (stack.isItemEqual(new ItemStack(ModItems.lightshooter)))
+			if (stack.isItemEqual(new ItemStack(ModItems.light_shooter)))
 				shooter = true;
 			else 
 				hopper = true;
@@ -44,17 +47,17 @@ public class RecipeLightShooterCollector extends ShapelessRecipes {
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		for (int i = 0 ; i<inv.getSizeInventory() ; i++) {
 			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null) {
-				if (!stack.isItemEqual(new ItemStack(ModItems.lightshooter)) && !stack.isItemEqual(new ItemStack(Blocks.HOPPER))) {
-					return null;
+			if (!stack.isEmpty()) {
+				if (!stack.isItemEqual(new ItemStack(ModItems.light_shooter)) && !stack.isItemEqual(new ItemStack(Blocks.HOPPER))) {
+					return ItemStack.EMPTY;
 				}
 				list.add(stack);
 			}
 		}
-		ItemStack stackShooter = null;
+		ItemStack stackShooter = ItemStack.EMPTY;
 		boolean shooter = false, hopper = false;
 		for (ItemStack stack: list) {
-			if (stack.isItemEqual(new ItemStack(ModItems.lightshooter))) {
+			if (stack.isItemEqual(new ItemStack(ModItems.light_shooter))) {
 				stackShooter = stack;
 				shooter = true;
 			}
@@ -63,20 +66,20 @@ public class RecipeLightShooterCollector extends ShapelessRecipes {
 			}
 		}
 		if (!shooter || !hopper || list.size() != 2)
-			return null;
-		ItemStack result = new ItemStack(ModItems.lightshooter_c, 1);
+			return ItemStack.EMPTY;
+		ItemStack result = new ItemStack(ModItems.light_shooter_collecter, 1);
 		result.setTagCompound(stackShooter.getTagCompound());
 		return result;
 	}
 
 	@Override
-	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
-		ItemStack[] aitemstack = new ItemStack[inv.getSizeInventory()];
+	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+		NonNullList<ItemStack> aitemstack =NonNullList.<ItemStack>withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
-        for (int i = 0; i < aitemstack.length; ++i)
+        for (int i = 0; i < aitemstack.size(); ++i)
         {
             ItemStack itemstack = inv.getStackInSlot(i);
-            aitemstack[i] = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
+            aitemstack.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
         }
 
         return aitemstack;

@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " U ", 
+		" B ", 
+		"RSR"
+    ],
+    "key": {
+        "U": {
+            "item": "usefulstuffs:umbrella"
+        },
+        "B": {
+            "item": "minecraft:wooden_button"
+        },
+        "S": {
+            "item": "minecraft:stone",
+			"data": 32767
+        },
+        "R": {
+            "item": "minecraft:redstone"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:rain_detector"
+    }
+}

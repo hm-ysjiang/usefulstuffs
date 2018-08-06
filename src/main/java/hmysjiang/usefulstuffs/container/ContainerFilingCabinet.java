@@ -1,21 +1,19 @@
 package hmysjiang.usefulstuffs.container;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import hmysjiang.usefulstuffs.container.slot.SlotFilingCabinet;
-import hmysjiang.usefulstuffs.tileentity.TileEntityFilingCabinet;
+import hmysjiang.usefulstuffs.blocks.filingcabinet.TileEntityFilingCabinet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerFilingCabinet extends Container {
-	
+
 	protected EntityPlayer player;
 	protected InventoryPlayer playerInv;
 	protected BlockPos pos;
@@ -34,7 +32,7 @@ public class ContainerFilingCabinet extends Container {
 		//18*6*10
 		for (int y = 0 ; y < 6 ; y++) {
 			for (int x = 0 ; x < 18 ; x++) {
-				this.addSlotToContainer(new SlotFilingCabinet(handler, x + (y * 18) + (page * 108), xFC + x *gap, yFC + y *gap));
+				this.addSlotToContainer(new SlotUnstackable(handler, x + (y * 18) + (page * 108), xFC + x *gap, yFC + y *gap));
 			}
 		}
 		
@@ -57,7 +55,7 @@ public class ContainerFilingCabinet extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot)this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack())
@@ -68,16 +66,16 @@ public class ContainerFilingCabinet extends Container {
             if (index < 108) {
             	if (!this.mergeItemStack(itemstack1, 108, this.inventorySlots.size(), true))
                 {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             }
             else if (!this.mergeItemStack(itemstack1, 0, 108, false)) {
-            	return null;
+            	return ItemStack.EMPTY;
             }
 
-            if (itemstack1.stackSize == 0)
+            if (itemstack1.getCount() == 0)
             {
-                slot.putStack((ItemStack)null);
+                slot.putStack(ItemStack.EMPTY);
             }
             else
             {
@@ -89,9 +87,9 @@ public class ContainerFilingCabinet extends Container {
 	}
 	
 	public void sort() {
-		List<ItemStack> newlist = new ArrayList<ItemStack>();
+		NonNullList<ItemStack> newlist = NonNullList.<ItemStack>create();
 		for (ItemStack stack: inventoryItemStacks) {
-			if (stack != null) {
+			if (!stack.isEmpty()) {
 				newlist.add(stack);
 			}
 		}
@@ -113,5 +111,18 @@ public class ContainerFilingCabinet extends Container {
 	public BlockPos getPos() {
 		return pos;
 	}
+	
+	public class SlotUnstackable extends SlotItemHandler {
 
+		public SlotUnstackable(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+			super(itemHandler, index, xPosition, yPosition);
+		}
+		
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			return super.isItemValid(stack) && stack.getItem().getItemStackLimit(stack) == 1;
+		}
+
+	}
+	
 }

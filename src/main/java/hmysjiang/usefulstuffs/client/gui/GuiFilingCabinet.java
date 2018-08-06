@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 public class GuiFilingCabinet extends GuiContainer {
-	
+
 	protected int page;
 	private static final int buttonSize = 20;
 	
@@ -41,7 +41,7 @@ public class GuiFilingCabinet extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		this.fontRendererObj.drawString(I18n.format("usefulstuffs.gui.filing_cabinet.name"), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("usefulstuffs.gui.filing_cabinet.name"), 8, 6, 4210752);
 	}
 	
 	@Override
@@ -72,10 +72,8 @@ public class GuiFilingCabinet extends GuiContainer {
 		else {
 			EntityPlayer player = ((ContainerFilingCabinet)this.inventorySlots).getPlayer();
 			BlockPos pos = ((ContainerFilingCabinet)this.inventorySlots).getPos();
-			PacketHandler.INSTANCE.sendToServer(new GuiSortPressed(player.world, pos));
-//			PacketHandler.INSTANCE.sendToServer(new GuiButtonPressed(player.worldObj, player, pos.getX(), pos.getY(), pos.getZ(), page));	
+			PacketHandler.INSTANCE.sendToServer(new GuiSortPressed(player.world, pos));	
 		}
 		super.actionPerformed(button);
 	}
-	
 }

@@ -2,11 +2,12 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
-import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
-import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
+import hmysjiang.usefulstuffs.utils.InventoryHelper;
+import hmysjiang.usefulstuffs.utils.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -34,9 +35,8 @@ public class ItemBuildingWand extends Item {
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn,
-			EnumHand hand) {
-		Object[] ret = WorldHelper.getBlockPosFacingEntityLookingAt(playerIn, itemStackIn.getItem() instanceof ItemBuildingWandInfinite ? 32 : 16);
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		Object[] ret = WorldHelper.getBlockPosFacingEntityLookingAt(playerIn, playerIn.getHeldItem(hand).getItem() instanceof ItemBuildingWandInfinite ? 32 : 16);
 		if (ret != null && ret[1] != null) {
 			BlockPos pos = (BlockPos) ret[0];
 			Vec3d p = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
@@ -44,7 +44,8 @@ public class ItemBuildingWand extends Item {
 			IBlockState state = worldIn.getBlockState(pos);
 			EnumFacing facing = (EnumFacing) ret[1];
 			ItemStack stackTemplate = playerIn.getHeldItemOffhand();
-			if (stackTemplate != null && stackTemplate.getItem() instanceof ItemBlock && stackTemplate.stackSize > 0) {
+			if (!stackTemplate.isEmpty() && stackTemplate.getItem() instanceof ItemBlock && stackTemplate.getCount() > 0) {
+				ItemStack wand = playerIn.getHeldItem(hand);
 				ItemStack stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
 				Block block = ((ItemBlock)stackTemplate.getItem()).getBlock();
 				boolean flag = block == state.getBlock();
@@ -54,28 +55,28 @@ public class ItemBuildingWand extends Item {
 					e = new Vec3d(-1, 0, 0);
 					while (flag1) {
 						p = p.add(e);
-						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (p.xCoord + 0.5 - playerIn.posX) < 1)
+						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (p.x + 0.5 - playerIn.posX) < 1)
 							break;
 						worldIn.setBlockState(new BlockPos(p), flag ? state : block.getStateFromMeta(stackTemplate.getMetadata()));
 						worldIn.playSound(playerIn, new BlockPos(p), block.getSoundType(block.getDefaultState(), worldIn, new BlockPos(p), playerIn).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 						if (!playerIn.capabilities.isCreativeMode) {
-							stack.stackSize--;
-							if (stack.stackSize == 0) {
+							stack.setCount(stack.getCount() - 1);
+							if (stack.isEmpty()) {
 								playerIn.inventory.deleteStack(stack);
 								if (stack.equals(stackTemplate)) {
 									flag1 = false;
 								}
 								else {
 									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
-									if (stack == null){
+									if (stack.isEmpty()){
 										flag1 = false;
 									}
 								}
 							}
-							if (!(itemStackIn.getItem() instanceof ItemBuildingWandInfinite)) {
-								itemStackIn.setItemDamage(itemStackIn.getItemDamage() + 1);
-								if (itemStackIn.getItemDamage() == itemStackIn.getMaxDamage()) {
-									playerIn.inventory.deleteStack(itemStackIn);
+							if (!(wand.getItem() instanceof ItemBuildingWandInfinite)) {
+								wand.setItemDamage(wand.getItemDamage() + 1);
+								if (wand.getItemDamage() == wand.getMaxDamage()) {
+									playerIn.inventory.deleteStack(wand);
 									flag1 = false;
 								}
 							}
@@ -86,28 +87,28 @@ public class ItemBuildingWand extends Item {
 					e = new Vec3d(1, 0, 0);
 					while (flag1) {
 						p = p.add(e);
-						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (playerIn.posX - (p.xCoord + 0.5)) < 1)
+						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (playerIn.posX - (p.x + 0.5)) < 1)
 							break;
 						worldIn.setBlockState(new BlockPos(p), flag ? state : block.getStateFromMeta(stackTemplate.getMetadata()));
 						worldIn.playSound(playerIn, new BlockPos(p), block.getSoundType(block.getDefaultState(), worldIn, new BlockPos(p), playerIn).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 						if (!playerIn.capabilities.isCreativeMode) {
-							stack.stackSize--;
-							if (stack.stackSize == 0) {
+							stack.setCount(stack.getCount() - 1);
+							if (stack.isEmpty()) {
 								playerIn.inventory.deleteStack(stack);
 								if (stack.equals(stackTemplate)) {
 									flag1 = false;
 								}
 								else {
 									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
-									if (stack == null){
+									if (stack.isEmpty()){
 										flag1 = false;
 									}
 								}
 							}
-							if (!(itemStackIn.getItem() instanceof ItemBuildingWandInfinite)) {
-								itemStackIn.setItemDamage(itemStackIn.getItemDamage() + 1);
-								if (itemStackIn.getItemDamage() == itemStackIn.getMaxDamage()) {
-									playerIn.inventory.deleteStack(itemStackIn);
+							if (!(wand.getItem() instanceof ItemBuildingWandInfinite)) {
+								wand.setItemDamage(wand.getItemDamage() + 1);
+								if (wand.getItemDamage() == wand.getMaxDamage()) {
+									playerIn.inventory.deleteStack(wand);
 									flag1 = false;
 								}
 							}
@@ -118,28 +119,28 @@ public class ItemBuildingWand extends Item {
 					e = new Vec3d(0, 0, -1);
 					while (flag1) {
 						p = p.add(e);
-						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (p.zCoord + 0.5 - playerIn.posZ) < 1)
+						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (p.z + 0.5 - playerIn.posZ) < 1)
 							break;
 						worldIn.setBlockState(new BlockPos(p), flag ? state : block.getStateFromMeta(stackTemplate.getMetadata()));
 						worldIn.playSound(playerIn, new BlockPos(p), block.getSoundType(block.getDefaultState(), worldIn, new BlockPos(p), playerIn).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 						if (!playerIn.capabilities.isCreativeMode) {
-							stack.stackSize--;
-							if (stack.stackSize == 0) {
+							stack.setCount(stack.getCount() - 1);
+							if (stack.isEmpty()) {
 								playerIn.inventory.deleteStack(stack);
 								if (stack.equals(stackTemplate)) {
 									flag1 = false;
 								}
 								else {
 									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
-									if (stack == null){
+									if (stack.isEmpty()){
 										flag1 = false;
 									}
 								}
 							}
-							if (!(itemStackIn.getItem() instanceof ItemBuildingWandInfinite)) {
-								itemStackIn.setItemDamage(itemStackIn.getItemDamage() + 1);
-								if (itemStackIn.getItemDamage() == itemStackIn.getMaxDamage()) {
-									playerIn.inventory.deleteStack(itemStackIn);
+							if (!(wand.getItem() instanceof ItemBuildingWandInfinite)) {
+								wand.setItemDamage(wand.getItemDamage() + 1);
+								if (wand.getItemDamage() == wand.getMaxDamage()) {
+									playerIn.inventory.deleteStack(wand);
 									flag1 = false;
 								}
 							}
@@ -150,28 +151,28 @@ public class ItemBuildingWand extends Item {
 					e = new Vec3d(0, 0, 1);
 					while (flag1) {
 						p = p.add(e);
-						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (playerIn.posZ - (p.zCoord + 0.5)) < 1)
+						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (playerIn.posZ - (p.z + 0.5)) < 1)
 							break;
 						worldIn.setBlockState(new BlockPos(p), flag ? state : block.getStateFromMeta(stackTemplate.getMetadata()));
 						worldIn.playSound(playerIn, new BlockPos(p), block.getSoundType(block.getDefaultState(), worldIn, new BlockPos(p), playerIn).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 						if (!playerIn.capabilities.isCreativeMode) {
-							stack.stackSize--;
-							if (stack.stackSize == 0) {
+							stack.setCount(stack.getCount() - 1);
+							if (stack.isEmpty()) {
 								playerIn.inventory.deleteStack(stack);
 								if (stack.equals(stackTemplate)) {
 									flag1 = false;
 								}
 								else {
 									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
-									if (stack == null){
+									if (stack.isEmpty()){
 										flag1 = false;
 									}
 								}
 							}
-							if (!(itemStackIn.getItem() instanceof ItemBuildingWandInfinite)) {
-								itemStackIn.setItemDamage(itemStackIn.getItemDamage() + 1);
-								if (itemStackIn.getItemDamage() == itemStackIn.getMaxDamage()) {
-									playerIn.inventory.deleteStack(itemStackIn);
+							if (!(wand.getItem() instanceof ItemBuildingWandInfinite)) {
+								wand.setItemDamage(wand.getItemDamage() + 1);
+								if (wand.getItemDamage() == wand.getMaxDamage()) {
+									playerIn.inventory.deleteStack(wand);
 									flag1 = false;
 								}
 							}
@@ -182,28 +183,28 @@ public class ItemBuildingWand extends Item {
 					e = new Vec3d(0, 1, 0);
 					while (flag1) {
 						p = p.add(e);
-						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (playerIn.posY - (p.yCoord + 0.5)) < 1)
+						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (playerIn.posY - (p.y + 0.5)) < 1)
 							break;
 						worldIn.setBlockState(new BlockPos(p), flag ? state : block.getStateFromMeta(stackTemplate.getMetadata()));
 						worldIn.playSound(playerIn, new BlockPos(p), block.getSoundType(block.getDefaultState(), worldIn, new BlockPos(p), playerIn).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 						if (!playerIn.capabilities.isCreativeMode) {
-							stack.stackSize--;
-							if (stack.stackSize == 0) {
+							stack.setCount(stack.getCount() - 1);
+							if (stack.isEmpty()) {
 								playerIn.inventory.deleteStack(stack);
 								if (stack.equals(stackTemplate)) {
 									flag1 = false;
 								}
 								else {
 									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
-									if (stack == null){
+									if (stack.isEmpty()){
 										flag1 = false;
 									}
 								}
 							}
-							if (!(itemStackIn.getItem() instanceof ItemBuildingWandInfinite)) {
-								itemStackIn.setItemDamage(itemStackIn.getItemDamage() + 1);
-								if (itemStackIn.getItemDamage() == itemStackIn.getMaxDamage()) {
-									playerIn.inventory.deleteStack(itemStackIn);
+							if (!(wand.getItem() instanceof ItemBuildingWandInfinite)) {
+								wand.setItemDamage(wand.getItemDamage() + 1);
+								if (wand.getItemDamage() == wand.getMaxDamage()) {
+									playerIn.inventory.deleteStack(wand);
 									flag1 = false;
 								}
 							}
@@ -214,28 +215,28 @@ public class ItemBuildingWand extends Item {
 					e = new Vec3d(0, -1, 0);
 					while (flag1) {
 						p = p.add(e);
-						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (p.yCoord + 0.5 - playerIn.posY) < 2)
+						if (!(worldIn.getBlockState(new BlockPos(p)).getMaterial().isReplaceable() || worldIn.getBlockState(new BlockPos(p)).getBlock() == Blocks.AIR) || (p.y + 0.5 - playerIn.posY) < 2)
 							break;
 						worldIn.setBlockState(new BlockPos(p), flag ? state : block.getStateFromMeta(stackTemplate.getMetadata()));
 						worldIn.playSound(playerIn, new BlockPos(p), block.getSoundType(block.getDefaultState(), worldIn, new BlockPos(p), playerIn).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 						if (!playerIn.capabilities.isCreativeMode) {
-							stack.stackSize--;
-							if (stack.stackSize == 0) {
+							stack.setCount(stack.getCount() - 1);
+							if (stack.isEmpty()) {
 								playerIn.inventory.deleteStack(stack);
 								if (stack.equals(stackTemplate)) {
 									flag1 = false;
 								}
 								else {
 									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
-									if (stack == null){
+									if (stack.isEmpty()){
 										flag1 = false;
 									}
 								}
 							}
-							if (!(itemStackIn.getItem() instanceof ItemBuildingWandInfinite)) {
-								itemStackIn.setItemDamage(itemStackIn.getItemDamage() + 1);
-								if (itemStackIn.getItemDamage() == itemStackIn.getMaxDamage()) {
-									playerIn.inventory.deleteStack(itemStackIn);
+							if (!(wand.getItem() instanceof ItemBuildingWandInfinite)) {
+								wand.setItemDamage(wand.getItemDamage() + 1);
+								if (wand.getItemDamage() == wand.getMaxDamage()) {
+									playerIn.inventory.deleteStack(wand);
 									flag1 = false;
 								}
 							}
@@ -246,11 +247,11 @@ public class ItemBuildingWand extends Item {
 			}
 			
 		}
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add(I18n.format("usefulstuffs.building_wand.tooltip_1"));
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.building_wand.tooltip_2"));
 		if (stack.getItem() instanceof ItemBuildingWandInfinite) {

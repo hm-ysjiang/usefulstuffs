@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " CP", 
+		"OOR", 
+		" BO"
+    ],
+    "key": {
+        "C": {
+            "item": "minecraft:chest"
+        },
+        "P": {
+            "item": "minecraft:piston"
+        },
+        "O": {
+            "item": "minecraft:obsidian"
+        },
+        "R": {
+            "item": "minecraft:redstone_torch"
+        },
+        "B": {
+            "item": "minecraft:wooden_button"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:light_shooter"
+    }
+}

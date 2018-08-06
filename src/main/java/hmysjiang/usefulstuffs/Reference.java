@@ -1,11 +1,11 @@
 package hmysjiang.usefulstuffs;
 
 public class Reference {
-	
+
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "1.3.0";
-	public static final String ACCEPTED_MCVERSION = "[1.10.2]";
+	public static final String VERSION = "2.0.0a";
+	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
 	public static final boolean TEST_MODE = true;
 	
 	public static enum ModItems{
@@ -22,7 +22,8 @@ public class Reference {
 		BODY_STORAGE("storage_body"),
 		BELT_LILY("lily_belt"),
 		BAUBLE_COMPACT("compact_bauble"),
-		PACKING_GLUE("packing_glue");
+		PACKING_GLUE("packing_glue"),
+		FLIPFLOPCORE("flipflop_core");
 		
 		private String unlocalizedName;
 		
@@ -45,7 +46,6 @@ public class Reference {
 		WELL("well"),
 		RAIN_DETECTOR("rain_detector"),
 		CAMPFIRE("campfire"),
-		LANTERN("lantern"),
 		FILING_CABINET("filing_cabinet"),
 		GLUED_BOX("glued_box"),
 		T_FLIPFLOP("t_flipflop");
@@ -67,9 +67,7 @@ public class Reference {
 	}
 	
 	public static enum ModEntities{
-		LIGHT_BULB(0),
-		FAIRY_LIGHT(1),
-		BULLET(2);
+		LIGHT_BULB(0);
 		
 		private int ID;
 		

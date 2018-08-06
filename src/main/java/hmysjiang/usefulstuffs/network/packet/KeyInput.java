@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -40,10 +39,10 @@ public class KeyInput implements IMessage {
 		public IMessage onMessage(KeyInput message, MessageContext ctx) {
 			switch(message.keyIndex) {
 			case 0:
-				EntityPlayer player = ctx.getServerHandler().playerEntity;
+				EntityPlayer player = ctx.getServerHandler().player;
 				IBaublesItemHandler baubleInv = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
 				for (int i = 0 ; i<baubleInv.getSlots() ; i++) {
-					if (baubleInv.getStackInSlot(i) != null && baubleInv.getStackInSlot(i).isItemEqual(new ItemStack(ModItems.body_storage))) {
+					if (baubleInv.getStackInSlot(i) != null && baubleInv.getStackInSlot(i).isItemEqual(new ItemStack(ModItems.bag_storage))) {
 						ItemStack bauble = baubleInv.getStackInSlot(i);
 						if (player.isSneaking()) {}
 						else {

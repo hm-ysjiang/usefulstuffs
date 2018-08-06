@@ -9,17 +9,17 @@ public class BaublesContainer extends ItemStackHandler implements IBaublesItemHa
 
 	private final static int BAUBLE_SLOTS = 7;
 	private boolean[] changed = new boolean[BAUBLE_SLOTS];
-	private boolean blockEvents = false;
+	private boolean blockEvents=false;	
 	private EntityLivingBase player;
-	
+
 	public BaublesContainer()
-    {
-        super(BAUBLE_SLOTS);
-    }
-	
+	{
+		super(BAUBLE_SLOTS);
+	}
+
 	@Override
 	public void setSize(int size)
-    {
+	{
 		if (size<BAUBLE_SLOTS) size = BAUBLE_SLOTS;
 		super.setSize(size);
 		boolean[] old = changed;
@@ -28,23 +28,23 @@ public class BaublesContainer extends ItemStackHandler implements IBaublesItemHa
 		{
 			changed[i] = old[i];
 		}
-    }
+	}
 
 	/**
 	 * Returns true if automation is allowed to insert the given stack (ignoring
 	 * stack size) into the given slot.
 	 */
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack, EntityLivingBase player) {		
-		if (stack == null || stack.getItem()==null || !(stack.getItem() instanceof IBauble) ||
-				!((IBauble) stack.getItem()).canEquip(stack, player))
-			return false;		
-		return ((IBauble) stack.getItem()).getBaubleType(stack).hasSlot(slot);
-	}	
-	
+	public boolean isItemValidForSlot(int slot, ItemStack stack, EntityLivingBase player) {
+		if (stack==null || stack.isEmpty() || !stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
+			return false;
+		IBauble bauble = stack.getCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null);
+		return bauble.canEquip(stack, player) && bauble.getBaubleType(stack).hasSlot(slot);
+	}
+
 	@Override
 	public void setStackInSlot(int slot, ItemStack stack) {
-		if (stack==null || this.isItemValidForSlot(slot, stack, player)) {
+		if (stack==null || stack.isEmpty() || this.isItemValidForSlot(slot, stack, player)) {
 			super.setStackInSlot(slot, stack);
 		}
 	}
@@ -64,30 +64,31 @@ public class BaublesContainer extends ItemStackHandler implements IBaublesItemHa
 	public void setEventBlock(boolean blockEvents) {
 		this.blockEvents = blockEvents;
 	}
-	
+
 	@Override
 	protected void onContentsChanged(int slot)
-    {
+	{
 		setChanged(slot,true);
-    }
-	
-	
+	}
+
 	@Override
 	public boolean isChanged(int slot) {
+		if (changed==null) {
+			changed = new boolean[this.getSlots()];
+		}
 		return changed[slot];
 	}
 
 	@Override
 	public void setChanged(int slot, boolean change) {
+		if (changed==null) {
+			changed = new boolean[this.getSlots()];
+		}
 		this.changed[slot] = change;
 	}
 
 	@Override
 	public void setPlayer(EntityLivingBase player) {
-		this.player = player;		
+		this.player=player;
 	}
-
-
-	
-	
 }

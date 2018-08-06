@@ -20,18 +20,17 @@ build
 # other
 eclipse
 run
-CREDITS-fml.txt
-forge-1.10.2-12.18.3.2511-changelog.txt
-gradle.properties
-gradlew
-gradlew.bat
-setup.bat
-gradle/wrapper/gradle-wrapper.properties
-gradle/wrapper/gradle-wrapper.jar
+forge-1.12.2-14.23.4.2705-changelog.txt
 README.txt
 Paulscode SoundSystem CodecIBXM License.txt
 Paulscode IBXM Library License.txt
 MinecraftForge-Credits.txt
 LICENSE-new.txt
-build.bat
-start.bat
+CREDITS-fml.txt
+src/main/resources/pack.mcmeta
+src/main/java/com/example/examplemod/ExampleMod.java
+gradlew.bat
+gradlew
+gradle/wrapper/gradle-wrapper.properties
+gradle/wrapper/gradle-wrapper.jar
+gradle.properties

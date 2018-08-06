@@ -1,93 +1,105 @@
 package hmysjiang.usefulstuffs.init;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.items.*;
-import hmysjiang.usefulstuffs.items.baubles.*;
-import hmysjiang.usefulstuffs.items.crafting.*;
+import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.items.ItemBento;
+import hmysjiang.usefulstuffs.items.ItemBuildingWand;
+import hmysjiang.usefulstuffs.items.ItemBuildingWandInfinite;
+import hmysjiang.usefulstuffs.items.ItemLightShooter;
+import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
+import hmysjiang.usefulstuffs.items.ItemPackingGlue;
+import hmysjiang.usefulstuffs.items.ItemWaterBlackList;
+import hmysjiang.usefulstuffs.items.baubles.ItemLilyBelt;
+import hmysjiang.usefulstuffs.items.baubles.ItemStorageBag;
+import hmysjiang.usefulstuffs.items.crafting.ItemBuildingWizard;
+import hmysjiang.usefulstuffs.items.crafting.ItemCompactStorageUnit;
+import hmysjiang.usefulstuffs.items.crafting.ItemFlipFlopCore;
+import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@EventBusSubscriber
 public class ModItems {
 	
-	public static Item helper;
-	public static Item lightshooter;
-	public static Item lightshooter_c;
-	public static Item waterfilter;
-	public static Item umbrella;
-	public static Item csu;
+	public static List<Item> itemblocks = new ArrayList<>();
+	
+	public static Item water_blacklist;
 	public static Item bento;
 	public static Item building_wand;
 	public static Item building_wand_infinite;
-	public static Item building_wizard;
-	public static Item belt_lily;
-	public static Item body_storage;
+	public static Item light_shooter;
+	public static Item light_shooter_collecter;
 	public static Item packing_glue;
+	public static Item building_wizard;
+	public static Item compact_storage_unit;
+	public static Item umbrella;
+	public static Item belt_lily;
+	public static Item bag_storage;
+	public static Item flipflop_core;
 	
 	public static void init() {
-		if (Reference.TEST_MODE)
-			helper = new ItemMagicalWand();
-		lightshooter = new ItemLightShooter();
-		lightshooter_c = new ItemLightShooterCollector();
-		waterfilter = new ItemWaterBlackListFilter();
-		umbrella = new ItemUmbrella();
-		csu = new ItemCompactStorageUnit();
+		water_blacklist = new ItemWaterBlackList();
 		bento = new ItemBento();
 		building_wand = new ItemBuildingWand(Reference.ModItems.BUILDING_WAND.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND.getRegistryName());
 		building_wand_infinite = new ItemBuildingWandInfinite(Reference.ModItems.BUILDING_WAND_INFINITE.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND_INFINITE.getRegistryName());
-		building_wizard = new ItemBuildingWizard();
-		belt_lily = new ItemLilyBelt();
-		body_storage = new ItemStorageBody();
+		light_shooter = new ItemLightShooter();
+		light_shooter_collecter = new ItemLightShooterCollector();
 		packing_glue = new ItemPackingGlue();
+		building_wizard = new ItemBuildingWizard();
+		compact_storage_unit = new ItemCompactStorageUnit();
+		umbrella = new ItemUmbrella();
+		belt_lily = new ItemLilyBelt();
+		bag_storage = new ItemStorageBag();
+		flipflop_core = new ItemFlipFlopCore();
+	}
+	
+	@SubscribeEvent
+	public static void onItemRegister(RegistryEvent.Register<Item> event) {
+		event.getRegistry().register(water_blacklist);
+		event.getRegistry().register(bento);
+		event.getRegistry().register(building_wand);
+		event.getRegistry().register(building_wand_infinite);
+		event.getRegistry().register(light_shooter);
+		event.getRegistry().register(light_shooter_collecter);
+		event.getRegistry().register(packing_glue);
+		event.getRegistry().register(building_wizard);
+		event.getRegistry().register(compact_storage_unit);
+		event.getRegistry().register(umbrella);
+		event.getRegistry().register(belt_lily);
+		event.getRegistry().register(bag_storage);
+		event.getRegistry().register(flipflop_core);
 		
+		event.getRegistry().registerAll(itemblocks.toArray(new Item[0]));
 	}
 	
-	public static void register() {
-		if (Reference.TEST_MODE)
-			GameRegistry.register(helper);
-		GameRegistry.register(lightshooter);
-		GameRegistry.register(lightshooter_c);
-		GameRegistry.register(waterfilter);
-		GameRegistry.register(umbrella);
-		GameRegistry.register(csu);
-		GameRegistry.register(bento);
-		GameRegistry.register(building_wand);
-		GameRegistry.register(building_wand_infinite);
-		GameRegistry.register(building_wizard);
-		GameRegistry.register(belt_lily);
-		GameRegistry.register(body_storage);
-		GameRegistry.register(packing_glue);
+	@SubscribeEvent
+	public static void onModelRegistry(ModelRegistryEvent event) {
+		UsefulStuffs.proxy.registerItemRenders(water_blacklist);
+		UsefulStuffs.proxy.registerItemRenders(bento);
+		UsefulStuffs.proxy.registerItemRenders(building_wand);
+		UsefulStuffs.proxy.registerItemRenders(building_wand_infinite);
+		UsefulStuffs.proxy.registerItemRenders(light_shooter);
+		UsefulStuffs.proxy.registerItemRenders(light_shooter_collecter);
+		UsefulStuffs.proxy.registerItemRenders(packing_glue);
+		UsefulStuffs.proxy.registerItemRenders(building_wizard);
+		UsefulStuffs.proxy.registerItemRenders(compact_storage_unit);
+		UsefulStuffs.proxy.registerItemRenders(umbrella);
+		UsefulStuffs.proxy.registerItemRenders(belt_lily);
+		UsefulStuffs.proxy.registerItemRenders(bag_storage);
+		UsefulStuffs.proxy.registerItemRenders(flipflop_core);
 		
-	}
-	
-	public static void registerRenders() {
-		if (Reference.TEST_MODE)
-			registerRender(helper);
-		registerRender(lightshooter);
-		registerRender(lightshooter_c);
-		registerRender(waterfilter);
-		registerRender(umbrella);
-		registerRender(csu);
-		registerRender(bento);
-		registerRender(building_wand);
-		registerRender(building_wand_infinite);
-		registerRender(building_wizard);
-		registerRender(belt_lily);
-		registerRender(body_storage);
-		registerRender(packing_glue);
-		
-	}
-	
-	private static void registerRender(Item item) {
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, item.getUnlocalizedName().substring(18)), "inventory"));
-//		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
-	
-	private static void registerRender(Item item, int meta, String filename) {
-		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, filename), "inventory"));
-//		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+		for (Item item: itemblocks)
+			UsefulStuffs.proxy.registerItemRenders(item);
 	}
 	
 }

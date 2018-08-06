@@ -4,6 +4,7 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -16,14 +17,9 @@ public class ItemLightShooterCollector extends ItemLightShooter {
 	}
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-		super.addInformation(stack, playerIn, tooltip, advanced);
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
+		super.addInformation(stack, worldIn, tooltip, advanced);
 		tooltip.add(TextFormatting.YELLOW + I18n.format("usefulstuffs.light_shooter.tooltip_c"));
-	}
-	
-	@Override
-	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		
 	}
 	
 }
