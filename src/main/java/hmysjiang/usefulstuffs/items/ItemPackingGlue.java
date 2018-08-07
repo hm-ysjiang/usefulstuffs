@@ -1,10 +1,14 @@
 package hmysjiang.usefulstuffs.items;
 
+import java.util.List;
+
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentXL;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.utils.WorldHelper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemPackingGlue extends Item {
@@ -81,6 +86,13 @@ public class ItemPackingGlue extends Item {
 	@Override
 	public int getItemEnchantability() {
 		return 10;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(I18n.format("usefulstuffs.packing_glue.tooltip_1"));
+		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.packing_glue.tooltip_2"));
+		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.packing_glue.tooltip_3"));
 	}
 	
 }

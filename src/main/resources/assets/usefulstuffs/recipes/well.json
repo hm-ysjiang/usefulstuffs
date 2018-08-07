@@ -13,7 +13,8 @@
             "item": "minecraft:piston"
         },
         "H": {
-            "item": "minecraft:hardened_clay"
+            "item": "minecraft:hardened_clay",
+            "data": 32767
         },
         "C": {
             "item": "minecraft:comparator"

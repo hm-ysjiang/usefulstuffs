@@ -18,6 +18,7 @@ import hmysjiang.usefulstuffs.items.crafting.ItemBuildingWizard;
 import hmysjiang.usefulstuffs.items.crafting.ItemCompactStorageUnit;
 import hmysjiang.usefulstuffs.items.crafting.ItemFlipFlopCore;
 import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -65,19 +66,19 @@ public class ModItems {
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
-		event.getRegistry().register(water_blacklist);
-		event.getRegistry().register(bento);
-		event.getRegistry().register(building_wand);
-		event.getRegistry().register(building_wand_infinite);
-		event.getRegistry().register(light_shooter);
-		event.getRegistry().register(light_shooter_collecter);
-		event.getRegistry().register(packing_glue);
-		event.getRegistry().register(building_wizard);
-		event.getRegistry().register(compact_storage_unit);
-		event.getRegistry().register(umbrella);
-		event.getRegistry().register(belt_lily);
-		event.getRegistry().register(bag_storage);
-		event.getRegistry().register(flipflop_core);
+		register(event.getRegistry(), water_blacklist,
+				bento,
+				building_wand,
+				building_wand_infinite,
+				light_shooter,
+				light_shooter_collecter,
+				packing_glue,
+				building_wizard,
+				compact_storage_unit,
+				umbrella,
+				belt_lily,
+				bag_storage,
+				flipflop_core);
 		
 		event.getRegistry().registerAll(itemblocks.toArray(new Item[0]));
 	}
@@ -100,6 +101,12 @@ public class ModItems {
 		
 		for (Item item: itemblocks)
 			UsefulStuffs.proxy.registerItemRenders(item);
+	}
+	
+	private static void register(IForgeRegistry<Item> registry, Item... items) {
+		registry.registerAll(items);
+		for (Item item: items)
+			item.setCreativeTab(UsefulStuffs.TAB);
 	}
 	
 }

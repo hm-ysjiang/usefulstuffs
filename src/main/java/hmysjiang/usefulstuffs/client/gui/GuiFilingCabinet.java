@@ -32,7 +32,8 @@ public class GuiFilingCabinet extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		drawDefaultBackground();
+//		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/gui/container/filing_cabinet_left.png"));
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, 256, this.ySize);
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/gui/container/filing_cabinet_right.png"));

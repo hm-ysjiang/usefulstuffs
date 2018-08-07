@@ -13,6 +13,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +36,8 @@ public class BlockGluedBox extends Block implements ITileEntityProvider {
 		setUnlocalizedName(Reference.ModBlocks.GLUED_BOX.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.GLUED_BOX.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
-		setSoundType(SoundType.CLOTH);
+		setSoundType(SoundType.SLIME);
+		setDefaultSlipperiness(0.8F);
 	}
 	
 	@Override
@@ -116,5 +119,59 @@ public class BlockGluedBox extends Block implements ITileEntityProvider {
 		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.glued_box.tooltip_1"));
 		tooltip.add(TextFormatting.GOLD + I18n.format("usefulstuffs.glued_box.tooltip_2"));
 	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+	
+	@Override
+	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+    {
+        if (entityIn.isSneaking())
+        {
+            super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
+        }
+        else
+        {
+            entityIn.fall(fallDistance, 0.0F);
+        }
+    }
+	
+	@Override
+	public void onLanded(World worldIn, Entity entityIn)
+    {
+        if (entityIn.isSneaking())
+        {
+            super.onLanded(worldIn, entityIn);
+        }
+        else if (entityIn.motionY < 0.0D)
+        {
+            entityIn.motionY = -entityIn.motionY;
+
+            if (!(entityIn instanceof EntityLivingBase))
+            {
+                entityIn.motionY *= 0.8D;
+            }
+        }
+    }
+	
+	@Override
+	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
+    {
+        if (Math.abs(entityIn.motionY) < 0.1D && !entityIn.isSneaking())
+        {
+            double d0 = 0.4D + Math.abs(entityIn.motionY) * 0.2D;
+            entityIn.motionX *= d0;
+            entityIn.motionZ *= d0;
+        }
+
+        super.onEntityWalk(worldIn, pos, entityIn);
+    }
 	
 }

@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " L ", 
+		"LNL", 
+		"WL "
+    ],
+    "key": {
+        "L": {
+            "item": "minecraft:leather"
+        },
+        "N": {
+            "item": "minecraft:nether_wart"
+        },
+        "W": {
+            "item": "minecraft:waterlily"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:lily_belt"
+    }
+}

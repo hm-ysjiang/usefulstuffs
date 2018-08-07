@@ -104,11 +104,5 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
-	
-	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
-		super.addInformation(stack, worldIn, tooltip, advanced);
-		tooltip.add(I18n.format("usefulstuffs.rain_detector.tooltip", TextFormatting.GOLD));
-	}
 
 }

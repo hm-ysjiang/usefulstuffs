@@ -14,6 +14,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber
 public class ModBlocks {
@@ -38,13 +39,14 @@ public class ModBlocks {
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-		event.getRegistry().register(campfire);
-		event.getRegistry().register(filing_cabinet);
-		event.getRegistry().register(glued_box);
-		event.getRegistry().register(light_bulb);
-		event.getRegistry().register(rain_detector);
-		event.getRegistry().register(t_flipflop);
-		event.getRegistry().register(well);
+		register(event.getRegistry(),
+				campfire,
+				filing_cabinet,
+				glued_box,
+				light_bulb,
+				rain_detector,
+				t_flipflop,
+				well);
 	}
 	
 	@SubscribeEvent
@@ -56,6 +58,12 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(rain_detector));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(t_flipflop));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(well));
+	}
+	
+	private static void register(IForgeRegistry<Block> registry, Block... blocks) {
+		registry.registerAll(blocks);
+		for (Block block: blocks)
+			block.setCreativeTab(UsefulStuffs.TAB);
 	}
 	
 }

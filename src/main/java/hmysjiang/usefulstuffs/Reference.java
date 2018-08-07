@@ -4,9 +4,9 @@ public class Reference {
 
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "2.0.0a";
+	public static final String VERSION = "2.0.0";
 	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
-	public static final boolean TEST_MODE = true;
+	public static final boolean TEST_MODE = false;
 	
 	public static enum ModItems{
 		MAGICAL_WAND("magical_wand"),
@@ -21,7 +21,6 @@ public class Reference {
 		BUILDING_WIZARD("building_wizard"),
 		BODY_STORAGE("storage_body"),
 		BELT_LILY("lily_belt"),
-		BAUBLE_COMPACT("compact_bauble"),
 		PACKING_GLUE("packing_glue"),
 		FLIPFLOPCORE("flipflop_core");
 		

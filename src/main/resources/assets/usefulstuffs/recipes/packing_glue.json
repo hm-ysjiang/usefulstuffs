@@ -1,0 +1,24 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        " S ", 
+		"GBG", 
+		"GGG"
+    ],
+    "key": {
+        "G": {
+            "item": "minecraft:glass_pane"
+        },
+        "B": {
+            "type": "forge:ore_dict",
+			"ore": "slimeball"
+        },
+        "S": {
+            "item": "minecraft:stone_slab",
+			"data": 0
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:packing_glue"
+    }
+}

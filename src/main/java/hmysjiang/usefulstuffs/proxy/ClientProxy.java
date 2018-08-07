@@ -15,12 +15,6 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-	public void init() {
-		super.init();
-		KeyBindingHandler.init();
-	}
-	
-	@Override
 	public void registerItemRenders(Item item) {
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

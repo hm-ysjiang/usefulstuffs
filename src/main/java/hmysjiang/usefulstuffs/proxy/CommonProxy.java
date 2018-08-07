@@ -14,6 +14,7 @@ import hmysjiang.usefulstuffs.init.ModEntities;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.init.ModRecipe;
 import hmysjiang.usefulstuffs.network.PacketHandler;
+import hmysjiang.usefulstuffs.utils.KeyBindingHandler;
 import hmysjiang.usefulstuffs.utils.OreDictHelper;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +30,7 @@ public class CommonProxy {
 		
 		ModEntities.register();
 		PacketHandler.init();
+		KeyBindingHandler.init();
 		
 		registerTileEntity();
 	}

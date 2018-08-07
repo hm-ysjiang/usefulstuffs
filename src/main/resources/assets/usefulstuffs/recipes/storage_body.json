@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " S ", 
+		"STS", 
+		"CS "
+    ],
+    "key": {
+        "S": {
+            "item": "minecraft:string"
+        },
+        "T": {
+            "item": "minecraft:leather_chestplate",
+			"data": 0
+        },
+        "C": {
+            "item": "minecraft:chest"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:storage_body"
+    }
+}
