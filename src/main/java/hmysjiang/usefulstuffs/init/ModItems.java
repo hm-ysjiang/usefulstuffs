@@ -6,6 +6,7 @@ import java.util.List;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.items.ItemBento;
+import hmysjiang.usefulstuffs.items.ItemBerry;
 import hmysjiang.usefulstuffs.items.ItemBuildingWand;
 import hmysjiang.usefulstuffs.items.ItemBuildingWandInfinite;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
@@ -18,12 +19,9 @@ import hmysjiang.usefulstuffs.items.crafting.ItemBuildingWizard;
 import hmysjiang.usefulstuffs.items.crafting.ItemCompactStorageUnit;
 import hmysjiang.usefulstuffs.items.crafting.ItemFlipFlopCore;
 import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -47,6 +45,7 @@ public class ModItems {
 	public static Item belt_lily;
 	public static Item bag_storage;
 	public static Item flipflop_core;
+	public static Item berry;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -62,6 +61,7 @@ public class ModItems {
 		belt_lily = new ItemLilyBelt();
 		bag_storage = new ItemStorageBag();
 		flipflop_core = new ItemFlipFlopCore();
+		berry = new ItemBerry();
 	}
 	
 	@SubscribeEvent
@@ -78,7 +78,8 @@ public class ModItems {
 				umbrella,
 				belt_lily,
 				bag_storage,
-				flipflop_core);
+				flipflop_core,
+				berry);
 		
 		event.getRegistry().registerAll(itemblocks.toArray(new Item[0]));
 	}
@@ -98,6 +99,9 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(belt_lily);
 		UsefulStuffs.proxy.registerItemRenders(bag_storage);
 		UsefulStuffs.proxy.registerItemRenders(flipflop_core);
+		
+		for (EnumDyeColor color: EnumDyeColor.values())
+			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());
 		
 		for (Item item: itemblocks)
 			UsefulStuffs.proxy.registerItemRenders(item);

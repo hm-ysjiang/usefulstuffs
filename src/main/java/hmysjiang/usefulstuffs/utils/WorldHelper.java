@@ -10,6 +10,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -120,6 +121,15 @@ public class WorldHelper {
 			}
 		}
 		return den;
+	}
+	
+	public static int getGroundHeight(World world, int x, int z) {
+		if (!world.isAreaLoaded(new BlockPos(x, 64, z), 1)) return -1;
+		for (int y = world.getHeight() ; y>=48 ; y--) {
+			if (world.getBlockState(new BlockPos(x, y, z)) == Blocks.STONE.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.DIRT.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.GRASS.getDefaultState())
+				return y;
+		}
+		return -1;
 	}
 	
 }

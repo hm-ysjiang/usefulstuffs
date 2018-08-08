@@ -4,7 +4,7 @@ public class Reference {
 
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "2.0.0";
+	public static final String VERSION = "2.1.0";
 	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
 	public static final boolean TEST_MODE = false;
 	
@@ -22,7 +22,8 @@ public class Reference {
 		BODY_STORAGE("storage_body"),
 		BELT_LILY("lily_belt"),
 		PACKING_GLUE("packing_glue"),
-		FLIPFLOPCORE("flipflop_core");
+		FLIPFLOPCORE("flipflop_core"),
+		BERRY("berry");
 		
 		private String unlocalizedName;
 		
@@ -47,7 +48,8 @@ public class Reference {
 		CAMPFIRE("campfire"),
 		FILING_CABINET("filing_cabinet"),
 		GLUED_BOX("glued_box"),
-		T_FLIPFLOP("t_flipflop");
+		T_FLIPFLOP("t_flipflop"),
+		BERRYBUSH("berrybush");
 		
 		private String unlocalizedName;
 		

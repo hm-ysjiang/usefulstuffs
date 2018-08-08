@@ -1,5 +1,6 @@
 package hmysjiang.usefulstuffs.container;
 
+import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemFood;
@@ -41,7 +42,7 @@ public class ContainerBento extends ContainerItem {
 		
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return super.isItemValid(stack) && stack.getItem() instanceof ItemFood;
+			return super.isItemValid(stack) && stack.getItem() instanceof ItemFood && !(stack.getItem() instanceof ItemBento);
 		}
 
 	}

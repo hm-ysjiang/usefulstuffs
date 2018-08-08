@@ -10,6 +10,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -44,12 +45,14 @@ public class ItemBento extends ItemFood {
 	
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
-		return 32;
+		ItemStack food = getNextFood(stack);
+		return food.isEmpty() ? 0 : ((ItemFood)food.getItem()).getMaxItemUseDuration(food);
 	}
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.EAT;
+		ItemStack food = getNextFood(stack);
+		return food.isEmpty() ? EnumAction.NONE : ((ItemFood)food.getItem()).getItemUseAction(food);
 	}
 	
 	@Override
@@ -58,7 +61,7 @@ public class ItemBento extends ItemFood {
 		if (!playerIn.world.isRemote && hand == EnumHand.MAIN_HAND && playerIn.isSneaking()) {
 			ItemStack stack = playerIn.getHeldItem(hand);
 			playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_BENTO, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
-			return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 		}
 		else {
 			ItemStack stack = playerIn.getHeldItem(hand);
@@ -80,8 +83,36 @@ public class ItemBento extends ItemFood {
         if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
         	return stack;
         }
-        ItemStack food = ItemStack.EMPTY;
+        ItemStack food = getNextFood(stack);
+        if (!food.isEmpty()) {
+        	consumeOne(stack, worldIn, entityLiving);
+        }
+        if (entityLiving instanceof EntityPlayer)
+        {
+            EntityPlayer entityplayer = (EntityPlayer)entityLiving;
+            entityplayer.addStat(StatList.getObjectUseStats(this));
+            entityplayer.addStat(StatList.getObjectUseStats(food.getItem()));
+        }
+		return stack;
+	}
+	
+	public ItemStack getNextFood(ItemStack stack) {
+		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
+        	return ItemStack.EMPTY;
+        }
         ItemStackHandler handler = new ItemStackHandler(6);
+        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+        for (int i = 0 ; i<handler.getSlots() ; i++) {
+        	if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
+        		return handler.getStackInSlot(i);
+        	}
+        }
+        return ItemStack.EMPTY;
+	}
+	
+	public void consumeOne(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+		ItemStack food = ItemStack.EMPTY;
+		ItemStackHandler handler = new ItemStackHandler(6);
         handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
         for (int i = 0 ; i<handler.getSlots() ; i++) {
         	if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
@@ -91,68 +122,31 @@ public class ItemBento extends ItemFood {
         		break;
         	}
         }
-        
-        if (entityLiving instanceof EntityPlayer)
-        {
-            EntityPlayer entityplayer = (EntityPlayer)entityLiving;
-            entityplayer.addStat(StatList.getObjectUseStats(this));
-        }
-        
         NBTTagCompound compound = stack.getTagCompound();
         compound.setTag("Cont", handler.serializeNBT());
         stack.setTagCompound(compound);
-		return stack;
 	}
 	
 	public boolean isEmpty(ItemStack stack) {
-		ItemStackHandler handler = new ItemStackHandler(6);
-		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
-		for (int i = 0 ; i<handler.getSlots() ; i++) {
-			if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
-				return false;
-			}
-		}
-		return true;
+		return getNextFood(stack) == null;
+	}
+	
+	@Override
+	public int getHealAmount(ItemStack stack) {
+		ItemStack food = getNextFood(stack);
+		return food.isEmpty() ? 0 : ((ItemFood)food.getItem()).getHealAmount(food);
+	}
+	
+	@Override
+	public float getSaturationModifier(ItemStack stack) {
+		ItemStack food = getNextFood(stack);
+		return food.isEmpty() ? 0 : ((ItemFood)food.getItem()).getSaturationModifier(food);
 	}
 	
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add(I18n.format("usefulstuffs.bento.tooltip_1"));
 		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.bento.tooltip_2"));
-	}
-	
-	@Override
-	public int getHealAmount(ItemStack stack) {
-		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
-        	return 0;
-        }
-        ItemStack food = ItemStack.EMPTY;
-        ItemStackHandler handler = new ItemStackHandler(6);
-        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
-        for (int i = 0 ; i<handler.getSlots() ; i++) {
-        	if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
-        		food = handler.getStackInSlot(i);
-        		return ((ItemFood)food.getItem()).getHealAmount(food);
-        	}
-        }
-		return super.getHealAmount(stack);
-	}
-	
-	@Override
-	public float getSaturationModifier(ItemStack stack) {
-		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
-        	return 0;
-        }
-        ItemStack food = ItemStack.EMPTY;
-        ItemStackHandler handler = new ItemStackHandler(6);
-        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
-        for (int i = 0 ; i<handler.getSlots() ; i++) {
-        	if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
-        		food = handler.getStackInSlot(i);
-        		return ((ItemFood)food.getItem()).getSaturationModifier(food);
-        	}
-        }
-		return super.getSaturationModifier(stack);
 	}
 
 }

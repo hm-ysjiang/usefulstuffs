@@ -16,6 +16,7 @@ import hmysjiang.usefulstuffs.init.ModRecipe;
 import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.utils.KeyBindingHandler;
 import hmysjiang.usefulstuffs.utils.OreDictHelper;
+import hmysjiang.usefulstuffs.world.gen.BerryBushGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -37,7 +38,11 @@ public class CommonProxy {
 	
 	public void init() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(UsefulStuffs.instance, new GuiHandler());
+		OreDictHelper.register();
 		OreDictHelper.pullOreRegistries();
+		GameRegistry.registerWorldGenerator(new BerryBushGenerator(), 0);
+		
+		registerItemVariants();
 	}
 	
 	public void postInit() {
@@ -45,6 +50,10 @@ public class CommonProxy {
 	}
 	
 	public void registerItemRenders(Item item) {}
+	
+	public void registerItemRenders(Item item, int meta, String location) {}
+	
+	public void registerItemVariants() {}
 	
 	private void registerTileEntity() {
 		GameRegistry.registerTileEntity(TileEntityCampfire.class, new ResourceLocation(Reference.MOD_ID, "campfire"));

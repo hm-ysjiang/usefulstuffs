@@ -35,10 +35,12 @@ public class TileEntityCampfire extends TileEntity implements ITickable {
 				return;
 			}
 			buffRadius = 3 + MathHelper.ceil(getModifierCounts()/2);
-			List<Entity> entitylist = world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(pos.getX()-buffRadius, pos.getY()-5, pos.getZ()-buffRadius, pos.getX()+buffRadius+1, pos.getY()+5, pos.getZ()+buffRadius+1));
+			List<Entity> entitylist = world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(pos.getX() + 0.5 - (double)buffRadius / 2, pos.getY() - 3, pos.getZ() + 0.5 - (double)buffRadius / 2, 
+																										 pos.getX() + 0.5 + (double)buffRadius / 2, pos.getY() + 3, pos.getZ() + 0.5 + (double)buffRadius / 2));
 			for (Entity entity:entitylist)
 				if (entity instanceof EntityLivingBase)
-					((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(10), 8, 1, false, false));
+					if (((EntityLivingBase)entity).getActivePotionEffect(Potion.getPotionById(10)) == null || ((EntityLivingBase)entity).getActivePotionEffect(Potion.getPotionById(10)).getDuration() < 30)
+						((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(10), 100, 1, false, false));
 		}
 	}
 

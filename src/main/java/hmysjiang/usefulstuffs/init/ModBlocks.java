@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.blocks.bush.BlockBerryBush;
 import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
 import hmysjiang.usefulstuffs.blocks.filingcabinet.BlockFilingCabinet;
 import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
@@ -9,6 +10,7 @@ import hmysjiang.usefulstuffs.blocks.raindetector.BlockRainDetector;
 import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.well.BlockWell;
 import net.minecraft.block.Block;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -26,6 +28,7 @@ public class ModBlocks {
 	public static Block rain_detector;
 	public static Block t_flipflop;
 	public static Block well;
+	public static Block[] berrybushes = new Block[16];
 	
 	public static void init() {
 		campfire = new BlockCampfire();
@@ -35,11 +38,14 @@ public class ModBlocks {
 		rain_detector = new BlockRainDetector();
 		t_flipflop = new BlockTFlipFlop();
 		well = new BlockWell();
+		for (int i = 0 ; i<EnumDyeColor.values().length ; i++)
+			berrybushes[i] = new BlockBerryBush(EnumDyeColor.byMetadata(i));
 	}
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-		register(event.getRegistry(),
+		IForgeRegistry<Block> registry = event.getRegistry();
+		register(registry,
 				campfire,
 				filing_cabinet,
 				glued_box,
@@ -47,6 +53,7 @@ public class ModBlocks {
 				rain_detector,
 				t_flipflop,
 				well);
+		register(registry, berrybushes);
 	}
 	
 	@SubscribeEvent
@@ -58,6 +65,11 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(rain_detector));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(t_flipflop));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(well));
+		for (Block block: berrybushes)
+			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(block));
+		
+//		for (EnumDyeColor color: EnumDyeColor.values())
+//			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(berrybush), color.getMetadata(), color.getDyeColorName());
 	}
 	
 	private static void register(IForgeRegistry<Block> registry, Block... blocks) {
