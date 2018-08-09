@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "age=0": { "model": "usefulstuffs:berrybush_unready"},
+        "age=1": { "model": "usefulstuffs:berrybush_ready"},
+        "age=2": { "model": "usefulstuffs:berrybush_yellow"}
+    }
+}

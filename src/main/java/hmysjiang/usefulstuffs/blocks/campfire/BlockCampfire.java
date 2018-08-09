@@ -9,6 +9,7 @@ import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -43,6 +44,7 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 		setSoundType(SoundType.WOOD);
 		setHardness(0.5F);
 	}
+	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
@@ -99,6 +101,16 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 		super.addInformation(stack, worldIn, tooltip, advanced);
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.campfire.tooltip_1"));
 		tooltip.add(TextFormatting.YELLOW + I18n.format("usefulstuffs.campfire.tooltip_2"));
+	}
+	
+	@Override
+	public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return false;
+	}
+	
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
 	}
 
 }

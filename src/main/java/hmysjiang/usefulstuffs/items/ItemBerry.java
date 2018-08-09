@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.items;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.UsefulStuffs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemFood;
@@ -18,8 +19,10 @@ public class ItemBerry extends ItemFood {
 	
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-		for (EnumDyeColor color: EnumDyeColor.values()) {
-			items.add(new ItemStack(this, 1, color.getMetadata()));
+		if (tab == UsefulStuffs.TAB) {
+			for (EnumDyeColor color: EnumDyeColor.values()) {
+				items.add(new ItemStack(this, 1, color.getMetadata()));
+			}	
 		}
 	}
 	
