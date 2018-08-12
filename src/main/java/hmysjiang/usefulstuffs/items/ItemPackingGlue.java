@@ -75,8 +75,11 @@ public class ItemPackingGlue extends Item {
 					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
 					world.setBlockToAir(pos);
 				}
+				else if (stack.getMaxDamage() >= cost) {
+					player.sendMessage(new TextComponentString("Insufficient durability! Required: " + cost + " Left: " + (stack.getMaxDamage() - stack.getItemDamage())));
+				}
 				else {
-					player.sendMessage(new TextComponentString("Insufficient durability! Required: " + cost));
+					player.sendMessage(new TextComponentString("You cannot pick this block up with this glue. Try to enchant this with Frugal !"));
 				}
 			}
 		}

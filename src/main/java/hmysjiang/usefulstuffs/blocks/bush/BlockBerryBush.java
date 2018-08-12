@@ -51,14 +51,16 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote && isMature(state)) {
-			worldIn.setBlockState(pos, state.withProperty(AGE, 1));
-			
-			//Spawn ItemEntity
-			EntityItem entity = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata()));
-			worldIn.spawnEntity(entity);
-			entity.onCollideWithPlayer(playerIn);
-			return true;
+		if (!worldIn.isRemote) {
+			if (!(playerIn.getHeldItem(hand).getItem() instanceof ItemBlock) || !(((ItemBlock)playerIn.getHeldItem(hand).getItem()).getBlock() instanceof BlockBerryBush)) {
+				if (isMature(state)) {
+					worldIn.setBlockState(pos, state.withProperty(AGE, 1));
+					EntityItem entity = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata()));
+					worldIn.spawnEntity(entity);
+					entity.onCollideWithPlayer(playerIn);
+					return true;	
+				}	
+			}
 		}
 		return false;
 	}
@@ -67,8 +69,6 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {
 		if (!worldIn.isRemote && isMature(worldIn.getBlockState(pos))) {
 			worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(AGE, 1));
-			
-			//Spawn ItemEntity
 			EntityItem entity = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata()));
 			worldIn.spawnEntity(entity);
 			entity.onCollideWithPlayer(playerIn);
@@ -98,10 +98,8 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isRemote)
         {
-            super.updateTick(worldIn, pos, state, rand);
-
             if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(8) == 0)
+            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(12) == 0)
             {
                 this.grow(worldIn, rand, pos, state);
             }
@@ -114,8 +112,7 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		if (canGrow(worldIn, pos, state, false))
-        {
+		if (canGrow(worldIn, pos, state, false)) {
             worldIn.setBlockState(pos, state.cycleProperty(AGE));
         }
 	}
@@ -196,8 +193,7 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	
 	@Override
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (worldIn.isRainingAt(pos.up()) && !worldIn.getBlockState(pos.down()).isTopSolid() && rand.nextInt(12) == 1)
-        {
+		if (worldIn.isRainingAt(pos.up()) && !worldIn.getBlockState(pos.down()).isTopSolid() && rand.nextInt(12) == 1) {
             double d0 = (double)((float)pos.getX() + rand.nextFloat());
             double d1 = (double)pos.getY() - 0.05D;
             double d2 = (double)((float)pos.getZ() + rand.nextFloat());

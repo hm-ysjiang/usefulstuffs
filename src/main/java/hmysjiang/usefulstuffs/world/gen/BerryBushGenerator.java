@@ -19,7 +19,7 @@ public class BerryBushGenerator implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
 		Biome biome = world.getBiome(new BlockPos(chunkX * 16, 64, chunkZ * 16));
-		if (world.provider.getDimension() == 0 && canGenInBiome(world.getBiome(new BlockPos(chunkX * 16, 64, chunkZ * 16))) && random.nextInt(50) == 0) {
+		if (canGenInWorld(world) && canGenInBiome(world.getBiome(new BlockPos(chunkX * 16, 64, chunkZ * 16))) && random.nextInt(50) == 0) {
 			int centerX = chunkX * 16 + random.nextInt(10) + 3;
 			int centerZ = chunkZ * 16 + random.nextInt(10) + 3;
 			int bushes = random.nextInt(4) + 4;
@@ -36,6 +36,10 @@ public class BerryBushGenerator implements IWorldGenerator {
 				world.setBlockState(pos, ((BlockBerryBush) ModBlocks.berrybushes[random.nextInt(16)]).getRandomSpawnState(random));
 			}
 		}
+	}
+	
+	public static boolean canGenInWorld(World world) {
+		return world.provider.getDimension() != 1 && world.provider.getDimension() != -1;
 	}
 	
 	public static boolean canGenInBiome(Biome biome) {

@@ -84,14 +84,6 @@ public class ItemLightShooter extends Item {
 		}
 	}
 	
-	@Override
-	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		NBTTagCompound nbtcompound = new NBTTagCompound();
-		nbtcompound.setInteger("Ammo", 0);
-		stack.setTagCompound(nbtcompound);
-		super.onCreated(stack, worldIn, playerIn);
-	}
-	
 	protected void launchAmmo(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		NBTTagCompound nbtcompound = itemStackIn.getTagCompound();
 		if (nbtcompound.getInteger("Ammo") > 0) {

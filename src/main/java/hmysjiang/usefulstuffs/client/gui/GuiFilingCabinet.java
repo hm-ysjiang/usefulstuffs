@@ -1,5 +1,7 @@
 package hmysjiang.usefulstuffs.client.gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.io.IOException;
 
 import hmysjiang.usefulstuffs.Reference;
@@ -17,9 +19,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 public class GuiFilingCabinet extends GuiContainer {
+	private static final int BUTTON_SIZE = 20;
 
 	protected int page;
-	private static final int buttonSize = 20;
 	
 	public GuiFilingCabinet(Container inventorySlotsIn) {
 		super(inventorySlotsIn);
@@ -56,19 +58,19 @@ public class GuiFilingCabinet extends GuiContainer {
 		super.initGui();
 		
 		if (page == 0) {
-			this.buttonList.add(new GuiButton(1, this.guiLeft + 247, this.guiTop + 132, buttonSize, buttonSize, ">"));
+			this.buttonList.add(new GuiButton(1, this.guiLeft + 247, this.guiTop + 132, BUTTON_SIZE, BUTTON_SIZE, ">"));
 		}
 		else if (page == 9) {
-			this.buttonList.add(new GuiButton(8, this.guiLeft + 52, this.guiTop + 132, buttonSize, buttonSize, "<"));
+			this.buttonList.add(new GuiButton(8, this.guiLeft + 52, this.guiTop + 132, BUTTON_SIZE, BUTTON_SIZE, "<"));
 		}
 		else if (page<9 && page>0) {
-			this.buttonList.add(new GuiButton(page - 1, this.guiLeft + 52, this.guiTop + 132, buttonSize, buttonSize, "<"));
-			this.buttonList.add(new GuiButton(page + 1, this.guiLeft + 247, this.guiTop + 132, buttonSize, buttonSize, ">"));
+			this.buttonList.add(new GuiButton(page - 1, this.guiLeft + 52, this.guiTop + 132, BUTTON_SIZE, BUTTON_SIZE, "<"));
+			this.buttonList.add(new GuiButton(page + 1, this.guiLeft + 247, this.guiTop + 132, BUTTON_SIZE, BUTTON_SIZE, ">"));
 		}
 		
-		this.buttonList.add(new GuiButton(10, this.guiLeft + 270, this.guiTop + 132, buttonSize, buttonSize, "S"));
+		this.buttonList.add(new GuiButton(10, this.guiLeft + 270, this.guiTop + 132, BUTTON_SIZE, BUTTON_SIZE, "S"));
 	}
-	
+
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		if (button.id != 10) {

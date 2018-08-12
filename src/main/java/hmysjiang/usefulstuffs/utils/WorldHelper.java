@@ -125,7 +125,7 @@ public class WorldHelper {
 	
 	public static int getGroundHeight(World world, int x, int z) {
 		if (!world.isAreaLoaded(new BlockPos(x, 64, z), 1)) return -1;
-		for (int y = world.getHeight() ; y>=48 ; y--) {
+		for (int y = world.getHeight() ; y>=60 ; y--) {
 			if (world.getBlockState(new BlockPos(x, y, z)) == Blocks.STONE.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.DIRT.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.GRASS.getDefaultState())
 				return y;
 		}
