@@ -5,6 +5,7 @@ import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
 import hmysjiang.usefulstuffs.blocks.filingcabinet.TileEntityFilingCabinet;
 import hmysjiang.usefulstuffs.blocks.gluedbox.TileEntityGluedBox;
+import hmysjiang.usefulstuffs.blocks.portalmuffler.TileEntityPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.TileEntityRainDetector;
 import hmysjiang.usefulstuffs.blocks.tflipflop.TileEntityTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.well.TileEntityWell;
@@ -62,6 +63,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityRainDetector.class, new ResourceLocation(Reference.MOD_ID, "rain_detector"));
 		GameRegistry.registerTileEntity(TileEntityTFlipFlop.class, new ResourceLocation(Reference.MOD_ID, "t_flipflop"));
 		GameRegistry.registerTileEntity(TileEntityWell.class, new ResourceLocation(Reference.MOD_ID, "well"));
+		GameRegistry.registerTileEntity(TileEntityPortalMuffler.class, new ResourceLocation(Reference.MOD_ID, "portal_muffler"));
 	}
 	
 }

@@ -1,5 +1,6 @@
 package hmysjiang.usefulstuffs.proxy;
 
+import hmysjiang.usefulstuffs.blocks.portalmuffler.PortalMufflerManager;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModEntities;
 import hmysjiang.usefulstuffs.init.ModItems;
@@ -9,6 +10,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
 	
@@ -16,6 +18,8 @@ public class ClientProxy extends CommonProxy {
 	public void preInit() {
 		super.preInit();
 		ModEntities.registerRenders();
+		
+		MinecraftForge.EVENT_BUS.register(PortalMufflerManager.INSTANCE);
 	}
 	
 	@Override

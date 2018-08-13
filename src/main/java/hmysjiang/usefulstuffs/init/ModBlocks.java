@@ -6,6 +6,7 @@ import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
 import hmysjiang.usefulstuffs.blocks.filingcabinet.BlockFilingCabinet;
 import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
+import hmysjiang.usefulstuffs.blocks.portalmuffler.BlockPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.BlockRainDetector;
 import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.well.BlockWell;
@@ -29,6 +30,7 @@ public class ModBlocks {
 	public static Block t_flipflop;
 	public static Block well;
 	public static Block[] berrybushes = new Block[16];
+	public static Block portal_muffler;
 	
 	public static void init() {
 		campfire = new BlockCampfire();
@@ -40,6 +42,7 @@ public class ModBlocks {
 		well = new BlockWell();
 		for (int i = 0 ; i<EnumDyeColor.values().length ; i++)
 			berrybushes[i] = new BlockBerryBush(EnumDyeColor.byMetadata(i));
+		portal_muffler = new BlockPortalMuffler();
 	}
 	
 	@SubscribeEvent
@@ -52,7 +55,8 @@ public class ModBlocks {
 				light_bulb,
 				rain_detector,
 				t_flipflop,
-				well);
+				well,
+				portal_muffler);
 		register(registry, berrybushes);
 	}
 	
@@ -65,6 +69,7 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(rain_detector));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(t_flipflop));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(well));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(portal_muffler));
 		for (Block block: berrybushes)
 			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(block));
 		
