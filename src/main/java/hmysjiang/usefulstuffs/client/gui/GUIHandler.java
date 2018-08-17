@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.client.gui;
 
 import hmysjiang.usefulstuffs.container.ContainerBento;
 import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
+import hmysjiang.usefulstuffs.container.ContainerLightShooter;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +22,7 @@ public class GuiHandler implements IGuiHandler {
 	public static final int GUI_FILING_CABINET_9 = 8;
 	public static final int GUI_FILING_CABINET_10 = 9;
 	public static final int GUI_BENTO = 10;
+	public static final int GUI_LIGHT_SHOOTER = 11;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -48,6 +50,8 @@ public class GuiHandler implements IGuiHandler {
 		case GUI_BENTO:
 			if (player.getHeldItemMainhand().getItem() instanceof ItemBento)
 				return new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6);
+		case GUI_LIGHT_SHOOTER:
+			return new ContainerLightShooter(player.inventory, player.getHeldItemMainhand(), 4);
 		default:
 			return null;
 		}
@@ -78,6 +82,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 9));
 		case GUI_BENTO:
 			return new GuiBento(new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6));
+		case GUI_LIGHT_SHOOTER:
+			return new GuiLightShooter(new ContainerLightShooter(player.inventory, player.getHeldItemMainhand(), 4));
 		default:
 			return null;
 		}

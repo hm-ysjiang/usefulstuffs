@@ -5,9 +5,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 
-public class TileEntityTFlipFlop extends TileEntity implements ITickable {
+public class TileEntityTFlipFlop extends TileEntity {
 
 	private boolean q, buf;
 	private EnumFacing output;
@@ -37,8 +36,7 @@ public class TileEntityTFlipFlop extends TileEntity implements ITickable {
 		}
 	}
 
-	@Override
-	public void update() {
+	public void updateSignal() {
 		if (input != null) {	//tile loaded
 			if (world.isSidePowered(pos.offset(input), input) ^ buf) {
 				buf = !buf;

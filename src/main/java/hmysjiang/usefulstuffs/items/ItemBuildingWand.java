@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.utils.InventoryHelper;
 import hmysjiang.usefulstuffs.utils.WorldHelper;
 import net.minecraft.block.Block;
@@ -23,6 +24,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemBuildingWand extends Item {
+	
+	public ItemBuildingWand() {
+		this(Reference.ModItems.BUILDING_WAND.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND.getRegistryName());
+	}
 	
 	public ItemBuildingWand(String unloacalizedName, String registryName) {
 		setUnlocalizedName(unloacalizedName);

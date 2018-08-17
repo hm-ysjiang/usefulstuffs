@@ -61,7 +61,7 @@ usefulstuffs.details.tooltip=§o<Hold Shift for details>
 usefulstuffs.wip.tooltip=§lWIP Item/Block
 usefulstuffs.light_shooter.tooltip_1=Ammo: %1$s/%2$s
 usefulstuffs.light_shooter.tooltip_2=Right click to launch
-usefulstuffs.light_shooter.tooltip_3=Shift-Right click to load Light Bulbs
+usefulstuffs.light_shooter.tooltip_3=Shift-Right click to open GUI
 usefulstuffs.light_shooter.tooltip_c=Combined with a hopper, automatically load when Light Bulbs being picked up
 usefulstuffs.well.tooltip_1=Automatically fill the 7x7 area around it
 usefulstuffs.well.tooltip_2=TransferRate: %smB per tick*side
@@ -109,6 +109,7 @@ effect.usefulstuffs.lily=Li-ly
 
 usefulstuffs.gui.bento.name=Bento Box
 usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
+usefulstuffs.gui.light_shooter.name=Light Shooter
 
 key.usefulstuffs.category=UsefulStuffs
 key.usefulstuffs.switchinv.desc=Switch Inventory (Storage Bag)

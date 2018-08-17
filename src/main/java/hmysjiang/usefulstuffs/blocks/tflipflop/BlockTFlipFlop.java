@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.blocks.tflipflop;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
@@ -54,7 +55,7 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 	
 	@Override
 	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-		return true;
+		return side != EnumFacing.DOWN && side != EnumFacing.UP;
 	}
 	
 	@Override
@@ -71,6 +72,12 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 			}	
 		}
 		return 0;
+	}
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (worldIn!= null && !worldIn.isRemote && worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileEntityTFlipFlop)
+			((TileEntityTFlipFlop) worldIn.getTileEntity(pos)).updateSignal();
 	}
 	
 	@Override

@@ -26,7 +26,6 @@ public class BlockMaterials {
 		public LightBulb() {
 			super(MapColor.GOLD);
 			setImmovableMobility();
-			setReplaceable();
 		}
 	}
 	

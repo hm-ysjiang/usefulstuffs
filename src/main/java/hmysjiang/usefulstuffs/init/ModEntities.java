@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 public class ModEntities {
 
 	public static void register() {
-		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "light_bulb"), EntityLightBulb.class, "light_bulb", Reference.ModEntities.LIGHT_BULB.getID(), UsefulStuffs.instance, 64, 10, true, 0, 0);
+		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "light_bulb"), EntityLightBulb.class, "light_bulb", Reference.ModEntities.LIGHT_BULB.getID(), UsefulStuffs.instance, 64, 10, true);
 	}
 	
 	public static void registerRenders() {

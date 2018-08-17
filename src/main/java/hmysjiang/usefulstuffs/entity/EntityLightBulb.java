@@ -6,6 +6,8 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -31,9 +33,7 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 	protected void onImpact(RayTraceResult result) {
 		if (!this.world.isRemote) {
 			if (result.typeOfHit == Type.BLOCK) {
-				Vec3d motion = new Vec3d(motionX, motionY, motionZ).normalize().scale(0.05D);
 				Vec3d pos = this.getPositionVector();
-				pos.subtract(motion);
 				if (world.getBlockState(new BlockPos(pos)).getBlock().isReplaceable(world, new BlockPos(pos))) {
 					world.setBlockState(new BlockPos(pos), ModBlocks.light_bulb.getDefaultState());
 				}
@@ -41,6 +41,11 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 					world.spawnEntity(new EntityItem(world, pos.x, pos.y, pos.z, new ItemStack(ModBlocks.light_bulb, 1)));
 				}
 				
+				this.setDead();
+			}
+			else if (result.typeOfHit == Type.ENTITY && result.entityHit != null && result.entityHit instanceof EntityLivingBase) {
+				EntityLivingBase living = (EntityLivingBase) result.entityHit;
+				living.addPotionEffect(new PotionEffect(Potion.getPotionById(24), 200));
 				this.setDead();
 			}
 		}

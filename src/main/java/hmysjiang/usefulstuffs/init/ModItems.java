@@ -50,8 +50,8 @@ public class ModItems {
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
 		bento = new ItemBento();
-		building_wand = new ItemBuildingWand(Reference.ModItems.BUILDING_WAND.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND.getRegistryName());
-		building_wand_infinite = new ItemBuildingWandInfinite(Reference.ModItems.BUILDING_WAND_INFINITE.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND_INFINITE.getRegistryName());
+		building_wand = new ItemBuildingWand();
+		building_wand_infinite = new ItemBuildingWandInfinite();
 		light_shooter = new ItemLightShooter();
 		light_shooter_collecter = new ItemLightShooterCollector();
 		packing_glue = new ItemPackingGlue();
