@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.blocks.raindetector;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.utils.WorldHelper;
 import net.minecraft.block.Block;
@@ -36,7 +37,7 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 		setRegistryName(Reference.ModBlocks.RAIN_DETECTOR.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(RAINING, Boolean.valueOf(false)));
-		this.setHardness(1.0F);
+		this.setHardness(1.5F);
 	}
 	
 	@Override
@@ -88,7 +89,7 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 	
 	@Override
 	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		return blockState.getValue(RAINING) ? 15 : 0  ;
+		return blockState.getValue(RAINING) ? 15 : 0;
 	}
 	
 	@Override

@@ -55,6 +55,7 @@ tile.usefulstuffs.berrybush_green.name=Green Berry Bush
 tile.usefulstuffs.berrybush_red.name=Red Berry Bush
 tile.usefulstuffs.berrybush_black.name=Black Berry Bush
 tile.usefulstuffs.portal_muffler.name=Portal Muffler
+tile.usefulstuffs.player_detector.name=Player Detector
 
 usefulstuffs.ingredient.tooltip=Crafting ingredient
 usefulstuffs.details.tooltip=§o<Hold Shift for details>
@@ -89,6 +90,7 @@ usefulstuffs.storage_body.tooltip_1=Provide extra 27 slots
 usefulstuffs.storage_body.tooltip_2=Press %1$s to switch between them and your current toolbar
 usefulstuffs.portal_muffler.tooltip_1=Mute the sound of Nether Portal nearby it
 usefulstuffs.portal_muffler.tooltip_2=You are too noisy, man
+usefulstuffs.player_detector.tooltip=Emits redstone signal when there is a player in the 5x5x5 area around it
 
 entity.usefulstuffs.light_bulb.name=LightBulb
 entity.usefulstuffs.fairy_light.name=FairyLight

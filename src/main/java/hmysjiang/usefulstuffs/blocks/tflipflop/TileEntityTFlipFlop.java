@@ -5,6 +5,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class TileEntityTFlipFlop extends TileEntity {
 
@@ -24,6 +26,7 @@ public class TileEntityTFlipFlop extends TileEntity {
 		int horizontalIdx = input.getHorizontalIndex() + 1;
 		horizontalIdx %= 4;
 		output = EnumFacing.getHorizontal(horizontalIdx);
+		notifyNeighbors(world, pos);
 	}
 	
 	public EnumFacing getInputSide(IBlockState state) {
@@ -43,12 +46,22 @@ public class TileEntityTFlipFlop extends TileEntity {
 				if (buf) {
 					q = !q;
 					world.markAndNotifyBlock(pos, world.getChunkFromBlockCoords(pos), world.getBlockState(pos), world.getBlockState(pos), 3);
+					notifyNeighbors(world, pos);
 				}
 			}
-			if (world.isSidePowered(pos.offset(reset), reset)) {
+			if (world.isSidePowered(pos.offset(reset), reset) && q) {
 				q = false;
 				world.markAndNotifyBlock(pos, world.getChunkFromBlockCoords(pos), world.getBlockState(pos), world.getBlockState(pos), 3);
+				notifyNeighbors(world, pos);
 			}
+		}
+	}
+	
+	void notifyNeighbors(World world, BlockPos pos) {
+		if (world != null && this.getBlockType() instanceof BlockTFlipFlop) {
+			world.notifyNeighborsOfStateChange(pos, this.blockType, false);
+			world.notifyNeighborsOfStateChange(pos.offset(this.output), this.blockType, false);
+			world.notifyNeighborsOfStateChange(pos.offset(this.output.getOpposite()), this.blockType, false);
 		}
 	}
 	

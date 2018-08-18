@@ -6,17 +6,22 @@ import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
 import hmysjiang.usefulstuffs.blocks.filingcabinet.BlockFilingCabinet;
 import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
+import hmysjiang.usefulstuffs.blocks.playerdetector.BlockPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.BlockPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.BlockRainDetector;
 import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.well.BlockWell;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber
@@ -31,6 +36,7 @@ public class ModBlocks {
 	public static Block well;
 	public static Block[] berrybushes = new Block[16];
 	public static Block portal_muffler;
+	public static Block player_detector;
 	
 	public static void init() {
 		campfire = new BlockCampfire();
@@ -43,6 +49,7 @@ public class ModBlocks {
 		for (int i = 0 ; i<EnumDyeColor.values().length ; i++)
 			berrybushes[i] = new BlockBerryBush(EnumDyeColor.byMetadata(i));
 		portal_muffler = new BlockPortalMuffler();
+		player_detector = new BlockPlayerDetector();
 	}
 	
 	@SubscribeEvent
@@ -56,7 +63,8 @@ public class ModBlocks {
 				rain_detector,
 				t_flipflop,
 				well,
-				portal_muffler);
+				portal_muffler,
+				player_detector);
 		register(registry, berrybushes);
 	}
 	
@@ -70,11 +78,17 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(t_flipflop));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(well));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(portal_muffler));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(player_detector));
 		for (Block block: berrybushes)
 			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(block));
 		
 //		for (EnumDyeColor color: EnumDyeColor.values())
 //			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(berrybush), color.getMetadata(), color.getDyeColorName());
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void createStateMapper() {
+		ModelLoader.setCustomStateMapper(player_detector, (new StateMap.Builder().ignore(BlockPlayerDetector.POWERED)).build());
 	}
 	
 	private static void register(IForgeRegistry<Block> registry, Block... blocks) {

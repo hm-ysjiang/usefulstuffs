@@ -4,7 +4,7 @@ public class Reference {
 
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "2.1.3";
+	public static final String VERSION = "2.1.4";
 	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
 	public static final boolean TEST_MODE = false;
 	
@@ -50,7 +50,8 @@ public class Reference {
 		GLUED_BOX("glued_box"),
 		T_FLIPFLOP("t_flipflop"),
 		BERRYBUSH("berrybush"),
-		PORTAL_MUFFLER("portal_muffler");
+		PORTAL_MUFFLER("portal_muffler"),
+		PLAYER_DETECTOR("player_detector");
 		
 		private String unlocalizedName;
 		

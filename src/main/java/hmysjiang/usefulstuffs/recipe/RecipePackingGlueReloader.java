@@ -86,13 +86,13 @@ public class RecipePackingGlueReloader extends ShapelessOreRecipe {
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		NonNullList<ItemStack> aitemstack =NonNullList.<ItemStack>withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
-        for (int i = 0; i < aitemstack.size(); ++i)
-        {
-            ItemStack itemstack = inv.getStackInSlot(i);
-            aitemstack.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
-        }
+		for (int i = 0; i < aitemstack.size(); ++i)
+		{
+			ItemStack itemstack = inv.getStackInSlot(i);
+			aitemstack.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
+		}
 
-        return aitemstack;
+		return aitemstack;
 	}
 
 }

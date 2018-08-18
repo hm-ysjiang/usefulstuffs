@@ -64,11 +64,11 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 		this.motionY = y;
 		this.motionZ = z;
 
-        float f1 = MathHelper.sqrt(x * x + z * z);
-        this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
-        this.rotationPitch = (float)(MathHelper.atan2(y, (double)f1) * (180D / Math.PI));
-        this.prevRotationYaw = this.rotationYaw;
-        this.prevRotationPitch = this.rotationPitch;
+		float f1 = MathHelper.sqrt(x * x + z * z);
+		this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
+		this.rotationPitch = (float)(MathHelper.atan2(y, (double)f1) * (180D / Math.PI));
+		this.prevRotationYaw = this.rotationYaw;
+		this.prevRotationPitch = this.rotationPitch;
 	}
 
 }

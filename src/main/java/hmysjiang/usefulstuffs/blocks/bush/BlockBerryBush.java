@@ -97,13 +97,13 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isRemote)
-        {
-            if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(12) == 0)
-            {
-                this.grow(worldIn, rand, pos, state);
-            }
-        }
+		{
+			if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(12) == 0)
+			{
+				this.grow(worldIn, rand, pos, state);
+			}
+		}
 	}
 	
 	public boolean isMature(IBlockState state) {
@@ -113,8 +113,8 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		if (canGrow(worldIn, pos, state, false)) {
-            worldIn.setBlockState(pos, state.cycleProperty(AGE));
-        }
+			worldIn.setBlockState(pos, state.cycleProperty(AGE));
+		}
 	}
 
 	@Override
@@ -194,11 +194,11 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	@Override
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		if (worldIn.isRainingAt(pos.up()) && !worldIn.getBlockState(pos.down()).isTopSolid() && rand.nextInt(12) == 1) {
-            double d0 = (double)((float)pos.getX() + rand.nextFloat());
-            double d1 = (double)pos.getY() - 0.05D;
-            double d2 = (double)((float)pos.getZ() + rand.nextFloat());
-            worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-        }
+			double d0 = (double)((float)pos.getX() + rand.nextFloat());
+			double d1 = (double)pos.getY() - 0.05D;
+			double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+			worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+		}
 	}
 
 }

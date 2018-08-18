@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "RWR", 
+		"WEW", 
+		"RWR"
+    ],
+    "key": {
+        "R": {
+            "item": "minecraft:redstone"
+        },
+        "E": {
+            "item": "minecraft:ender_eye"
+        },
+        "W": {
+            "item": "minecraft:wool",
+			"data": 15
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:player_detector"
+    }
+}

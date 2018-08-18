@@ -35,4 +35,11 @@ public class BlockMaterials {
 			setImmovableMobility();
 		}
 	}
+	
+	public static class Circuit extends Material{
+		public Circuit() {
+			super(MapColor.STONE);
+			setImmovableMobility();
+		}
+	}
 }

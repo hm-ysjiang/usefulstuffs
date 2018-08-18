@@ -66,65 +66,65 @@ public class ItemBento extends ItemFood {
 		else {
 			ItemStack stack = playerIn.getHeldItem(hand);
 			if (playerIn.canEat(false) && !isEmpty(stack))
-	        {
-	            playerIn.setActiveHand(hand);
-	            return new ActionResult(EnumActionResult.SUCCESS, stack);
-	        }
-	        else
-	        {
-	            return new ActionResult(EnumActionResult.FAIL, stack);
-	        }
+			{
+				playerIn.setActiveHand(hand);
+				return new ActionResult(EnumActionResult.SUCCESS, stack);
+			}
+			else
+			{
+				return new ActionResult(EnumActionResult.FAIL, stack);
+			}
 		}
 		
 	}
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
-        	return stack;
-        }
-        ItemStack food = getNextFood(stack);
-        if (!food.isEmpty()) {
-        	consumeOne(stack, worldIn, entityLiving);
-        }
-        if (entityLiving instanceof EntityPlayer)
-        {
-            EntityPlayer entityplayer = (EntityPlayer)entityLiving;
-            entityplayer.addStat(StatList.getObjectUseStats(this));
-            entityplayer.addStat(StatList.getObjectUseStats(food.getItem()));
-        }
+		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
+			return stack;
+		}
+		ItemStack food = getNextFood(stack);
+		if (!food.isEmpty()) {
+			consumeOne(stack, worldIn, entityLiving);
+		}
+		if (entityLiving instanceof EntityPlayer)
+		{
+			EntityPlayer entityplayer = (EntityPlayer)entityLiving;
+			entityplayer.addStat(StatList.getObjectUseStats(this));
+			entityplayer.addStat(StatList.getObjectUseStats(food.getItem()));
+		}
 		return stack;
 	}
 	
 	public ItemStack getNextFood(ItemStack stack) {
 		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
-        	return ItemStack.EMPTY;
-        }
-        ItemStackHandler handler = new ItemStackHandler(6);
-        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
-        for (int i = 0 ; i<handler.getSlots() ; i++) {
-        	if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
-        		return handler.getStackInSlot(i);
-        	}
-        }
-        return ItemStack.EMPTY;
+			return ItemStack.EMPTY;
+		}
+		ItemStackHandler handler = new ItemStackHandler(6);
+		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+		for (int i = 0 ; i<handler.getSlots() ; i++) {
+			if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
+				return handler.getStackInSlot(i);
+			}
+		}
+		return ItemStack.EMPTY;
 	}
 	
 	public void consumeOne(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
 		ItemStack food = ItemStack.EMPTY;
 		ItemStackHandler handler = new ItemStackHandler(6);
-        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
-        for (int i = 0 ; i<handler.getSlots() ; i++) {
-        	if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
-        		food = handler.getStackInSlot(i);
-        		food = food.onItemUseFinish(worldIn, entityLiving);
-        		handler.setStackInSlot(i, food.getCount() == 0 ? ItemStack.EMPTY : food);
-        		break;
-        	}
-        }
-        NBTTagCompound compound = stack.getTagCompound();
-        compound.setTag("Cont", handler.serializeNBT());
-        stack.setTagCompound(compound);
+		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+		for (int i = 0 ; i<handler.getSlots() ; i++) {
+			if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
+				food = handler.getStackInSlot(i);
+				food = food.onItemUseFinish(worldIn, entityLiving);
+				handler.setStackInSlot(i, food.getCount() == 0 ? ItemStack.EMPTY : food);
+				break;
+			}
+		}
+		NBTTagCompound compound = stack.getTagCompound();
+		compound.setTag("Cont", handler.serializeNBT());
+		stack.setTagCompound(compound);
 	}
 	
 	public boolean isEmpty(ItemStack stack) {

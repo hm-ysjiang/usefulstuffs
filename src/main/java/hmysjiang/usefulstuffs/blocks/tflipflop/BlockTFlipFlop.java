@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.blocks.tflipflop;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -25,7 +26,7 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0, 0, 1, 0.0625 * 2, 1);
 
 	public BlockTFlipFlop() {
-		super(new Material(MapColor.STONE));
+		super(new BlockMaterials.Circuit());
 		setUnlocalizedName(Reference.ModBlocks.T_FLIPFLOP.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.T_FLIPFLOP.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
@@ -60,29 +61,38 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 	
 	@Override
 	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		TileEntityTFlipFlop tile = (TileEntityTFlipFlop)blockAccess.getTileEntity(pos);
-		EnumFacing output = tile.getOutputSide();
-		boolean q = tile.shouldQOutput();
-		if (output != null) {
-			if (output == side) {
-				return q ? 15 : 0;
+		if (blockAccess != null && blockAccess.getBlockState(pos).getBlock() == this) {
+			TileEntityTFlipFlop tile = (TileEntityTFlipFlop)blockAccess.getTileEntity(pos);
+			EnumFacing output = tile.getOutputSide();
+			boolean q = tile.shouldQOutput();
+			if (output != null) {
+				if (output == side) {
+					return q ? 15 : 0;
+				}
+				else if (output.getOpposite() == side) {
+					return q ? 0 : 15;
+				}
 			}
-			else if (output.getOpposite() == side) {
-				return q ? 0 : 15;
-			}	
 		}
 		return 0;
+	}
+	
+	@Override
+	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+		return getStrongPower(blockState, blockAccess, pos, side);
+	}
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		((TileEntityTFlipFlop) worldIn.getTileEntity(pos)).notifyNeighbors(worldIn, pos);
+		
+		super.breakBlock(worldIn, pos, state);
 	}
 	
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (worldIn!= null && !worldIn.isRemote && worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileEntityTFlipFlop)
 			((TileEntityTFlipFlop) worldIn.getTileEntity(pos)).updateSignal();
-	}
-	
-	@Override
-	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		return getStrongPower(blockState, blockAccess, pos, side);
 	}
 	
 	@Override
