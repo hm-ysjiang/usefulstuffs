@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.utils;
 
 import com.google.common.collect.ImmutableMap;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.items.ItemPackingGlue;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -20,6 +21,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
 public class WorldHelper {
+	
+	private static final int bush_min_h = ConfigManager.bushSpawnMinHeight;
 	
 	/**
 	 * Check if a block can see sky, transparent blocks doesn't count
@@ -56,6 +59,7 @@ public class WorldHelper {
 		BlockPos prev = new BlockPos(entityEyePos);
 		for (int i = 1 ; i<=range*20 ; i++) {
 			BlockPos pos = new BlockPos(startPos.add(gaze.scale(i)));
+			if (!entity.world.isAreaLoaded(pos, 1)) return null;
 			if (entity.world.getBlockState(pos).getMaterial() != Material.AIR) {
 				return new Object[] {pos, getRelationBetweenAdjacentBlocks(pos, prev)};
 			}
@@ -125,7 +129,7 @@ public class WorldHelper {
 	
 	public static int getGroundHeight(World world, int x, int z) {
 		if (!world.isAreaLoaded(new BlockPos(x, 64, z), 1)) return -1;
-		for (int y = world.getHeight() ; y>=60 ; y--) {
+		for (int y = world.getHeight() ; y>=bush_min_h ; y--) {
 			if (world.getBlockState(new BlockPos(x, y, z)) == Blocks.STONE.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.DIRT.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.GRASS.getDefaultState())
 				return y;
 		}

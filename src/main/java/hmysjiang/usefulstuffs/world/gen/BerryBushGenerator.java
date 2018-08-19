@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.world.gen;
 
 import java.util.Random;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.blocks.bush.BlockBerryBush;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.utils.WorldHelper;
@@ -13,7 +14,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class BerryBushGenerator implements IWorldGenerator {
-	public static final int[] BANNED_BIOME_IDS = new int[] {3, 11, 12, 25, 26, 140, 158};
+	public static final int[] BANNED_BIOME_IDS = ConfigManager.bush_banned_biomes;
+	public static final int[] BANNED_DIM_IDS = ConfigManager.bush_banned_dims;
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
@@ -39,7 +41,11 @@ public class BerryBushGenerator implements IWorldGenerator {
 	}
 	
 	public static boolean canGenInWorld(World world) {
-		return world.provider.getDimension() != 1 && world.provider.getDimension() != -1;
+		int id = world.provider.getDimension();
+		for (int i: BANNED_DIM_IDS)
+			if (i == id)
+				return false;
+		return true;
 	}
 	
 	public static boolean canGenInBiome(Biome biome) {

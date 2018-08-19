@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.blocks.bush;
 
 import java.util.Random;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
@@ -32,6 +33,7 @@ import net.minecraftforge.common.IPlantable;
 public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	public static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125, 0, 0.125, 0.875, 0.8125, 0.875);
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 2);
+	public static int growthChance = -1;
 	
 	private EnumDyeColor color;
 
@@ -46,6 +48,9 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 		setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0));
 		
 		this.color = color;
+		
+		if (growthChance == -1)
+			growthChance = ConfigManager.bushGrowthChance;
 	}
 	
 	@Override
@@ -99,7 +104,7 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 		if (!worldIn.isRemote)
 		{
 			if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(12) == 0)
+			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(growthChance) == 0)
 			{
 				this.grow(worldIn, rand, pos, state);
 			}

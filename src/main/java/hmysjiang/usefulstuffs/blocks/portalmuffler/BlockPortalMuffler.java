@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.blocks.portalmuffler;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
@@ -17,7 +18,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class BlockPortalMuffler extends Block implements ITileEntityProvider {
-
+	
 	public BlockPortalMuffler() {
 		super(new Material(MapColor.CLOTH));
 		setUnlocalizedName(Reference.ModBlocks.PORTAL_MUFFLER.getUnlocalizedName());

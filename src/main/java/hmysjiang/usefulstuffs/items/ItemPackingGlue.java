@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentXL;
 import hmysjiang.usefulstuffs.init.ModBlocks;
@@ -26,14 +27,15 @@ import net.minecraft.world.World;
 
 public class ItemPackingGlue extends Item {
 	
-	public final int DURABILITY = 32;
+	public static int durability;
 	
 	public ItemPackingGlue() {
-//		super(EnumHelper.addToolMaterial(Reference.MOD_ID + ":packing_glue", 0, 32, 0, 0, 3), new HashSet<Block>());
 		setUnlocalizedName(Reference.ModItems.PACKING_GLUE.getUnlocalizedName());
 		setRegistryName(Reference.ModItems.PACKING_GLUE.getRegistryName());
 		setMaxStackSize(1);
-		setMaxDamage(DURABILITY);
+		
+		durability = ConfigManager.glueDurability;
+		setMaxDamage(durability);
 	}
 	
 	@Override

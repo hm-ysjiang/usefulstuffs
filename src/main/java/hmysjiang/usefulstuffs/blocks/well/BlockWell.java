@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.blocks.well;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
@@ -29,12 +30,18 @@ import net.minecraftforge.items.IItemHandler;
 
 public class BlockWell extends Block implements ITileEntityProvider {
 
+	public static int rate;
+	public static int range;
+	
 	public BlockWell() {
 		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.WELL.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.WELL.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setHardness(5.0F);
+		
+		rate = ConfigManager.wellTransRate;
+		range = ConfigManager.wellTransRange;
 	}
 	
 	@Override
@@ -50,8 +57,8 @@ public class BlockWell extends Block implements ITileEntityProvider {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
 		super.addInformation(stack, worldIn, tooltip, advanced);
-		tooltip.add(I18n.format("usefulstuffs.well.tooltip_1"));
-		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.well.tooltip_2", new TileEntityWell().getTransferRate()));
+		tooltip.add(I18n.format("usefulstuffs.well.tooltip_1", (range * 2 + 1), (range * 2 + 1)));
+		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.well.tooltip_2", rate));
 	}
 	
 	@Override

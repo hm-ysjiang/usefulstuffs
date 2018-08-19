@@ -41,6 +41,7 @@ public class UsefulStuffs {
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
+		ConfigManager.loadConfigFile();
 		proxy.preInit();
 	}
 	

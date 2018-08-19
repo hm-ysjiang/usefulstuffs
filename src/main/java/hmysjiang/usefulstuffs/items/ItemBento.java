@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
@@ -25,11 +26,14 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class ItemBento extends ItemFood {
 	
+	public static boolean speed;
+	
 	public ItemBento() {
 		super(0, 0, false);
 		setUnlocalizedName(Reference.ModItems.BENTO.getUnlocalizedName());
 		setRegistryName(Reference.ModItems.BENTO.getRegistryName());
 		setMaxStackSize(1);
+		speed = ConfigManager.bentoSpeed;
 	}
 	
 	@Override
@@ -46,7 +50,7 @@ public class ItemBento extends ItemFood {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		ItemStack food = getNextFood(stack);
-		return food.isEmpty() ? 0 : ((ItemFood)food.getItem()).getMaxItemUseDuration(food);
+		return food.isEmpty() ? 0 : (speed ? ((ItemFood)food.getItem()).getMaxItemUseDuration(food) : 32);
 	}
 	
 	@Override

@@ -1,7 +1,7 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " L ", 
+        " LD", 
 		"LNL", 
 		"WL "
     ],
@@ -14,6 +14,9 @@
         },
         "W": {
             "item": "minecraft:waterlily"
+        },
+        "D": {
+            "item": "minecraft:diamond"
         }
     },
     "result": {

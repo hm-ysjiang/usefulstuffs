@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
@@ -26,7 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class ItemLightShooter extends Item {
 	
-	private static final int FULL_COOLDOWN = 30;
+	public static int cooldown;
 	public static final int MAX_AMMO = 256;
 	
 	public ItemLightShooter() {
@@ -37,7 +38,9 @@ public class ItemLightShooter extends Item {
 		setUnlocalizedName(unlocalized);
 		setRegistryName(registry);
 		this.maxStackSize = 1;
-		setMaxDamage(FULL_COOLDOWN + 1);
+		cooldown = ConfigManager.shooterCD;
+		if (cooldown > 0)
+			setMaxDamage(cooldown);
 	}
 	
 	@Override
@@ -62,7 +65,7 @@ public class ItemLightShooter extends Item {
 			EntityLightBulb entity = new EntityLightBulb(worldIn, playerIn);
 			entity.setThrowableHeading(playerIn.getLookVec().x, playerIn.getLookVec().y, playerIn.getLookVec().z, 2.0F, 0);
 			worldIn.spawnEntity(entity);
-			itemStackIn.setItemDamage(FULL_COOLDOWN);
+			itemStackIn.setItemDamage(cooldown);
 			decrAmmoCount(itemStackIn, 1);
 		}
 	}

@@ -1,5 +1,6 @@
 itemGroup.usefulstuffs=Useful Stuffs
 
+
 item.usefulstuffs.light_shooter.name=Light Shooter
 item.usefulstuffs.light_shooter_collector.name=Light Shooter
 item.usefulstuffs.umbrella.name=Umbrella
@@ -57,6 +58,7 @@ tile.usefulstuffs.berrybush_black.name=Black Berry Bush
 tile.usefulstuffs.portal_muffler.name=Portal Muffler
 tile.usefulstuffs.player_detector.name=Player Detector
 
+
 usefulstuffs.ingredient.tooltip=Crafting ingredient
 usefulstuffs.details.tooltip=§o<Hold Shift for details>
 usefulstuffs.wip.tooltip=§lWIP Item/Block
@@ -64,7 +66,7 @@ usefulstuffs.light_shooter.tooltip_1=Ammo: %1$s/%2$s
 usefulstuffs.light_shooter.tooltip_2=Right click to launch
 usefulstuffs.light_shooter.tooltip_3=Shift-Right click to open GUI
 usefulstuffs.light_shooter.tooltip_c=Combined with a hopper, automatically load when Light Bulbs being picked up
-usefulstuffs.well.tooltip_1=Automatically fill the 7x7 area around it
+usefulstuffs.well.tooltip_1=Automatically fill the %1$sx%2$s area around it
 usefulstuffs.well.tooltip_2=TransferRate: %smB per tick*side
 usefulstuffs.waterfilter.tooltip_1=Install to a Well of Water Fall to prevent it from sending water to certain sides of blocks
 usefulstuffs.waterfilter.tooltip_2=Shift+Right click to bind a side of the block
@@ -75,45 +77,57 @@ usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
 usefulstuffs.filing_cabinet.tooltip_2=1080 slots for unstackable items
 usefulstuffs.bento.tooltip_1=Holds 6 stacks of food
 usefulstuffs.bento.tooltip_2=Seems to not return the bowls...
-usefulstuffs.building_wand.tooltip_1=Place blocks from the block player looking at to player
+usefulstuffs.building_wand.tooltip_1=Place blocks from the block player looking at to the player
 usefulstuffs.building_wand.tooltip_2=Put block in offhand to specify blocks to be placed
-usefulstuffs.building_wand.tooltip_normal=MaxRange: 16 blocks
-usefulstuffs.building_wand.tooltip_infinite=MaxRange: 32 blocks, %1$sUnlimited durability
+usefulstuffs.building_wand.tooltip_normal=MaxRange: %s blocks
+usefulstuffs.building_wand.tooltip_infinite=MaxRange: %1$s blocks, %2$sUnlimited durability
 usefulstuffs.glued_box.tooltip_1=Nothing is in the box
 usefulstuffs.glued_box.tooltip_2=If you get this in the game, report to the author
-usefulstuffs.glued_box.tooltip_3=Block Stored:%1$s
+usefulstuffs.glued_box.tooltip_3=Block Stored:%s
 usefulstuffs.packing_glue.tooltip_1=Cannot pick up unbreakable blocks!
 usefulstuffs.packing_glue.tooltip_2=Shift-Right click to pick a block up
 usefulstuffs.packing_glue.tooltip_3=The durability cost per operation depends on the block.Try to enchant Frugal on this
 usefulstuffs.lily_belt.tooltip=Haven't tried Potion of Floating Lily?It makes you float on the water!
 usefulstuffs.storage_body.tooltip_1=Provide extra 27 slots
-usefulstuffs.storage_body.tooltip_2=Press %1$s to switch between them and your current toolbar
+usefulstuffs.storage_body.tooltip_2=Press %s to switch between them and your current toolbar
 usefulstuffs.portal_muffler.tooltip_1=Mute the sound of Nether Portal nearby it
 usefulstuffs.portal_muffler.tooltip_2=You are too noisy, man
-usefulstuffs.player_detector.tooltip=Emits redstone signal when there is a player in the 5x5x5 area around it
+usefulstuffs.player_detector.tooltip=Emits redstone signal when there is a player in the %1$sx%2$sx%3$s area around it
+
 
 entity.usefulstuffs.light_bulb.name=LightBulb
-entity.usefulstuffs.fairy_light.name=FairyLight
 
-achievement.light_bulb=Fancy!
-achievement.light_bulb.desc=An alternative light source
-achievement.light_shooter=Light up the world
-achievement.light_shooter.desc=Pew Pew Pew
-achievement.rain_detector=Genius.
-achievement.rain_detector.desc=The rain drops fall on the umbrella, umbrella hits the button, which triggers the signal.TOTALLY MAKE SENSE
-achievement.building_wand=Belated Blessing
-achievement.building_wand.desc=For building purpose, like Greek Temples or etc.
 
 potion.effect.lily=Potion of Floating LilyPad
 splash_potion.effect.lily=Splash Potion of Floating LilyPad
 lingering_potion.effect.lily=Lingering Potion of Floating LilyPad
 effect.usefulstuffs.lily=Li-ly
 
+
 usefulstuffs.gui.bento.name=Bento Box
 usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
 usefulstuffs.gui.light_shooter.name=Light Shooter
 
+
 key.usefulstuffs.category=UsefulStuffs
 key.usefulstuffs.switchinv.desc=Switch Inventory (Storage Bag)
 
+
 enchantment.usefulstuffs.xl.name=Frugal
+
+
+usefulstuffs.config.blocks.bush_growth_chance.comment=When growth tick triggers, there is a chance of 1/n that a bush will grow. DEFAULT=12, MIN=7
+usefulstuffs.config.blocks.bush_banned_biomes.comment=Berry bushes will not generate in these biomes
+usefulstuffs.config.blocks.bush_banned_dims.comment=Berry bushes will not generate in these dimensions
+usefulstuffs.config.blocks.bush_spawn_min_height.comment=The minimum height that a bush will generate on. DEFAULT=60, MIN=4, MAX=64
+usefulstuffs.config.blocks.player_detector_range.comment=The radius of the player detector. DEFAULT=2, MIN=2
+usefulstuffs.config.blocks.portal_muffler_range.comment=The radius which a portal muffler can reach. DEFAULT=4, MIN=4
+usefulstuffs.config.blocks.well_trans_rate.comment=The transfer rate of the well (mB/side*tick), set to 0 to disable. DEFAULT=250, MAX=1000
+usefulstuffs.config.blocks.well_trans_range.comment=The range of the well. DEFAULT=3, MIN=0, MAX=7
+
+usefulstuffs.config.items.bento_speed.comment=Should the max using duration of bento simulates its content? DEFAULT=true
+usefulstuffs.config.items.building_wand_durability.comment=The durability of a normal building wand. DEFAULT=2048, MIN=0
+usefulstuffs.config.items.building_wand_range.comment=The range of a normal building wand. DEFAULT=16, MIN=8
+usefulstuffs.config.items.building_wand_range_infinite.comment=The range of a infinite building wand. DEFAULT=32, MIN=8
+usefulstuffs.config.items.light_shooter_cooldown.comment=The cooldown of light shooter, set to 0 to disable cooldown. DEFAULT=30
+usefulstuffs.config.items.glue_durability.comment=The durability of packing glue. DEFAULT=32, MIN=32

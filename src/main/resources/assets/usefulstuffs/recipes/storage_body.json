@@ -1,7 +1,7 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " S ", 
+        " SD", 
 		"STS", 
 		"CS "
     ],
@@ -15,6 +15,9 @@
         },
         "C": {
             "item": "minecraft:chest"
+        },
+        "D": {
+            "item": "minecraft:diamond"
         }
     },
     "result": {

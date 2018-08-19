@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.blocks.playerdetector;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
@@ -29,6 +30,7 @@ import net.minecraft.world.World;
 
 public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityProvider {
 	
+	public static int range;
 	public static final PropertyBool POWERED = PropertyBool.create("powered");
 	public static AxisAlignedBB getBoundingBoxFromFacing(EnumFacing facing) {
 		switch (facing) {
@@ -52,6 +54,8 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setSoundType(SoundType.METAL);
 		setHardness(1.5F);
+		
+		range = ConfigManager.playerDetectorRange;
 	}
 	
 	@Override
@@ -154,7 +158,7 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 	
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(I18n.format("usefulstuffs.player_detector.tooltip"));
+		tooltip.add(I18n.format("usefulstuffs.player_detector.tooltip", (range * 2 + 1), (range * 2 + 1), (range * 2 + 1)));
 	}
 
 }

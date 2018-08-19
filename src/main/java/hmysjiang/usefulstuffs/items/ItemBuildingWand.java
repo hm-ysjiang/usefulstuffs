@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.utils.InventoryHelper;
 import hmysjiang.usefulstuffs.utils.WorldHelper;
@@ -25,6 +26,10 @@ import net.minecraft.world.World;
 
 public class ItemBuildingWand extends Item {
 	
+	public static int durability;
+	public static int range;
+	public static int rangeInfi;
+	
 	public ItemBuildingWand() {
 		this(Reference.ModItems.BUILDING_WAND.getUnlocalizedName(), Reference.ModItems.BUILDING_WAND.getRegistryName());
 	}
@@ -34,14 +39,18 @@ public class ItemBuildingWand extends Item {
 		setRegistryName(registryName);
 		setMaxStackSize(1);
 		
+		durability = ConfigManager.buildingwandDurability;
+		range = ConfigManager.buildingwandRange;
+		rangeInfi = ConfigManager.buildingwandRangeInfinite;
+		
 		if (!(this instanceof ItemBuildingWandInfinite)) {
-			setMaxDamage(16 * 128);
+			setMaxDamage(durability);
 		}
 	}
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		Object[] ret = WorldHelper.getBlockPosFacingEntityLookingAt(playerIn, playerIn.getHeldItem(hand).getItem() instanceof ItemBuildingWandInfinite ? 32 : 16);
+		Object[] ret = WorldHelper.getBlockPosFacingEntityLookingAt(playerIn, playerIn.getHeldItem(hand).getItem() instanceof ItemBuildingWandInfinite ? rangeInfi : range);
 		if (ret != null && ret[1] != null) {
 			BlockPos pos = (BlockPos) ret[0];
 			Vec3d p = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
@@ -260,10 +269,10 @@ public class ItemBuildingWand extends Item {
 		tooltip.add(I18n.format("usefulstuffs.building_wand.tooltip_1"));
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.building_wand.tooltip_2"));
 		if (stack.getItem() instanceof ItemBuildingWandInfinite) {
-			tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.building_wand.tooltip_infinite", TextFormatting.GRAY));
+			tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.building_wand.tooltip_infinite", rangeInfi, TextFormatting.GRAY));
 		}
 		else {
-			tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.building_wand.tooltip_normal"));
+			tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.building_wand.tooltip_normal", range));
 		}
 	}
 	

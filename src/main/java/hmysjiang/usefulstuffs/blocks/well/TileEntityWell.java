@@ -3,6 +3,9 @@ package hmysjiang.usefulstuffs.blocks.well;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.typesafe.config.Config;
+
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.item.Item;
@@ -26,15 +29,13 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityWell extends TileEntity implements ITickable {
 	
 	public static final int CAPACITY = 64000;
-	public static final String KEY_CONT = "Content";
+	public static final String KEY_CONT = "Cont";
 	
-	private int transRate;
 	private WaterTank tankWater;
 	private Handler handler;
 	
 	public TileEntityWell() {
 		tankWater = new WaterTank(CAPACITY);
-		transRate = 500;
 		handler = new Handler();
 	}
 	
@@ -62,8 +63,8 @@ public class TileEntityWell extends TileEntity implements ITickable {
 		if (!world.isRemote) {
 			List<int[]> blacklist = getFilteredBlocks();
 			boolean filtered;
-			for (int x = -3;x<=3;x++) {
-				for (int z = -3;z<=3;z++) {
+			for (int x = -BlockWell.range;x<=BlockWell.range;x++) {
+				for (int z = -BlockWell.range;z<=BlockWell.range;z++) {
 					BlockPos bpos = new BlockPos(pos.getX()+x, pos.getY(), pos.getZ()+z);
 					TileEntity tile = world.getTileEntity(bpos);
 					if (tile != null && world.getBlockState(bpos) != ModBlocks.well.getDefaultState()) { 
@@ -76,7 +77,7 @@ public class TileEntityWell extends TileEntity implements ITickable {
 								}
 							}
 							if (!filtered && tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
-								tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing).fill(new FluidStack(FluidRegistry.WATER, transRate), true);
+								tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing).fill(new FluidStack(FluidRegistry.WATER, BlockWell.rate), true);
 								break;
 							}
 						}
@@ -100,10 +101,6 @@ public class TileEntityWell extends TileEntity implements ITickable {
 	
 	public int getFluidAmount() {
 		return tankWater.getFluidAmount();
-	}
-	
-	public int getTransferRate() {
-		return transRate;
 	}
 	
 	public List<int[]> getFilteredBlocks(){
