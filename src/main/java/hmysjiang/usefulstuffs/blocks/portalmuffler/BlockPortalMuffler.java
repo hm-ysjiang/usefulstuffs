@@ -16,6 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockPortalMuffler extends Block implements ITileEntityProvider {
 	
@@ -31,6 +33,7 @@ public class BlockPortalMuffler extends Block implements ITileEntityProvider {
 		return new TileEntityPortalMuffler();
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add(I18n.format("usefulstuffs.portal_muffler.tooltip_1"));

@@ -3,8 +3,8 @@ package hmysjiang.usefulstuffs.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import hmysjiang.usefulstuffs.items.ItemBerry;
 import hmysjiang.usefulstuffs.items.ItemBuildingWand;
@@ -19,7 +19,6 @@ import hmysjiang.usefulstuffs.items.crafting.ItemBuildingWizard;
 import hmysjiang.usefulstuffs.items.crafting.ItemCompactStorageUnit;
 import hmysjiang.usefulstuffs.items.crafting.ItemFlipFlopCore;
 import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -100,7 +99,7 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(bag_storage);
 		UsefulStuffs.proxy.registerItemRenders(flipflop_core);
 		
-		for (EnumDyeColor color: EnumDyeColor.values())
+		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());
 		
 		for (Item item: itemblocks)

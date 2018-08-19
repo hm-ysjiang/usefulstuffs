@@ -57,26 +57,26 @@ public class ConfigManager {
 		
 		//Blocks
 		Property propertyBushGrowthChance = config.get(CATEGORY_BLOCK, "bush_growth_chance", 12);
-		propertyBushGrowthChance.setComment(I18n.format("usefulstuffs.config.blocks.bush_growth_chance.comment"));
+		propertyBushGrowthChance.setComment("When growth tick triggers, there is a chance of 1/n that a bush will grow. DEFAULT=12, MIN=7");
 		propertyBushGrowthChance.setMinValue(7);
 		bushGrowthChance = propertyBushGrowthChance.getInt();
 		propertyBushGrowthChance.set(bushGrowthChance);
 		orderBlock.add(propertyBushGrowthChance.getName());
 		
 		Property propertyBushBannedBiomes = config.get(CATEGORY_BLOCK, "bush_banned_biomes", new int[] {3, 11, 12, 25, 26, 140, 158});
-		propertyBushBannedBiomes.setComment(I18n.format("usefulstuffs.config.blocks.bush_banned_biomes.comment"));
+		propertyBushBannedBiomes.setComment("Berry bushes will not generate in these biomes");
 		bush_banned_biomes = propertyBushBannedBiomes.getIntList();
 		propertyBushBannedBiomes.set(bush_banned_biomes);
 		orderBlock.add(propertyBushBannedBiomes.getName());
 		
 		Property propertyBushBannedDims = config.get(CATEGORY_BLOCK, "bush_banned_dims", new int[] {1, -1});
-		propertyBushBannedDims.setComment(I18n.format("usefulstuffs.config.blocks.bush_banned_dims.comment"));
+		propertyBushBannedDims.setComment("Berry bushes will not generate in these dimensions");
 		bush_banned_dims = propertyBushBannedDims.getIntList();
 		propertyBushBannedDims.set(bush_banned_dims);
 		orderBlock.add(propertyBushBannedDims.getName());
 		
 		Property propertyBushSpawnMinH = config.get(CATEGORY_BLOCK, "bush_spawn_min_height", 60);
-		propertyBushSpawnMinH.setComment(I18n.format("usefulstuffs.config.blocks.bush_spawn_min_height.comment"));
+		propertyBushSpawnMinH.setComment("The minimum height that a bush will generate on. DEFAULT=60, MIN=4, MAX=64");
 		propertyBushSpawnMinH.setMinValue(4);
 		propertyBushSpawnMinH.setMaxValue(64);
 		bushSpawnMinHeight = propertyBushSpawnMinH.getInt();
@@ -84,21 +84,21 @@ public class ConfigManager {
 		orderBlock.add(propertyBushSpawnMinH.getName());
 		
 		Property propertyPlayerDetectorRange = config.get(CATEGORY_BLOCK, "player_detector_range", 2);
-		propertyPlayerDetectorRange.setComment(I18n.format("usefulstuffs.config.blocks.player_detector_range.comment"));
+		propertyPlayerDetectorRange.setComment("The radius of the player detector. DEFAULT=2, MIN=2");
 		propertyPlayerDetectorRange.setMinValue(2);
 		playerDetectorRange = propertyPlayerDetectorRange.getInt();
 		propertyPlayerDetectorRange.set(playerDetectorRange);
 		orderBlock.add(propertyPlayerDetectorRange.getName());
 		
 		Property propertyPortalMufflerRange = config.get(CATEGORY_BLOCK, "portal_muffler_range", 4);
-		propertyPortalMufflerRange.setComment(I18n.format("usefulstuffs.config.blocks.portal_muffler_range.comment"));
+		propertyPortalMufflerRange.setComment("The radius which a portal muffler can reach. DEFAULT=4, MIN=4");
 		propertyPortalMufflerRange.setMinValue(4);
 		portalMufflerRange = propertyPortalMufflerRange.getInt();
 		propertyPortalMufflerRange.set(portalMufflerRange);
 		orderBlock.add(propertyPortalMufflerRange.getName());
 		
 		Property propertyWellTransRate = config.get(CATEGORY_BLOCK, "well_trans_rate", 250);
-		propertyWellTransRate.setComment(I18n.format("usefulstuffs.config.blocks.well_trans_rate.comment"));
+		propertyWellTransRate.setComment("The transfer rate of the well (mB/side*tick), set to 0 to disable. DEFAULT=250, MAX=1000");
 		propertyWellTransRate.setMaxValue(1000);
 		propertyWellTransRate.setMinValue(0);
 		wellTransRate = propertyWellTransRate.getInt();
@@ -106,7 +106,7 @@ public class ConfigManager {
 		orderBlock.add(propertyWellTransRate.getName());
 		
 		Property propertyWellTransRange = config.get(CATEGORY_BLOCK, "well_trans_range", 3);
-		propertyWellTransRange.setComment(I18n.format("usefulstuffs.config.blocks.well_trans_range.comment"));
+		propertyWellTransRange.setComment("The range of the well. DEFAULT=3, MIN=0, MAX=7");
 		propertyWellTransRange.setMaxValue(7);
 		propertyWellTransRate.setMinValue(0);
 		wellTransRange = propertyWellTransRange.getInt();
@@ -115,41 +115,41 @@ public class ConfigManager {
 		
 		//items
 		Property propertyBentoSpeed = config.get(CATEGORY_ITEM, "bento_speed", true);
-		propertyBentoSpeed.setComment(I18n.format("usefulstuffs.config.items.bento_speed.comment"));
+		propertyBentoSpeed.setComment("Should the max using duration of bento simulates its content? DEFAULT=true");
 		bentoSpeed = propertyBentoSpeed.getBoolean();
 		propertyBentoSpeed.set(bentoSpeed);
 		orderItem.add(propertyBentoSpeed.getName());
 		
 		Property propertyBuildingWandDurability = config.get(CATEGORY_ITEM, "building_wand_durability", 2048);
-		propertyBuildingWandDurability.setComment(I18n.format("usefulstuffs.config.items.building_wand_durability.comment"));
+		propertyBuildingWandDurability.setComment("The durability of a normal building wand. DEFAULT=2048, MIN=0");
 		propertyBuildingWandDurability.setMinValue(0);
 		buildingwandDurability = propertyBuildingWandDurability.getInt();
 		propertyBuildingWandDurability.set(buildingwandDurability);
 		orderItem.add(propertyBuildingWandDurability.getName());
 		
 		Property propertyBuildingWandRange = config.get(CATEGORY_ITEM, "building_wand_range", 16);
-		propertyBuildingWandRange.setComment(I18n.format("usefulstuffs.config.items.building_wand_range.comment"));
+		propertyBuildingWandRange.setComment("The range of a normal building wand. DEFAULT=16, MIN=8");
 		propertyBuildingWandRange.setMinValue(8);
 		buildingwandRange = propertyBuildingWandRange.getInt();
 		propertyBuildingWandRange.set(buildingwandRange);
 		orderItem.add(propertyBuildingWandRange.getName());
 		
 		Property propertyBuildingWandRangeInfi = config.get(CATEGORY_ITEM, "building_wand_range_infinite", 32);
-		propertyBuildingWandRangeInfi.setComment(I18n.format("usefulstuffs.config.items.building_wand_range_infinite.comment"));
+		propertyBuildingWandRangeInfi.setComment("The range of a infinite building wand. DEFAULT=32, MIN=8");
 		propertyBuildingWandRangeInfi.setMinValue(8);
 		buildingwandRangeInfinite = propertyBuildingWandRangeInfi.getInt();
 		propertyBuildingWandRangeInfi.set(buildingwandRangeInfinite);
 		orderItem.add(propertyBuildingWandRangeInfi.getName());
 		
 		Property propertyLightShooterCD = config.get(CATEGORY_ITEM, "light_shooter_cooldown", 30);
-		propertyLightShooterCD.setComment(I18n.format("usefulstuffs.config.items.light_shooter_cooldown.comment"));
+		propertyLightShooterCD.setComment("The cooldown of light shooter, set to 0 to disable cooldown. DEFAULT=30");
 		propertyLightShooterCD.setMinValue(0);
 		shooterCD = propertyLightShooterCD.getInt();
 		propertyLightShooterCD.set(shooterCD);
 		orderItem.add(propertyLightShooterCD.getName());
 		
 		Property propertyGlueDurability = config.get(CATEGORY_ITEM, "glue_durability", 32);
-		propertyGlueDurability.setComment(I18n.format("usefulstuffs.config.items.glue_durability.comment"));
+		propertyGlueDurability.setComment("The durability of packing glue. DEFAULT=32, MIN=32");
 		propertyGlueDurability.setMinValue(32);
 		glueDurability = propertyGlueDurability.getInt();
 		propertyGlueDurability.set(glueDurability);

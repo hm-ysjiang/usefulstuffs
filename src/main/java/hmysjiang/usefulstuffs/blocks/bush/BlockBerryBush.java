@@ -35,9 +35,9 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 2);
 	public static int growthChance = -1;
 	
-	private EnumDyeColor color;
+	private EnumBerryColor color;
 
-	public BlockBerryBush(EnumDyeColor color) {
+	public BlockBerryBush(EnumBerryColor color) {
 		super(Material.PLANTS);
 		setUnlocalizedName(Reference.ModBlocks.BERRYBUSH.getUnlocalizedName() + "_" + color.getDyeColorName());
 		setRegistryName(Reference.ModBlocks.BERRYBUSH.getRegistryName().toString() + "_" + color.getDyeColorName());

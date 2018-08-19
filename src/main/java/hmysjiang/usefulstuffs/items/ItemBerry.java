@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.items;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemFood;
@@ -20,7 +21,7 @@ public class ItemBerry extends ItemFood {
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (tab == UsefulStuffs.TAB) {
-			for (EnumDyeColor color: EnumDyeColor.values()) {
+			for (EnumBerryColor color: EnumBerryColor.values()) {
 				items.add(new ItemStack(this, 1, color.getMetadata()));
 			}	
 		}
@@ -28,7 +29,7 @@ public class ItemBerry extends ItemFood {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName() + "_" + EnumDyeColor.byMetadata(stack.getMetadata()).getDyeColorName();
+		return getUnlocalizedName() + "_" + EnumBerryColor.byMetadata(stack.getMetadata()).getDyeColorName();
 	}
 	
 	@Override

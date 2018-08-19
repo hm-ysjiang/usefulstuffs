@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.bush.BlockBerryBush;
+import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
 import hmysjiang.usefulstuffs.blocks.filingcabinet.BlockFilingCabinet;
 import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
@@ -13,7 +14,6 @@ import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.well.BlockWell;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -46,8 +46,8 @@ public class ModBlocks {
 		rain_detector = new BlockRainDetector();
 		t_flipflop = new BlockTFlipFlop();
 		well = new BlockWell();
-		for (int i = 0 ; i<EnumDyeColor.values().length ; i++)
-			berrybushes[i] = new BlockBerryBush(EnumDyeColor.byMetadata(i));
+		for (int i = 0 ; i<EnumBerryColor.values().length ; i++)
+			berrybushes[i] = new BlockBerryBush(EnumBerryColor.byMetadata(i));
 		portal_muffler = new BlockPortalMuffler();
 		player_detector = new BlockPlayerDetector();
 	}

@@ -116,18 +116,4 @@ key.usefulstuffs.switchinv.desc=Switch Inventory (Storage Bag)
 enchantment.usefulstuffs.xl.name=Frugal
 
 
-usefulstuffs.config.blocks.bush_growth_chance.comment=When growth tick triggers, there is a chance of 1/n that a bush will grow. DEFAULT=12, MIN=7
-usefulstuffs.config.blocks.bush_banned_biomes.comment=Berry bushes will not generate in these biomes
-usefulstuffs.config.blocks.bush_banned_dims.comment=Berry bushes will not generate in these dimensions
-usefulstuffs.config.blocks.bush_spawn_min_height.comment=The minimum height that a bush will generate on. DEFAULT=60, MIN=4, MAX=64
-usefulstuffs.config.blocks.player_detector_range.comment=The radius of the player detector. DEFAULT=2, MIN=2
-usefulstuffs.config.blocks.portal_muffler_range.comment=The radius which a portal muffler can reach. DEFAULT=4, MIN=4
-usefulstuffs.config.blocks.well_trans_rate.comment=The transfer rate of the well (mB/side*tick), set to 0 to disable. DEFAULT=250, MAX=1000
-usefulstuffs.config.blocks.well_trans_range.comment=The range of the well. DEFAULT=3, MIN=0, MAX=7
 
-usefulstuffs.config.items.bento_speed.comment=Should the max using duration of bento simulates its content? DEFAULT=true
-usefulstuffs.config.items.building_wand_durability.comment=The durability of a normal building wand. DEFAULT=2048, MIN=0
-usefulstuffs.config.items.building_wand_range.comment=The range of a normal building wand. DEFAULT=16, MIN=8
-usefulstuffs.config.items.building_wand_range_infinite.comment=The range of a infinite building wand. DEFAULT=32, MIN=8
-usefulstuffs.config.items.light_shooter_cooldown.comment=The cooldown of light shooter, set to 0 to disable cooldown. DEFAULT=30
-usefulstuffs.config.items.glue_durability.comment=The durability of packing glue. DEFAULT=32, MIN=32

@@ -22,6 +22,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class ItemBento extends ItemFood {
@@ -147,6 +149,7 @@ public class ItemBento extends ItemFood {
 		return food.isEmpty() ? 0 : ((ItemFood)food.getItem()).getSaturationModifier(food);
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add(I18n.format("usefulstuffs.bento.tooltip_1"));

@@ -34,6 +34,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber
 public class BlockCampfire extends Block implements ITileEntityProvider {
@@ -126,6 +128,7 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 		return new TileEntityCampfire();
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
 		super.addInformation(stack, worldIn, tooltip, advanced);

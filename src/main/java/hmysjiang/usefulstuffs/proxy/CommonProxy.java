@@ -33,7 +33,6 @@ public class CommonProxy {
 		
 		ModEntities.register();
 		PacketHandler.init();
-		KeyBindingHandler.init();
 		
 		registerTileEntity();
 	}

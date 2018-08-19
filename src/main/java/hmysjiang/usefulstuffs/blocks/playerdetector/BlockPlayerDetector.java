@@ -27,6 +27,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityProvider {
 	
@@ -156,6 +158,7 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 		world.notifyNeighborsOfStateChange(pos.offset(EnumFacing.DOWN), this, false);
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add(I18n.format("usefulstuffs.player_detector.tooltip", (range * 2 + 1), (range * 2 + 1), (range * 2 + 1)));

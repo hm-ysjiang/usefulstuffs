@@ -62,6 +62,7 @@ public class PotionLily extends Potion {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
 		TextureAtlasSprite sprite = SpriteHandler.lily;
@@ -72,6 +73,7 @@ public class PotionLily extends Potion {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
 		TextureAtlasSprite sprite = SpriteHandler.lily;

@@ -18,6 +18,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemStorageBag extends Item implements IBauble {
 
@@ -41,6 +43,7 @@ public class ItemStorageBag extends Item implements IBauble {
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.storage_body.tooltip_1"));

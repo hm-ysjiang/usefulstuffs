@@ -21,6 +21,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemLilyBelt extends Item implements IBauble {
 
@@ -69,6 +71,7 @@ public class ItemLilyBelt extends Item implements IBauble {
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(I18n.format("usefulstuffs.lily_belt.tooltip"));
