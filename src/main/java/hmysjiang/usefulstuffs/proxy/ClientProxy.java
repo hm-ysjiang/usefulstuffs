@@ -5,7 +5,7 @@ import hmysjiang.usefulstuffs.blocks.portalmuffler.PortalMufflerManager;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModEntities;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.utils.KeyBindingHandler;
+import hmysjiang.usefulstuffs.utils.handler.KeyBindingHandler;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumDyeColor;

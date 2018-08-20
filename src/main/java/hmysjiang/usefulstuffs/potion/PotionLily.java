@@ -2,7 +2,7 @@ package hmysjiang.usefulstuffs.potion;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.client.SpriteHandler;
-import hmysjiang.usefulstuffs.utils.LogHelper;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;

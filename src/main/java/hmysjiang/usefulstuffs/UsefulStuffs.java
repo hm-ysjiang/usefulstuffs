@@ -2,7 +2,7 @@ package hmysjiang.usefulstuffs;
 
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.proxy.CommonProxy;
-import hmysjiang.usefulstuffs.utils.LogHelper;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;

@@ -5,7 +5,7 @@ import java.util.Random;
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.blocks.bush.BlockBerryBush;
 import hmysjiang.usefulstuffs.init.ModBlocks;
-import hmysjiang.usefulstuffs.utils.WorldHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;

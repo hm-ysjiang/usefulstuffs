@@ -107,6 +107,8 @@ effect.usefulstuffs.lily=Li-ly
 usefulstuffs.gui.bento.name=Bento Box
 usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
 usefulstuffs.gui.light_shooter.name=Light Shooter
+usefulstuffs.gui.campfire.name=Campfire of Traveller's Wisdom
+usefulstuffs.gui.campfire.modifier=BuffRadius:%s
 
 
 key.usefulstuffs.category=UsefulStuffs

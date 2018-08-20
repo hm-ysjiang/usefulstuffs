@@ -5,7 +5,7 @@ import java.util.List;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.utils.WorldHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;

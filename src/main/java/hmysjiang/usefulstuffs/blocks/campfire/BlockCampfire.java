@@ -3,8 +3,11 @@ package hmysjiang.usefulstuffs.blocks.campfire;
 import java.util.List;
 import java.util.Random;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.BlockMaterials;
+import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
@@ -36,9 +39,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 @EventBusSubscriber
 public class BlockCampfire extends Block implements ITileEntityProvider {
+	
+	public static boolean needFuel;
 	
 	@SubscribeEvent
 	public static void onInteract(PlayerInteractEvent event) {
@@ -75,14 +82,22 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 		setLightLevel(1.0F);
 		setSoundType(SoundType.WOOD);
 		setHardness(0.5F);
+		
+		needFuel = ConfigManager.campfireNeedsFuel;
 	}
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			if (playerIn.isSneaking()) 
-				playerIn.sendMessage(new TextComponentString("Radius :"+((TileEntityCampfire)worldIn.getTileEntity(pos)).getBuffRadius()));
+			if (playerIn.isSneaking()) {
+				if (needFuel) {
+					playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_CAMPFIRE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+				}
+				else {
+					playerIn.sendMessage(new TextComponentString("Radius: " + ((TileEntityCampfire) worldIn.getTileEntity(pos)).getBuffRadius()));
+				}
+			}
 		}
 		return true;
 	}
@@ -94,6 +109,16 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		if (worldIn.getTileEntity(pos) != null) {
+			IItemHandler handler;
+			if (needFuel)
+				handler = ((TileEntityCampfire)worldIn.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+			else 
+				handler = ((TileEntityCampfire)worldIn.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			for (int i = 0 ; i<handler.getSlots() ; i++)
+				if (!handler.getStackInSlot(i).isEmpty())
+					worldIn.spawnEntity(new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, handler.getStackInSlot(i)));
+		}
 		worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STICK, rnd.nextInt(2)+2)));
 		super.breakBlock(worldIn, pos, state);
 	}

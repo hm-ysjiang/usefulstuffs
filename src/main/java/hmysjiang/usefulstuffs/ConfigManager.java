@@ -25,6 +25,7 @@ public class ConfigManager {
 	public static int portalMufflerRange;
 	public static int wellTransRate;
 	public static int wellTransRange;
+	public static boolean campfireNeedsFuel;
 	public static boolean bentoSpeed;
 	public static int buildingwandDurability;
 	public static int buildingwandRange;
@@ -112,6 +113,12 @@ public class ConfigManager {
 		wellTransRange = propertyWellTransRange.getInt();
 		propertyWellTransRange.set(wellTransRange);
 		orderBlock.add(propertyWellTransRange.getName());
+		
+		Property propertyCampfireFuel = config.get(CATEGORY_BLOCK, "campfire_needs_fuel", true);
+		propertyCampfireFuel.setComment("Does campfire requires fuel to work? DEFAULT=true");
+		campfireNeedsFuel = propertyCampfireFuel.getBoolean();
+		propertyCampfireFuel.set(campfireNeedsFuel);
+		orderBlock.add(propertyCampfireFuel.getName());
 		
 		//items
 		Property propertyBentoSpeed = config.get(CATEGORY_ITEM, "bento_speed", true);

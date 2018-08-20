@@ -1,7 +1,7 @@
 package hmysjiang.usefulstuffs.client;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.utils.LogHelper;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;

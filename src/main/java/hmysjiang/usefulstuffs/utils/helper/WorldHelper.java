@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.utils;
+package hmysjiang.usefulstuffs.utils.helper;
 
 import com.google.common.collect.ImmutableMap;
 

@@ -10,24 +10,23 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerFilingCabinet extends Container {
+public class ContainerFilingCabinet extends ContainerBase {
 
 	protected EntityPlayer player;
-	protected InventoryPlayer playerInv;
 	protected BlockPos pos;
 	protected TileEntityFilingCabinet tile;
 	protected int page;
 	
 	public ContainerFilingCabinet(EntityPlayer player, BlockPos pos, int page) {
+		super(player.inventory, (ItemStackHandler) ((TileEntityFilingCabinet) player.world.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
 		this.player = player;
-		this.playerInv = player.inventory;
 		this.pos = pos;
 		this.tile = (TileEntityFilingCabinet) player.world.getTileEntity(pos);
 		this.page = page;
 		
-		IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		int xFC = 7, yFC = 18, gap = 18;
 		//18*6*10
 		for (int y = 0 ; y < 6 ; y++) {
@@ -39,20 +38,15 @@ public class ContainerFilingCabinet extends Container {
 		int xPos = 79, yPos = 140;
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 9; ++x) {
-				this.addSlotToContainer(new Slot(playerInv, x + y * 9 + 9, xPos + x * 18, yPos + y * 18));
+				this.addSlotToContainer(new Slot(player.inventory, x + y * 9 + 9, xPos + x * 18, yPos + y * 18));
 			}
 		}
 		
 		for (int x = 0; x < 9; ++x) {
-			this.addSlotToContainer(new Slot(playerInv, x, xPos + x * 18, yPos + 58));
+			this.addSlotToContainer(new Slot(player.inventory, x, xPos + x * 18, yPos + 58));
 		}
 	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) {
-		return !playerIn.isSpectator();
-	}
-
+	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;

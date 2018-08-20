@@ -6,7 +6,7 @@ import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.utils.LogHelper;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;

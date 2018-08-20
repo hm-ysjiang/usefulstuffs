@@ -1,7 +1,8 @@
-package hmysjiang.usefulstuffs.utils;
+package hmysjiang.usefulstuffs.utils.helper;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ public class OreDictHelper {
 	public static void register() {
 		//berries
 		LogHelper.info("Registering ItemBerry-s to OreDictionary");
-		for (EnumDyeColor color: EnumDyeColor.values()) {
+		for (EnumBerryColor color: EnumBerryColor.values()) {
 			OreDictionary.registerOre("dye", new ItemStack(ModItems.berry, 1, color.getMetadata()));
 			OreDictionary.registerOre("listAllberry", new ItemStack(ModItems.berry, 1, color.getMetadata()));
 			OreDictionary.registerOre("listAllfruit", new ItemStack(ModItems.berry, 1, color.getMetadata()));	

@@ -7,7 +7,7 @@ import baubles.api.IBauble;
 import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.utils.KeyBindingHandler;
+import hmysjiang.usefulstuffs.utils.handler.KeyBindingHandler;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

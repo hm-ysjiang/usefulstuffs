@@ -1,13 +1,19 @@
 package hmysjiang.usefulstuffs.client.gui;
 
+import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
 import hmysjiang.usefulstuffs.container.ContainerBento;
+import hmysjiang.usefulstuffs.container.ContainerCampfire;
 import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
 import hmysjiang.usefulstuffs.container.ContainerLightShooter;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -23,6 +29,7 @@ public class GuiHandler implements IGuiHandler {
 	public static final int GUI_FILING_CABINET_10 = 9;
 	public static final int GUI_BENTO = 10;
 	public static final int GUI_LIGHT_SHOOTER = 11;
+	public static final int GUI_CAMPFIRE = 12;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -52,6 +59,8 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6);
 		case GUI_LIGHT_SHOOTER:
 			return new ContainerLightShooter(player.inventory, player.getHeldItemMainhand(), 4);
+		case GUI_CAMPFIRE:
+			return new ContainerCampfire(player, new BlockPos(x, y, z));
 		default:
 			return null;
 		}
@@ -84,6 +93,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiBento(new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6));
 		case GUI_LIGHT_SHOOTER:
 			return new GuiLightShooter(new ContainerLightShooter(player.inventory, player.getHeldItemMainhand(), 4));
+		case GUI_CAMPFIRE:
+			return new GuiCampfire(new ContainerCampfire(player, new BlockPos(x, y, z)));
 		default:
 			return null;
 		}

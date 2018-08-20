@@ -4,8 +4,8 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.utils.InventoryHelper;
-import hmysjiang.usefulstuffs.utils.WorldHelper;
+import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

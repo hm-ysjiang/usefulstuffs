@@ -5,7 +5,7 @@ import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
-import hmysjiang.usefulstuffs.utils.InventoryHelper;
+import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
