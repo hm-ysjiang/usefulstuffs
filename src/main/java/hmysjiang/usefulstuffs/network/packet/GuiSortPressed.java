@@ -45,7 +45,7 @@ public class GuiSortPressed implements IMessage {
 
 		@Override
 		public IMessage onMessage(GuiSortPressed message, MessageContext ctx) {
-			World world = WorldHelper.getWorldFromId(message.world);
+			World world = WorldHelper.getServerWorldFromId(message.world);
 			BlockPos pos = new BlockPos(message.x, message.y, message.z);
 			((TileEntityFilingCabinet)world.getTileEntity(pos)).sort();
 			return null;

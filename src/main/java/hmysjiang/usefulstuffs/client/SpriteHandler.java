@@ -14,10 +14,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class SpriteHandler {
 	
 	public static TextureAtlasSprite lily = null;
+	public static TextureAtlasSprite fierylily = null;
+	public static TextureAtlasSprite umbrella = null;
 	
 	@SubscribeEvent
 	public static void onPreTextureStitch(TextureStitchEvent.Pre event) {
 		lily = event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID, "misc/lilypad"));
+		fierylily = event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID, "blocks/fierylily"));
+		umbrella = event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID, "items/umbrella"));
 	}
 	
 }

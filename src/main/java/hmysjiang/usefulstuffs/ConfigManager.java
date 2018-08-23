@@ -21,6 +21,7 @@ public class ConfigManager {
 	public static int[] bush_banned_biomes;
 	public static int[] bush_banned_dims;
 	public static int bushSpawnMinHeight;
+	public static int bushSpawnRate;
 	public static int playerDetectorRange;
 	public static int portalMufflerRange;
 	public static int wellTransRate;
@@ -32,6 +33,7 @@ public class ConfigManager {
 	public static int buildingwandRangeInfinite;
 	public static int shooterCD;
 	public static int glueDurability;
+	public static int fierylilySpawnRate;
 	
 	private static Configuration config;
 	private static List<String> orderBlock;
@@ -84,6 +86,13 @@ public class ConfigManager {
 		propertyBushSpawnMinH.set(bushSpawnMinHeight);
 		orderBlock.add(propertyBushSpawnMinH.getName());
 		
+		Property propertyBushSpawnRate = config.get(CATEGORY_BLOCK, "bush_spawn_rate", 50);
+		propertyBushSpawnRate.setComment("There is a chance of 1/n that a group of bushes will spawn in a chunk with proper biome, set to 0 to disable bush gen. DEFAULT=50");
+		propertyBushSpawnRate.setMinValue(0);
+		bushSpawnRate = propertyBushSpawnRate.getInt();
+		propertyBushSpawnRate.set(bushSpawnRate);
+		orderBlock.add(propertyBushSpawnRate.getName());
+		
 		Property propertyPlayerDetectorRange = config.get(CATEGORY_BLOCK, "player_detector_range", 2);
 		propertyPlayerDetectorRange.setComment("The radius of the player detector. DEFAULT=2, MIN=2");
 		propertyPlayerDetectorRange.setMinValue(2);
@@ -119,6 +128,13 @@ public class ConfigManager {
 		campfireNeedsFuel = propertyCampfireFuel.getBoolean();
 		propertyCampfireFuel.set(campfireNeedsFuel);
 		orderBlock.add(propertyCampfireFuel.getName());
+		
+		Property propertyFieryLilySpawnRate = config.get(CATEGORY_BLOCK, "fierylily_spawn_rate", 50);
+		propertyFieryLilySpawnRate.setComment("There is a chance of 1/n that fierylily will spawn in a chunk, set to 0 to disable fierylily gen. DEFAULT=40");
+		propertyFieryLilySpawnRate.setMinValue(0);
+		fierylilySpawnRate = propertyFieryLilySpawnRate.getInt();
+		propertyFieryLilySpawnRate.set(fierylilySpawnRate);
+		orderBlock.add(propertyFieryLilySpawnRate.getName());
 		
 		//items
 		Property propertyBentoSpeed = config.get(CATEGORY_ITEM, "bento_speed", true);

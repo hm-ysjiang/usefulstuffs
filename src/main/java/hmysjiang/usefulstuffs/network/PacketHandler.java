@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.network;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.network.packet.FieryRemoved;
 import hmysjiang.usefulstuffs.network.packet.GuiButtonPressed;
 import hmysjiang.usefulstuffs.network.packet.GuiSortPressed;
 import hmysjiang.usefulstuffs.network.packet.KeyInput;
@@ -19,6 +20,8 @@ public class PacketHandler {
 		INSTANCE.registerMessage(GuiButtonPressed.Handler.class, GuiButtonPressed.class, disc++, Side.SERVER);
 		INSTANCE.registerMessage(GuiSortPressed.Handler.class, GuiSortPressed.class, disc++, Side.SERVER);
 		INSTANCE.registerMessage(KeyInput.Handler.class, KeyInput.class, disc++, Side.SERVER);
+		
+		INSTANCE.registerMessage(FieryRemoved.Handler.class, FieryRemoved.class, disc++, Side.CLIENT);
 	}
 	
 }

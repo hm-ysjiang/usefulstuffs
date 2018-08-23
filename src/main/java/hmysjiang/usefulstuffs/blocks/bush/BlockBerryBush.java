@@ -16,7 +16,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -29,6 +28,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	public static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125, 0, 0.125, 0.875, 0.8125, 0.875);
@@ -168,11 +169,6 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	}
 	
 	@Override
-	public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return false;
-	}
-	
-	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		pos = pos.down();
 		return worldIn.getBlockState(pos).getBlock() instanceof BlockBerryBush || worldIn.getBlockState(pos).getBlock() == Blocks.STONE || worldIn.getBlockState(pos).getBlock() == Blocks.GRASS || worldIn.getBlockState(pos).getBlock() == Blocks.DIRT;
@@ -187,6 +183,12 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	}
 	
 	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		if (!worldIn.isRemote && state.getValue(AGE) == 2) 
+			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata())));
+	}
+	
+	@Override
 	public boolean canSpawnInBlock() {
 		return true;
 	}
@@ -196,6 +198,7 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 		return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		if (worldIn.isRainingAt(pos.up()) && !worldIn.getBlockState(pos.down()).isTopSolid() && rand.nextInt(12) == 1) {

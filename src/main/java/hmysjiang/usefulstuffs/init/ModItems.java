@@ -5,6 +5,7 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
+import hmysjiang.usefulstuffs.blocks.fierylily.ItemFieryLilyPad;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import hmysjiang.usefulstuffs.items.ItemBerry;
 import hmysjiang.usefulstuffs.items.ItemBuildingWand;
@@ -13,6 +14,7 @@ import hmysjiang.usefulstuffs.items.ItemLightShooter;
 import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
 import hmysjiang.usefulstuffs.items.ItemPackingGlue;
 import hmysjiang.usefulstuffs.items.ItemWaterBlackList;
+import hmysjiang.usefulstuffs.items.baubles.ItemFieryLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemStorageBag;
 import hmysjiang.usefulstuffs.items.crafting.ItemBuildingWizard;
@@ -45,6 +47,7 @@ public class ModItems {
 	public static Item bag_storage;
 	public static Item flipflop_core;
 	public static Item berry;
+	public static Item belt_fiery_lily;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -61,6 +64,7 @@ public class ModItems {
 		bag_storage = new ItemStorageBag();
 		flipflop_core = new ItemFlipFlopCore();
 		berry = new ItemBerry();
+		belt_fiery_lily = new ItemFieryLilyBelt();
 	}
 	
 	@SubscribeEvent
@@ -78,7 +82,8 @@ public class ModItems {
 				belt_lily,
 				bag_storage,
 				flipflop_core,
-				berry);
+				berry,
+				belt_fiery_lily);
 		
 		event.getRegistry().registerAll(itemblocks.toArray(new Item[0]));
 	}
@@ -98,6 +103,7 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(belt_lily);
 		UsefulStuffs.proxy.registerItemRenders(bag_storage);
 		UsefulStuffs.proxy.registerItemRenders(flipflop_core);
+		UsefulStuffs.proxy.registerItemRenders(belt_fiery_lily);
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());

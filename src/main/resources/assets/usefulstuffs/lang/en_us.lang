@@ -30,6 +30,7 @@ item.usefulstuffs.berry_brown.name=Brown Berry
 item.usefulstuffs.berry_green.name=Green Berry
 item.usefulstuffs.berry_red.name=Red Berry
 item.usefulstuffs.berry_black.name=Black Berry
+item.usefulstuffs.fiery_lily_belt.name=Belt of Fiery Lily
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -57,6 +58,7 @@ tile.usefulstuffs.berrybush_red.name=Red Berry Bush
 tile.usefulstuffs.berrybush_black.name=Black Berry Bush
 tile.usefulstuffs.portal_muffler.name=Portal Muffler
 tile.usefulstuffs.player_detector.name=Player Detector
+tile.usefulstuffs.fiery_lily.name=Fiery Lily
 
 
 usefulstuffs.ingredient.tooltip=Crafting ingredient
@@ -93,6 +95,8 @@ usefulstuffs.storage_body.tooltip_2=Press %s to switch between them and your cur
 usefulstuffs.portal_muffler.tooltip_1=Mute the sound of Nether Portal nearby it
 usefulstuffs.portal_muffler.tooltip_2=You are too noisy, man
 usefulstuffs.player_detector.tooltip=Emits redstone signal when there is a player in the %1$sx%2$sx%3$s area around it
+usefulstuffs.fiery_lily_belt.tooltip=Immune to Fire Damage!
+usefulstuffs.umbrella.tooltip=When equipped on head, falling damage is reduced by 30%s
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb
@@ -102,6 +106,19 @@ potion.effect.lily=Potion of Floating LilyPad
 splash_potion.effect.lily=Splash Potion of Floating LilyPad
 lingering_potion.effect.lily=Lingering Potion of Floating LilyPad
 effect.usefulstuffs.lily=Li-ly
+tipped_arrow.effect.lily=Arrow of Floating LilyPad
+
+potion.effect.fierylily=Potion of Fiery LilyPad
+splash_potion.effect.fierylily=Splash Potion of Fiery LilyPad
+lingering_potion.effect.fierylily=Lingering Potion of Fiery LilyPad
+effect.usefulstuffs.fierylily=Fiery Li-ly
+tipped_arrow.effect.fierylily=Arrow of Fiery LilyPad
+
+potion.effect.umbrella=Potion of Parachute
+splash_potion.effect.umbrella=Splash Potion of Parachute
+lingering_potion.effect.umbrella=Lingering Potion of Parachute
+effect.usefulstuffs.umbrella=Parachute
+tipped_arrow.effect.umbrella=Arrow of Parachute
 
 
 usefulstuffs.gui.bento.name=Bento Box

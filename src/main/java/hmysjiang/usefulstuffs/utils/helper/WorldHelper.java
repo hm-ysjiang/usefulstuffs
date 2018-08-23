@@ -43,7 +43,7 @@ public class WorldHelper {
 		return world.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.AIR;
 	}
 	
-	public static World getWorldFromId(int id) {
+	public static World getServerWorldFromId(int id) {
 		for (WorldServer world:DimensionManager.getWorlds()) {
 			if (world.provider.getDimension() == id) {
 				return world;

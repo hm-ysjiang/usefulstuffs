@@ -16,9 +16,9 @@ import hmysjiang.usefulstuffs.init.ModEntities;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.init.ModRecipe;
 import hmysjiang.usefulstuffs.network.PacketHandler;
-import hmysjiang.usefulstuffs.utils.handler.KeyBindingHandler;
 import hmysjiang.usefulstuffs.utils.helper.OreDictHelper;
 import hmysjiang.usefulstuffs.world.gen.BerryBushGenerator;
+import hmysjiang.usefulstuffs.world.gen.FieryLilyGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -42,6 +42,7 @@ public class CommonProxy {
 		OreDictHelper.register();
 		OreDictHelper.pullOreRegistries();
 		GameRegistry.registerWorldGenerator(new BerryBushGenerator(), 0);
+		GameRegistry.registerWorldGenerator(new FieryLilyGenerator(), 0);
 		
 		registerItemVariants();
 	}

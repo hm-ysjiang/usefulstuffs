@@ -53,7 +53,7 @@ public class GuiButtonPressed implements IMessage {
 
 		@Override
 		public IMessage onMessage(GuiButtonPressed message, MessageContext ctx) {
-			World world = WorldHelper.getWorldFromId(message.world);
+			World world = WorldHelper.getServerWorldFromId(message.world);
 			EntityPlayer player = (EntityPlayer) world.getEntityByID(message.player);
 			player.openGui(UsefulStuffs.instance, message.page, world, message.x, message.y, message.z);
 			return null;

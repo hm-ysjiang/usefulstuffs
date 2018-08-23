@@ -83,7 +83,7 @@ public class ItemWaterBlackList extends Item implements IItemBindable {
 				NBTTagList list = getBoundBlockListFromNBT(stack);
 				for (int i = 0 ; i<list.tagCount() ; i++) { 
 					int[] data = list.getIntArrayAt(i);
-					World world = WorldHelper.getWorldFromId(data[0]);
+					World world = WorldHelper.getServerWorldFromId(data[0]);
 					String blockname = world.getBlockState(new BlockPos(data[1], data[2], data[3])).getBlock().getUnlocalizedName();
 					EnumFacing side = EnumFacing.DOWN;
 					for (EnumFacing facing:EnumFacing.values())

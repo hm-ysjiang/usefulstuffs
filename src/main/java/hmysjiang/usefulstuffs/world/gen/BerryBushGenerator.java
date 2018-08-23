@@ -21,7 +21,7 @@ public class BerryBushGenerator implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
 		Biome biome = world.getBiome(new BlockPos(chunkX * 16, 64, chunkZ * 16));
-		if (canGenInWorld(world) && canGenInBiome(world.getBiome(new BlockPos(chunkX * 16, 64, chunkZ * 16))) && random.nextInt(50) == 0) {
+		if (canGenInWorld(world) && canGenInBiome(world.getBiome(new BlockPos(chunkX * 16, 64, chunkZ * 16))) && random.nextInt(ConfigManager.bushSpawnRate) == 0) {
 			int centerX = chunkX * 16 + random.nextInt(10) + 3;
 			int centerZ = chunkZ * 16 + random.nextInt(10) + 3;
 			int bushes = random.nextInt(4) + 4;

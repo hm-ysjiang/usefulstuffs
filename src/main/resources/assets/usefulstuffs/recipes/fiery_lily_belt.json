@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " RS", 
+		"RBR", 
+		"FR "
+    ],
+    "key": {
+        "R": {
+            "item": "minecraft:blaze_rod"
+        },
+        "S": {
+            "item": "minecraft:nether_star"
+        },
+        "B": {
+            "item": "usefulstuffs:lily_belt"
+        },
+        "F": {
+            "item": "usefulstuffs:fiery_lily"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:fiery_lily_belt"
+    }
+}

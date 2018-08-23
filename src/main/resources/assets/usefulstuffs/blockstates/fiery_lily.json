@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "usefulstuffs:fiery_lily" },
+            { "model": "usefulstuffs:fiery_lily", "y": 90 },
+            { "model": "usefulstuffs:fiery_lily", "y": 180 },
+            { "model": "usefulstuffs:fiery_lily", "y": 270 }
+        ]
+    }
+}

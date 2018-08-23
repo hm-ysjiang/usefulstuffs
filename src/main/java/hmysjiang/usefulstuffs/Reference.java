@@ -4,7 +4,7 @@ public class Reference {
 
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "2.2.2";
+	public static final String VERSION = "2.2.3";
 	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
 	public static final boolean TEST_MODE = false;
 	
@@ -23,7 +23,8 @@ public class Reference {
 		BELT_LILY("lily_belt"),
 		PACKING_GLUE("packing_glue"),
 		FLIPFLOPCORE("flipflop_core"),
-		BERRY("berry");
+		BERRY("berry"),
+		BELT_FIERY_LILY("fiery_lily_belt");
 		
 		private String unlocalizedName;
 		
@@ -51,7 +52,8 @@ public class Reference {
 		T_FLIPFLOP("t_flipflop"),
 		BERRYBUSH("berrybush"),
 		PORTAL_MUFFLER("portal_muffler"),
-		PLAYER_DETECTOR("player_detector");
+		PLAYER_DETECTOR("player_detector"),
+		FIERY_LILY("fiery_lily");
 		
 		private String unlocalizedName;
 		

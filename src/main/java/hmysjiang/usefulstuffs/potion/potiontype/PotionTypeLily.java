@@ -10,8 +10,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class PotionTypeLily extends PotionType {
 	
-	public static PotionType instance = new PotionTypeLily("lily", new PotionEffect[] {new PotionEffect(PotionLily.instance, 12000)});
-	public static PotionType instance_long = new PotionTypeLily("lily_long", "lily", new PotionEffect[] {new PotionEffect(PotionLily.instance, 24000)});
+	public static PotionType instance = new PotionTypeLily("lily", new PotionEffect[] {new PotionEffect(PotionLily.instance, 6000)});
+	public static PotionType instance_long = new PotionTypeLily("lily_long", "lily", new PotionEffect[] {new PotionEffect(PotionLily.instance, 9000)});
 	
 	public PotionTypeLily(String registryName, PotionEffect... effects) {
 		this(registryName, null, effects);
