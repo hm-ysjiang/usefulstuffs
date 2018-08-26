@@ -1,0 +1,138 @@
+﻿itemGroup.usefulstuffs=Useful Stuffs
+
+
+item.usefulstuffs.light_shooter.name=光球投射槍
+item.usefulstuffs.light_shooter_collector.name=光球投射槍
+item.usefulstuffs.umbrella.name=雨傘
+item.usefulstuffs.waterfilter.name=供水黑名單
+item.usefulstuffs.compact_storage_unit.name=壓縮存儲單元
+item.usefulstuffs.bento.name=便當盒
+item.usefulstuffs.building_wand.name=建築之杖
+item.usefulstuffs.building_wand_infinite.name=無限建築之杖
+item.usefulstuffs.building_wizard.name=建築精靈
+item.usefulstuffs.packing_glue.name=封裝膠水
+item.usefulstuffs.flipflop_core.name=正反器核心
+item.usefulstuffs.lily_belt.name=荷葉腰帶
+item.usefulstuffs.storage_body.name=存儲背包
+item.usefulstuffs.berry_white.name=白色莓果
+item.usefulstuffs.berry_orange.name=橙色莓果
+item.usefulstuffs.berry_magenta.name=洋紅色莓果
+item.usefulstuffs.berry_light_blue.name=淺藍色莓果
+item.usefulstuffs.berry_yellow.name=黃色莓果
+item.usefulstuffs.berry_lime.name=淺綠色莓果
+item.usefulstuffs.berry_pink.name=粉紅色莓果
+item.usefulstuffs.berry_gray.name=灰色莓果
+item.usefulstuffs.berry_silver.name=淺灰色莓果
+item.usefulstuffs.berry_cyan.name=青色莓果
+item.usefulstuffs.berry_purple.name=紫色莓果
+item.usefulstuffs.berry_blue.name=藍色莓果
+item.usefulstuffs.berry_brown.name=棕色莓果
+item.usefulstuffs.berry_green.name=綠色莓果
+item.usefulstuffs.berry_red.name=紅色莓果
+item.usefulstuffs.berry_black.name=黑色莓果
+item.usefulstuffs.fiery_lily_belt.name=紅蓮腰帶
+
+
+tile.usefulstuffs.light_bulb.name=光球
+tile.usefulstuffs.well.name=水瀑之井
+tile.usefulstuffs.rain_detector.name=下雨感測器
+tile.usefulstuffs.campfire.name=旅人的睿智之火
+tile.usefulstuffs.filing_cabinet.name=收納櫃
+tile.usefulstuffs.t_flipflop.name=T型正反器
+tile.usefulstuffs.glued_box.name=被膠水封起來的箱子
+tile.usefulstuffs.berrybush_white.name=白色莓果叢
+tile.usefulstuffs.berrybush_orange.name=橙色莓果叢
+tile.usefulstuffs.berrybush_magenta.name=洋紅色莓果叢
+tile.usefulstuffs.berrybush_light_blue.name=淺藍色莓果叢
+tile.usefulstuffs.berrybush_yellow.name=黃色莓果叢
+tile.usefulstuffs.berrybush_lime.name=淺綠色莓果叢
+tile.usefulstuffs.berrybush_pink.name=粉紅色莓果叢
+tile.usefulstuffs.berrybush_gray.name=灰色莓果叢
+tile.usefulstuffs.berrybush_silver.name=淺灰色莓果叢
+tile.usefulstuffs.berrybush_cyan.name=青色莓果叢
+tile.usefulstuffs.berrybush_purple.name=紫色莓果叢
+tile.usefulstuffs.berrybush_blue.name=藍色莓果叢
+tile.usefulstuffs.berrybush_brown.name=棕色莓果叢
+tile.usefulstuffs.berrybush_green.name=綠色莓果叢
+tile.usefulstuffs.berrybush_red.name=紅色莓果叢
+tile.usefulstuffs.berrybush_black.name=黑色莓果叢
+tile.usefulstuffs.portal_muffler.name=傳送們靜音器
+tile.usefulstuffs.player_detector.name=玩家偵測器
+tile.usefulstuffs.fiery_lily.name=烈焰荷葉
+
+
+usefulstuffs.ingredient.tooltip=合成材料
+usefulstuffs.details.tooltip=§o<按住SHIFT看詳細資料>
+usefulstuffs.wip.tooltip=§l尚未完成的功能
+usefulstuffs.light_shooter.tooltip_1=彈藥: %1$s/%2$s
+usefulstuffs.light_shooter.tooltip_2=右鍵發射
+usefulstuffs.light_shooter.tooltip_3=蹲下-右鍵打開GUI
+usefulstuffs.light_shooter.tooltip_c=因為跟漏斗結合了，當撿起光球時會自動裝填
+usefulstuffs.well.tooltip_1=會嘗試幫附近 %1$sx%2$s區域中的機器裝水
+usefulstuffs.well.tooltip_2=傳送速率: %smB 每tick*面
+usefulstuffs.waterfilter.tooltip_1=安裝在水瀑之井中以防止它送水至某方塊的特定面
+usefulstuffs.waterfilter.tooltip_2=蹲下-右鍵以選取某方塊的一面
+usefulstuffs.waterfilter.tooltip_3=對著水瀑之井右鍵安裝
+usefulstuffs.campfire.tooltip_1=在它下方5x5的空間放置原木以增加效果範圍
+usefulstuffs.campfire.tooltip_2=蹲下時點燃一塊原木獲得
+usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
+usefulstuffs.filing_cabinet.tooltip_2=存放1080個不可堆疊的物品
+usefulstuffs.bento.tooltip_1=容納6組食物
+usefulstuffs.bento.tooltip_2=有時候似乎不會返還木碗...
+usefulstuffs.building_wand.tooltip_1=從玩家看著的方塊那放置方塊到玩家的位置
+usefulstuffs.building_wand.tooltip_2=用副手拿著欲放置的方塊
+usefulstuffs.building_wand.tooltip_normal=距離上限: %s 格
+usefulstuffs.building_wand.tooltip_infinite=距離上限: %1$s 格, %2$s無限耐久
+usefulstuffs.glued_box.tooltip_1=裏頭甚麼都沒有
+usefulstuffs.glued_box.tooltip_2=如果你在正常遊戲過程中拿到了這個，向作者回報
+usefulstuffs.glued_box.tooltip_3=儲存的方塊:%s
+usefulstuffs.packing_glue.tooltip_1=無法封裝不可破壞的方塊！
+usefulstuffs.packing_glue.tooltip_2=蹲下-右鍵封裝方塊
+usefulstuffs.packing_glue.tooltip_3=消耗的耐久度取決於方塊的性質，試著附上節儉的附魔
+usefulstuffs.lily_belt.tooltip=還沒試過荷葉藥水嗎？它會讓你能浮在水上！
+usefulstuffs.storage_body.tooltip_1=多提供27格欄位
+usefulstuffs.storage_body.tooltip_2=按下 %s 以在它們和現在的工具列中切換
+usefulstuffs.portal_muffler.tooltip_1=讓附近的地獄傳送門閉上它們的嘴巴
+usefulstuffs.portal_muffler.tooltip_2=你給我安靜一點好不好？
+usefulstuffs.player_detector.tooltip=當附近的 %1$sx%2$sx%3$s 區域中有玩家的話會發出紅石訊號
+usefulstuffs.fiery_lily_belt.tooltip=火焰免疫！
+usefulstuffs.umbrella.tooltip=裝在頭上時，減低30%s的降落傷害
+
+
+entity.usefulstuffs.light_bulb.name=光球
+
+
+potion.effect.lily=荷葉藥水
+splash_potion.effect.lily=飛濺 荷葉藥水
+lingering_potion.effect.lily=滯留 荷葉藥水
+effect.usefulstuffs.lily=荷葉
+tipped_arrow.effect.lily=荷葉之箭
+
+potion.effect.fierylily=紅蓮藥水
+splash_potion.effect.fierylily=飛濺 紅蓮藥水
+lingering_potion.effect.fierylily=滯留 紅蓮藥水
+effect.usefulstuffs.fierylily=烈焰荷葉
+tipped_arrow.effect.fierylily=紅蓮之箭
+
+potion.effect.umbrella=空降藥水
+splash_potion.effect.umbrella=飛濺 空降藥水
+lingering_potion.effect.umbrella=滯留 空降藥水
+effect.usefulstuffs.umbrella=空降
+tipped_arrow.effect.umbrella=空降之箭
+
+
+usefulstuffs.gui.bento.name=便當盒
+usefulstuffs.gui.filing_cabinet.name=收納櫃
+usefulstuffs.gui.light_shooter.name=光球投射槍
+usefulstuffs.gui.campfire.name=旅人的睿智之火
+usefulstuffs.gui.campfire.modifier=Buff範圍:%s
+
+
+key.usefulstuffs.category=UsefulStuffs
+key.usefulstuffs.switchinv.desc=切換物品欄 (存儲背包)
+
+
+enchantment.usefulstuffs.xl.name=節儉
+
+
+
