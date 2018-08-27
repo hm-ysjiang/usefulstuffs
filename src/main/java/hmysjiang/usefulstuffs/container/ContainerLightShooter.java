@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.container;
 
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
 import hmysjiang.usefulstuffs.container.ContainerBento.SlotFood;
+import invtweaks.api.container.ChestContainer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemBlock;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+@ChestContainer
 public class ContainerLightShooter extends ContainerItem {
 
 	public ContainerLightShooter(IInventory inv, ItemStack stack, int size) {

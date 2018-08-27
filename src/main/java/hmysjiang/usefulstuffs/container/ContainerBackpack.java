@@ -1,12 +1,14 @@
 package hmysjiang.usefulstuffs.container;
 
 import hmysjiang.usefulstuffs.items.baubles.ItemBackpack;
+import invtweaks.api.container.ChestContainer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+@ChestContainer
 public class ContainerBackpack extends ContainerItem {
 	
 	public ContainerBackpack(IInventory inv, ItemStack stack, int size) {
