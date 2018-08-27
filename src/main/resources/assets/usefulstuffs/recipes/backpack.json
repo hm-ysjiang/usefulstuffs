@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " SD", 
+		"STS", 
+		"CSC"
+    ],
+    "key": {
+        "S": {
+            "item": "minecraft:string"
+        },
+        "T": {
+            "item": "minecraft:leather_chestplate",
+			"data": 0
+        },
+        "C": {
+            "item": "minecraft:chest"
+        },
+        "D": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:backpack"
+    }
+}

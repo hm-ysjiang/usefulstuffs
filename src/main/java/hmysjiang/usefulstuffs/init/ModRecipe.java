@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.recipe.RecipeLightShooterCollector;
+import hmysjiang.usefulstuffs.recipe.RecipeMiningBackpack;
 import hmysjiang.usefulstuffs.recipe.RecipePackingGlueReloader;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -33,6 +34,7 @@ public class ModRecipe {
 		
 		event.getRegistry().register(new RecipeLightShooterCollector(recipeLightShooterCollector));
 		event.getRegistry().register(new RecipePackingGlueReloader());
+		event.getRegistry().register(new RecipeMiningBackpack());
 	}
 	
 }

@@ -99,6 +99,10 @@ usefulstuffs.portal_muffler.tooltip_2=You are too noisy, man
 usefulstuffs.player_detector.tooltip=Emits redstone signal when there is a player in the %1$sx%2$sx%3$s area around it
 usefulstuffs.fiery_lily_belt.tooltip=Immune to Fire Damage!
 usefulstuffs.umbrella.tooltip=When equipped on head, falling damage is reduced by 30%s
+usefulstuffs.backpack.tooltip=When equipped on bauble slot, press %s to open backpack
+usefulstuffs.backpack.tooltip_normal=Just a normal backpack
+usefulstuffs.backpack.tooltip_mining_1=Automatically collect mining resources
+usefulstuffs.backpack.tooltip_mining_2=Shift-Right click to open config gui, Equip on bauble slot to make Auto-Pickup work
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb
