@@ -3,6 +3,8 @@ package hmysjiang.usefulstuffs.network.packet;
 import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
 import hmysjiang.usefulstuffs.init.ModItems;
+import hmysjiang.usefulstuffs.items.baubles.ItemBackpack;
+import hmysjiang.usefulstuffs.items.baubles.ItemStorageBag;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -41,53 +43,11 @@ public class KeyInput implements IMessage {
 			case 0:
 				EntityPlayer player = ctx.getServerHandler().player;
 				IBaublesItemHandler baubleInv = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
-				for (int i = 0 ; i<baubleInv.getSlots() ; i++) {
-					if (baubleInv.getStackInSlot(i) != null && baubleInv.getStackInSlot(i).isItemEqual(new ItemStack(ModItems.bag_storage))) {
-						ItemStack bauble = baubleInv.getStackInSlot(i);
-						if (player.isSneaking()) {}
-						else {
-							if (!bauble.hasTagCompound() || !bauble.getTagCompound().hasKey("Current") || !bauble.getTagCompound().hasKey("Cont")) {
-								//create a new handler, deal with the contents
-								ItemStackHandler handler = new ItemStackHandler(36);
-								IInventory inv = player.inventory;
-								for (int j = 0 ; j<9 ; j++) {
-									handler.setStackInSlot(j, inv.getStackInSlot(j));
-									inv.removeStackFromSlot(j);
-								}
-								//seal the information into nbt
-								NBTTagCompound compound = new NBTTagCompound();
-								compound.setInteger("Current", 1);
-								compound.setTag("Cont", handler.serializeNBT());
-								bauble.setTagCompound(compound);
-							}
-							else {
-								//retrieve the information from nbt
-								NBTTagCompound compound = bauble.getTagCompound();
-								ItemStackHandler handler = new ItemStackHandler(36);
-								handler.deserializeNBT(compound.getCompoundTag("Cont"));
-								int cur = compound.getInteger("Current");
-								IInventory inv = player.inventory;
-								//copy the items in player'shotbar into handler
-								for (int j = 0 ; j<9 ; j++) {
-									handler.setStackInSlot(cur * 9 + j, inv.getStackInSlot(j));
-								}
-								cur ++;	cur %= 4;
-								for (int j = 0 ; j<9 ; j++) {
-									ItemStack stack = handler.getStackInSlot(cur * 9 + j);
-									if (stack == null) {
-										inv.removeStackFromSlot(j);
-									}
-									else {
-										inv.setInventorySlotContents(j, stack);
-									}
-								}
-								//update the nbt data
-								compound.setTag("Cont", handler.serializeNBT());
-								compound.setInteger("Current", cur);
-								bauble.setTagCompound(compound);
-							}
-						}
-					}
+				if (baubleInv.getStackInSlot(5) != null) {
+					if (baubleInv.getStackInSlot(5).isItemEqual(new ItemStack(ModItems.bag_storage)))
+						ItemStorageBag.onKeyBindingPressed(player, baubleInv.getStackInSlot(5));
+					else if (baubleInv.getStackInSlot(5).getItem() instanceof ItemBackpack)
+						ItemBackpack.onKeyBindingPressed(player);
 				}
 				break;
 			}

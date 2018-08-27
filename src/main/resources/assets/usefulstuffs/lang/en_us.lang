@@ -31,6 +31,8 @@ item.usefulstuffs.berry_green.name=Green Berry
 item.usefulstuffs.berry_red.name=Red Berry
 item.usefulstuffs.berry_black.name=Black Berry
 item.usefulstuffs.fiery_lily_belt.name=Belt of Fiery Lily
+item.usefulstuffs.backpack.name=Backpack
+item.usefulstuffs.mining_backpack.name=Mining Backpack
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -121,15 +123,13 @@ effect.usefulstuffs.umbrella=Parachute
 tipped_arrow.effect.umbrella=Arrow of Parachute
 
 
-usefulstuffs.gui.bento.name=Bento Box
 usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
-usefulstuffs.gui.light_shooter.name=Light Shooter
 usefulstuffs.gui.campfire.name=Campfire of Traveller's Wisdom
 usefulstuffs.gui.campfire.modifier=BuffRadius:%s
 
 
 key.usefulstuffs.category=UsefulStuffs
-key.usefulstuffs.switchinv.desc=Switch Inventory (Storage Bag)
+key.usefulstuffs.switchinv.desc=Useful Key
 
 
 enchantment.usefulstuffs.xl.name=Frugal

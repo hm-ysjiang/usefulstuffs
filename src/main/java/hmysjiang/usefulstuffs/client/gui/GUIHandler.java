@@ -1,10 +1,13 @@
 package hmysjiang.usefulstuffs.client.gui;
 
+import baubles.api.cap.BaublesCapabilities;
 import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
 import hmysjiang.usefulstuffs.container.ContainerBento;
 import hmysjiang.usefulstuffs.container.ContainerCampfire;
 import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
+import hmysjiang.usefulstuffs.container.ContainerBackpack;
 import hmysjiang.usefulstuffs.container.ContainerLightShooter;
+import hmysjiang.usefulstuffs.container.ContainerMiningBackpackConfig;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -30,6 +33,9 @@ public class GuiHandler implements IGuiHandler {
 	public static final int GUI_BENTO = 10;
 	public static final int GUI_LIGHT_SHOOTER = 11;
 	public static final int GUI_CAMPFIRE = 12;
+	public static final int GUI_BACKPACK = 13;
+	public static final int GUI_BACKPACK_BAUBLE = 14;
+	public static final int GUI_BACKPACK_MINING_CONFIG = 15;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -61,6 +67,12 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerLightShooter(player.inventory, player.getHeldItemMainhand(), 4);
 		case GUI_CAMPFIRE:
 			return new ContainerCampfire(player, new BlockPos(x, y, z));
+		case GUI_BACKPACK:
+			return new ContainerBackpack(player.inventory, player.getHeldItemMainhand(), 54);
+		case GUI_BACKPACK_BAUBLE:
+			return new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54);
+		case GUI_BACKPACK_MINING_CONFIG:
+			return new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand());
 		default:
 			return null;
 		}
@@ -95,6 +107,12 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiLightShooter(new ContainerLightShooter(player.inventory, player.getHeldItemMainhand(), 4));
 		case GUI_CAMPFIRE:
 			return new GuiCampfire(new ContainerCampfire(player, new BlockPos(x, y, z)));
+		case GUI_BACKPACK:
+			return new GuiBackpack(new ContainerBackpack(player.inventory, player.getHeldItemMainhand(), 54));
+		case GUI_BACKPACK_BAUBLE:
+			return new GuiBackpack(new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54));
+		case GUI_BACKPACK_MINING_CONFIG:
+			return new GuiMiningBackpackConfig(new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand()));
 		default:
 			return null;
 		}

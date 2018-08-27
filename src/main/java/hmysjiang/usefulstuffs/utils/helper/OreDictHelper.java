@@ -45,4 +45,10 @@ public class OreDictHelper {
 		OreDictionary.registerOre("cropBlackberry", new ItemStack(ModItems.berry, 1, 15));
 	}
 	
+	public static String getOreRegistry(ItemStack stack) {
+		int[] ids = OreDictionary.getOreIDs(stack);
+		if (ids.length == 0) return null;
+		return OreDictionary.getOreName(ids[0]);
+	}
+	
 }

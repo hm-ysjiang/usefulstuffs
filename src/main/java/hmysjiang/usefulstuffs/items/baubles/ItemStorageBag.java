@@ -8,20 +8,68 @@ import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.utils.handler.KeyBindingHandler;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class ItemStorageBag extends Item implements IBauble {
+	
+	public static void onKeyBindingPressed(EntityPlayer player, ItemStack bauble) {
+		if (player.isSneaking()) {}
+		else {
+			if (!bauble.hasTagCompound() || !bauble.getTagCompound().hasKey("Current") || !bauble.getTagCompound().hasKey("Cont")) {
+				//create a new handler, deal with the contents
+				ItemStackHandler handler = new ItemStackHandler(36);
+				IInventory inv = player.inventory;
+				for (int j = 0 ; j<9 ; j++) {
+					handler.setStackInSlot(j, inv.getStackInSlot(j));
+					inv.removeStackFromSlot(j);
+				}
+				//seal the information into nbt
+				NBTTagCompound compound = new NBTTagCompound();
+				compound.setInteger("Current", 1);
+				compound.setTag("Cont", handler.serializeNBT());
+				bauble.setTagCompound(compound);
+			}
+			else {
+				//retrieve the information from nbt
+				NBTTagCompound compound = bauble.getTagCompound();
+				ItemStackHandler handler = new ItemStackHandler(36);
+				handler.deserializeNBT(compound.getCompoundTag("Cont"));
+				int cur = compound.getInteger("Current");
+				IInventory inv = player.inventory;
+				//copy the items in player'shotbar into handler
+				for (int j = 0 ; j<9 ; j++) {
+					handler.setStackInSlot(cur * 9 + j, inv.getStackInSlot(j));
+				}
+				cur ++;	cur %= 4;
+				for (int j = 0 ; j<9 ; j++) {
+					ItemStack stack = handler.getStackInSlot(cur * 9 + j);
+					if (stack == null) {
+						inv.removeStackFromSlot(j);
+					}
+					else {
+						inv.setInventorySlotContents(j, stack);
+					}
+				}
+				//update the nbt data
+				compound.setTag("Cont", handler.serializeNBT());
+				compound.setInteger("Current", cur);
+				bauble.setTagCompound(compound);
+			}
+		}
+	}
 
 	public ItemStorageBag() {
 		setUnlocalizedName(Reference.ModItems.BODY_STORAGE.getUnlocalizedName());

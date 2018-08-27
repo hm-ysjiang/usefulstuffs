@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.container;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -10,6 +11,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class ContainerItem extends ContainerBase {
@@ -50,6 +53,13 @@ public abstract class ContainerItem extends ContainerBase {
 		if (slotId == blocked)
 			return inventorySlots.get(slotId).getStack();
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public String getStackDisplayName() {
+		if (stack.hasDisplayName())
+			return stack.getDisplayName();
+		return I18n.format(stack.getUnlocalizedName() + ".name");
 	}
 
 }

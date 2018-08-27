@@ -78,6 +78,7 @@ public class ItemPackingGlue extends Item {
 					drop.setTagCompound(compound);
 					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
 					world.setBlockToAir(pos);
+					return EnumActionResult.SUCCESS;
 				}
 				else if (stack.getMaxDamage() >= cost) {
 					player.sendMessage(new TextComponentString("Insufficient durability! Required: " + cost + " Left: " + (stack.getMaxDamage() - stack.getItemDamage())));

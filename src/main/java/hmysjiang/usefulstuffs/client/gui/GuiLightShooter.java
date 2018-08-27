@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.client.gui;
 
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.container.ContainerItem;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -32,7 +33,7 @@ public class GuiLightShooter extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		this.fontRenderer.drawString(I18n.format("usefulstuffs.gui.light_shooter.name"), 8, 6, 4210752);
+		this.fontRenderer.drawString(((ContainerItem)this.inventorySlots).getStackDisplayName(), 8, 6, 4210752);
 	}
 
 }

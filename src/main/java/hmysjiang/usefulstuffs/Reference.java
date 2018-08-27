@@ -24,7 +24,9 @@ public class Reference {
 		PACKING_GLUE("packing_glue"),
 		FLIPFLOPCORE("flipflop_core"),
 		BERRY("berry"),
-		BELT_FIERY_LILY("fiery_lily_belt");
+		BELT_FIERY_LILY("fiery_lily_belt"),
+		BODY_BACKPACK("backpack"),
+		BODY_BACKPACK_MINING("mining_backpack");
 		
 		private String unlocalizedName;
 		

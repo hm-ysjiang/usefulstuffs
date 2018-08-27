@@ -1,6 +1,3 @@
-﻿itemGroup.usefulstuffs=Useful Stuffs
-
-
 item.usefulstuffs.light_shooter.name=光球投射槍
 item.usefulstuffs.light_shooter_collector.name=光球投射槍
 item.usefulstuffs.umbrella.name=雨傘
@@ -31,6 +28,8 @@ item.usefulstuffs.berry_green.name=綠色莓果
 item.usefulstuffs.berry_red.name=紅色莓果
 item.usefulstuffs.berry_black.name=黑色莓果
 item.usefulstuffs.fiery_lily_belt.name=紅蓮腰帶
+item.usefulstuffs.backpack.name=背包
+item.usefulstuffs.mining_backpack.name=採礦背包
 
 
 tile.usefulstuffs.light_bulb.name=光球
@@ -121,15 +120,9 @@ effect.usefulstuffs.umbrella=空降
 tipped_arrow.effect.umbrella=空降之箭
 
 
-usefulstuffs.gui.bento.name=便當盒
 usefulstuffs.gui.filing_cabinet.name=收納櫃
-usefulstuffs.gui.light_shooter.name=光球投射槍
 usefulstuffs.gui.campfire.name=旅人的睿智之火
 usefulstuffs.gui.campfire.modifier=Buff範圍:%s
-
-
-key.usefulstuffs.category=UsefulStuffs
-key.usefulstuffs.switchinv.desc=切換物品欄 (存儲背包)
 
 
 enchantment.usefulstuffs.xl.name=節儉
