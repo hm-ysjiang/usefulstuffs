@@ -58,7 +58,8 @@ public class ItemLightShooter extends Item {
 		//launch
 		else if (shooter.getItemDamage() == 0) {
 			worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.PLAYERS, 1.0F, 1.0F);
-			this.launch(shooter, worldIn, playerIn);
+			if (!worldIn.isRemote)
+				this.launch(shooter, worldIn, playerIn);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
