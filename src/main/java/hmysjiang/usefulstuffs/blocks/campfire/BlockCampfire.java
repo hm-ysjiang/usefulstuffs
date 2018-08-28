@@ -89,8 +89,8 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
-			if (playerIn.isSneaking()) {
+		if (playerIn.isSneaking()) {
+			if (!worldIn.isRemote) {
 				if (needFuel) {
 					playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_CAMPFIRE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 				}
@@ -98,8 +98,9 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 					playerIn.sendMessage(new TextComponentString("Radius: " + ((TileEntityCampfire) worldIn.getTileEntity(pos)).getBuffRadius()));
 				}
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	@Override

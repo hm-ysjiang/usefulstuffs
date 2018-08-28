@@ -64,7 +64,7 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 					EntityItem entity = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata()));
 					worldIn.spawnEntity(entity);
 					entity.onCollideWithPlayer(playerIn);
-					return true;	
+					return true;
 				}	
 			}
 		}

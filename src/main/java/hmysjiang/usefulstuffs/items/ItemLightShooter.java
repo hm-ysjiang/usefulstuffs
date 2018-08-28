@@ -19,6 +19,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
@@ -52,12 +53,12 @@ public class ItemLightShooter extends Item {
 		if (playerIn.isSneaking()) {
 			if (!worldIn.isRemote) 
 				playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_LIGHT_SHOOTER, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, shooter);
 		}
 		//launch
 		else if (shooter.getItemDamage() == 0) {
 			worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.PLAYERS, 1.0F, 1.0F);
-			if (!worldIn.isRemote)
-				this.launch(shooter, worldIn, playerIn);
+			this.launch(shooter, worldIn, playerIn);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}

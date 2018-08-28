@@ -61,7 +61,7 @@ public class ItemBackpack extends Item implements IBauble {
 		if (handIn == EnumHand.MAIN_HAND) {
 			if (!worldIn.isRemote) {
 				playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_BACKPACK, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
-				}
+			}
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);

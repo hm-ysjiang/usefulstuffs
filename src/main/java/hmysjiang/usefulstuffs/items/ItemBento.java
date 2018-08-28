@@ -72,13 +72,11 @@ public class ItemBento extends ItemFood {
 		}
 		else {
 			ItemStack stack = playerIn.getHeldItem(hand);
-			if (playerIn.canEat(false) && !isEmpty(stack))
-			{
+			if (playerIn.canEat(false) && !isEmpty(stack)) {
 				playerIn.setActiveHand(hand);
 				return new ActionResult(EnumActionResult.SUCCESS, stack);
 			}
-			else
-			{
+			else {
 				return new ActionResult(EnumActionResult.FAIL, stack);
 			}
 		}
@@ -94,8 +92,7 @@ public class ItemBento extends ItemFood {
 		if (!food.isEmpty()) {
 			consumeOne(stack, worldIn, entityLiving);
 		}
-		if (entityLiving instanceof EntityPlayer)
-		{
+		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer entityplayer = (EntityPlayer)entityLiving;
 			entityplayer.addStat(StatList.getObjectUseStats(this));
 			entityplayer.addStat(StatList.getObjectUseStats(food.getItem()));
