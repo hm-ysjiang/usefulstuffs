@@ -95,11 +95,7 @@ public class ItemMiningBackpack extends ItemBackpack {
 	}
 
 	private static boolean check(ItemStack stack) {
-		String oreRegistry = OreDictHelper.getOreRegistry(stack);
-		if (oreRegistry == null) return false;
-		if (oreRegistry.startsWith("ore") || oreRegistry.startsWith("gem") || oreRegistry.startsWith("crystal"))
-			return true;
-		if (oreRegistry.equals("dustRedstone") || oreRegistry.equals("itemFlint") || oreRegistry.equals("coal"))
+		if (OreDictHelper.isRegisterOre(stack))
 			return true;
 		String registryName = stack.getItem().getRegistryName().getResourcePath();
 		if (registryName.endsWith("ore") || registryName.endsWith("crystal"))

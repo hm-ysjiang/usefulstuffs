@@ -44,11 +44,18 @@ public class OreDictHelper {
 		OreDictionary.registerOre("cropBlueberry", new ItemStack(ModItems.berry, 1, 11));
 		OreDictionary.registerOre("cropBlackberry", new ItemStack(ModItems.berry, 1, 15));
 	}
-	
-	public static String getOreRegistry(ItemStack stack) {
+
+	public static boolean isRegisterOre(ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
-		if (ids.length == 0) return null;
-		return OreDictionary.getOreName(ids[0]);
+		for (int id: ids) {
+			String oreName = OreDictionary.getOreName(id);
+			if (oreName == null) continue;
+			if (oreName.startsWith("ore") || oreName.startsWith("gem") || oreName.startsWith("crystal"))
+				return true;
+			if (oreName.equals("dustRedstone") || oreName.equals("itemFlint") || oreName.equals("coal"))
+				return true;
+		}
+		return false;
 	}
 	
 }
