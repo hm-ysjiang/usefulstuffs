@@ -98,7 +98,7 @@ public class ItemMiningBackpack extends ItemBackpack {
 		if (OreDictHelper.isRegisterOre(stack))
 			return true;
 		String registryName = stack.getItem().getRegistryName().getResourcePath();
-		if (registryName.endsWith("ore") || registryName.endsWith("crystal"))
+		if (registryName.startsWith("ore") || registryName.startsWith("crystal") || registryName.endsWith("ore") || registryName.endsWith("crystal"))
 			return true;
 		return false;
 	}
