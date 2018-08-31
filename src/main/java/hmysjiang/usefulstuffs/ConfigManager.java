@@ -34,13 +34,16 @@ public class ConfigManager {
 	public static int shooterCD;
 	public static int glueDurability;
 	public static int fierylilySpawnRate;
+	public static boolean chickenDropsFeather;
 	
 	private static Configuration config;
 	private static List<String> orderBlock;
 	private static List<String> orderItem;
+	private static List<String> orderGeneral;
 	public static final String FILE_NAME = "usefulstuffs.cfg";
 	public static final String CATEGORY_BLOCK = "Blocks";
 	public static final String CATEGORY_ITEM = "Items";
+	public static final String CATEGORY_GENERAL = "General";
 	
 	public static Configuration getConfig() {
 		return config;
@@ -55,6 +58,7 @@ public class ConfigManager {
 	private static void loadConfig() {
 		orderBlock = new ArrayList<String>();
 		orderItem = new ArrayList<String>();
+		orderGeneral = new ArrayList<String>();
 		config.load();
 		
 		
@@ -178,9 +182,17 @@ public class ConfigManager {
 		propertyGlueDurability.set(glueDurability);
 		orderItem.add(propertyGlueDurability.getName());
 		
+		//General
+		Property propertyChickenDropsFeather = config.get(CATEGORY_GENERAL, "chicken_drops_feather", true);
+		propertyChickenDropsFeather.setComment("Does chicken drops feather while falling? DEFAULT=true");
+		chickenDropsFeather = propertyChickenDropsFeather.getBoolean();
+		propertyChickenDropsFeather.set(chickenDropsFeather);
+		orderGeneral.add(propertyChickenDropsFeather.getName());
+		
 		
 		config.setCategoryPropertyOrder(CATEGORY_BLOCK, orderBlock);
 		config.setCategoryPropertyOrder(CATEGORY_ITEM, orderItem);
+		config.setCategoryPropertyOrder(CATEGORY_GENERAL, orderGeneral);
 		
 		
 		if (config.hasChanged())

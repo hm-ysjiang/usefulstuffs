@@ -43,7 +43,7 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 				
 				this.setDead();
 			}
-			else if (result.typeOfHit == Type.ENTITY && result.entityHit != null && result.entityHit instanceof EntityLivingBase) {
+			else if (result.typeOfHit == Type.ENTITY && result.entityHit != null && result.entityHit instanceof EntityLivingBase && !(result.entityHit == this.thrower)) {
 				EntityLivingBase living = (EntityLivingBase) result.entityHit;
 				living.addPotionEffect(new PotionEffect(Potion.getPotionById(24), 200));
 				this.setDead();
