@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.init.ModItems;
@@ -110,9 +111,11 @@ public class ItemMilkBag extends Item {
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
 		if (!worldIn.isRemote) {
 			if (stack.hasTagCompound() && !isCompletelyFermented(stack)) {
-				int fermentLevel = (int) (stack.getTagCompound().getInteger("FermentLevel") * 0.6F);
-				if (rnd.nextInt(100) < fermentLevel) {
-					entityLiving.addPotionEffect(new PotionEffect(negativeEffects.get(rnd.nextInt(5)), 600));
+				if (ConfigManager.fermentedMilkCauseNegativeEffect) {
+					int fermentLevel = (int) (stack.getTagCompound().getInteger("FermentLevel") * 0.6F);
+					if (rnd.nextInt(100) < fermentLevel) {
+						entityLiving.addPotionEffect(new PotionEffect(negativeEffects.get(rnd.nextInt(5)), 600));
+					}
 				}
 			}
 			else {

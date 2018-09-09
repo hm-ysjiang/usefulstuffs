@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,7 +26,7 @@ public class ItemCheese extends ItemFood {
 	
 	@Override
 	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
-		if (!worldIn.isRemote) {
+		if (!worldIn.isRemote && ConfigManager.cheeseDoesBuff) {
 			player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 1));
 			player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 2400, 1));
 		}

@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.blocks.gluedbox;
 import java.util.List;
 import java.util.Random;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModBlocks;
@@ -90,7 +91,12 @@ public class BlockGluedBox extends Block implements ITileEntityProvider {
 						Block block = Block.getBlockFromName(compound.getString("Name"));
 						if (block != null) {
 							worldIn.removeTileEntity(pos);
-							worldIn.setBlockState(pos, block.getStateFromMeta(meta));
+							if (ConfigManager.doPlacementCheck) {
+								worldIn.setBlockState(pos, block.getStateForPlacement(worldIn, pos, side.getOpposite(), hitX, hitY, hitZ, meta, playerIn, hand));
+							}
+							else {
+								worldIn.setBlockState(pos, block.getStateFromMeta(meta));
+							}
 							if (compound.hasKey("Tile")) {
 								TileEntity tile2 = worldIn.getTileEntity(pos);
 								if (tile2 != null) {

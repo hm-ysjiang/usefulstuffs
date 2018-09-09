@@ -1,5 +1,6 @@
 package hmysjiang.usefulstuffs.blocks.fermenter;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemMilkBag;
 import net.minecraft.item.ItemStack;
@@ -14,12 +15,15 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityMilkFermenter extends TileEntity implements ITickable, ICapabilityProvider {
 	
+	private static int workTimeSeq = -1;
 	private ItemStackHandler handler;
 	private int workTime;
 	
 	public TileEntityMilkFermenter() {
 		handler = new Handler(3);
 		workTime = 0;
+		if (workTimeSeq == -1)
+			workTimeSeq = ConfigManager.milkFermentTime / 100;
 	}
 
 	@Override
@@ -37,7 +41,7 @@ public class TileEntityMilkFermenter extends TileEntity implements ITickable, IC
 			else {
 				if (stack.getItemDamage() == 8) return;
 				workTime++;
-				workTime %= 60 * (8 - stack.getItemDamage());
+				workTime %= workTimeSeq * (8 - stack.getItemDamage());
 				if (workTime == 0) {
 					if (stack.isItemEqualIgnoreDurability(new ItemStack(ModItems.milk_bag))) {
 						if (!stack.hasTagCompound()) ItemMilkBag.setDefaultTag(stack);

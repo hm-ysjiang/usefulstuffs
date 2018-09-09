@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.items.ItemBento;
@@ -76,7 +77,8 @@ public class ModItems {
 		belt_fiery_lily = new ItemFieryLilyBelt();
 		backpack = new ItemBackpack();
 		mining_backpack = new ItemMiningBackpack();
-		infinite_water = new ItemInfiniteWater();
+		if (ConfigManager.enableInfiniteWater)
+			infinite_water = new ItemInfiniteWater();
 		milk_bag = new ItemMilkBag();
 		cheese = new ItemCheese();
 	}
@@ -100,9 +102,10 @@ public class ModItems {
 				belt_fiery_lily,
 				backpack,
 				mining_backpack,
-				infinite_water,
 				milk_bag,
 				cheese);
+		if (ConfigManager.enableInfiniteWater)
+			event.getRegistry().register(infinite_water);
 		
 		event.getRegistry().registerAll(itemblocks.toArray(new Item[0]));
 	}
@@ -125,7 +128,8 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(belt_fiery_lily);
 		UsefulStuffs.proxy.registerItemRenders(backpack);
 		UsefulStuffs.proxy.registerItemRenders(mining_backpack);
-		UsefulStuffs.proxy.registerItemRenders(infinite_water);
+		if (ConfigManager.enableInfiniteWater)
+			UsefulStuffs.proxy.registerItemRenders(infinite_water);
 		UsefulStuffs.proxy.registerItemRenders(milk_bag);
 		UsefulStuffs.proxy.registerItemRenders(cheese);
 		

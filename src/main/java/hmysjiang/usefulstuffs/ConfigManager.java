@@ -27,6 +27,8 @@ public class ConfigManager {
 	public static int wellTransRate;
 	public static int wellTransRange;
 	public static boolean campfireNeedsFuel;
+	public static boolean doPlacementCheck;
+	public static int milkFermentTime;
 	public static boolean bentoSpeed;
 	public static int buildingwandDurability;
 	public static int buildingwandRange;
@@ -34,6 +36,9 @@ public class ConfigManager {
 	public static int shooterCD;
 	public static int glueDurability;
 	public static int fierylilySpawnRate;
+	public static boolean enableInfiniteWater;
+	public static boolean fermentedMilkCauseNegativeEffect;
+	public static boolean cheeseDoesBuff;
 	public static boolean chickenDropsFeather;
 	
 	private static Configuration config;
@@ -91,7 +96,7 @@ public class ConfigManager {
 		orderBlock.add(propertyBushSpawnMinH.getName());
 		
 		Property propertyBushSpawnRate = config.get(CATEGORY_BLOCK, "bush_spawn_rate", 50);
-		propertyBushSpawnRate.setComment("There is a chance of 1/n that a group of bushes will spawn in a chunk with proper biome, set to 0 to disable bush gen. DEFAULT=50");
+		propertyBushSpawnRate.setComment("There is a chance of 1/n that a group of bushes will spawn in a chunk with a proper biome, set to 0 to disable bush gen. DEFAULT=50");
 		propertyBushSpawnRate.setMinValue(0);
 		bushSpawnRate = propertyBushSpawnRate.getInt();
 		propertyBushSpawnRate.set(bushSpawnRate);
@@ -140,6 +145,20 @@ public class ConfigManager {
 		propertyFieryLilySpawnRate.set(fierylilySpawnRate);
 		orderBlock.add(propertyFieryLilySpawnRate.getName());
 		
+		Property propertyDoPlacementCheck = config.get(CATEGORY_BLOCK, "glued_box_placement_check", true);
+		propertyDoPlacementCheck.setComment("Should the glued box check for the placement logic when being opened? DEFAULT=true NOTE:This may behavier strangely on non-full blocks");
+		doPlacementCheck = propertyDoPlacementCheck.getBoolean();
+		propertyDoPlacementCheck.set(doPlacementCheck);
+		orderBlock.add(propertyDoPlacementCheck.getName());
+		
+		Property propertyMilkFermentTime = config.get(CATEGORY_BLOCK, "milk_ferment_time", 6000);
+		propertyMilkFermentTime.setComment("How many ticks does it take to ferment a bucket of milk into cheese? DEFAULT=6000");
+		propertyMilkFermentTime.setMinValue(0);
+		milkFermentTime = propertyMilkFermentTime.getInt();
+		milkFermentTime -=milkFermentTime%100;
+		propertyMilkFermentTime.set(milkFermentTime);
+		orderBlock.add(propertyMilkFermentTime.getName());
+		
 		//items
 		Property propertyBentoSpeed = config.get(CATEGORY_ITEM, "bento_speed", true);
 		propertyBentoSpeed.setComment("Should the max using duration of bento simulates its content? DEFAULT=true");
@@ -181,6 +200,24 @@ public class ConfigManager {
 		glueDurability = propertyGlueDurability.getInt();
 		propertyGlueDurability.set(glueDurability);
 		orderItem.add(propertyGlueDurability.getName());
+		
+		Property propertyEnableInfiniteWater = config.get(CATEGORY_ITEM, "enable_infinite_water", true);
+		propertyEnableInfiniteWater.setComment("Should the item usefulstuffs:infinite_water be registered into the game? DEFAUT=true");
+		enableInfiniteWater = propertyEnableInfiniteWater.getBoolean();
+		propertyEnableInfiniteWater.set(enableInfiniteWater);
+		orderItem.add(propertyEnableInfiniteWater.getName());
+		
+		Property propertyFermentedMilkNegativeEffect = config.get(CATEGORY_ITEM, "fermented_milk_negative_effect", true);
+		propertyFermentedMilkNegativeEffect.setComment("Does drinking a bucket of partially fermented milk causes negative effect? DEFAUT=true");
+		fermentedMilkCauseNegativeEffect = propertyFermentedMilkNegativeEffect.getBoolean();
+		propertyFermentedMilkNegativeEffect.set(fermentedMilkCauseNegativeEffect);
+		orderItem.add(propertyFermentedMilkNegativeEffect.getName());
+		
+		Property propertyCheeseDoesBuff = config.get(CATEGORY_ITEM, "cheese_does_buff", true);
+		propertyCheeseDoesBuff.setComment("Does cheese buffs the player? DEFAUT=true");
+		cheeseDoesBuff = propertyCheeseDoesBuff.getBoolean();
+		propertyCheeseDoesBuff.set(cheeseDoesBuff);
+		orderItem.add(propertyCheeseDoesBuff.getName());
 		
 		//General
 		Property propertyChickenDropsFeather = config.get(CATEGORY_GENERAL, "chicken_drops_feather", true);
