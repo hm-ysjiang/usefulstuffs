@@ -41,10 +41,6 @@ public class TileEntityCampfire extends TileEntity implements ITickable, ICapabi
 
 	@Override
 	public void update() {
-		if (WorldHelper.hasNoBlockBelow(world, pos)) {
-			world.setBlockToAir(pos);
-			return;
-		}
 		if (isBurning() && BlockCampfire.needFuel) {
 			timeLeft = timeLeft > 0 ? timeLeft - (3 + MathHelper.ceil(getModifierCounts()/2)) / 3 : 0;
 			if (timeLeft <= 0) {

@@ -1,0 +1,24 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "   ", 
+		"BDB", 
+		"SBS"
+    ],
+    "key": {
+        "B": {
+            "item": "minecraft:bucket"
+        },
+        "D": {
+            "item": "minecraft:diamond"
+        },
+        "S": {
+            "type": "forge:ore_dict",
+            "ore": "slimeball"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:infinite_water",
+        "data": 2
+    }
+}

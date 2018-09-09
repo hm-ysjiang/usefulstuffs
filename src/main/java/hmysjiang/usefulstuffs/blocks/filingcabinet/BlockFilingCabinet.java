@@ -33,7 +33,7 @@ import net.minecraftforge.items.IItemHandler;
 public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityProvider {
 
 	public BlockFilingCabinet() {
-		super(new BlockMaterials.FilingCabinet());
+		super(BlockMaterials.FILINGCABINET);
 		setUnlocalizedName(Reference.ModBlocks.FILING_CABINET.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.FILING_CABINET.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

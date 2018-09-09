@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.proxy;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
+import hmysjiang.usefulstuffs.blocks.fermenter.TileEntityMilkFermenter;
 import hmysjiang.usefulstuffs.blocks.filingcabinet.TileEntityFilingCabinet;
 import hmysjiang.usefulstuffs.blocks.gluedbox.TileEntityGluedBox;
 import hmysjiang.usefulstuffs.blocks.playerdetector.TileEntityPlayerDetector;
@@ -66,6 +67,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityWell.class, new ResourceLocation(Reference.MOD_ID, "well"));
 		GameRegistry.registerTileEntity(TileEntityPortalMuffler.class, new ResourceLocation(Reference.MOD_ID, "portal_muffler"));
 		GameRegistry.registerTileEntity(TileEntityPlayerDetector.class, new ResourceLocation(Reference.MOD_ID, "player_detector"));
+		GameRegistry.registerTileEntity(TileEntityMilkFermenter.class, new ResourceLocation(Reference.MOD_ID, "milk_fermenter"));
 	}
 	
 }

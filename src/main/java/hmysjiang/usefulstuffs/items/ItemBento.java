@@ -79,7 +79,6 @@ public class ItemBento extends ItemFood {
 				return new ActionResult(EnumActionResult.FAIL, stack);
 			}
 		}
-		
 	}
 
 	@Override

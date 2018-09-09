@@ -36,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockGluedBox extends Block implements ITileEntityProvider {
 
 	public BlockGluedBox() {
-		super(new BlockMaterials.GluedBox());
+		super(BlockMaterials.GLUEDBOX);
 		setUnlocalizedName(Reference.ModBlocks.GLUED_BOX.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.GLUED_BOX.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

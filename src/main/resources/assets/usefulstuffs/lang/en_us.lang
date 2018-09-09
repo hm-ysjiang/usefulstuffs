@@ -33,6 +33,12 @@ item.usefulstuffs.berry_black.name=Black Berry
 item.usefulstuffs.fiery_lily_belt.name=Belt of Fiery Lily
 item.usefulstuffs.backpack.name=Backpack
 item.usefulstuffs.mining_backpack.name=Mining Backpack
+item.usefulstuffs.infinite_water.name=Water Source
+item.usefulstuffs.milk_bag.name=Milk Bag
+item.usefulstuffs.milk_bag_empty.name=Milk Bag (Empty)
+item.usefulstuffs.milk_bag_fermented.name=Milk Bag (Fermented)
+item.usefulstuffs.milk_bag_fermented_par.name=Milk Bag (Partially Fermented)
+item.usefulstuffs.cheese.name=Cheese
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -61,6 +67,7 @@ tile.usefulstuffs.berrybush_black.name=Black Berry Bush
 tile.usefulstuffs.portal_muffler.name=Portal Muffler
 tile.usefulstuffs.player_detector.name=Player Detector
 tile.usefulstuffs.fiery_lily.name=Fiery Lily
+tile.usefulstuffs.milk_fermenter.name=Milk Fermenter
 
 
 usefulstuffs.ingredient.tooltip=Crafting ingredient
@@ -103,6 +110,16 @@ usefulstuffs.backpack.tooltip=When equipped on bauble slot, press %s to open bac
 usefulstuffs.backpack.tooltip_normal=Just a normal backpack
 usefulstuffs.backpack.tooltip_mining_1=Automatically collect mining resources
 usefulstuffs.backpack.tooltip_mining_2=Shift-Right click to open config gui, Equip on bauble slot to make Auto-Pickup work
+usefulstuffs.milk_fermenter.tooltip=Ferments the milk in a milk bag into cheese
+usefulstuffs.milk_bag.tooltip_1=%s/8 buckets of milk
+usefulstuffs.milk_bag.tooltip_1_1=%s/8 bucket of milk
+usefulstuffs.milk_bag.tooltip_2=%s fermented
+usefulstuffs.milk_bag.tooltip_3=Put in a Milk Fermenter to make cheese
+usefulstuffs.milk_bag.tooltip_4=Shift+Right click to load, Right click to use
+usefulstuffs.infinite_water.tooltip_1=Fill this with 2 buckets of water to make this a infinite source
+usefulstuffs.infinite_water.tooltip_2=Shift+Right click to place, Right click to fill
+usefulstuffs.infinite_water.tooltip_2_1=Right click to fill
+usefulstuffs.cheese.tooltip=Good to Health!
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb
@@ -130,6 +147,7 @@ tipped_arrow.effect.umbrella=Arrow of Parachute
 usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
 usefulstuffs.gui.campfire.name=Campfire of Traveller's Wisdom
 usefulstuffs.gui.campfire.modifier=BuffRadius:%s
+usefulstuffs.gui.fermenter.name=Milk Fermenter
 
 
 key.usefulstuffs.category=UsefulStuffs

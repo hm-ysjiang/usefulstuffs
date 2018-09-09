@@ -5,39 +5,45 @@ import net.minecraft.block.material.Material;
 
 public class BlockMaterials {
 	
+	public static final Material CAMPFIRE = new CAMPFIRE();
+	public static final Material FILINGCABINET = new FilingCabinet();
+	public static final Material LIGHTBULB = new LightBulb();
+	public static final Material GLUEDBOX = new GluedBox();
+	public static final Material MACHINE = new Machine();
+	
 	@Deprecated
 	public BlockMaterials() {}
 	
-	public static class Campfire extends Material{
-		public Campfire() {
+	private static class CAMPFIRE extends Material{
+		public CAMPFIRE() {
 			super(MapColor.WOOD);
 			setImmovableMobility();
 		}
 	}
 	
-	public static class FilingCabinet extends Material{
+	protected static class FilingCabinet extends Material{
 		public FilingCabinet() {
 			super(MapColor.WOOD);
 			setImmovableMobility();
 		}
 	}
 	
-	public static class LightBulb extends Material{
+	protected static class LightBulb extends Material{
 		public LightBulb() {
 			super(MapColor.GOLD);
 			setImmovableMobility();
 		}
 	}
 	
-	public static class GluedBox extends Material{
+	protected static class GluedBox extends Material{
 		public GluedBox() {
 			super(MapColor.YELLOW);
 			setImmovableMobility();
 		}
 	}
 	
-	public static class Circuit extends Material{
-		public Circuit() {
+	protected static class Machine extends Material{
+		public Machine() {
 			super(MapColor.STONE);
 			setImmovableMobility();
 		}

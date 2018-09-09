@@ -26,7 +26,7 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0, 0, 1, 0.0625 * 2, 1);
 
 	public BlockTFlipFlop() {
-		super(new BlockMaterials.Circuit());
+		super(BlockMaterials.MACHINE);
 		setUnlocalizedName(Reference.ModBlocks.T_FLIPFLOP.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.T_FLIPFLOP.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

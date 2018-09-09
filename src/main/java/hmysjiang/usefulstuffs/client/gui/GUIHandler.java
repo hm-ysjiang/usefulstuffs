@@ -7,6 +7,7 @@ import hmysjiang.usefulstuffs.container.ContainerCampfire;
 import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
 import hmysjiang.usefulstuffs.container.ContainerBackpack;
 import hmysjiang.usefulstuffs.container.ContainerLightShooter;
+import hmysjiang.usefulstuffs.container.ContainerMilkFermenter;
 import hmysjiang.usefulstuffs.container.ContainerMiningBackpackConfig;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +37,7 @@ public class GuiHandler implements IGuiHandler {
 	public static final int GUI_BACKPACK = 13;
 	public static final int GUI_BACKPACK_BAUBLE = 14;
 	public static final int GUI_BACKPACK_MINING_CONFIG = 15;
+	public static final int GUI_FERMENTER = 16;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -73,6 +75,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54);
 		case GUI_BACKPACK_MINING_CONFIG:
 			return new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand());
+		case GUI_FERMENTER:
+			return new ContainerMilkFermenter(player, new BlockPos(x, y, z));
 		default:
 			return null;
 		}
@@ -113,6 +117,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiBackpack(new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54));
 		case GUI_BACKPACK_MINING_CONFIG:
 			return new GuiMiningBackpackConfig(new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand()));
+		case GUI_FERMENTER:
+			return new GuiMIlkFermenter(new ContainerMilkFermenter(player, new BlockPos(x, y, z)));
 		default:
 			return null;
 		}

@@ -1,5 +1,7 @@
 package hmysjiang.usefulstuffs.utils.helper;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.ImmutableMap;
 
 import hmysjiang.usefulstuffs.ConfigManager;
@@ -11,60 +13,26 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.items.IItemHandler;
 
 public class WorldHelper {
 	
 	private static final int bush_min_h = ConfigManager.bushSpawnMinHeight;
 	
-	/**
-	 * Check if a block can see sky, transparent blocks doesn't count
-	 * Do not check the world is remote or not
-	 * @param worldIn
-	 * @param pos
-	 * @return
-	 */
-	public static boolean canBlockSeeSky(World worldIn, BlockPos pos) {
-		int max_h = worldIn.getHeight();
-		for (int y = pos.getY()+1 ; y<max_h ; y++) 
-			if (worldIn.getBlockState(new BlockPos(pos.getX(), y, pos.getZ())).getMaterial() != Material.AIR) 
-				return false;
-		return true;
-	}
-	
-	public static boolean hasNoBlockBelow(World world, BlockPos pos) {
-		return world.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.AIR;
-	}
-	
 	public static World getServerWorldFromId(int id) {
 		for (WorldServer world:DimensionManager.getWorlds()) {
 			if (world.provider.getDimension() == id) {
 				return world;
-			}
-		}
-		return null;
-	}
-	
-	public static Object[] getBlockPosFacingEntityLookingAt(EntityLivingBase entity, int range) {
-		Vec3d entityEyePos = entity.getPositionVector().add(new Vec3d(0, entity.getEyeHeight(), 0));
-		Vec3d startPos = new Vec3d(entityEyePos.x, entityEyePos.y, entityEyePos.z);
-		Vec3d gaze = entity.getLookVec().scale(0.05D);
-		BlockPos prev = new BlockPos(entityEyePos);
-		for (int i = 1 ; i<=range*20 ; i++) {
-			BlockPos pos = new BlockPos(startPos.add(gaze.scale(i)));
-			if (!entity.world.isAreaLoaded(pos, 1)) return null;
-			if (entity.world.getBlockState(pos).getMaterial() != Material.AIR) {
-				return new Object[] {pos, getRelationBetweenAdjacentBlocks(pos, prev)};
-			}
-			if (!pos.equals(prev)) {
-				prev = new BlockPos(startPos.add(gaze.scale(i)));
 			}
 		}
 		return null;
@@ -134,6 +102,44 @@ public class WorldHelper {
 				return y;
 		}
 		return -1;
+	}
+	
+	public static void spawnItemsInHandler(World world, int x, int y, int z, @Nonnull IItemHandler handler) {
+		if (world.isRemote) return;
+		for (int i = 0 ; i<handler.getSlots() ; i++) {
+			world.spawnEntity(new EntityItem(world, x, y, z, handler.getStackInSlot(i).copy()));
+		}
+	}
+	
+	public static RayTraceResult rayTrace(EntityLivingBase living, int maxRange) {
+		Vec3d prev = living.getPositionVector().add(new Vec3d(0, living.getEyeHeight(), 0));
+		Vec3d startPos = new Vec3d(prev.x, prev.y, prev.z);
+		Vec3d gaze = living.getLookVec().scale(0.05D);
+		for (int i = 1 ; i<=maxRange * 20 ; i++) {
+			Vec3d pos = startPos.add(gaze.scale(i));
+			if (!living.world.isAreaLoaded(new BlockPos(pos), 1)) return null;
+			if (living.world.getBlockState(new BlockPos(pos)).getMaterial() != Material.AIR) {
+				if (getRelationBetweenAdjacentBlocks(new BlockPos(pos), new BlockPos(prev)) == null)
+					return null;
+				return new RayTraceResult(pos, getRelationBetweenAdjacentBlocks(new BlockPos(pos), new BlockPos(prev)), new BlockPos(pos));
+			}
+			if (!pos.equals(prev)) {
+				prev = startPos.add(gaze.scale(i));
+			}
+		}
+		return null;
+	}
+	
+	public static int getDistanceProjctedOnAxis(BlockPos pos1, BlockPos pos2, EnumFacing.Axis axis) {
+		switch (axis) {
+		case X:
+			return Math.abs(pos1.getX() - pos2.getX());
+		case Y:
+			return Math.abs(pos1.getY() - pos2.getY());
+		case Z:
+			return Math.abs(pos1.getZ() - pos2.getZ());
+		}
+		return 0;
 	}
 	
 }

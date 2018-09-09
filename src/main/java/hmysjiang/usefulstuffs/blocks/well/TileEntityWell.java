@@ -63,8 +63,8 @@ public class TileEntityWell extends TileEntity implements ITickable {
 		if (!world.isRemote) {
 			List<int[]> blacklist = getFilteredBlocks();
 			boolean filtered;
-			for (int x = -BlockWell.range;x<=BlockWell.range;x++) {
-				for (int z = -BlockWell.range;z<=BlockWell.range;z++) {
+			for (int x = -BlockWell.range ; x<=BlockWell.range ; x++) {
+				for (int z = -BlockWell.range ; z<=BlockWell.range ; z++) {
 					BlockPos bpos = new BlockPos(pos.getX()+x, pos.getY(), pos.getZ()+z);
 					TileEntity tile = world.getTileEntity(bpos);
 					if (tile != null && world.getBlockState(bpos) != ModBlocks.well.getDefaultState()) { 
@@ -78,7 +78,6 @@ public class TileEntityWell extends TileEntity implements ITickable {
 							}
 							if (!filtered && tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
 								tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing).fill(new FluidStack(FluidRegistry.WATER, BlockWell.rate), true);
-								break;
 							}
 						}
 					}

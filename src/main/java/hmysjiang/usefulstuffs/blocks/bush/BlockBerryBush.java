@@ -183,12 +183,6 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	}
 	
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		if (!worldIn.isRemote && state.getValue(AGE) == 2) 
-			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata())));
-	}
-	
-	@Override
 	public boolean canSpawnInBlock() {
 		return true;
 	}

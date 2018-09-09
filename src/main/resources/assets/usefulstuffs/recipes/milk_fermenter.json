@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "HTH", 
+		"H H", 
+		"HHH"
+    ],
+    "key": {
+        "H": {
+            "item": "minecraft:hay_block"
+        },
+        "T": {
+            "item": "minecraft:trapdoor"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:milk_fermenter"
+    }
+}

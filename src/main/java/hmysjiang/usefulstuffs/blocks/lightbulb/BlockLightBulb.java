@@ -18,7 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -42,7 +41,7 @@ public class BlockLightBulb extends Block {
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(PIXEL*6, PIXEL*6, PIXEL*6, PIXEL*10, PIXEL*10, PIXEL*10);
 
 	public BlockLightBulb() {
-		super(new BlockMaterials.LightBulb());
+		super(BlockMaterials.LIGHTBULB);
 		setUnlocalizedName(Reference.ModBlocks.LIGHT_BULB.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.LIGHT_BULB.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

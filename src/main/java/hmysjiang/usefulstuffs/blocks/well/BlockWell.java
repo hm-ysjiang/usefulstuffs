@@ -4,6 +4,7 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
+import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -36,7 +37,7 @@ public class BlockWell extends Block implements ITileEntityProvider {
 	public static int range;
 	
 	public BlockWell() {
-		super(Material.ROCK);
+		super(BlockMaterials.MACHINE);
 		setUnlocalizedName(Reference.ModBlocks.WELL.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.WELL.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

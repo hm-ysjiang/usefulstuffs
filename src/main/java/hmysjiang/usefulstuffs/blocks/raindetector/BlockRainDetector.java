@@ -1,11 +1,7 @@
 package hmysjiang.usefulstuffs.blocks.raindetector;
 
-import java.util.List;
-
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
@@ -14,17 +10,14 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -53,8 +46,17 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 	}
 	
 	public void updateState(World world, BlockPos pos) {
-		if (!WorldHelper.canBlockSeeSky(world, pos)) {
+		if (world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.up())).size() > 0) {
+			if (!world.getBlockState(pos).getValue(RAINING))
+				world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.6F);
+			world.setBlockState(pos, getDefaultState().withProperty(RAINING, true));
+			return;
+		}
+		if (!world.canBlockSeeSky(pos)) {
+			if (world.getBlockState(pos).getValue(RAINING))
+				world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.6F);
 			world.setBlockState(pos, this.getDefaultState());
+			return;
 		}
 		else {
 			if (world.getBlockState(pos).getValue(RAINING)) {

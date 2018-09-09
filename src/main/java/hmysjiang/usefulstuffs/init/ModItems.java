@@ -5,17 +5,19 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
-import hmysjiang.usefulstuffs.blocks.fierylily.ItemFieryLilyPad;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import hmysjiang.usefulstuffs.items.ItemBerry;
 import hmysjiang.usefulstuffs.items.ItemBuildingWand;
 import hmysjiang.usefulstuffs.items.ItemBuildingWandInfinite;
+import hmysjiang.usefulstuffs.items.ItemCheese;
+import hmysjiang.usefulstuffs.items.ItemInfiniteWater;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
 import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
+import hmysjiang.usefulstuffs.items.ItemMilkBag;
 import hmysjiang.usefulstuffs.items.ItemPackingGlue;
 import hmysjiang.usefulstuffs.items.ItemWaterBlackList;
-import hmysjiang.usefulstuffs.items.baubles.ItemFieryLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemBackpack;
+import hmysjiang.usefulstuffs.items.baubles.ItemFieryLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemMiningBackpack;
 import hmysjiang.usefulstuffs.items.baubles.ItemStorageBag;
@@ -52,6 +54,9 @@ public class ModItems {
 	public static Item belt_fiery_lily;
 	public static Item backpack;
 	public static Item mining_backpack;
+	public static Item infinite_water;
+	public static Item milk_bag;
+	public static Item cheese;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -71,6 +76,9 @@ public class ModItems {
 		belt_fiery_lily = new ItemFieryLilyBelt();
 		backpack = new ItemBackpack();
 		mining_backpack = new ItemMiningBackpack();
+		infinite_water = new ItemInfiniteWater();
+		milk_bag = new ItemMilkBag();
+		cheese = new ItemCheese();
 	}
 	
 	@SubscribeEvent
@@ -91,7 +99,10 @@ public class ModItems {
 				berry,
 				belt_fiery_lily,
 				backpack,
-				mining_backpack);
+				mining_backpack,
+				infinite_water,
+				milk_bag,
+				cheese);
 		
 		event.getRegistry().registerAll(itemblocks.toArray(new Item[0]));
 	}
@@ -114,6 +125,9 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(belt_fiery_lily);
 		UsefulStuffs.proxy.registerItemRenders(backpack);
 		UsefulStuffs.proxy.registerItemRenders(mining_backpack);
+		UsefulStuffs.proxy.registerItemRenders(infinite_water);
+		UsefulStuffs.proxy.registerItemRenders(milk_bag);
+		UsefulStuffs.proxy.registerItemRenders(cheese);
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());

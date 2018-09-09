@@ -75,7 +75,7 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	private Random rnd = new Random();
 
 	public BlockCampfire() {
-		super(new BlockMaterials.Campfire());
+		super(BlockMaterials.CAMPFIRE);
 		setRegistryName(Reference.ModBlocks.CAMPFIRE.getRegistryName());
 		setUnlocalizedName(Reference.ModBlocks.CAMPFIRE.getUnlocalizedName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
@@ -89,18 +89,15 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (playerIn.isSneaking()) {
-			if (!worldIn.isRemote) {
-				if (needFuel) {
-					playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_CAMPFIRE, worldIn, pos.getX(), pos.getY(), pos.getZ());
-				}
-				else {
-					playerIn.sendMessage(new TextComponentString("Radius: " + ((TileEntityCampfire) worldIn.getTileEntity(pos)).getBuffRadius()));
-				}
+		if (!worldIn.isRemote) {
+			if (needFuel) {
+				playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_CAMPFIRE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			}
-			return true;
+			else {
+				playerIn.sendMessage(new TextComponentString("Radius: " + ((TileEntityCampfire) worldIn.getTileEntity(pos)).getBuffRadius()));
+			}
 		}
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -170,6 +167,14 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+	}
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (worldIn.isRemote)
+			return;
+		if (worldIn.isAirBlock(pos.down()))
+			worldIn.setBlockToAir(pos);
 	}
 
 }

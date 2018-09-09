@@ -4,6 +4,7 @@ import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.bush.BlockBerryBush;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
+import hmysjiang.usefulstuffs.blocks.fermenter.BlockMilkFermenter;
 import hmysjiang.usefulstuffs.blocks.fierylily.BlockFieryLilyPad;
 import hmysjiang.usefulstuffs.blocks.filingcabinet.BlockFilingCabinet;
 import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
@@ -39,6 +40,7 @@ public class ModBlocks {
 	public static Block portal_muffler;
 	public static Block player_detector;
 	public static Block fiery_lily;
+	public static Block milk_fermenter;
 	
 	public static void init() {
 		campfire = new BlockCampfire();
@@ -53,6 +55,7 @@ public class ModBlocks {
 		portal_muffler = new BlockPortalMuffler();
 		player_detector = new BlockPlayerDetector();
 		fiery_lily = new BlockFieryLilyPad();
+		milk_fermenter = new BlockMilkFermenter();
 	}
 	
 	@SubscribeEvent
@@ -68,7 +71,8 @@ public class ModBlocks {
 				well,
 				portal_muffler,
 				player_detector,
-				fiery_lily);
+				fiery_lily,
+				milk_fermenter);
 		register(registry, berrybushes);
 	}
 	
@@ -84,11 +88,9 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(portal_muffler));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(player_detector));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(fiery_lily));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(milk_fermenter));
 		for (Block block: berrybushes)
 			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(block));
-		
-//		for (EnumDyeColor color: EnumDyeColor.values())
-//			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(berrybush), color.getMetadata(), color.getDyeColorName());
 	}
 	
 	@SideOnly(Side.CLIENT)
