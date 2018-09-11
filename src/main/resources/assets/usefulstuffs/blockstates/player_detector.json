@@ -1,8 +1,12 @@
 {
     "variants": {
-        "facing=north": { "model": "usefulstuffs:player_detector"},
-        "facing=south": { "model": "usefulstuffs:player_detector", "y": 180},
-        "facing=west":  { "model": "usefulstuffs:player_detector", "y": 270},
-        "facing=east":  { "model": "usefulstuffs:player_detector", "y": 90}
+        "facing=north,upside=false": { "model": "usefulstuffs:player_detector"},
+        "facing=south,upside=false": { "model": "usefulstuffs:player_detector", "y": 180},
+        "facing=west,upside=false":  { "model": "usefulstuffs:player_detector", "y": 270},
+        "facing=east,upside=false":  { "model": "usefulstuffs:player_detector", "y": 90},
+        "facing=north,upside=true": { "model": "usefulstuffs:player_detector", "y": 180, "x": 180},
+        "facing=south,upside=true": { "model": "usefulstuffs:player_detector", "x": 180},
+        "facing=west,upside=true":  { "model": "usefulstuffs:player_detector", "y": 90, "x": 180},
+        "facing=east,upside=true":  { "model": "usefulstuffs:player_detector", "y": 270, "x": 180}
     }
 }

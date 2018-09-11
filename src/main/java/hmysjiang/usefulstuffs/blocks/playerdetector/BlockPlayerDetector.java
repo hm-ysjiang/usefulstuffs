@@ -35,15 +35,24 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 	
 	public static int range;
 	public static final PropertyBool POWERED = PropertyBool.create("powered");
-	public static AxisAlignedBB getBoundingBoxFromFacing(EnumFacing facing) {
+	public static final PropertyBool UP = PropertyBool.create("upside");
+	public static AxisAlignedBB getBoundingBoxFromFacing(EnumFacing facing, boolean up) {
 		switch (facing) {
 		case NORTH:
+			if (up)
+				return new AxisAlignedBB(0.0625, 0.0625 * 14, 0, 0.0625 * 15, 1, 0.0625 * 2);
 			return new AxisAlignedBB(0.0625, 0, 0, 0.0625 * 15, 0.0625 * 2, 0.0625 * 2);
 		case SOUTH:
+			if (up)
+				return new AxisAlignedBB(0.0625, 0.0625 * 14, 0.0625 * 14, 0.0625 * 15, 1, 1);
 			return new AxisAlignedBB(0.0625, 0, 0.0625 * 14, 0.0625 * 15, 0.0625 * 2, 1);
 		case EAST:
+			if (up)
+				return new AxisAlignedBB(0.0625 * 14, 0.0625 * 14, 0.0625, 1, 1, 0.0625 * 15);
 			return new AxisAlignedBB(0.0625 * 14, 0, 0.0625, 1, 0.0625 * 2, 0.0625 * 15);
 		case WEST:
+			if (up)
+				return new AxisAlignedBB(0, 0.0625 * 14, 0.0625, 0.0625 * 2, 1, 0.0625 * 15);
 			return new AxisAlignedBB(0, 0, 0.0625, 0.0625 * 2, 0.0625 * 2, 0.0625 * 15);
 		default: 
 			return new AxisAlignedBB(0.0625, 0, 0, 0.0625 * 15, 0.0625 * 2, 0.0625 * 2);
@@ -57,6 +66,7 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setSoundType(SoundType.METAL);
 		setHardness(0.8F);
+		setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH).withProperty(POWERED, false).withProperty(UP, false));
 		
 		range = ConfigManager.playerDetectorRange;
 	}
@@ -78,7 +88,7 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 	
 	@Override
 	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-		return side == EnumFacing.DOWN || side == state.getValue(FACING);
+		return side == EnumFacing.DOWN || side == state.getValue(FACING).getOpposite();
 	}
 	
 	@Override
@@ -96,29 +106,33 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
 			int meta, EntityLivingBase placer) {
-		if (facing == EnumFacing.DOWN || facing == EnumFacing.UP)
-			return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(POWERED, Boolean.valueOf(false));
-		return this.getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(POWERED, Boolean.valueOf(false));
+		if (facing == EnumFacing.DOWN)
+			return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(POWERED, Boolean.valueOf(false)).withProperty(UP, true);
+		if (facing == EnumFacing.UP)
+			return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(POWERED, Boolean.valueOf(false)).withProperty(UP, false);
+		if (hitY < 0.5)
+			return this.getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(POWERED, Boolean.valueOf(false)).withProperty(UP, false);
+		return this.getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(POWERED, Boolean.valueOf(false)).withProperty(UP, true);
 	}
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, POWERED);
+		return new BlockStateContainer(this, FACING, POWERED, UP);
 	}
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta % 4)).withProperty(POWERED, Boolean.valueOf(meta >= 4));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta % 4)).withProperty(POWERED, Boolean.valueOf(meta % 8 >= 4)).withProperty(UP, Boolean.valueOf(meta >= 8));
 	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getHorizontalIndex() + (((Boolean)state.getValue(POWERED)).booleanValue() ? 4 : 0);
+		return state.getValue(FACING).getHorizontalIndex() + (((Boolean)state.getValue(POWERED)).booleanValue() ? 4 : 0) + (((Boolean)state.getValue(UP)).booleanValue() ? 8 : 0);
 	}
 	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return getBoundingBoxFromFacing(state.getValue(FACING));
+		return getBoundingBoxFromFacing(state.getValue(FACING), state.getValue(UP));
 	}
 	
 	@Override

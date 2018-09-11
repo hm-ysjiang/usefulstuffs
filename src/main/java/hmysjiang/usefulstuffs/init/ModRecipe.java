@@ -1,8 +1,11 @@
 package hmysjiang.usefulstuffs.init;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.recipe.RecipeLightShooterCollector;
 import hmysjiang.usefulstuffs.recipe.RecipeMiningBackpack;
 import hmysjiang.usefulstuffs.recipe.RecipePackingGlueReloader;
+import hmysjiang.usefulstuffs.recipe.RecipeWell;
+import hmysjiang.usefulstuffs.recipe.RecipeWellNew;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,6 +38,10 @@ public class ModRecipe {
 		event.getRegistry().register(new RecipeLightShooterCollector(recipeLightShooterCollector));
 		event.getRegistry().register(new RecipePackingGlueReloader());
 		event.getRegistry().register(new RecipeMiningBackpack());
+		if (ConfigManager.enableInfiniteWater)
+			event.getRegistry().register(new RecipeWellNew());
+		else 
+			event.getRegistry().register(new RecipeWell());
 	}
 	
 }
