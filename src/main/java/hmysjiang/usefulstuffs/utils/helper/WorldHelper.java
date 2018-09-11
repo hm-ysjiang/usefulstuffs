@@ -57,6 +57,36 @@ public class WorldHelper {
 		else return null;
 	}
 	
+	public static boolean isRelationCorrect(BlockPos dominant, BlockPos recessive, EnumFacing relation, boolean collideCount) {
+		switch (relation.getAxis()) {
+		case X:
+			if (dominant.getX() == recessive.getX())
+				return collideCount;
+			if (dominant.getX() > recessive.getX() && relation == EnumFacing.WEST) 
+				return true;
+			if (dominant.getX() < recessive.getX() && relation == EnumFacing.EAST) 
+				return true;
+			return false;
+		case Y:
+			if (dominant.getY() == recessive.getY())
+				return collideCount;
+			if (dominant.getY() > recessive.getY() && relation == EnumFacing.DOWN) 
+				return true;
+			if (dominant.getY() < recessive.getY() && relation == EnumFacing.UP) 
+				return true;
+			return false;
+		case Z:
+			if (dominant.getZ() == recessive.getZ())
+				return collideCount;
+			if (dominant.getZ() > recessive.getZ() && relation == EnumFacing.NORTH) 
+				return true;
+			if (dominant.getZ() < recessive.getZ() && relation == EnumFacing.SOUTH) 
+				return true;
+			return false;
+		}
+		return false;
+	}
+	
 	/***
 	 * 
 	 * @param state

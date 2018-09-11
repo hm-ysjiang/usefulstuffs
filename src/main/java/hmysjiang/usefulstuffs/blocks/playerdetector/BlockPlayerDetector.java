@@ -1,11 +1,14 @@
 package hmysjiang.usefulstuffs.blocks.playerdetector;
 
 import java.util.List;
+import java.util.Random;
 
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -16,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -52,7 +56,7 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 		setRegistryName(Reference.ModBlocks.PLAYER_DETECTOR.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setSoundType(SoundType.METAL);
-		setHardness(1.5F);
+		setHardness(0.8F);
 		
 		range = ConfigManager.playerDetectorRange;
 	}
@@ -94,7 +98,7 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 			int meta, EntityLivingBase placer) {
 		if (facing == EnumFacing.DOWN || facing == EnumFacing.UP)
 			return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(POWERED, Boolean.valueOf(false));
-		return this.getDefaultState().withProperty(FACING, facing).withProperty(POWERED, Boolean.valueOf(false));
+		return this.getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(POWERED, Boolean.valueOf(false));
 	}
 	
 	@Override
@@ -127,12 +131,29 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 		return new TileEntityPlayerDetector();
 	}
 	
-	public void updateState(World world, BlockPos pos, boolean powered) {
+	public void updateState(World world, BlockPos pos, boolean allowOff) {
 		if (world.getBlockState(pos).getBlock() == this) {	//Prevent TileEntity from tick this after block is broken
+			AxisAlignedBB bb = new AxisAlignedBB(pos).grow(range);
+			EnumFacing facing = world.getBlockState(pos).getValue(FACING);
+			boolean powered = false;
+			if (ConfigManager.onlyDetectOneSide) 
+				for (EntityPlayer player: world.getEntitiesWithinAABB(EntityPlayer.class, bb)) {
+					if (WorldHelper.isRelationCorrect(pos, player.getPosition(), facing.getOpposite(), true)) {
+						powered = true;
+						break;
+					}
+				}
+			else 
+				powered = world.getEntitiesWithinAABB(EntityPlayer.class, bb).size() > 0;
 			boolean flag = powered ^ ((Boolean)world.getBlockState(pos).getValue(POWERED)).booleanValue();
-			world.setBlockState(pos, world.getBlockState(pos).withProperty(POWERED, Boolean.valueOf(powered)));
-			if (flag) 
-				notifyNeighbors(world, pos, world.getBlockState(pos).getValue(FACING));	
+			if (powered)
+				world.setBlockState(pos, world.getBlockState(pos).withProperty(POWERED, Boolean.valueOf(true)));
+			else if (allowOff)
+				world.setBlockState(pos, world.getBlockState(pos).withProperty(POWERED, Boolean.valueOf(false)));
+			if (flag) {
+				notifyNeighbors(world, pos, facing);
+				world.scheduleUpdate(pos, this, 20);
+			}
 		}
 	}
 	
@@ -161,6 +182,12 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add(I18n.format("usefulstuffs.player_detector.tooltip", (range * 2 + 1), (range * 2 + 1), (range * 2 + 1)));
+	}
+	
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+		if (!worldIn.isRemote) 
+			this.updateState(worldIn, pos, true);
 	}
 
 }

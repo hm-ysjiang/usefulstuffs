@@ -29,6 +29,7 @@ public class ConfigManager {
 	public static boolean campfireNeedsFuel;
 	public static boolean doPlacementCheck;
 	public static int milkFermentTime;
+	public static boolean onlyDetectOneSide;
 	public static boolean bentoSpeed;
 	public static int buildingwandDurability;
 	public static int buildingwandRange;
@@ -102,9 +103,9 @@ public class ConfigManager {
 		propertyBushSpawnRate.set(bushSpawnRate);
 		orderBlock.add(propertyBushSpawnRate.getName());
 		
-		Property propertyPlayerDetectorRange = config.get(CATEGORY_BLOCK, "player_detector_range", 2);
-		propertyPlayerDetectorRange.setComment("The radius of the player detector. DEFAULT=2, MIN=2");
-		propertyPlayerDetectorRange.setMinValue(2);
+		Property propertyPlayerDetectorRange = config.get(CATEGORY_BLOCK, "player_detector_range", 1);
+		propertyPlayerDetectorRange.setComment("The radius of the player detector. DEFAULT=1, MIN=1");
+		propertyPlayerDetectorRange.setMinValue(1);
 		playerDetectorRange = propertyPlayerDetectorRange.getInt();
 		propertyPlayerDetectorRange.set(playerDetectorRange);
 		orderBlock.add(propertyPlayerDetectorRange.getName());
@@ -158,6 +159,12 @@ public class ConfigManager {
 		milkFermentTime -=milkFermentTime%100;
 		propertyMilkFermentTime.set(milkFermentTime);
 		orderBlock.add(propertyMilkFermentTime.getName());
+		
+		Property propertyOnlyDetectOneSide = config.get(CATEGORY_BLOCK, "only_detect_1_side", true);
+		propertyOnlyDetectOneSide.setComment("Should the Player Detector only detect the side it is facing? DEFAULT=true");
+		onlyDetectOneSide = propertyOnlyDetectOneSide.getBoolean();
+		propertyOnlyDetectOneSide.set(onlyDetectOneSide);
+		orderBlock.add(propertyOnlyDetectOneSide.getName());
 		
 		//items
 		Property propertyBentoSpeed = config.get(CATEGORY_ITEM, "bento_speed", true);
