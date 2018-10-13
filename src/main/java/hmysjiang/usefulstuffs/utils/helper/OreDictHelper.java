@@ -11,12 +11,20 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDictHelper {
 	
 	public static List<ItemStack> slimes;
+	private static boolean inited = false;
 	
-	public static void pullOreRegistries() {
+	public static void init() {
+		if (!inited) {
+			pullOreRegistries();
+			register();
+		}
+	}
+	
+	private static void pullOreRegistries() {
 		slimes = OreDictionary.getOres("slimeball");
 	}
 	
-	public static void register() {
+	private static void register() {
 		//berries
 		LogHelper.info("Registering ItemBerry-s to OreDictionary");
 		for (EnumBerryColor color: EnumBerryColor.values()) {

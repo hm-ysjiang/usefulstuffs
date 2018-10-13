@@ -40,8 +40,7 @@ public class CommonProxy {
 	
 	public void init() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(UsefulStuffs.instance, new GuiHandler());
-		OreDictHelper.register();
-		OreDictHelper.pullOreRegistries();
+		OreDictHelper.init();
 		GameRegistry.registerWorldGenerator(new BerryBushGenerator(), 0);
 		GameRegistry.registerWorldGenerator(new FieryLilyGenerator(), 0);
 		

@@ -10,6 +10,7 @@ import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,7 +49,7 @@ public class ItemPackingGlue extends Item {
 			if (player.isSneaking() && state.getBlock() != ModBlocks.glued_box && state.getBlockHardness(world, pos) >= 0) {
 				ItemStack stack = player.getHeldItem(hand);
 				float raw_cost = WorldHelper.getBlockDataDensity(world, pos, state, world.getTileEntity(pos));
-				Integer enchLevel = EnchantmentHelper.getEnchantments(stack).get(EnchantmentXL.instance);
+				Integer enchLevel = EnchantmentHelper.getEnchantments(stack).get(EnchantmentXL.INSTANCE);
 				if (enchLevel != null) {
 					if (enchLevel == 1) {
 						raw_cost /= 1.5;
@@ -93,7 +94,7 @@ public class ItemPackingGlue extends Item {
 	
 	@Override
 	public int getItemEnchantability() {
-		return 10;
+		return 2;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -102,6 +103,11 @@ public class ItemPackingGlue extends Item {
 		tooltip.add(I18n.format("usefulstuffs.packing_glue.tooltip_1"));
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.packing_glue.tooltip_2"));
 		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.packing_glue.tooltip_3"));
+	}
+	
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+		return enchantment == EnchantmentXL.INSTANCE;
 	}
 	
 }

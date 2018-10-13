@@ -117,7 +117,7 @@ usefulstuffs.milk_bag.tooltip_2=%s fermented
 usefulstuffs.milk_bag.tooltip_3=Put in a Milk Fermenter to make cheese
 usefulstuffs.milk_bag.tooltip_4=Shift+Right click to load, Right click to use
 usefulstuffs.infinite_water.tooltip_1=Fill this with 2 buckets of water to make this a infinite source
-usefulstuffs.infinite_water.tooltip_2=Shift+Right click to place, Right click to fill
+usefulstuffs.infinite_water.tooltip_2=Right click to place, Shift+Right click to fill
 usefulstuffs.infinite_water.tooltip_2_1=Right click to fill
 usefulstuffs.cheese.tooltip=Good to Health!
 

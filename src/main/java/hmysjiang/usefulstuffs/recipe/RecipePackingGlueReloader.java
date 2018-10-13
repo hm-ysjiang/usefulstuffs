@@ -22,6 +22,10 @@ public class RecipePackingGlueReloader extends ShapelessOreRecipe {
 	@Override
 	public boolean matches(InventoryCrafting inv, World worldIn) {
 		List<ItemStack> slimes = OreDictHelper.slimes;
+		if (slimes == null) {
+			OreDictHelper.init();
+		}
+		slimes = OreDictHelper.slimes;
 		int glue = 0, slime = 0;
 		for (int i = 0 ; i<inv.getSizeInventory() ; i++) {
 			ItemStack stack = inv.getStackInSlot(i);

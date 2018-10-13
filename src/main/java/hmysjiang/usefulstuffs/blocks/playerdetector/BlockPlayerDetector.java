@@ -88,14 +88,14 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 	
 	@Override
 	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-		return side == EnumFacing.DOWN || side == state.getValue(FACING).getOpposite();
+		return side == state.getValue(FACING) || side == (state.getValue(UP) ? EnumFacing.UP : EnumFacing.DOWN);
 	}
 	
 	@Override
 	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		if (!((Boolean)blockState.getValue(POWERED)).booleanValue())
 			return 0;
-		return side == blockState.getValue(FACING).getOpposite() || side == EnumFacing.DOWN ? 15 : 0;
+		return side == blockState.getValue(FACING).getOpposite() || side == (blockState.getValue(UP) ? EnumFacing.UP : EnumFacing.DOWN) ? 15 : 0;
 	}
 	
 	@Override

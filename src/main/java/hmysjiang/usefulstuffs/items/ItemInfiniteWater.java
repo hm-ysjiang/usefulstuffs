@@ -28,6 +28,10 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,43 +47,59 @@ public class ItemInfiniteWater extends Item {
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-		ItemStack bucket = playerIn.getHeldItem(handIn);
-		int fillLevel = 2 - bucket.getItemDamage();
-		boolean place = playerIn.isSneaking();
-		RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, !place);
-		if (raytraceresult == null)	
-			return new ActionResult<ItemStack>(EnumActionResult.PASS, bucket);
-		if (raytraceresult.typeOfHit != Type.BLOCK) 
-			return new ActionResult<ItemStack>(EnumActionResult.PASS, bucket);
-		BlockPos pos = raytraceresult.getBlockPos();
-		if (worldIn.isBlockModifiable(playerIn, pos)) {
-			if (place) {
-				if (fillLevel ==  0)
+//		if (!worldIn.isRemote) {
+			ItemStack bucket = playerIn.getHeldItem(handIn);
+			int fillLevel = 2 - bucket.getItemDamage();
+			boolean place = playerIn.isSneaking();
+			RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, !place);
+			if (raytraceresult == null)	
+				return new ActionResult<ItemStack>(EnumActionResult.PASS, bucket);
+			if (raytraceresult.typeOfHit != Type.BLOCK) 
+				return new ActionResult<ItemStack>(EnumActionResult.PASS, bucket);
+			BlockPos pos = raytraceresult.getBlockPos();
+			if (worldIn.isBlockModifiable(playerIn, pos)) {
+				if (place) {
+					if (fillLevel ==  0)
+						return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
+					
+					//Try to access the fluid handler
+					RayTraceResult ray2 = this.rayTrace(worldIn, playerIn, true);
+					if (worldIn.getTileEntity(ray2.getBlockPos()) != null && worldIn.getTileEntity(ray2.getBlockPos()).hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, ray2.sideHit)) {
+						IFluidHandler handler = worldIn.getTileEntity(ray2.getBlockPos()).getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, ray2.sideHit);
+						if (handler.fill(new FluidStack(FluidRegistry.WATER, 1000), false) > 0) {
+							handler.fill(new FluidStack(FluidRegistry.WATER, 1000), true);
+							if (worldIn.isRemote)
+								worldIn.playSound(playerIn, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+							return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, bucket);
+						}
+					}
+					
+					boolean replace = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
+					pos = replace && raytraceresult.sideHit == EnumFacing.UP ? pos : pos.offset(raytraceresult.sideHit);
+					if (!playerIn.canPlayerEdit(pos, raytraceresult.sideHit, bucket)) 
+						return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
+					else if (this.placeWater(worldIn, pos, playerIn)) {
+						if (fillLevel == 1)
+							bucket.setItemDamage(2);
+						return new ActionResult(EnumActionResult.SUCCESS, bucket);
+					}
 					return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
-				boolean replace = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
-				pos = replace && raytraceresult.sideHit == EnumFacing.UP ? pos : pos.offset(raytraceresult.sideHit);
-				if (!playerIn.canPlayerEdit(pos, raytraceresult.sideHit, bucket)) 
-					return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
-				else if (this.placeWater(worldIn, pos, playerIn)) {
-					if (fillLevel == 1)
-						bucket.setItemDamage(2);
-					return new ActionResult(EnumActionResult.SUCCESS, bucket);
 				}
-				return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
-			}
-			else {
-				if (!playerIn.canPlayerEdit(pos.offset(raytraceresult.sideHit), raytraceresult.sideHit, bucket)) 
+				else {
+					if (!playerIn.canPlayerEdit(pos.offset(raytraceresult.sideHit), raytraceresult.sideHit, bucket)) 
+						return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
+					IBlockState state = worldIn.getBlockState(pos);
+					if (state.getMaterial() == Material.WATER && ((Integer)state.getValue(BlockLiquid.LEVEL)).intValue() == 0) {
+						worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
+						playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
+						return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillWater(bucket, playerIn));
+					}
 					return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
-				IBlockState state = worldIn.getBlockState(pos);
-				if (state.getMaterial() == Material.WATER && ((Integer)state.getValue(BlockLiquid.LEVEL)).intValue() == 0) {
-					worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
-					playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-					return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillWater(bucket, playerIn));
 				}
-				return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
 			}
-		}
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
+			return new ActionResult<ItemStack>(EnumActionResult.FAIL, bucket);
+//		}
+//		return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 	}
 
 	private ItemStack fillWater(ItemStack bucket, EntityPlayer playerIn) {

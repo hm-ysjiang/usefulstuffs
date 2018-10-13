@@ -1,5 +1,6 @@
 package hmysjiang.usefulstuffs.init;
 
+import hmysjiang.usefulstuffs.enchantment.EnchantmentMoonLight;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentXL;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent;
@@ -11,7 +12,8 @@ public class ModEnchantments {
 	
 	@SubscribeEvent
 	public static void OnEnchantmentRegister(RegistryEvent.Register<Enchantment> event) {
-		event.getRegistry().register(EnchantmentXL.instance);
+		event.getRegistry().register(EnchantmentXL.INSTANCE);
+		event.getRegistry().register(EnchantmentMoonLight.INSTANCE);
 	}
 	
 }

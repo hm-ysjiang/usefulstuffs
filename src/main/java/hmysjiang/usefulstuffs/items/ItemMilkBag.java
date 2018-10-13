@@ -110,7 +110,7 @@ public class ItemMilkBag extends Item {
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
 		if (!worldIn.isRemote) {
-			if (stack.hasTagCompound() && !isCompletelyFermented(stack)) {
+			if (!isCompletelyFermented(stack)) {
 				if (ConfigManager.fermentedMilkCauseNegativeEffect) {
 					int fermentLevel = (int) (stack.getTagCompound().getInteger("FermentLevel") * 0.6F);
 					if (rnd.nextInt(100) < fermentLevel) {
@@ -138,7 +138,7 @@ public class ItemMilkBag extends Item {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		if (stack.getItemDamage() == 0)
+		if (stack.getItemDamage() == 8)
 			return super.getUnlocalizedName() + "_empty";
 		if (stack.hasTagCompound() && stack.getTagCompound().getInteger("FermentLevel") > 0) {
 			if (isCompletelyFermented(stack))

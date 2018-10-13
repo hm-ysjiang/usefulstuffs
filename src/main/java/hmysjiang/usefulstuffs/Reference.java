@@ -1,13 +1,17 @@
 package hmysjiang.usefulstuffs;
 
+import java.util.UUID;
+
+import com.mojang.authlib.GameProfile;
+
 public class Reference {
 
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "2.3.3";
+	public static final String VERSION = "2.4.0";
 	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
 	public static final boolean TEST_MODE = false;
-//	public static final GameProfile MOD_PROFILE = new GameProfile(UUID.fromString("9b607828-0f15-4ceb-ba58-708fa1f22009"), "UsefulStuffsFakePlayer");
+	public static final GameProfile MOD_PROFILE = new GameProfile(UUID.fromString("9b607828-0f15-4ceb-ba58-708fa1f22009"), "UsefulStuffsFakePlayer");
 	
 	public static enum ModItems{
 		MAGICAL_WAND("magical_wand"),
@@ -30,7 +34,8 @@ public class Reference {
 		BODY_BACKPACK_MINING("mining_backpack"),
 		INIFNITE_WATER("infinite_water"),
 		MILK_BAG("milk_bag"),
-		CHEESE("cheese");
+		CHEESE("cheese"),
+		LIGHT_BOW("light_bow");
 		
 		private String unlocalizedName;
 		
@@ -79,7 +84,8 @@ public class Reference {
 	}
 	
 	public static enum ModEntities{
-		LIGHT_BULB(0);
+		LIGHT_BULB(0),
+		LIGHT_ARROW(1);
 		
 		private int ID;
 		

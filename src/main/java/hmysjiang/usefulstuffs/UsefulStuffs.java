@@ -19,7 +19,7 @@ public class UsefulStuffs {
 	@Instance
 	public static UsefulStuffs instance;
 	
-	@SidedProxy(clientSide = "hmysjiang.usefulstuffs.proxy.ClientProxy", serverSide = "hmysjiang.usefulstuffs.proxy.CommonProxy")
+	@SidedProxy(clientSide = "hmysjiang.usefulstuffs.proxy.ClientProxy", serverSide = "hmysjiang.usefulstuffs.proxy.CommmonProxy")
 	public static CommonProxy proxy;
 	
 	public static final CreativeTabs TAB = new CreativeTabs(Reference.MOD_ID) {

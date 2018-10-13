@@ -12,6 +12,7 @@ import hmysjiang.usefulstuffs.items.ItemBuildingWand;
 import hmysjiang.usefulstuffs.items.ItemBuildingWandInfinite;
 import hmysjiang.usefulstuffs.items.ItemCheese;
 import hmysjiang.usefulstuffs.items.ItemInfiniteWater;
+import hmysjiang.usefulstuffs.items.ItemLightBow;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
 import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
 import hmysjiang.usefulstuffs.items.ItemMilkBag;
@@ -58,6 +59,7 @@ public class ModItems {
 	public static Item infinite_water;
 	public static Item milk_bag;
 	public static Item cheese;
+	public static Item light_bow;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -81,6 +83,7 @@ public class ModItems {
 			infinite_water = new ItemInfiniteWater();
 		milk_bag = new ItemMilkBag();
 		cheese = new ItemCheese();
+		light_bow = new ItemLightBow();
 	}
 	
 	@SubscribeEvent
@@ -103,7 +106,8 @@ public class ModItems {
 				backpack,
 				mining_backpack,
 				milk_bag,
-				cheese);
+				cheese,
+				light_bow);
 		if (ConfigManager.enableInfiniteWater)
 			event.getRegistry().register(infinite_water);
 		
@@ -132,6 +136,7 @@ public class ModItems {
 			UsefulStuffs.proxy.registerItemRenders(infinite_water);
 		UsefulStuffs.proxy.registerItemRenders(milk_bag);
 		UsefulStuffs.proxy.registerItemRenders(cheese);
+		UsefulStuffs.proxy.registerItemRenders(light_bow);
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());
