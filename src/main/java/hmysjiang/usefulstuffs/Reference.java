@@ -35,7 +35,8 @@ public class Reference {
 		INIFNITE_WATER("infinite_water"),
 		MILK_BAG("milk_bag"),
 		CHEESE("cheese"),
-		LIGHT_BOW("light_bow");
+		LIGHT_BOW("light_bow"),
+		LIGHT_BATTERY("light_battery");
 		
 		private String unlocalizedName;
 		

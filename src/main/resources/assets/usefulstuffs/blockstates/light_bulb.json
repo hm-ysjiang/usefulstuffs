@@ -1,7 +1,6 @@
 {
     "variants": {
-        "normal": {
-            "model": "usefulstuffs:light_bulb"
-        }
+        "realbulb=true": { "model": "usefulstuffs:light_bulb" },
+        "realbulb=false": { "model": "usefulstuffs:light_bulb" }
     }
 }

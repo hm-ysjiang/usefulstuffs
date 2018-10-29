@@ -1,5 +1,7 @@
 package hmysjiang.usefulstuffs.blocks.lightbulb;
 
+import java.util.Random;
+
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModBlocks;
@@ -8,9 +10,12 @@ import hmysjiang.usefulstuffs.items.ItemLightShooter;
 import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -18,6 +23,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -25,12 +31,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @EventBusSubscriber
 public class BlockLightBulb extends Block {
 	
+	public static final PropertyBool REAL = PropertyBool.create("realbulb");
+	
 	@SubscribeEvent
 	public static void onPlayerPickUpItem(EntityItemPickupEvent event) {
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stack = event.getItem().getItem();
 		if (stack.isItemEqual(new ItemStack(ModBlocks.light_bulb))) {
-			ItemStack collector = InventoryHelper.findStackInPlayerInventory(player, new ItemStack(ModItems.light_shooter_collecter));
+			ItemStack collector = InventoryHelper.findStackInPlayerInventory(player, new ItemStack(ModItems.light_shooter_collecter), false);
 			if (!collector.isEmpty()) {
 				stack.setCount(ItemLightShooter.incrAmmoCount(collector, stack.getCount()));
 			}
@@ -46,7 +54,8 @@ public class BlockLightBulb extends Block {
 		setRegistryName(Reference.ModBlocks.LIGHT_BULB.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setLightLevel(1.0F);
-		setSoundType(SoundType.CLOTH);
+		setSoundType(SoundType.GLASS);
+		setDefaultState(this.blockState.getBaseState().withProperty(REAL, true));
 	}
 	
 	@Override
@@ -82,6 +91,26 @@ public class BlockLightBulb extends Block {
 	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+	}
+	
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, REAL);
+	}
+	
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(REAL) ? 0 : 1;
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(REAL, meta == 0);
+	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return state.getValue(REAL) ? super.getItemDropped(state, rand, fortune) : null;
 	}
 
 }

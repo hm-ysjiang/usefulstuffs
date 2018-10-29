@@ -70,9 +70,9 @@ public class GuiHandler implements IGuiHandler {
 		case GUI_CAMPFIRE:
 			return new ContainerCampfire(player, new BlockPos(x, y, z));
 		case GUI_BACKPACK:
-			return new ContainerBackpack(player.inventory, player.getHeldItemMainhand(), 54);
+			return new ContainerBackpack(player.inventory, player.getHeldItemMainhand(), 54, false);
 		case GUI_BACKPACK_BAUBLE:
-			return new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54);
+			return new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54, true);
 		case GUI_BACKPACK_MINING_CONFIG:
 			return new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand());
 		case GUI_FERMENTER:
@@ -112,9 +112,9 @@ public class GuiHandler implements IGuiHandler {
 		case GUI_CAMPFIRE:
 			return new GuiCampfire(new ContainerCampfire(player, new BlockPos(x, y, z)));
 		case GUI_BACKPACK:
-			return new GuiBackpack(new ContainerBackpack(player.inventory, player.getHeldItemMainhand(), 54));
+			return new GuiBackpack(new ContainerBackpack(player.inventory, player.getHeldItemMainhand(), 54, false));
 		case GUI_BACKPACK_BAUBLE:
-			return new GuiBackpack(new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54));
+			return new GuiBackpack(new ContainerBackpack(player.inventory, player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5), 54, true));
 		case GUI_BACKPACK_MINING_CONFIG:
 			return new GuiMiningBackpackConfig(new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand()));
 		case GUI_FERMENTER:

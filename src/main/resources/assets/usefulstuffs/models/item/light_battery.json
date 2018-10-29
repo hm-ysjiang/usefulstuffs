@@ -1,0 +1,12 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "usefulstuffs:items/light_battery"
+    },
+    "overrides": [
+        { "predicate": {"damaged": 0, "damage": 0.01}, "model": "usefulstuffs:item/light_battery_3"},
+        { "predicate": {"damaged": 0, "damage": 0.25}, "model": "usefulstuffs:item/light_battery_2"},
+        { "predicate": {"damaged": 0, "damage": 0.5}, "model": "usefulstuffs:item/light_battery_1"},
+        { "predicate": {"damaged": 0, "damage": 0.75}, "model": "usefulstuffs:item/light_battery_0"}
+    ]
+}

@@ -30,6 +30,7 @@ public class ConfigManager {
 	public static boolean doPlacementCheck;
 	public static int milkFermentTime;
 	public static boolean onlyDetectOneSide;
+	
 	public static boolean bentoSpeed;
 	public static int buildingwandDurability;
 	public static int buildingwandRange;
@@ -40,6 +41,9 @@ public class ConfigManager {
 	public static boolean enableInfiniteWater;
 	public static boolean fermentedMilkCauseNegativeEffect;
 	public static boolean cheeseDoesBuff;
+	public static boolean shooterAcceptBattery;
+	public static int shooterUseBattery;
+	
 	public static boolean chickenDropsFeather;
 	
 	private static Configuration config;
@@ -225,6 +229,18 @@ public class ConfigManager {
 		cheeseDoesBuff = propertyCheeseDoesBuff.getBoolean();
 		propertyCheeseDoesBuff.set(cheeseDoesBuff);
 		orderItem.add(propertyCheeseDoesBuff.getName());
+		
+		Property propertyShooterAccpetBattery = config.get(CATEGORY_ITEM, "shooter_accpet_battery", false);
+		propertyShooterAccpetBattery.setComment("Does the light shooter accepts charges from light battery? DEFAUT=false");
+		shooterAcceptBattery = propertyShooterAccpetBattery.getBoolean();
+		propertyShooterAccpetBattery.set(shooterAcceptBattery);
+		orderItem.add(propertyShooterAccpetBattery.getName());
+		
+		Property propertyShooterUseBattery = config.get(CATEGORY_ITEM, "shooter_use_battery", 250);
+		propertyShooterUseBattery.setComment("If the light shooter accepts charges from battery, how much does it cost to launch an ammo? DEFAUT=250");
+		shooterUseBattery = propertyShooterUseBattery.getInt();
+		propertyShooterUseBattery.set(shooterUseBattery);
+		orderItem.add(propertyShooterUseBattery.getName());
 		
 		//General
 		Property propertyChickenDropsFeather = config.get(CATEGORY_GENERAL, "chicken_drops_feather", true);

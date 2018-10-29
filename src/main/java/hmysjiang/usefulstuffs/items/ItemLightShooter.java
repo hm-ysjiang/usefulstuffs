@@ -9,6 +9,8 @@ import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.entity.EntityLightBulb;
 import hmysjiang.usefulstuffs.init.ModBlocks;
+import hmysjiang.usefulstuffs.init.ModItems;
+import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -65,15 +67,26 @@ public class ItemLightShooter extends Item {
 	}
 	
 	protected void launch(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		if (getAmmo(itemStackIn) > 0) {
-			EntityLightBulb entity = new EntityLightBulb(worldIn, playerIn);
+		int ammo = getAmmo(playerIn, itemStackIn);
+		if (ammo != 0) {
+			EntityLightBulb entity = new EntityLightBulb(worldIn, playerIn, ammo != -1);
 			entity.setThrowableHeading(playerIn.getLookVec().x, playerIn.getLookVec().y, playerIn.getLookVec().z, 2.0F, 0);
 			worldIn.spawnEntity(entity);
 			itemStackIn.setItemDamage(cooldown);
-			decrAmmoCount(itemStackIn, 1);
+			decrAmmoCount(playerIn, itemStackIn, 1);
 		}
 	}
 
+	public static int getAmmo(EntityPlayer player, ItemStack itemStackIn) {
+		if (ConfigManager.shooterAcceptBattery) {
+			ItemStack battery = InventoryHelper.findStackInPlayerInventoryContainBaubles(player, new ItemStack(ModItems.light_battery), true);
+			int charge = ItemLightBattery.getChargedEnergy(battery);
+			if (charge >= ConfigManager.shooterUseBattery) 
+				return -1;
+		}
+		return getAmmo(itemStackIn);
+	}
+	
 	public static int getAmmo(ItemStack itemStackIn) {
 		int ammo = 0;
 		ItemStackHandler handler = getItemHandler(itemStackIn, "Cont");
@@ -97,7 +110,15 @@ public class ItemLightShooter extends Item {
 		return handler;
 	}
 
-	public static void decrAmmoCount(ItemStack itemStackIn, int amount) {
+	public static void decrAmmoCount(EntityPlayer player, ItemStack itemStackIn, int amount) {
+		if (ConfigManager.shooterAcceptBattery) {
+			ItemStack battery = InventoryHelper.findStackInPlayerInventoryContainBaubles(player, new ItemStack(ModItems.light_battery), true);
+			int charge = ItemLightBattery.getChargedEnergy(battery);
+			if (charge >= ConfigManager.shooterUseBattery) {
+				battery.setItemDamage(battery.getItemDamage() + ConfigManager.shooterUseBattery);
+				return;
+			}
+		}
 		ItemStackHandler handler = getItemHandler(itemStackIn, "Cont");
 		for (int i = 0 ; i<handler.getSlots() ; i++)
 			if (!handler.extractItem(i, 1, false).isEmpty())
@@ -129,6 +150,10 @@ public class ItemLightShooter extends Item {
 		else {
 			tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.light_shooter.tooltip_1", 0, String.valueOf(this.MAX_AMMO)));
 		}
+		if (ConfigManager.shooterAcceptBattery)
+			tooltip.add(I18n.format("usefulstuffs.light_shooter.tooltip_battery_true", String.valueOf(ConfigManager.shooterUseBattery)));
+		else 
+			tooltip.add(I18n.format("usefulstuffs.light_shooter.tooltip_battery_false"));
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.light_shooter.tooltip_2"));
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.light_shooter.tooltip_3"));
 	}

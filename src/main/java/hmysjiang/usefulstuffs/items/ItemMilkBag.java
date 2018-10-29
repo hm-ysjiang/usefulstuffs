@@ -11,6 +11,7 @@ import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -91,6 +92,13 @@ public class ItemMilkBag extends Item {
 			return new ActionResult<ItemStack>(EnumActionResult.FAIL, stack);
 		playerIn.setActiveHand(handIn);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+	}
+	
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		if (!stack.hasTagCompound() || stack.getTagCompound().hasKey("FermentLevel")) {
+			setDefaultTag(stack);
+		}
 	}
 	
 	@Override

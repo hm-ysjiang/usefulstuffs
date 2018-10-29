@@ -1,5 +1,7 @@
 package hmysjiang.usefulstuffs.entity;
 
+import hmysjiang.usefulstuffs.network.PacketHandler;
+import hmysjiang.usefulstuffs.network.packet.SyncLightArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -23,16 +25,14 @@ public class EntityLightArrow extends EntityArrow {
 	
 	@Override
 	public void onUpdate() {
-		super.onUpdate();
-		if (this.inGround) {
+		if (this.inGround) 
 			this.setDead();
-		}
-		else if (this.world.isRemote) {
+		if (!this.world.isRemote)
+			PacketHandler.INSTANCE.sendToDimension(new SyncLightArrow(this), this.world.provider.getDimension());
+		super.onUpdate();
+		if (this.world.isRemote) {
 			this.spawnParticles();
 		}
-//		else {
-//			world.update
-//		}
 	}
 	
 	private void spawnParticles() {
@@ -44,7 +44,7 @@ public class EntityLightArrow extends EntityArrow {
 			this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, r, g, b);
 		}
 	}
-
+	
 	@Override
 	protected void onHit(RayTraceResult raytraceResultIn) {
 		super.onHit(raytraceResultIn);
@@ -54,12 +54,6 @@ public class EntityLightArrow extends EntityArrow {
 	@Override
 	protected ItemStack getArrowStack() {
 		return ItemStack.EMPTY;
-	}
-	
-	@Override
-	protected void arrowHit(EntityLivingBase living) {
-		super.arrowHit(living);
-		this.setDead();
 	}
 
 }

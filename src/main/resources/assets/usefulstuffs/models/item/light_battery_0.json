@@ -1,0 +1,6 @@
+{
+    "parent": "usefulstuffs:item/light_battery",
+    "textures": {
+        "layer0": "usefulstuffs:items/light_battery_0"
+    }
+}

@@ -39,6 +39,7 @@ item.usefulstuffs.milk_bag_empty.name=Milk Bag (Empty)
 item.usefulstuffs.milk_bag_fermented.name=Milk Bag (Fermented)
 item.usefulstuffs.milk_bag_fermented_par.name=Milk Bag (Partially Fermented)
 item.usefulstuffs.cheese.name=Cheese
+item.usefulstuffs.light_bow.name=Bow of Sunshine
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -77,6 +78,8 @@ usefulstuffs.light_shooter.tooltip_1=Ammo: %1$s/%2$s
 usefulstuffs.light_shooter.tooltip_2=Right click to launch
 usefulstuffs.light_shooter.tooltip_3=Shift-Right click to open GUI
 usefulstuffs.light_shooter.tooltip_c=Combined with a hopper, automatically load when Light Bulbs being picked up
+usefulstuffs.light_shooter.tooltip_battery_true=Draw %s light unit per shot
+usefulstuffs.light_shooter.tooltip_battery_false=Using charge from battery has been disabled in config
 usefulstuffs.well.tooltip_1=Automatically fill the %1$sx%2$s area around it
 usefulstuffs.well.tooltip_2=TransferRate: %smB per tick*side
 usefulstuffs.waterfilter.tooltip_1=Install to a Well of Water Fall to prevent it from sending water to certain sides of blocks
@@ -120,6 +123,12 @@ usefulstuffs.infinite_water.tooltip_1=Fill this with 2 buckets of water to make 
 usefulstuffs.infinite_water.tooltip_2=Right click to place, Shift+Right click to fill
 usefulstuffs.infinite_water.tooltip_2_1=Right click to fill
 usefulstuffs.cheese.tooltip=Good to Health!
+usefulstuffs.light_bow.tooltip_1=Fire arrows of light!
+usefulstuffs.light_bow.tooltip_2=Charges itself when exposed to sunlight
+usefulstuffs.light_bow.tooltip_3=Well, moonlight is a reflection of sunlight actually
+usefulstuffs.light_bow.tooltip_charge=%s/400 light unit
+usefulstuffs.light_battery.tooltip=Provides light unit to gadgets that use light
+usefulstuffs.light_battery.tooltip_charge=%s/32000 light unit
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb
@@ -155,6 +164,8 @@ key.usefulstuffs.switchinv.desc=Useful Key
 
 
 enchantment.usefulstuffs.xl.name=Frugal
+enchantment.usefulstuffs.moonlight.name=Blessing of Artemis
+enchantment.usefulstuffs.fast_draw.name=Fast Draw
 
 
 

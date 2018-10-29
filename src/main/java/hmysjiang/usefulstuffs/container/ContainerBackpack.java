@@ -11,8 +11,11 @@ import net.minecraftforge.items.SlotItemHandler;
 @ChestContainer
 public class ContainerBackpack extends ContainerItem {
 	
-	public ContainerBackpack(IInventory inv, ItemStack stack, int size) {
+	public ContainerBackpack(IInventory inv, ItemStack stack, int size, boolean onKey) {
 		super(inv, stack, size);
+		
+		if (onKey)
+			blocked = -1;
 		
 		int xH = 8, yH = 18;
 

@@ -10,7 +10,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ItemCraftingIngredient extends Item {
+public class ItemCraftingIngredient extends Item {
+	
+	@Deprecated
+	public ItemCraftingIngredient() {}
+	
+	public ItemCraftingIngredient(String registryName, String unlocalizedName) {
+		setUnlocalizedName(unlocalizedName);
+		setRegistryName(registryName);
+	}
 	
 	@SideOnly(Side.CLIENT)
 	@Override

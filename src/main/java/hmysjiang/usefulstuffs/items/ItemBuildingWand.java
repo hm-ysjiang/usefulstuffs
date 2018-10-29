@@ -62,7 +62,7 @@ public class ItemBuildingWand extends Item {
 				ItemStack stackTemplate = playerIn.getHeldItemOffhand();
 				if (!stackTemplate.isEmpty() && stackTemplate.getItem() instanceof ItemBlock) {
 					ItemStack wand = playerIn.getHeldItemMainhand();
-					ItemStack stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
+					ItemStack stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate, false);
 					Block block = ((ItemBlock)stackTemplate.getItem()).getBlock();
 					BlockPos pos = raytrace.getBlockPos();
 					BlockPos end = new BlockPos(playerIn);
@@ -87,7 +87,7 @@ public class ItemBuildingWand extends Item {
 									loop = false;
 								}
 								else {
-									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate);
+									stack = InventoryHelper.findStackInPlayerInventory(playerIn, stackTemplate, false);
 									if (stack.isEmpty()){
 										loop = false;
 									}

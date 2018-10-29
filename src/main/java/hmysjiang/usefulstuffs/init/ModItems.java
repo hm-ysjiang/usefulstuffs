@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.ConfigManager;
+import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.items.ItemBento;
@@ -12,6 +13,7 @@ import hmysjiang.usefulstuffs.items.ItemBuildingWand;
 import hmysjiang.usefulstuffs.items.ItemBuildingWandInfinite;
 import hmysjiang.usefulstuffs.items.ItemCheese;
 import hmysjiang.usefulstuffs.items.ItemInfiniteWater;
+import hmysjiang.usefulstuffs.items.ItemLightBattery;
 import hmysjiang.usefulstuffs.items.ItemLightBow;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
 import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
@@ -23,9 +25,7 @@ import hmysjiang.usefulstuffs.items.baubles.ItemFieryLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemMiningBackpack;
 import hmysjiang.usefulstuffs.items.baubles.ItemStorageBag;
-import hmysjiang.usefulstuffs.items.crafting.ItemBuildingWizard;
-import hmysjiang.usefulstuffs.items.crafting.ItemCompactStorageUnit;
-import hmysjiang.usefulstuffs.items.crafting.ItemFlipFlopCore;
+import hmysjiang.usefulstuffs.items.crafting.ItemCraftingIngredient;
 import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -60,6 +60,7 @@ public class ModItems {
 	public static Item milk_bag;
 	public static Item cheese;
 	public static Item light_bow;
+	public static Item light_battery;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -69,12 +70,12 @@ public class ModItems {
 		light_shooter = new ItemLightShooter();
 		light_shooter_collecter = new ItemLightShooterCollector();
 		packing_glue = new ItemPackingGlue();
-		building_wizard = new ItemBuildingWizard();
-		compact_storage_unit = new ItemCompactStorageUnit();
+		building_wizard = new ItemCraftingIngredient(Reference.ModItems.BUILDING_WIZARD.getRegistryName(), Reference.ModItems.BUILDING_WIZARD.getUnlocalizedName());
+		compact_storage_unit = new ItemCraftingIngredient(Reference.ModItems.CSU.getRegistryName(), Reference.ModItems.CSU.getUnlocalizedName());
 		umbrella = new ItemUmbrella();
 		belt_lily = new ItemLilyBelt();
 		bag_storage = new ItemStorageBag();
-		flipflop_core = new ItemFlipFlopCore();
+		flipflop_core = new ItemCraftingIngredient(Reference.ModItems.FLIPFLOPCORE.getRegistryName(), Reference.ModItems.FLIPFLOPCORE.getUnlocalizedName());
 		berry = new ItemBerry();
 		belt_fiery_lily = new ItemFieryLilyBelt();
 		backpack = new ItemBackpack();
@@ -84,6 +85,7 @@ public class ModItems {
 		milk_bag = new ItemMilkBag();
 		cheese = new ItemCheese();
 		light_bow = new ItemLightBow();
+		light_battery = new ItemLightBattery();
 	}
 	
 	@SubscribeEvent
@@ -107,7 +109,8 @@ public class ModItems {
 				mining_backpack,
 				milk_bag,
 				cheese,
-				light_bow);
+				light_bow,
+				light_battery);
 		if (ConfigManager.enableInfiniteWater)
 			event.getRegistry().register(infinite_water);
 		
@@ -137,6 +140,7 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(milk_bag);
 		UsefulStuffs.proxy.registerItemRenders(cheese);
 		UsefulStuffs.proxy.registerItemRenders(light_bow);
+		UsefulStuffs.proxy.registerItemRenders(light_battery);
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());

@@ -1,11 +1,13 @@
 package hmysjiang.usefulstuffs.entity;
 
+import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 
 public class EntityLightBulb extends EntityThrowable implements IProjectile {
 	
+	private boolean fromBulb = false;
 	public EntityLightBulb(World worldIn) {
 		super(worldIn);
 	}
@@ -28,6 +31,11 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 	public EntityLightBulb(World worldIn, double x, double y, double z) {
 		super(worldIn, x, y, z);
 	}
+	
+	public EntityLightBulb(World worldIn, EntityLivingBase throwerIn, boolean fromBulb) {
+		this(worldIn, throwerIn);
+		this.fromBulb = fromBulb;
+	}
 
 	@Override
 	protected void onImpact(RayTraceResult result) {
@@ -35,7 +43,7 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 			if (result.typeOfHit == Type.BLOCK) {
 				Vec3d pos = this.getPositionVector();
 				if (world.getBlockState(new BlockPos(pos)).getBlock().isReplaceable(world, new BlockPos(pos))) {
-					world.setBlockState(new BlockPos(pos), ModBlocks.light_bulb.getDefaultState());
+					world.setBlockState(new BlockPos(pos), ModBlocks.light_bulb.getDefaultState().withProperty(BlockLightBulb.REAL, this.fromBulb));
 				}
 				else {
 					world.spawnEntity(new EntityItem(world, pos.x, pos.y, pos.z, new ItemStack(ModBlocks.light_bulb, 1)));
@@ -69,6 +77,18 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 		this.rotationPitch = (float)(MathHelper.atan2(y, (double)f1) * (180D / Math.PI));
 		this.prevRotationYaw = this.rotationYaw;
 		this.prevRotationPitch = this.rotationPitch;
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound compound) {
+		super.writeEntityToNBT(compound);
+		compound.setBoolean("fromBulb", fromBulb);
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound compound) {
+		super.readEntityFromNBT(compound);
+		this.fromBulb = compound.getBoolean("fromBulb");
 	}
 
 }

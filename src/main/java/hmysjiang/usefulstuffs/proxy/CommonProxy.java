@@ -12,6 +12,7 @@ import hmysjiang.usefulstuffs.blocks.raindetector.TileEntityRainDetector;
 import hmysjiang.usefulstuffs.blocks.tflipflop.TileEntityTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.well.TileEntityWell;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
+import hmysjiang.usefulstuffs.enchantment.EnchantmentFastDraw;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModEntities;
 import hmysjiang.usefulstuffs.init.ModItems;
@@ -20,8 +21,10 @@ import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.utils.helper.OreDictHelper;
 import hmysjiang.usefulstuffs.world.gen.BerryBushGenerator;
 import hmysjiang.usefulstuffs.world.gen.FieryLilyGenerator;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -36,6 +39,8 @@ public class CommonProxy {
 		PacketHandler.init();
 		
 		registerTileEntity();
+		
+		MinecraftForge.EVENT_BUS.register(EnchantmentFastDraw.INSTANCE);
 	}
 	
 	public void init() {
