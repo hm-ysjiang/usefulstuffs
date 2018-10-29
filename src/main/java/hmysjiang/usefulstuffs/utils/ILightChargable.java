@@ -15,16 +15,13 @@ public interface ILightChargable {
 		if (world.isRemote)	return;
 		if (!world.canBlockSeeSky(pos) || world.isRaining()) return;
 		int time = (int) world.getWorldTime();
-		int charge = getChargeAmount(time, stack.getItem() instanceof ItemLightBow && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0, EnchantmentHelper.getEnchantmentLevel(EnchantmentMoonLight.INSTANCE, stack) > 0);
+		int charge = getChargeAmount(time, EnchantmentHelper.getEnchantmentLevel(EnchantmentMoonLight.INSTANCE, stack) > 0);
 		if (stack.isItemDamaged()) {
 			stack.setItemDamage(stack.getItemDamage() > charge ? stack.getItemDamage() - charge : 0);
 		}
 	}
 	
-	default int getChargeAmount(int time, boolean infinity, boolean moonlight) {
-		if (infinity) {
-			return 4;
-		}
+	default int getChargeAmount(int time, boolean moonlight) {
 		if (time <= 12000) {
 			int dif = MathHelper.abs(6000 - time);
 			int charge =  (int) (MathHelper.cos((float) (Math.PI * dif / 12000)) * 4 + 1);

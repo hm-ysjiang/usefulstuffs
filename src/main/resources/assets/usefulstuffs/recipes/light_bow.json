@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " B ", 
+        "TY ", 
+        " B "
+    ],
+    "key": {
+        "B": {
+            "item": "minecraft:blaze_rod"
+        },
+        "T": {
+            "item": "usefulstuffs:triangular_prism"
+        },
+        "Y": {
+            "item": "minecraft:dye",
+            "data": 11
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:light_bow",
+        "data": 400
+    }
+}

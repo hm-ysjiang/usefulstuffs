@@ -6,19 +6,14 @@ import javax.annotation.Nullable;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
-import hmysjiang.usefulstuffs.enchantment.EnchantmentMoonLight;
 import hmysjiang.usefulstuffs.entity.EntityLightArrow;
-import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.utils.ILightChargable;
-import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
-import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.IItemPropertyGetter;
@@ -29,8 +24,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
@@ -111,18 +104,7 @@ public class ItemLightBow extends ItemBow implements ILightChargable {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		if (entityIn instanceof EntityPlayer) {
-			ItemStack battery = InventoryHelper.findStackInPlayerInventoryContainBaubles((EntityPlayer) entityIn, new ItemStack(ModItems.light_battery), true);
-			int charge = ItemLightBattery.getChargedEnergy(battery);
-			if (charge > 0) {
-				if (charge > 10)
-					charge = 10;
-				if (charge > stack.getItemDamage())
-					charge = stack.getItemDamage();
-				battery.setItemDamage(battery.getItemDamage() + charge);
-				stack.setItemDamage(stack.getItemDamage() - charge);
-			}
-			else 
-				charge(worldIn, stack, entityIn.getPosition());
+			charge(worldIn, stack, entityIn.getPosition());
 		}
 	}
 	

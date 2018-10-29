@@ -40,6 +40,8 @@ item.usefulstuffs.milk_bag_fermented.name=Milk Bag (Fermented)
 item.usefulstuffs.milk_bag_fermented_par.name=Milk Bag (Partially Fermented)
 item.usefulstuffs.cheese.name=Cheese
 item.usefulstuffs.light_bow.name=Bow of Sunshine
+item.usefulstuffs.light_battery.name=Light Battery
+item.usefulstuffs.triangular_prism.name=Triangular Prism
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -125,10 +127,11 @@ usefulstuffs.infinite_water.tooltip_2_1=Right click to fill
 usefulstuffs.cheese.tooltip=Good to Health!
 usefulstuffs.light_bow.tooltip_1=Fire arrows of light!
 usefulstuffs.light_bow.tooltip_2=Charges itself when exposed to sunlight
-usefulstuffs.light_bow.tooltip_3=Well, moonlight is a reflection of sunlight actually
+usefulstuffs.light_bow.tooltip_3=Well, moonlight is reflection of sunlight actually
 usefulstuffs.light_bow.tooltip_charge=%s/400 light unit
-usefulstuffs.light_battery.tooltip=Provides light unit to gadgets that use light
+usefulstuffs.light_battery.tooltip_1=Provides light unit to gadgets that use light
 usefulstuffs.light_battery.tooltip_charge=%s/32000 light unit
+usefulstuffs.light_battery.tooltip_2=Charges itself when exposed to sunlight
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb

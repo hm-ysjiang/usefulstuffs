@@ -2,8 +2,8 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         " CP", 
-		"OOR", 
-		" BO"
+        "OOR", 
+        " BO"
     ],
     "key": {
         "C": {

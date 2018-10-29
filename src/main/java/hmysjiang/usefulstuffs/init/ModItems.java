@@ -61,6 +61,7 @@ public class ModItems {
 	public static Item cheese;
 	public static Item light_bow;
 	public static Item light_battery;
+	public static Item triangular_prism;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -86,6 +87,7 @@ public class ModItems {
 		cheese = new ItemCheese();
 		light_bow = new ItemLightBow();
 		light_battery = new ItemLightBattery();
+		triangular_prism = new ItemCraftingIngredient(Reference.ModItems.TRIANGULAR_PRISM.getRegistryName(), Reference.ModItems.TRIANGULAR_PRISM.getUnlocalizedName());
 	}
 	
 	@SubscribeEvent
@@ -110,7 +112,8 @@ public class ModItems {
 				milk_bag,
 				cheese,
 				light_bow,
-				light_battery);
+				light_battery,
+				triangular_prism);
 		if (ConfigManager.enableInfiniteWater)
 			event.getRegistry().register(infinite_water);
 		
@@ -141,6 +144,7 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(cheese);
 		UsefulStuffs.proxy.registerItemRenders(light_bow);
 		UsefulStuffs.proxy.registerItemRenders(light_battery);
+		UsefulStuffs.proxy.registerItemRenders(triangular_prism);
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());

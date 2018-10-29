@@ -36,7 +36,8 @@ public class Reference {
 		MILK_BAG("milk_bag"),
 		CHEESE("cheese"),
 		LIGHT_BOW("light_bow"),
-		LIGHT_BATTERY("light_battery");
+		LIGHT_BATTERY("light_battery"),
+		TRIANGULAR_PRISM("triangular_prism");
 		
 		private String unlocalizedName;
 		

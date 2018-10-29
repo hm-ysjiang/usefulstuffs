@@ -14,6 +14,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -61,13 +62,38 @@ public class ItemLightBattery extends Item implements ILightChargable, IBauble {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		charge(worldIn, stack, entityIn.getPosition());
+		if (entityIn instanceof EntityPlayer)
+			chargeInventory(stack, (EntityPlayer) entityIn, itemSlot);
 	}
-	
+
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		charge(player.world, itemstack, player.getPosition());
+		if (player instanceof EntityPlayer)
+			chargeInventory(itemstack, (EntityPlayer) player, -1);
 	}
 	
+	private void chargeInventory(ItemStack battery, EntityPlayer player, int itemSlot) {
+		for (ItemStack stack: player.inventory.mainInventory)
+			if (stack.getItem() instanceof ILightChargable && !(stack.getItem() instanceof ItemLightBattery))
+				chargeItem(battery, stack);
+		for (ItemStack stack: player.inventory.offHandInventory)
+			if (stack.getItem() instanceof ILightChargable && !(stack.getItem() instanceof ItemLightBattery))
+				chargeItem(battery, stack);
+	}
+	
+	private void chargeItem(ItemStack battery, ItemStack stack) {
+		int charge = getChargedEnergy(battery);
+		if (charge > 0) {
+			if (charge > 10)
+				charge = 10;
+			if (charge > stack.getItemDamage())
+				charge = stack.getItemDamage();
+			battery.setItemDamage(battery.getItemDamage() + charge);
+			stack.setItemDamage(stack.getItemDamage() - charge);
+		}
+	}
+
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (tab == UsefulStuffs.TAB) {
@@ -104,8 +130,9 @@ public class ItemLightBattery extends Item implements ILightChargable, IBauble {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(I18n.format("usefulstuffs.light_battery.tooltip"));
+		tooltip.add(I18n.format("usefulstuffs.light_battery.tooltip_1"));
 		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.light_battery.tooltip_charge", String.valueOf(getChargedEnergy(stack))));
+		tooltip.add(I18n.format("usefulstuffs.light_battery.tooltip_2"));
 	}
 	
 }
