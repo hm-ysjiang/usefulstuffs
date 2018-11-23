@@ -22,4 +22,8 @@ public class LogHelper {
 		LOGGER.log(Level.WARN, msg);
 	}
 	
+	public static void debug(String msg) {
+		LOGGER.log(Level.INFO, msg);
+	}
+	
 }

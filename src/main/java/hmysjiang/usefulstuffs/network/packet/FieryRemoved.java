@@ -35,7 +35,8 @@ public class FieryRemoved implements IMessage {
 
 		@Override
 		public IMessage onMessage(FieryRemoved message, MessageContext ctx) {
-			Minecraft.getMinecraft().world.getEntityByID(message.entityID).isImmuneToFire = false;
+			if (message != null)
+				Minecraft.getMinecraft().world.getEntityByID(message.entityID).isImmuneToFire = false;
 			return null;
 		}
 		

@@ -39,18 +39,19 @@ public class KeyInput implements IMessage {
 
 		@Override
 		public IMessage onMessage(KeyInput message, MessageContext ctx) {
-			switch(message.keyIndex) {
-			case 0:
-				EntityPlayer player = ctx.getServerHandler().player;
-				IBaublesItemHandler baubleInv = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
-				if (baubleInv.getStackInSlot(5) != null) {
-					if (baubleInv.getStackInSlot(5).isItemEqual(new ItemStack(ModItems.bag_storage)))
-						ItemStorageBag.onKeyBindingPressed(player, baubleInv.getStackInSlot(5));
-					else if (baubleInv.getStackInSlot(5).getItem() instanceof ItemBackpack)
-						ItemBackpack.onKeyBindingPressed(player);
+			if (message != null)
+				switch(message.keyIndex) {
+				case 0:
+					EntityPlayer player = ctx.getServerHandler().player;
+					IBaublesItemHandler baubleInv = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
+					if (player != null && baubleInv.getStackInSlot(5) != null) {
+						if (baubleInv.getStackInSlot(5).isItemEqual(new ItemStack(ModItems.bag_storage)))
+							ItemStorageBag.onKeyBindingPressed(player, baubleInv.getStackInSlot(5));
+						else if (baubleInv.getStackInSlot(5).getItem() instanceof ItemBackpack)
+							ItemBackpack.onKeyBindingPressed(player);
+					}
+					break;
 				}
-				break;
-			}
 			return null;
 		}
 	}

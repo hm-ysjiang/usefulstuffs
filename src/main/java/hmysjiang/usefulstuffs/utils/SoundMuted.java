@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.blocks.portalmuffler;
+package hmysjiang.usefulstuffs.utils;
 
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.Sound;

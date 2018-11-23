@@ -57,14 +57,16 @@ public class SyncLightArrow implements IMessage {
 
 		@Override
 		public IMessage onMessage(SyncLightArrow message, MessageContext ctx) {
-			Entity entity = Minecraft.getMinecraft().world.getEntityByID(message.entityId);
-			if (entity != null) {
-				entity.posX = message.posX;
-				entity.posY = message.posY;
-				entity.posZ = message.posZ;
-				entity.motionX = message.motionX;
-				entity.motionY = message.motionY;
-				entity.motionZ = message.motionZ;
+			if (message != null) {
+				Entity entity = Minecraft.getMinecraft().world.getEntityByID(message.entityId);
+				if (entity != null) {
+					entity.posX = message.posX;
+					entity.posY = message.posY;
+					entity.posZ = message.posZ;
+					entity.motionX = message.motionX;
+					entity.motionY = message.motionY;
+					entity.motionZ = message.motionZ;
+				}	
 			}
 			return null;
 		}

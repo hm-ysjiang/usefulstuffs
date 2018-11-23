@@ -1,9 +1,10 @@
 package hmysjiang.usefulstuffs.blocks.portalmuffler;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import hmysjiang.usefulstuffs.ConfigManager;
+import hmysjiang.usefulstuffs.utils.SoundMuted;
+import hmysjiang.usefulstuffs.utils.TileEntityManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -11,13 +12,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PortalMufflerManager {
+public class PortalMufflerManager extends TileEntityManager<TileEntityPortalMuffler> {
 	public static final ResourceLocation SOUND_PORTAL = new ResourceLocation("minecraft:block.portal.ambient");
 	public static final PortalMufflerManager INSTANCE = new PortalMufflerManager();
+	
 	public static int rangeSq;
 	
 	public static boolean isPosInRange(BlockPos pos1, BlockPos pos2) {
@@ -25,31 +26,26 @@ public class PortalMufflerManager {
 		return pos1.distanceSq(pos2.getX(), pos2.getY(), pos2.getZ()) <= rangeSq;
 	}
 	
-	private List<TileEntityPortalMuffler> mufflers;
-	
 	public PortalMufflerManager() {
-		mufflers = new ArrayList<TileEntityPortalMuffler>();
 		rangeSq = ConfigManager.portalMufflerRange * ConfigManager.portalMufflerRange;
 	}
 	
-	@SubscribeEvent
-	public void onPlayerLogIn(PlayerEvent.PlayerLoggedInEvent event) {
-		if (mufflers == null)
-			mufflers = new ArrayList<TileEntityPortalMuffler>();
-		mufflers.clear();
+	@Override
+	protected Side getSide() {
+		return Side.CLIENT;
 	}
 	
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onSoundPlay(PlaySoundEvent event) {
-		if (mufflers == null)
-			mufflers = new ArrayList<TileEntityPortalMuffler>();
+		if (clients == null)
+			clients = new ArrayList<TileEntityPortalMuffler>();
 		WorldClient world = Minecraft.getMinecraft().world;
 		if (world != null) {
 			ISound sound = event.getSound();
 			if (sound.getSoundLocation().equals(SOUND_PORTAL)) {
 				BlockPos soundPos = new BlockPos(sound.getXPosF(), sound.getYPosF(), sound.getZPosF());
-				for (TileEntityPortalMuffler tile: mufflers) {
+				for (TileEntityPortalMuffler tile: clients) {
 					if (!world.isAreaLoaded(tile.getPos(), 1)) continue;
 					if (world.provider.getDimension() == tile.getWorld().provider.getDimension() && isPosInRange(tile.getPos(), soundPos)) {
 						event.setResultSound(new SoundMuted(sound, 0));
@@ -58,24 +54,6 @@ public class PortalMufflerManager {
 				}
 			}
 		}
-	}
-	
-	//Returns true if successfully registered
-	public boolean registerMuffler(TileEntityPortalMuffler muffler) {
-		if (muffler == null) return false;
-		for (TileEntityPortalMuffler muffler1: mufflers) 
-			if (muffler1.getWorld().provider.getDimension() == muffler.getWorld().provider.getDimension())
-				if (muffler1.getPos().equals(muffler.getPos()))
-					return true;
-		mufflers.add(muffler);
-		return true;
-	}
-	
-	public void unregisterMuffler(TileEntityPortalMuffler muffler) {
-		for (int i = 0 ; i<mufflers.size() ; i++) 
-			if (mufflers.get(i).getWorld().provider.getDimension() == muffler.getWorld().provider.getDimension())
-				if (mufflers.get(i).getPos().equals(muffler.getPos()))
-					mufflers.remove(i);
 	}
 	
 }

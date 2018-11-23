@@ -21,7 +21,6 @@ import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.utils.helper.OreDictHelper;
 import hmysjiang.usefulstuffs.world.gen.BerryBushGenerator;
 import hmysjiang.usefulstuffs.world.gen.FieryLilyGenerator;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;

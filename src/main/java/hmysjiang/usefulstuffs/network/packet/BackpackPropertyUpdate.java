@@ -46,9 +46,14 @@ public class BackpackPropertyUpdate implements IMessage {
 
 		@Override
 		public IMessage onMessage(BackpackPropertyUpdate message, MessageContext ctx) {
-			EntityPlayer player = (EntityPlayer) WorldHelper.getServerWorldFromId(message.worldId).getEntityByID(message.playerId);
-			ItemStack stack = player.getHeldItemMainhand();
-			ItemMiningBackpack.updateProperties(stack, message.auto, message.quickDepo);
+			if (message != null) {
+				World world = WorldHelper.getServerWorldFromId(message.worldId);
+				if (world == null) 	return null;
+				EntityPlayer player = (EntityPlayer) world.getEntityByID(message.playerId);
+				if (player == null)	return null;
+				ItemStack stack = player.getHeldItemMainhand();
+				ItemMiningBackpack.updateProperties(stack, message.auto, message.quickDepo);
+			}
 			return null;
 		}
 		
