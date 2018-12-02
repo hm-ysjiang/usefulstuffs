@@ -13,6 +13,7 @@ import hmysjiang.usefulstuffs.blocks.playerdetector.BlockPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.BlockPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.BlockRainDetector;
 import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
+import hmysjiang.usefulstuffs.blocks.universaluser.BlockUniversalUser;
 import hmysjiang.usefulstuffs.blocks.well.BlockWell;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -41,6 +42,7 @@ public class ModBlocks {
 	public static Block player_detector;
 	public static Block fiery_lily;
 	public static Block milk_fermenter;
+	public static Block universal_user;
 	
 	public static void init() {
 		campfire = new BlockCampfire();
@@ -56,6 +58,7 @@ public class ModBlocks {
 		player_detector = new BlockPlayerDetector();
 		fiery_lily = new BlockFieryLilyPad();
 		milk_fermenter = new BlockMilkFermenter();
+		universal_user = new BlockUniversalUser();
 	}
 	
 	@SubscribeEvent
@@ -72,7 +75,8 @@ public class ModBlocks {
 				portal_muffler,
 				player_detector,
 				fiery_lily,
-				milk_fermenter);
+				milk_fermenter,
+				universal_user);
 		register(registry, berrybushes);
 	}
 	
@@ -89,6 +93,7 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(player_detector));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(fiery_lily));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(milk_fermenter));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(universal_user));
 		for (Block block: berrybushes)
 			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(block));
 	}

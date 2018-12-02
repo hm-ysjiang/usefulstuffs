@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.utils.handler;
+package hmysjiang.usefulstuffs.utils.fakeplayer;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -10,8 +10,6 @@ import hmysjiang.usefulstuffs.Reference;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FakePlayerHandler {
 	

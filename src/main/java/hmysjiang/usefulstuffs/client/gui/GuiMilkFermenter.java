@@ -12,10 +12,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-public class GuiMIlkFermenter extends GuiContainer {
+public class GuiMilkFermenter extends GuiContainer {
 	
 	private TileEntityMilkFermenter tile;
-	public GuiMIlkFermenter(Container inventorySlotsIn) {
+	public GuiMilkFermenter(Container inventorySlotsIn) {
 		super(inventorySlotsIn);
 		tile = ((ContainerMilkFermenter) inventorySlotsIn).getTile();
 	}

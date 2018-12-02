@@ -11,6 +11,7 @@ import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -30,7 +31,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 public class BlockMilkFermenter extends Block implements ITileEntityProvider {
 	
 	public BlockMilkFermenter() {
-		super(BlockMaterials.MACHINE);
+		super(Material.CACTUS);
 		setUnlocalizedName(Reference.ModBlocks.MILK_FERMENTER.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.MILK_FERMENTER.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));

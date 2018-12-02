@@ -10,6 +10,7 @@ import hmysjiang.usefulstuffs.blocks.playerdetector.TileEntityPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.TileEntityPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.TileEntityRainDetector;
 import hmysjiang.usefulstuffs.blocks.tflipflop.TileEntityTFlipFlop;
+import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser;
 import hmysjiang.usefulstuffs.blocks.well.TileEntityWell;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentFastDraw;
@@ -71,6 +72,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityPortalMuffler.class, new ResourceLocation(Reference.MOD_ID, "portal_muffler"));
 		GameRegistry.registerTileEntity(TileEntityPlayerDetector.class, new ResourceLocation(Reference.MOD_ID, "player_detector"));
 		GameRegistry.registerTileEntity(TileEntityMilkFermenter.class, new ResourceLocation(Reference.MOD_ID, "milk_fermenter"));
+		GameRegistry.registerTileEntity(TileEntityUniversalUser.class, new ResourceLocation(Reference.MOD_ID, "universal_user"));
 	}
 	
 }

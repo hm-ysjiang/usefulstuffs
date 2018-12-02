@@ -17,6 +17,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -170,6 +171,36 @@ public class WorldHelper {
 			return Math.abs(pos1.getZ() - pos2.getZ());
 		}
 		return 0;
+	}
+	
+	public static EntityLivingBase rayTraceEntity(EntityLivingBase source) {
+		Vec3d pos = source.getPositionEyes(1.0F);
+		Vec3d gaze = source.getLookVec().normalize().scale(0.1);
+		for (int i = 1 ; i<=30 ; i++) {
+			Vec3d p = pos.add(gaze.scale(i));
+			for (EntityLivingBase living: source.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(new BlockPos(p)).grow(1))) {
+				if (living.getEntityBoundingBox().contains(p))
+					return living;
+			}
+		}
+		return null;
+	}
+	
+	public static EntityLivingBase rayTraceEntity(World world, BlockPos pos, EnumFacing facing, double blockDistance) {
+		Vec3d posv = new Vec3d(pos).addVector(0.5, 0.5, 0.5);
+		Vec3d gaze = new Vec3d(facing.getDirectionVec()).scale(0.1);
+		for (int i = 1 ; i<=(int) (blockDistance * 10) ; i++) {
+			Vec3d p = posv.add(gaze.scale(i));
+			for (EntityLivingBase living: world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(new BlockPos(p)).grow(1))) {
+				if (living.getEntityBoundingBox().contains(p))
+					return living;
+			}
+		}
+		return null;
+	}
+	
+	public static Vec3d getHitVecFromAdjacent(EnumFacing directionTo){
+		return new Vec3d(0.5, 0.5, 0.5).subtract(new Vec3d(directionTo.getDirectionVec()).scale(0.5));
 	}
 	
 }

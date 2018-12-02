@@ -37,7 +37,7 @@ public class BlockWell extends Block implements ITileEntityProvider {
 	public static int range;
 	
 	public BlockWell() {
-		super(BlockMaterials.MACHINE);
+		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.WELL.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.WELL.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

@@ -53,6 +53,7 @@ public class TileEntityMilkFermenter extends TileEntity implements ITickable, IC
 							handler.setStackInSlot(1, ItemStack.EMPTY);
 						}
 					}
+					this.markDirty();
 				}
 			}
 		}

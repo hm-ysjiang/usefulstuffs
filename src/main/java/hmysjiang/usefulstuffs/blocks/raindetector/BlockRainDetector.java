@@ -25,7 +25,7 @@ public class BlockRainDetector extends Block implements ITileEntityProvider {
 	public static final PropertyBool RAINING = PropertyBool.create("raining");
 
 	public BlockRainDetector() {
-		super(new Material(MapColor.STONE));
+		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.RAIN_DETECTOR.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.RAIN_DETECTOR.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

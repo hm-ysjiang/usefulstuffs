@@ -7,6 +7,8 @@ import hmysjiang.usefulstuffs.network.packet.GuiButtonPressed;
 import hmysjiang.usefulstuffs.network.packet.GuiSortPressed;
 import hmysjiang.usefulstuffs.network.packet.KeyInput;
 import hmysjiang.usefulstuffs.network.packet.SyncLightArrow;
+import hmysjiang.usefulstuffs.network.packet.SyncUser;
+import hmysjiang.usefulstuffs.network.packet.UserPropertyUpdate;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,9 +25,11 @@ public class PacketHandler {
 		INSTANCE.registerMessage(GuiSortPressed.Handler.class, GuiSortPressed.class, disc++, Side.SERVER);
 		INSTANCE.registerMessage(KeyInput.Handler.class, KeyInput.class, disc++, Side.SERVER);
 		INSTANCE.registerMessage(BackpackPropertyUpdate.Handler.class, BackpackPropertyUpdate.class, disc++, Side.SERVER);
+		INSTANCE.registerMessage(UserPropertyUpdate.Handler.class, UserPropertyUpdate.class, disc++, Side.SERVER);
 		
 		INSTANCE.registerMessage(FieryRemoved.Handler.class, FieryRemoved.class, disc++, Side.CLIENT);
 		INSTANCE.registerMessage(SyncLightArrow.Handler.class, SyncLightArrow.class, disc++, Side.CLIENT);
+		INSTANCE.registerMessage(SyncUser.Handler.class, SyncUser.class, disc++, Side.CLIENT);
 	}
 	
 }

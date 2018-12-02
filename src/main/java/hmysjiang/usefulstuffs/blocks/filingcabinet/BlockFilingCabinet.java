@@ -10,6 +10,7 @@ import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -33,7 +34,7 @@ import net.minecraftforge.items.IItemHandler;
 public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityProvider {
 
 	public BlockFilingCabinet() {
-		super(BlockMaterials.FILINGCABINET);
+		super(Material.WOOD);
 		setUnlocalizedName(Reference.ModBlocks.FILING_CABINET.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.FILING_CABINET.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));

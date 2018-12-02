@@ -10,6 +10,7 @@ import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -50,8 +51,9 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	@SubscribeEvent
 	public static void onInteract(PlayerInteractEvent event) {
 		EntityPlayer player = event.getEntityPlayer();
-		if (player.isSneaking() && player.getHeldItemMainhand() != null && player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(Items.FLINT_AND_STEEL))) {
-			if (player.world.getBlockState(event.getPos()) == Blocks.LOG.getDefaultState()) {
+		if (player.isSneaking() && !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(Items.FLINT_AND_STEEL))) {
+			if (player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG || player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG2) {
+				LogHelper.info("!");
 				if (!player.capabilities.isCreativeMode) {
 					ItemStack stack = player.getHeldItemMainhand();
 					if (stack.getItemDamage() >= stack.getMaxDamage()) {

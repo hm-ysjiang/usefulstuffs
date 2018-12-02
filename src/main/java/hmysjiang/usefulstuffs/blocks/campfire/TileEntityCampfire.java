@@ -47,6 +47,7 @@ public class TileEntityCampfire extends TileEntity implements ITickable, ICapabi
 				timeLeft = getBurnTime();
 				fuelTime = timeLeft;
 				handler.extractItem(0, 1, false);
+				this.markDirty();
 			}
 		}
 		if (timeLeft > 0 || !BlockCampfire.needFuel) {

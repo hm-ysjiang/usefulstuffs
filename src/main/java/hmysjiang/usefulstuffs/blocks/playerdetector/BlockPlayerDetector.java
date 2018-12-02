@@ -12,6 +12,7 @@ import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -60,7 +61,7 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 	}
 
 	public BlockPlayerDetector() {
-		super(BlockMaterials.MACHINE);
+		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.PLAYER_DETECTOR.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.PLAYER_DETECTOR.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));

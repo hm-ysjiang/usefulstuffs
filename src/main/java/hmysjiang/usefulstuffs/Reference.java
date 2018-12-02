@@ -67,7 +67,8 @@ public class Reference {
 		PORTAL_MUFFLER("portal_muffler"),
 		PLAYER_DETECTOR("player_detector"),
 		FIERY_LILY("fiery_lily"),
-		MILK_FERMENTER("milk_fermenter");
+		MILK_FERMENTER("milk_fermenter"),
+		UNIVERSAL_USER("universal_user");
 		
 		private String unlocalizedName;
 		

@@ -26,6 +26,7 @@ public class BlockPortalMuffler extends Block implements ITileEntityProvider {
 		setUnlocalizedName(Reference.ModBlocks.PORTAL_MUFFLER.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.PORTAL_MUFFLER.getRegistryName());
 		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		setHardness(0.8F);
 	}
 
 	@Override

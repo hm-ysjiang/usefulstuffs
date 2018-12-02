@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.client.gui;
 
 import baubles.api.cap.BaublesCapabilities;
 import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
+import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser;
 import hmysjiang.usefulstuffs.container.ContainerBento;
 import hmysjiang.usefulstuffs.container.ContainerCampfire;
 import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
@@ -9,6 +10,7 @@ import hmysjiang.usefulstuffs.container.ContainerBackpack;
 import hmysjiang.usefulstuffs.container.ContainerLightShooter;
 import hmysjiang.usefulstuffs.container.ContainerMilkFermenter;
 import hmysjiang.usefulstuffs.container.ContainerMiningBackpackConfig;
+import hmysjiang.usefulstuffs.container.ContainerUniversalUser;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -38,6 +40,7 @@ public class GuiHandler implements IGuiHandler {
 	public static final int GUI_BACKPACK_BAUBLE = 14;
 	public static final int GUI_BACKPACK_MINING_CONFIG = 15;
 	public static final int GUI_FERMENTER = 16;
+	public static final int GUI_USER = 17;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -77,6 +80,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand());
 		case GUI_FERMENTER:
 			return new ContainerMilkFermenter(player, new BlockPos(x, y, z));
+		case GUI_USER:
+			return new ContainerUniversalUser(player.inventory, (TileEntityUniversalUser) world.getTileEntity(new BlockPos(x, y, z)));
 		default:
 			return null;
 		}
@@ -118,7 +123,9 @@ public class GuiHandler implements IGuiHandler {
 		case GUI_BACKPACK_MINING_CONFIG:
 			return new GuiMiningBackpackConfig(new ContainerMiningBackpackConfig(player, player.getHeldItemMainhand()));
 		case GUI_FERMENTER:
-			return new GuiMIlkFermenter(new ContainerMilkFermenter(player, new BlockPos(x, y, z)));
+			return new GuiMilkFermenter(new ContainerMilkFermenter(player, new BlockPos(x, y, z)));
+		case GUI_USER:
+			return new GuiUniversalUser(new ContainerUniversalUser(player.inventory, (TileEntityUniversalUser) world.getTileEntity(new BlockPos(x, y, z))));
 		default:
 			return null;
 		}

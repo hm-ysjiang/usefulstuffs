@@ -96,7 +96,7 @@ public class ItemMilkBag extends Item {
 	
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		if (!stack.hasTagCompound() || stack.getTagCompound().hasKey("FermentLevel")) {
+		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("FermentLevel")) {
 			setDefaultTag(stack);
 		}
 	}
