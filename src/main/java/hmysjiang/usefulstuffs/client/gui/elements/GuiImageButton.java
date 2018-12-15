@@ -34,7 +34,6 @@ public class GuiImageButton extends GuiButton {
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		super.drawButton(mc, mouseX, mouseY, partialTicks);
-		
 		this.drawTexturedModalRect(x + imgoffsetX, y + imgoffsetY, RenderHelper.getSprite(image), imgWidth, imgHeight);
 	}
 	

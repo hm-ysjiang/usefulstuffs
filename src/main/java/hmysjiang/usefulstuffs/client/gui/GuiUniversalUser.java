@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.client.gui;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser.Activation;
@@ -61,6 +62,21 @@ public class GuiUniversalUser extends GuiContainer {
 		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		renderHoveredToolTip(mouseX, mouseY);
+		if (mouseX >= this.guiLeft + 152 && mouseX < this.guiLeft + 168 && mouseY >= this.guiTop + 16 && mouseY < this.guiTop + 32)
+			this.drawHoveringText(redstone.toString(), mouseX, mouseY);
+		else if (mouseX >= this.guiLeft + 8 && mouseX < this.guiLeft + 11 && mouseY >= this.guiTop + 17 && mouseY < this.guiTop + 69) {
+			IEnergyStorage storage = ((ContainerUniversalUser)inventorySlots).getCapacitor();
+			this.drawHoveringText(Arrays.asList("Capacitor", ("" + storage.getEnergyStored() + "/" + storage.getMaxEnergyStored() + "FE")), mouseX, mouseY);
+		}
+		else if (mouseX >= this.guiLeft + 17 && mouseX < this.guiLeft + 20 && mouseY >= this.guiTop + 17 && mouseY < this.guiTop + 69) {
+			IEnergyStorage storage = ((ContainerUniversalUser)inventorySlots).getTile().getInnerCapacitor();
+			this.drawHoveringText(Arrays.asList("InnerCapacitor", ("" + storage.getEnergyStored() + "/" + storage.getMaxEnergyStored() + "FE")), mouseX, mouseY);
+		}
+		else if (mouseX >= this.guiLeft + 26 && mouseX < this.guiLeft + 42 && mouseY >= this.guiTop + 17 && mouseY < this.guiTop + 69) {
+			IFluidTank tank = ((ContainerUniversalUser)inventorySlots).getTank();
+			if (tank.getFluid() != null)
+				this.drawHoveringText(Arrays.asList(I18n.format(tank.getFluid().getUnlocalizedName()), ("" + tank.getFluidAmount() + "/" + tank.getCapacity() + "mB")), mouseX, mouseY);
+		}
 	}
 
 	@Override

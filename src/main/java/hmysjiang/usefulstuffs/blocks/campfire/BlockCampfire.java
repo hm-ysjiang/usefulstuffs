@@ -35,7 +35,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -49,11 +49,10 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	public static boolean needFuel;
 	
 	@SubscribeEvent
-	public static void onInteract(PlayerInteractEvent event) {
+	public static void onInteract(RightClickBlock event) {
 		EntityPlayer player = event.getEntityPlayer();
 		if (player.isSneaking() && !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(Items.FLINT_AND_STEEL))) {
 			if (player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG || player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG2) {
-				LogHelper.info("!");
 				if (!player.capabilities.isCreativeMode) {
 					ItemStack stack = player.getHeldItemMainhand();
 					if (stack.getItemDamage() >= stack.getMaxDamage()) {

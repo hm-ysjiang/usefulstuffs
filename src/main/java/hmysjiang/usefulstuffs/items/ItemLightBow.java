@@ -63,7 +63,7 @@ public class ItemLightBow extends ItemBow implements ILightChargable {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		if (playerIn.capabilities.isCreativeMode || !stack.isItemDamaged()) {
+		if (!worldIn.isRemote && playerIn.capabilities.isCreativeMode || !stack.isItemDamaged()) {
 			playerIn.setActiveHand(handIn);
 			ActionResult<ItemStack> ret = ForgeEventFactory.onArrowNock(stack, worldIn, playerIn, handIn, true);
 			if (ret != null)	return ret;
