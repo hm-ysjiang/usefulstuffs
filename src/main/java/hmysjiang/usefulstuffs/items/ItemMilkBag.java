@@ -120,14 +120,17 @@ public class ItemMilkBag extends Item {
 		if (!worldIn.isRemote) {
 			if (!isCompletelyFermented(stack)) {
 				if (ConfigManager.fermentedMilkCauseNegativeEffect) {
-					int fermentLevel = (int) (stack.getTagCompound().getInteger("FermentLevel") * 0.6F);
+					int fermentLevel = (int) (stack.getTagCompound().getInteger("FermentLevel") * 0.8F);
 					if (rnd.nextInt(100) < fermentLevel) {
 						entityLiving.addPotionEffect(new PotionEffect(negativeEffects.get(rnd.nextInt(5)), 600));
 					}
+					else {
+						entityLiving.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
+					}
 				}
-			}
-			else {
-				entityLiving.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
+				else {
+					entityLiving.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
+				}
 			}
 		}
 		stack.setItemDamage(stack.getItemDamage() + 1);

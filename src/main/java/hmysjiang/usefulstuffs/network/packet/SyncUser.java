@@ -48,12 +48,13 @@ public class SyncUser implements IMessage {
 
 		@Override
 		public IMessage onMessage(SyncUser message, MessageContext ctx) {
-			World world = Minecraft.getMinecraft().world;
-			BlockPos pos = new BlockPos(message.x, message.y, message.z);
-			if (world.isAreaLoaded(pos, pos)){
-				TileEntity tile = world.getTileEntity(pos);
-				if (tile != null && tile instanceof TileEntityUniversalUser) {
-					tile.readFromNBT(message.tag);
+			if (message != null) {
+				BlockPos pos = new BlockPos(message.x, message.y, message.z);
+				if (Minecraft.getMinecraft().world.isAreaLoaded(pos, pos)){
+					TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(pos);
+					if (tile != null && tile instanceof TileEntityUniversalUser) {
+						tile.readFromNBT(message.tag);
+					}
 				}
 			}
 			return null;
