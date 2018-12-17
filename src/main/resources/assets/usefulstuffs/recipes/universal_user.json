@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "CEC", 
+		"BUB", 
+		"CCC"
+    ],
+    "key": {
+        "C": {
+            "item": "minecraft:cobblestone"
+        },
+        "E": {
+            "item": "minecraft:ender_eye"
+        },
+        "B": {
+            "item": "minecraft:iron_bars"
+        },
+        "U": {
+            "item": "usefulstuffs:universal_core"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:universal_user"
+    }
+}

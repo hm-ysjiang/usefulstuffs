@@ -83,7 +83,7 @@ public class ItemLightBow extends ItemBow implements ILightChargable {
 			if (vel >= 0.1D) {
 				EntityLightArrow arrow = new EntityLightArrow(worldIn, entityLiving);
 				arrow.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, vel * 10F, 0.1F);
-				arrow.setDamage(1.5);
+				arrow.setDamage(1.25);
 				
 				if (vel == 1.0F) {
 					arrow.setIsCritical(true);

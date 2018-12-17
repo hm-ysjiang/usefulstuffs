@@ -64,11 +64,11 @@ public class GuiUniversalUser extends GuiContainer {
 		renderHoveredToolTip(mouseX, mouseY);
 		if (mouseX >= this.guiLeft + 152 && mouseX < this.guiLeft + 168 && mouseY >= this.guiTop + 16 && mouseY < this.guiTop + 32)
 			this.drawHoveringText(redstone.toString(), mouseX, mouseY);
-		else if (mouseX >= this.guiLeft + 8 && mouseX < this.guiLeft + 11 && mouseY >= this.guiTop + 17 && mouseY < this.guiTop + 69) {
+		else if (mouseX >= this.guiLeft + 7 && mouseX < this.guiLeft + 12 && mouseY >= this.guiTop + 17 && mouseY < this.guiTop + 69) {
 			IEnergyStorage storage = ((ContainerUniversalUser)inventorySlots).getCapacitor();
 			this.drawHoveringText(Arrays.asList("Capacitor", ("" + storage.getEnergyStored() + "/" + storage.getMaxEnergyStored() + "FE")), mouseX, mouseY);
 		}
-		else if (mouseX >= this.guiLeft + 17 && mouseX < this.guiLeft + 20 && mouseY >= this.guiTop + 17 && mouseY < this.guiTop + 69) {
+		else if (mouseX >= this.guiLeft + 16 && mouseX < this.guiLeft + 21 && mouseY >= this.guiTop + 17 && mouseY < this.guiTop + 69) {
 			IEnergyStorage storage = ((ContainerUniversalUser)inventorySlots).getTile().getInnerCapacitor();
 			this.drawHoveringText(Arrays.asList("InnerCapacitor", ("" + storage.getEnergyStored() + "/" + storage.getMaxEnergyStored() + "FE")), mouseX, mouseY);
 		}
@@ -116,27 +116,53 @@ public class GuiUniversalUser extends GuiContainer {
 	}
 	
 	@Override
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+		super.mouseClicked(mouseX, mouseY, mouseButton);
+		if (mouseButton == 1) {
+		    for (int i = 0; i < this.buttonList.size(); ++i) {
+		        GuiButton guibutton = this.buttonList.get(i);
+		
+		        if (guibutton.mousePressed(this.mc, mouseX, mouseY)) {
+		            net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent.Pre event = new net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent.Pre(this, guibutton, this.buttonList);
+		            if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
+		                break;
+		            guibutton = event.getButton();
+		            this.selectedButton = guibutton;
+		            guibutton.playPressSound(this.mc.getSoundHandler());
+		            this.actionPerformed(guibutton, true);
+		            if (this.equals(this.mc.currentScreen))
+		                net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent.Post(this, event.getButton(), this.buttonList));
+		        }
+		    }
+		}
+	}
+	
+	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
-		PacketHandler.INSTANCE.sendToServer(new UserPropertyUpdate(button.id, ((ContainerUniversalUser)inventorySlots).getTile().getWorld().provider.getDimension(), ((ContainerUniversalUser)inventorySlots).getTile().getPos().getX(), ((ContainerUniversalUser)inventorySlots).getTile().getPos().getY(), ((ContainerUniversalUser)inventorySlots).getTile().getPos().getZ()));
+		this.actionPerformed(button, false);
+	}
+	
+	protected void actionPerformed(GuiButton button, boolean counter) throws IOException {
+		PacketHandler.INSTANCE.sendToServer(new UserPropertyUpdate(button.id, ((ContainerUniversalUser)inventorySlots).getTile().getWorld().provider.getDimension(), ((ContainerUniversalUser)inventorySlots).getTile().getPos().getX(), ((ContainerUniversalUser)inventorySlots).getTile().getPos().getY(), ((ContainerUniversalUser)inventorySlots).getTile().getPos().getZ(), counter));
 		switch (button.id) {
 		case 0:
-			this.activation = this.activation.next();
+			this.activation = this.activation.next(counter);
 			this.buttonList.get(button.id).displayString = this.activation.toString();
 			break;
 		case 1:
-			this.speed = this.speed.next();
+			this.speed = this.speed.next(counter);
 			this.buttonList.get(button.id).displayString = this.speed.toString();
 			break;
 		case 2:
-			this.select = this.select.next();
+			this.select = this.select.next(counter);
 			this.buttonList.get(button.id).displayString = this.select.toString();
 			break;
 		case 3:
-			this.button = this.button.next();
+			this.button = this.button.next(counter);
 			this.buttonList.get(button.id).displayString = this.button.toString();
 			break;
 		case 4:
-			this.redstone = this.redstone.next();
+			this.redstone = this.redstone.next(counter);
 			((GuiImageButton) this.buttonList.get(button.id)).setImage(redstone.getImgLocation());
 			break;
 		}

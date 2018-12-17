@@ -71,6 +71,7 @@ tile.usefulstuffs.portal_muffler.name=Portal Muffler
 tile.usefulstuffs.player_detector.name=Player Detector
 tile.usefulstuffs.fiery_lily.name=Fiery Lily
 tile.usefulstuffs.milk_fermenter.name=Milk Fermenter
+tile.usefulstuffs.universal_user.name=Universal User
 
 
 usefulstuffs.ingredient.tooltip=Crafting ingredient
@@ -132,6 +133,7 @@ usefulstuffs.light_bow.tooltip_charge=%s/400 light unit
 usefulstuffs.light_battery.tooltip_1=Provides light unit to gadgets that use light
 usefulstuffs.light_battery.tooltip_charge=%s/32000 light unit
 usefulstuffs.light_battery.tooltip_2=Charges itself when exposed to sunlight
+usefulstuffs.universal_user.tooltip=Do the re-charge thingy in one machine!
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb
@@ -160,6 +162,7 @@ usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
 usefulstuffs.gui.campfire.name=Campfire of Traveller's Wisdom
 usefulstuffs.gui.campfire.modifier=BuffRadius:%s
 usefulstuffs.gui.fermenter.name=Milk Fermenter
+usefulstuffs.gui.user.name=Universal User
 
 
 key.usefulstuffs.category=UsefulStuffs

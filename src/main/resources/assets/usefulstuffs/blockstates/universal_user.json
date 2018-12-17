@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "usefulstuffs:user_up", "x": 90},
+        "facing=down": { "model": "usefulstuffs:user_down", "x": 270},
+        "facing=north":  { "model": "usefulstuffs:user"},
+        "facing=south": { "model": "usefulstuffs:user", "y": 180},
+        "facing=west":  { "model": "usefulstuffs:user", "y": 270},
+        "facing=east":  { "model": "usefulstuffs:user", "y": 90}
+    }
+}

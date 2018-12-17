@@ -7,10 +7,11 @@ import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.network.packet.SyncUser;
 import hmysjiang.usefulstuffs.utils.fakeplayer.FakePlayerHandler;
 import hmysjiang.usefulstuffs.utils.fakeplayer.USFakePlayer;
-import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,6 +31,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -58,8 +60,8 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 	public TileEntityUniversalUser() {
 		this.inventory = new ItemStackHandler(9);
 		this.tank = new FluidTank(4000);
-		this.capacitor = new EnergyBank(1000000);
-		this.innerCapacitor = new EnergyBank(500000, 5000, 10000);
+		this.capacitor = new EnergyBank(200000);
+		this.innerCapacitor = new EnergyBank(50000, 10000);
 		prevStack = ItemStack.EMPTY;
 		workTime = 0;
 		operateSpeed = OperateSpeed.SLOW;
@@ -182,7 +184,7 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 			}
 			if (innerCapacitor.getEnergyStored() < innerCapacitor.getMaxEnergyStored()) {
 				//Transfer energy
-				int charge = innerCapacitor.receiveEnergy(capacitor.extractEnergy(5000, true), true);
+				int charge = innerCapacitor.receiveEnergy(capacitor.extractEnergy(10000, true), true);
 				innerCapacitor.receiveEnergy(capacitor.extractEnergy(charge, false), false);
 				this.markDirty();
 			}
@@ -197,7 +199,24 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 					storage.receiveEnergy(innerCapacitor.extractEnergy(charge, false), false);
 					this.markDirty();
 				}
-				if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+				if (stack.getItem() == Items.BUCKET) {
+					if (tank.getFluid() != null && tank.drain(1000, false).amount == 1000) {
+						boolean flag = false;
+						ItemStack bucket = FluidUtil.getFilledBucket(tank.getFluid());
+						stack.shrink(1);
+						for (int j = 0 ; j<9 ; j++) {
+							if (inventory.insertItem(j, bucket, false).isEmpty()) {
+								flag = true;
+								break;
+							}
+						}
+						if (!flag)
+							world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, bucket));
+						tank.drain(1000, true);
+						this.markDirty();
+					}
+				}
+				else if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
 					IFluidHandlerItem handler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 					if (tank.getFluid() != null && handler.fill(tank.getFluid(), false) > 0) {
 						//Do refill
@@ -259,7 +278,7 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (facing == world.getBlockState(pos).getValue(((BlockUniversalUser)this.blockType).FACING))
+		if (facing != null && facing == world.getBlockState(pos).getValue(((BlockUniversalUser)this.blockType).FACING))
 			return null;
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return (T) inventory;
@@ -272,22 +291,24 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
+		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 		readPartialNBT(compound);
+		workTime = compound.getInteger("workTime");
 		super.readFromNBT(compound);
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		compound.setTag("inventory", inventory.serializeNBT());
+		compound.setInteger("workTime", workTime);
 		return super.writeToNBT(writePartialNBT(compound));
 	}
 	
 	public void readPartialNBT(NBTTagCompound compound) {
-		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 		tank.readFromNBT(compound.getCompoundTag("tank"));
 		capacitor.setEnergy(compound.getInteger("energy"));
 		innerCapacitor.setEnergy(compound.getInteger("innerEnergy"));
 		prevStack.deserializeNBT(compound.getCompoundTag("prevStack"));
-		workTime = compound.getInteger("workTime");
 		operateSpeed = OperateSpeed.fromId(compound.getInteger("operateSpeed"));
 		activation = Activation.fromId(compound.getInteger("activation"));
 		button = Button.fromId(compound.getInteger("button"));
@@ -296,12 +317,10 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 	}
 	
 	public NBTTagCompound writePartialNBT(NBTTagCompound compound) {
-		compound.setTag("inventory", inventory.serializeNBT());
 		compound.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
 		compound.setInteger("energy", capacitor.getEnergyStored());
 		compound.setInteger("innerEnergy", innerCapacitor.getEnergyStored());
 		compound.setTag("prevStack", prevStack.serializeNBT());
-		compound.setInteger("workTime", workTime);
 		compound.setInteger("operateSpeed", operateSpeed.getId());
 		compound.setInteger("activation", activation.getId());
 		compound.setInteger("button", button.getId());
@@ -339,8 +358,10 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 			return this.energyCost;
 		}
 		
-		public OperateSpeed next() {
-			return fromId(this.getId() + 1);
+		public OperateSpeed next(boolean counter) {
+			if (!counter)
+				return fromId(this.getId() + 1);
+			return fromId(this.getId() - 1 < 0 ? 3 : this.getId() - 1);
 		}
 		
 		@Override
@@ -390,8 +411,10 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 			return this.id;
 		}
 		
-		public Activation next() {
-			return fromId(this.getId() + 1);
+		public Activation next(boolean counter) {
+			if (!counter)
+				return fromId(this.getId() + 1);
+			return fromId(this.getId() - 1 < 0 ? 4 : this.getId() - 1);
 		}
 		
 		@Override
@@ -443,8 +466,10 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 			return this.id > 1;
 		}
 		
-		public Button next() {
-			return fromId(this.getId() + 1);
+		public Button next(boolean counter) {
+			if (!counter)
+				return fromId(this.getId() + 1);
+			return fromId(this.getId() - 1 < 0 ? 1 : this.getId() - 1);
 		}
 		
 		@Override
@@ -486,8 +511,10 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 			return this.id;
 		}
 		
-		public Select next() {
-			return fromId(this.getId() + 1);
+		public Select next(boolean counter) {
+			if (!counter)
+				return fromId(this.getId() + 1);
+			return fromId(this.getId() - 1 < 0 ? 1 : this.getId() - 1);
 		}
 		
 		@Override
@@ -533,8 +560,10 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 			return this.id;
 		}
 		
-		public Redstone next() {
-			return fromId(this.getId() + 1);
+		public Redstone next(boolean counter) {
+			if (!counter)
+				return fromId(this.getId() + 1);
+			return fromId(this.getId() - 1 < 0 ? 2 : this.getId() - 1);
 		}
 		
 		public ResourceLocation getImgLocation() {
