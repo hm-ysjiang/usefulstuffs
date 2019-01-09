@@ -5,7 +5,6 @@ import java.util.Random;
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.blocks.bush.BlockBerryBush;
 import hmysjiang.usefulstuffs.init.ModBlocks;
-import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -14,6 +13,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class BerryBushGenerator implements IWorldGenerator {
+	private static final int bush_min_h = ConfigManager.bushSpawnMinHeight;
 	public static final int[] BANNED_BIOME_IDS = ConfigManager.bush_banned_biomes;
 	public static final int[] BANNED_DIM_IDS = ConfigManager.bush_banned_dims;
 
@@ -28,14 +28,15 @@ public class BerryBushGenerator implements IWorldGenerator {
 			while (bushes-- > 0) {
 				int x = centerX + (int) (random.nextGaussian() * 2);
 				int z = centerZ + (int) (random.nextGaussian() * 2);
-				int y = WorldHelper.getGroundHeight(world, x, z);
-				if (y == -1 || y <= world.getSeaLevel()) continue;
-				BlockPos pos = new BlockPos(x, ++y, z);
+				BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+				if (pos.getY() < bush_min_h)
+					continue;
 				while (world.getBlockState(pos).getBlock() instanceof BlockBerryBush) {
-					pos = new BlockPos(x, ++y, z);
+					pos = pos.up();
 				}
 				if (!world.isAirBlock(pos) && !world.getBlockState(pos).getBlock().isReplaceable(world, pos)) continue;
-				world.setBlockState(pos, ((BlockBerryBush) ModBlocks.berrybushes[random.nextInt(16)]).getRandomSpawnState(random));
+				if (ModBlocks.berrybushes[0].canPlaceBlockAt(world, pos)) 
+					world.setBlockState(pos, ((BlockBerryBush) ModBlocks.berrybushes[random.nextInt(16)]).getRandomSpawnState(random));
 			}
 		}
 	}

@@ -28,8 +28,6 @@ import net.minecraftforge.items.IItemHandler;
 
 public class WorldHelper {
 	
-	private static final int bush_min_h = ConfigManager.bushSpawnMinHeight;
-	
 	public static World getServerWorldFromId(int id) {
 		for (WorldServer world:DimensionManager.getWorlds()) {
 			if (world.provider.getDimension() == id) {
@@ -124,15 +122,6 @@ public class WorldHelper {
 			}
 		}
 		return den;
-	}
-	
-	public static int getGroundHeight(World world, int x, int z) {
-		if (!world.isAreaLoaded(new BlockPos(x, 64, z), 1)) return -1;
-		for (int y = world.getHeight() ; y>=bush_min_h ; y--) {
-			if (world.getBlockState(new BlockPos(x, y, z)) == Blocks.STONE.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.DIRT.getDefaultState() || world.getBlockState(new BlockPos(x, y, z)) == Blocks.GRASS.getDefaultState())
-				return y;
-		}
-		return -1;
 	}
 	
 	public static void spawnItemsInHandler(World world, int x, int y, int z, @Nonnull IItemHandler handler) {

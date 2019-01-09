@@ -171,7 +171,7 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		pos = pos.down();
-		return worldIn.getBlockState(pos).getBlock() instanceof BlockBerryBush || worldIn.getBlockState(pos).getBlock() == Blocks.STONE || worldIn.getBlockState(pos).getBlock() == Blocks.GRASS || worldIn.getBlockState(pos).getBlock() == Blocks.DIRT;
+		return worldIn.getBlockState(pos).getBlock() instanceof BlockBerryBush || worldIn.getBlockState(pos).getBlock() == Blocks.GRASS || worldIn.getBlockState(pos).getBlock() == Blocks.DIRT;
 	}
 	
 	@Override
