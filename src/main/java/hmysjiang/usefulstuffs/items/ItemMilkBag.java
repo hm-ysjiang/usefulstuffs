@@ -36,6 +36,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMilkBag extends Item {
 	
+	//Do not change this
+	public static ItemStack fermented;
 	public static List<Potion> negativeEffects = new ArrayList<Potion>();
 	public static void setDefaultTag(ItemStack stack) {
 		stack.setTagCompound(new NBTTagCompound());
@@ -64,6 +66,9 @@ public class ItemMilkBag extends Item {
 		setMaxStackSize(1);
 		setMaxDamage(8);
 		setNoRepair();
+		fermented = new ItemStack(this);
+		setDefaultTag(fermented);
+		fermented.getTagCompound().setInteger("FermentLevel", 100);
 		
 		rnd = new Random();
 	}
@@ -83,7 +88,7 @@ public class ItemMilkBag extends Item {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (stack.hasTagCompound() && isCompletelyFermented(stack)) {
 			stack.setItemDamage(stack.getItemDamage() + 1);
-			playerIn.addItemStackToInventory(new ItemStack(ModItems.cheese));
+			playerIn.addItemStackToInventory(new ItemStack(ModItems.cheese, 3));
 			if (stack.getItemDamage() == 8)
 				stack.getTagCompound().setInteger("FermentLevel", 0);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
@@ -137,6 +142,16 @@ public class ItemMilkBag extends Item {
 		if (stack.getItemDamage() == 8 && stack.hasTagCompound())
 			stack.getTagCompound().setInteger("FermentLevel", 0);
 		return stack;
+	}
+	
+	@Override
+	public boolean showDurabilityBar(ItemStack stack) {
+		return true;
+	}
+	
+	@Override
+	public int getRGBDurabilityForDisplay(ItemStack stack) {
+		return 0xffffff;
 	}
 	
 	@Override

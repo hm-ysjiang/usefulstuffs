@@ -7,6 +7,7 @@ import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentXL;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -47,6 +48,13 @@ public class ItemPackingGlue extends Item {
 		if (!world.isRemote) {
 			IBlockState state = world.getBlockState(pos);
 			if (player.isSneaking() && state.getBlock() != ModBlocks.glued_box && state.getBlockHardness(world, pos) >= 0) {
+				Block block = state.getBlock();
+				for (String blacklistedBlock: ConfigManager.glueBlackList) {
+					if (blacklistedBlock.equals(block.getRegistryName().toString())) {
+						player.sendMessage(new TextComponentString("This block is blacklisted in the config"));
+						return EnumActionResult.PASS;
+					}
+				}
 				ItemStack stack = player.getHeldItem(hand);
 				float raw_cost = WorldHelper.getBlockDataDensity(world, pos, state, world.getTileEntity(pos));
 				Integer enchLevel = EnchantmentHelper.getEnchantments(stack).get(EnchantmentXL.INSTANCE);
@@ -74,8 +82,8 @@ public class ItemPackingGlue extends Item {
 						compound.setTag("Tile", tileData);
 						world.removeTileEntity(pos);
 					}
-					compound.setInteger("Meta", (state.getBlock()).getMetaFromState(state));
-					compound.setString("Name", state.getBlock().getRegistryName().toString());
+					compound.setInteger("Meta", block.getMetaFromState(state));
+					compound.setString("Name", block.getRegistryName().toString());
 					drop.setTagCompound(compound);
 					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
 					world.setBlockToAir(pos);

@@ -1,6 +1,6 @@
 package hmysjiang.usefulstuffs.network.packet;
 
-import hmysjiang.usefulstuffs.blocks.filingcabinet.TileEntityFilingCabinet;
+import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;
@@ -49,7 +49,7 @@ public class GuiSortPressed implements IMessage {
 				World world = WorldHelper.getServerWorldFromId(message.world);
 				if (world == null)	return null;
 				BlockPos pos = new BlockPos(message.x, message.y, message.z);
-				((TileEntityFilingCabinet)world.getTileEntity(pos)).sort();	
+				((TileEntityFilingCabinetUnstackable)world.getTileEntity(pos)).sort();	
 			}
 			return null;
 		}

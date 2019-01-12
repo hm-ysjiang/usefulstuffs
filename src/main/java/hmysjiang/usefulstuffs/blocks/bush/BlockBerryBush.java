@@ -38,11 +38,12 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	
 	private EnumBerryColor color;
 
-	public BlockBerryBush(EnumBerryColor color) {
+	public BlockBerryBush(EnumBerryColor color, boolean enabled) {
 		super(Material.PLANTS);
 		setUnlocalizedName(Reference.ModBlocks.BERRYBUSH.getUnlocalizedName() + "_" + color.getDyeColorName());
 		setRegistryName(Reference.ModBlocks.BERRYBUSH.getRegistryName().toString() + "_" + color.getDyeColorName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setSoundType(SoundType.PLANT);
 		setTickRandomly(true);
 		setHardness(0.5F);
@@ -120,6 +121,13 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		if (canGrow(worldIn, pos, state, false)) {
 			worldIn.setBlockState(pos, state.cycleProperty(AGE));
+		}
+		else if (ConfigManager.bushDropsAfterMature){
+			if (!worldIn.isRemote) {
+				worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(AGE, 1));
+				EntityItem entity = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata()));
+				worldIn.spawnEntity(entity);
+			}
 		}
 	}
 

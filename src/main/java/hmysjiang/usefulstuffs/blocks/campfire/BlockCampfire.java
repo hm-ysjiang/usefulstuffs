@@ -10,7 +10,6 @@ import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -50,24 +49,26 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	
 	@SubscribeEvent
 	public static void onInteract(RightClickBlock event) {
-		EntityPlayer player = event.getEntityPlayer();
-		if (player.isSneaking() && !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(Items.FLINT_AND_STEEL))) {
-			if (player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG || player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG2) {
-				if (!player.capabilities.isCreativeMode) {
-					ItemStack stack = player.getHeldItemMainhand();
-					if (stack.getItemDamage() >= stack.getMaxDamage()) {
-						for (int i = 0 ; i<player.inventory.getSizeInventory() ; i++) {
-							if (player.inventory.getStackInSlot(i) == stack) {
-								player.inventory.removeStackFromSlot(i);
+		if (ConfigManager.enableCampfireCraft) {
+			EntityPlayer player = event.getEntityPlayer();
+			if (player.isSneaking() && !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(Items.FLINT_AND_STEEL))) {
+				if (player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG || player.world.getBlockState(event.getPos()).getBlock() == Blocks.LOG2) {
+					if (!player.capabilities.isCreativeMode) {
+						ItemStack stack = player.getHeldItemMainhand();
+						if (stack.getItemDamage() >= stack.getMaxDamage()) {
+							for (int i = 0 ; i<player.inventory.getSizeInventory() ; i++) {
+								if (player.inventory.getStackInSlot(i) == stack) {
+									player.inventory.removeStackFromSlot(i);
+								}
 							}
 						}
+						else { 
+							stack.setItemDamage(stack.getItemDamage()+1);
+						}
 					}
-					else { 
-						stack.setItemDamage(stack.getItemDamage()+1);
-					}
+					player.world.setBlockState(event.getPos(), ModBlocks.campfire.getDefaultState());
+					event.setCanceled(true);
 				}
-				player.world.setBlockState(event.getPos(), ModBlocks.campfire.getDefaultState());
-				event.setCanceled(true);
 			}
 		}
 	}
@@ -75,11 +76,12 @@ public class BlockCampfire extends Block implements ITileEntityProvider {
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.0625, 0, 0.0625, 0.0625*15, 0.0625*4, 0.0625*15);
 	private Random rnd = new Random();
 
-	public BlockCampfire() {
+	public BlockCampfire(boolean enabled) {
 		super(BlockMaterials.CAMPFIRE);
 		setRegistryName(Reference.ModBlocks.CAMPFIRE.getRegistryName());
 		setUnlocalizedName(Reference.ModBlocks.CAMPFIRE.getUnlocalizedName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setLightLevel(1.0F);
 		setSoundType(SoundType.WOOD);
 		setHardness(0.5F);

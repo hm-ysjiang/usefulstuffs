@@ -1,5 +1,6 @@
 package hmysjiang.usefulstuffs.proxy;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.PortalMufflerManager;
 import hmysjiang.usefulstuffs.init.ModBlocks;
@@ -24,7 +25,8 @@ public class ClientProxy extends CommonProxy {
 		
 		KeyBindingHandler.init();
 		
-		MinecraftForge.EVENT_BUS.register(PortalMufflerManager.INSTANCE);
+		if (ConfigManager.portalMufflerEnabled)
+			MinecraftForge.EVENT_BUS.register(PortalMufflerManager.INSTANCE);
 	}
 	
 	@Override

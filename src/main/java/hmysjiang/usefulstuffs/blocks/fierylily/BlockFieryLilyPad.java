@@ -18,10 +18,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFieryLilyPad extends BlockLilyPad {
 
-	public BlockFieryLilyPad() {
+	public BlockFieryLilyPad(boolean enabled) {
 		setUnlocalizedName(Reference.ModBlocks.FIERY_LILY.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.FIERY_LILY.getRegistryName());
-		ModItems.itemblocks.add(new ItemFieryLilyPad(this).setRegistryName(getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemFieryLilyPad(this).setRegistryName(getRegistryName()));
 		setSoundType(SoundType.PLANT);
 	}
 	

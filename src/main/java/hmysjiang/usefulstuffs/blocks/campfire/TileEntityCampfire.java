@@ -2,13 +2,9 @@ package hmysjiang.usefulstuffs.blocks.campfire;
 
 import java.util.List;
 
-import hmysjiang.usefulstuffs.init.ModBlocks;
-import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;

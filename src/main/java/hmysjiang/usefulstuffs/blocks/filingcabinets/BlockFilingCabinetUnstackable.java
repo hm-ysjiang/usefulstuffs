@@ -1,10 +1,9 @@
-package hmysjiang.usefulstuffs.blocks.filingcabinet;
+package hmysjiang.usefulstuffs.blocks.filingcabinets;
 
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
-import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.BlockHorizontal;
@@ -31,20 +30,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityProvider {
+public class BlockFilingCabinetUnstackable extends BlockHorizontal implements ITileEntityProvider {
 
-	public BlockFilingCabinet() {
+	public BlockFilingCabinetUnstackable(boolean enabled) {
 		super(Material.WOOD);
 		setUnlocalizedName(Reference.ModBlocks.FILING_CABINET.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.FILING_CABINET.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setHardness(5.0F);
 		setSoundType(SoundType.WOOD);
 	}
 	
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityFilingCabinet();
+		return new TileEntityFilingCabinetUnstackable();
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = worldIn.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityFilingCabinet) {
+		if (tile != null && tile instanceof TileEntityFilingCabinetUnstackable) {
 			if (!worldIn.isRemote) {
 				playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_FILING_CABINET_1, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			}
@@ -69,7 +69,7 @@ public class BlockFilingCabinet extends BlockHorizontal implements ITileEntityPr
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		if (worldIn.getTileEntity(pos) != null) {
-			IItemHandler handler = ((TileEntityFilingCabinet)worldIn.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			IItemHandler handler = ((TileEntityFilingCabinetUnstackable)worldIn.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 			for (int i = 0 ; i<handler.getSlots() ; i++)
 				if (!handler.getStackInSlot(i).isEmpty())
 					worldIn.spawnEntity(new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, handler.getStackInSlot(i)));

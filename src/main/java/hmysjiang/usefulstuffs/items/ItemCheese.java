@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemCheese extends ItemFood {
 
 	public ItemCheese() {
-		super(4, 1.625F, false);
+		super(3, 0.8F, false);
 		setUnlocalizedName(Reference.ModItems.CHEESE.getUnlocalizedName());
 		setRegistryName(Reference.ModItems.CHEESE.getRegistryName());
 	}

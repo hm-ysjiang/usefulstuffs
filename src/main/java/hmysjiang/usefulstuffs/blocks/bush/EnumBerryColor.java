@@ -1,8 +1,6 @@
 package hmysjiang.usefulstuffs.blocks.bush;
 
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.text.TextFormatting;
 
 public enum EnumBerryColor implements IStringSerializable {
 	WHITE(0, "white"),

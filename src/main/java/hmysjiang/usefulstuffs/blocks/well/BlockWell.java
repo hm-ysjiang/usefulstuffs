@@ -4,7 +4,6 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -19,13 +18,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -36,11 +31,12 @@ public class BlockWell extends Block implements ITileEntityProvider {
 	public static int rate;
 	public static int range;
 	
-	public BlockWell() {
+	public BlockWell(boolean enabled) {
 		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.WELL.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.WELL.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setHardness(5.0F);
 		
 		rate = ConfigManager.wellTransRate;

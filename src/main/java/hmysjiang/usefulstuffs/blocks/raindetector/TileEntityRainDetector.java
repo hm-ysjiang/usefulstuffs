@@ -2,7 +2,6 @@ package hmysjiang.usefulstuffs.blocks.raindetector;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.world.World;
 
 public class TileEntityRainDetector extends TileEntity implements ITickable {
 

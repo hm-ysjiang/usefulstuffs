@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.entity.EntityLightArrow;
@@ -133,15 +134,17 @@ public class ItemLightBow extends ItemBow implements ILightChargable {
 	
 	@SubscribeEvent
 	public static void onFOVUpdate(FOVUpdateEvent event) {
-		EntityPlayer player = event.getEntity();
-		if (player != null) {
-			if (!player.getActiveItemStack().isEmpty() && player.getActiveItemStack().getItem() instanceof ItemLightBow) {
-				float fov = event.getFov();
-				int duration = 72000 - player.getItemInUseCount();
-				if (duration > 40)
-					duration = 40;
-				float multiplier = (float) (1.0 - 0.3 * (double) duration / 40.0);
-				event.setNewfov(fov * multiplier);
+		if (ConfigManager.lightBowEnabled) {
+			EntityPlayer player = event.getEntity();
+			if (player != null) {
+				if (!player.getActiveItemStack().isEmpty() && player.getActiveItemStack().getItem() instanceof ItemLightBow) {
+					float fov = event.getFov();
+					int duration = 72000 - player.getItemInUseCount();
+					if (duration > 40)
+						duration = 40;
+					float multiplier = (float) (1.0 - 0.3 * (double) duration / 40.0);
+					event.setNewfov(fov * multiplier);
+				}
 			}
 		}
 	}

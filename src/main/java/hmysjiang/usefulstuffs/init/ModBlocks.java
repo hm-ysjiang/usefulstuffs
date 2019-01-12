@@ -1,12 +1,13 @@
 package hmysjiang.usefulstuffs.init;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.bush.BlockBerryBush;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
 import hmysjiang.usefulstuffs.blocks.fermenter.BlockMilkFermenter;
 import hmysjiang.usefulstuffs.blocks.fierylily.BlockFieryLilyPad;
-import hmysjiang.usefulstuffs.blocks.filingcabinet.BlockFilingCabinet;
+import hmysjiang.usefulstuffs.blocks.filingcabinets.BlockFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
 import hmysjiang.usefulstuffs.blocks.playerdetector.BlockPlayerDetector;
@@ -31,7 +32,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModBlocks {
 	
 	public static Block campfire;
-	public static Block filing_cabinet;
+	public static Block filing_cabinet_unstackable;
 	public static Block glued_box;
 	public static Block light_bulb;
 	public static Block rain_detector;
@@ -45,45 +46,70 @@ public class ModBlocks {
 	public static Block universal_user;
 	
 	public static void init() {
-		campfire = new BlockCampfire();
-		filing_cabinet = new BlockFilingCabinet();
-		glued_box = new BlockGluedBox();
-		light_bulb = new BlockLightBulb();
-		rain_detector = new BlockRainDetector();
-		t_flipflop = new BlockTFlipFlop();
-		well = new BlockWell();
+		campfire = new BlockCampfire(ConfigManager.campfireEnabled);
+		filing_cabinet_unstackable = new BlockFilingCabinetUnstackable(ConfigManager.filingCabinetUnstackableEnabled);
+		glued_box = new BlockGluedBox(ConfigManager.glueEnabled);
+		light_bulb = new BlockLightBulb(ConfigManager.lightBulbEnabled);
+		rain_detector = new BlockRainDetector(ConfigManager.rainDetectorEnabled);
+		t_flipflop = new BlockTFlipFlop(ConfigManager.tFlipFlopEnabled);
+		well = new BlockWell(ConfigManager.wellEnabled);
 		for (int i = 0 ; i<EnumBerryColor.values().length ; i++)
-			berrybushes[i] = new BlockBerryBush(EnumBerryColor.byMetadata(i));
-		portal_muffler = new BlockPortalMuffler();
-		player_detector = new BlockPlayerDetector();
-		fiery_lily = new BlockFieryLilyPad();
-		milk_fermenter = new BlockMilkFermenter();
-		universal_user = new BlockUniversalUser();
+			berrybushes[i] = new BlockBerryBush(EnumBerryColor.byMetadata(i), ConfigManager.berryEnabled);
+		portal_muffler = new BlockPortalMuffler(ConfigManager.portalMufflerEnabled);
+		player_detector = new BlockPlayerDetector(ConfigManager.playerDetectorEnabled);
+		fiery_lily = new BlockFieryLilyPad(ConfigManager.fieryLilyEnabled);
+		milk_fermenter = new BlockMilkFermenter(ConfigManager.milkFermenterEnabled);
+		universal_user = new BlockUniversalUser(ConfigManager.universalUserEnabled);
 	}
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
-		register(registry,
-				campfire,
-				filing_cabinet,
-				glued_box,
-				light_bulb,
-				rain_detector,
-				t_flipflop,
-				well,
-				portal_muffler,
-				player_detector,
-				fiery_lily,
-				milk_fermenter,
-				universal_user);
-		register(registry, berrybushes);
+		if (ConfigManager.campfireEnabled) {
+			registry.register(campfire);
+		}
+		if (ConfigManager.filingCabinetUnstackableEnabled) {
+			registry.register(filing_cabinet_unstackable);
+		}
+		if (ConfigManager.glueEnabled) {
+			registry.register(glued_box);
+		}
+		if (ConfigManager.lightBulbEnabled) {
+			registry.register(light_bulb);
+		}
+		if (ConfigManager.rainDetectorEnabled) {
+			registry.register(rain_detector);
+		}
+		if (ConfigManager.tFlipFlopEnabled) {
+			registry.register(t_flipflop);
+		}
+		if (ConfigManager.wellEnabled) {
+			registry.register(well);
+		}
+		if (ConfigManager.portalMufflerEnabled) {
+			registry.register(portal_muffler);
+		}
+		if (ConfigManager.playerDetectorEnabled) {
+			registry.register(player_detector);
+		}
+		if (ConfigManager.fieryLilyEnabled) {
+			registry.register(fiery_lily);
+		}
+		if (ConfigManager.milkFermenterEnabled) {
+			registry.register(milk_fermenter);
+		}
+		if (ConfigManager.universalUserEnabled) {
+			registry.register(universal_user);
+		}
+		if (ConfigManager.berryEnabled) {
+			register(registry, berrybushes);
+		}
 	}
 	
 	@SubscribeEvent
 	public static void onModelRegistry(ModelRegistryEvent event) {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(campfire));
-		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(filing_cabinet));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(filing_cabinet_unstackable));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(glued_box));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(light_bulb));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(rain_detector));

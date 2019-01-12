@@ -23,8 +23,10 @@ public class ModRecipe {
 	
 	public static void init() {
 		recipeLightShooterCollector = NonNullList.<Ingredient>create();
-		recipeLightShooterCollector.add(Ingredient.fromStacks(new ItemStack(Blocks.HOPPER, 1)));
-		recipeLightShooterCollector.add(Ingredient.fromStacks(new ItemStack(ModItems.light_shooter, 1)));
+		if (ConfigManager.lightShootersEnabled) {
+			recipeLightShooterCollector.add(Ingredient.fromStacks(new ItemStack(Blocks.HOPPER, 1)));
+			recipeLightShooterCollector.add(Ingredient.fromStacks(new ItemStack(ModItems.light_shooter, 1)));
+		}
 	}
 		
 	private static void registerMiscs() {
@@ -35,13 +37,18 @@ public class ModRecipe {
 	public static void onRecipeRegister(RegistryEvent.Register<IRecipe> event){
 		registerMiscs();
 		
-		event.getRegistry().register(new RecipeLightShooterCollector(recipeLightShooterCollector));
-		event.getRegistry().register(new RecipePackingGlueReloader());
-		event.getRegistry().register(new RecipeMiningBackpack());
-		if (ConfigManager.enableInfiniteWater)
-			event.getRegistry().register(new RecipeWellNew());
-		else 
-			event.getRegistry().register(new RecipeWell());
+		if (ConfigManager.lightShootersEnabled)
+			event.getRegistry().register(new RecipeLightShooterCollector(recipeLightShooterCollector));
+		if (ConfigManager.glueEnabled)
+			event.getRegistry().register(new RecipePackingGlueReloader());
+		if (ConfigManager.miningBackpackEnabled)
+			event.getRegistry().register(new RecipeMiningBackpack());
+		if (ConfigManager.wellEnabled) {
+			if (ConfigManager.infiniteWaterEnabled)
+				event.getRegistry().register(new RecipeWellNew());
+			else 
+				event.getRegistry().register(new RecipeWell());
+		}
 	}
 	
 }

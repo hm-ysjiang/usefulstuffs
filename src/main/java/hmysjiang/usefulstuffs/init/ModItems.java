@@ -82,8 +82,7 @@ public class ModItems {
 		belt_fiery_lily = new ItemFieryLilyBelt();
 		backpack = new ItemBackpack();
 		mining_backpack = new ItemMiningBackpack();
-		if (ConfigManager.enableInfiniteWater)
-			infinite_water = new ItemInfiniteWater();
+		infinite_water = new ItemInfiniteWater();
 		milk_bag = new ItemMilkBag();
 		cheese = new ItemCheese();
 		light_bow = new ItemLightBow();
@@ -94,33 +93,70 @@ public class ModItems {
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
-		register(event.getRegistry(), water_blacklist,
-				bento,
-				building_wand,
-				building_wand_infinite,
-				light_shooter,
-				light_shooter_collecter,
-				packing_glue,
-				building_wizard,
+		IForgeRegistry<Item> registry = event.getRegistry();
+		if (ConfigManager.wellEnabled) {
+			registry.register(water_blacklist);
+		}
+		if (ConfigManager.bentoEnabled) {
+			registry.register(bento);
+		}
+		if (ConfigManager.buildingWandsEnabled) {
+			registry.register(building_wand);
+			registry.register(building_wand_infinite);
+			registry.register(building_wizard);
+		}
+		if (ConfigManager.lightShootersEnabled) {
+			registry.register(light_shooter);
+			registry.register(light_shooter_collecter);
+		}
+		if (ConfigManager.glueEnabled) {
+			registry.register(packing_glue);
+		}
+		if (ConfigManager.lilyBeltEnabled) {
+			registry.register(belt_lily);
+		}
+		if (ConfigManager.bagStorageEnabled) {
+			registry.register(bag_storage);
+		}
+		if (ConfigManager.tFlipFlopEnabled) {
+			registry.register(flipflop_core);
+		}
+		if (ConfigManager.berryEnabled) {
+			registry.register(berry);
+		}
+		if (ConfigManager.fieryLilyEnabled) {
+			registry.register(belt_fiery_lily);
+		}
+		if (ConfigManager.backpackEnabled) {
+			registry.register(backpack);
+		}
+		if (ConfigManager.miningBackpackEnabled) {
+			registry.register(mining_backpack);
+		}
+		if (ConfigManager.infiniteWaterEnabled) {
+			registry.register(infinite_water);
+		}
+		if (ConfigManager.milkBagEnabled) {
+			registry.register(milk_bag);
+		}
+		if (ConfigManager.milkFermenterEnabled) {
+			registry.register(cheese);
+		}
+		if (ConfigManager.lightBowEnabled) {
+			registry.register(light_bow);
+		}
+		if (ConfigManager.lightBatteryEnabled) {
+			registry.register(light_battery);
+		}
+		if (ConfigManager.universalUserEnabled) {
+			registry.register(universal_core);
+		}
+		register(registry, 
 				compact_storage_unit,
 				umbrella,
-				belt_lily,
-				bag_storage,
-				flipflop_core,
-				berry,
-				belt_fiery_lily,
-				backpack,
-				mining_backpack,
-				milk_bag,
-				cheese,
-				light_bow,
-				light_battery,
-				triangular_prism,
-				universal_core);
-		if (ConfigManager.enableInfiniteWater)
-			event.getRegistry().register(infinite_water);
+				triangular_prism);
 		
-		event.getRegistry().registerAll(itemblocks.toArray(new Item[0]));
+		registry.registerAll(itemblocks.toArray(new Item[0]));
 	}
 	
 	@SubscribeEvent
@@ -141,8 +177,7 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(belt_fiery_lily);
 		UsefulStuffs.proxy.registerItemRenders(backpack);
 		UsefulStuffs.proxy.registerItemRenders(mining_backpack);
-		if (ConfigManager.enableInfiniteWater)
-			UsefulStuffs.proxy.registerItemRenders(infinite_water);
+		UsefulStuffs.proxy.registerItemRenders(infinite_water);
 		UsefulStuffs.proxy.registerItemRenders(milk_bag);
 		UsefulStuffs.proxy.registerItemRenders(cheese);
 		UsefulStuffs.proxy.registerItemRenders(light_bow);

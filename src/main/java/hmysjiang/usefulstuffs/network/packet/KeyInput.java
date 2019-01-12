@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.network.packet;
 
 import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.baubles.ItemBackpack;
 import hmysjiang.usefulstuffs.items.baubles.ItemStorageBag;
@@ -45,9 +46,9 @@ public class KeyInput implements IMessage {
 					EntityPlayer player = ctx.getServerHandler().player;
 					IBaublesItemHandler baubleInv = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
 					if (player != null && baubleInv.getStackInSlot(5) != null) {
-						if (baubleInv.getStackInSlot(5).isItemEqual(new ItemStack(ModItems.bag_storage)))
+						if (ConfigManager.bagStorageEnabled && baubleInv.getStackInSlot(5).isItemEqual(new ItemStack(ModItems.bag_storage)))
 							ItemStorageBag.onKeyBindingPressed(player, baubleInv.getStackInSlot(5));
-						else if (baubleInv.getStackInSlot(5).getItem() instanceof ItemBackpack)
+						else if ((ConfigManager.backpackEnabled || ConfigManager.miningBackpackEnabled) && baubleInv.getStackInSlot(5).getItem() instanceof ItemBackpack)
 							ItemBackpack.onKeyBindingPressed(player);
 					}
 					break;

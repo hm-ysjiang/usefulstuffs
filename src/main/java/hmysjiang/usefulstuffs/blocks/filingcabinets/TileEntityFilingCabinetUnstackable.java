@@ -1,4 +1,4 @@
-package hmysjiang.usefulstuffs.blocks.filingcabinet;
+package hmysjiang.usefulstuffs.blocks.filingcabinets;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,11 +9,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityFilingCabinet extends TileEntity {
+public class TileEntityFilingCabinetUnstackable extends TileEntity {
 
 	private Handler handler;
 	
-	public TileEntityFilingCabinet() {
+	public TileEntityFilingCabinetUnstackable() {
 		handler = new Handler(1080);
 	}
 	

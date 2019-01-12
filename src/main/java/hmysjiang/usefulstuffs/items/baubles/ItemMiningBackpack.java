@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.items.baubles;
 import java.util.List;
 
 import baubles.api.cap.BaublesCapabilities;
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
@@ -59,28 +60,30 @@ public class ItemMiningBackpack extends ItemBackpack {
 	
 	@SubscribeEvent
 	public static void onPlayerPickUp(EntityItemPickupEvent event) {
-		if (event.getEntityPlayer() != null) {
-			ItemStack stack = event.getItem().getItem().copy();
-			EntityPlayer player = event.getEntityPlayer();
-			if (player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5).getItem() == ModItems.mining_backpack) {
-				ItemStack backpack = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5);
-				if (backpack.getTagCompound() == null) ItemMiningBackpack.setDefaultTag(backpack);
-				if (backpack.getTagCompound().getBoolean("Auto")) {
-					ItemStackHandler filter = new ItemStackHandler(18);
-					filter.deserializeNBT(backpack.getTagCompound().getCompoundTag("Filter"));
-					if (preCheck(stack, filter)) return;
-					if (check(stack) || postCheck(stack, filter)) {
-						ItemStackHandler handler = new ItemStackHandler(54);
-						handler.deserializeNBT(backpack.getTagCompound().getCompoundTag("Cont"));
-						for (int i = 0 ; i<handler.getSlots() ; i++) {
-							stack = handler.insertItem(i, stack.copy(), false);
-							if (stack.getCount() == 0) {
-								break;
+		if (ConfigManager.miningBackpackEnabled) {
+			if (event.getEntityPlayer() != null) {
+				ItemStack stack = event.getItem().getItem().copy();
+				EntityPlayer player = event.getEntityPlayer();
+				if (player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5).getItem() == ModItems.mining_backpack) {
+					ItemStack backpack = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null).getStackInSlot(5);
+					if (backpack.getTagCompound() == null) ItemMiningBackpack.setDefaultTag(backpack);
+					if (backpack.getTagCompound().getBoolean("Auto")) {
+						ItemStackHandler filter = new ItemStackHandler(18);
+						filter.deserializeNBT(backpack.getTagCompound().getCompoundTag("Filter"));
+						if (preCheck(stack, filter)) return;
+						if (check(stack) || postCheck(stack, filter)) {
+							ItemStackHandler handler = new ItemStackHandler(54);
+							handler.deserializeNBT(backpack.getTagCompound().getCompoundTag("Cont"));
+							for (int i = 0 ; i<handler.getSlots() ; i++) {
+								stack = handler.insertItem(i, stack.copy(), false);
+								if (stack.getCount() == 0) {
+									break;
+								}
 							}
+							event.getItem().getItem().setCount(stack.getCount());
+							backpack.getTagCompound().setTag("Cont", handler.serializeNBT());
+							return;
 						}
-						event.getItem().getItem().setCount(stack.getCount());
-						backpack.getTagCompound().setTag("Cont", handler.serializeNBT());
-						return;
 					}
 				}
 			}

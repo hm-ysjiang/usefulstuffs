@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "2.4.4"
+version = "2.5.0"
 group = "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "UsefulStuffs-1.12.2"
 
@@ -34,7 +34,25 @@ minecraft {
     useDepAts = true
 }
 
+repositories {
+  maven {
+    // location of the maven that hosts JEI files
+    name = "Progwml6 maven"
+    url = "http://dvs1.progwml6.com/files/maven"
+  }
+  maven {
+    // location of a maven mirror for JEI files, as a fallback
+    name = "ModMaven"
+    url = "modmaven.k-4u.nl"
+  }
+}
+
 dependencies {
+    // compile against the JEI API but do not include it at runtime
+    deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
+    // at runtime, use the full JEI jar
+    runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

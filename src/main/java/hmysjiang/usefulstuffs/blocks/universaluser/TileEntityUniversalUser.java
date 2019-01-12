@@ -169,14 +169,13 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 						break;
 					}
 				} catch(Exception exception) {}
-				refPlayer.get().setSneaking(false);
-				resetWorkTime();
 				for (int i = 0 ; i<9 ; i++) {
 					if (!(ItemStack.areItemStacksEqual(inventory.getStackInSlot(i), refPlayer.get().inventory.getStackInSlot(i))
 							&& ItemStack.areItemStackTagsEqual(inventory.getStackInSlot(i), refPlayer.get().inventory.getStackInSlot(i)))) {
 						inventory.setStackInSlot(i, refPlayer.get().inventory.getStackInSlot(i).copy());
 					}
 				}
+				resetWorkTime();
 				this.markDirty();
 			}
 			else {

@@ -25,7 +25,7 @@ public class UsefulStuffs {
 	public static final CreativeTabs TAB = new CreativeTabs(Reference.MOD_ID) {
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(ModBlocks.filing_cabinet);
+			return new ItemStack(ModBlocks.filing_cabinet_unstackable);
 		}
 	};
 	

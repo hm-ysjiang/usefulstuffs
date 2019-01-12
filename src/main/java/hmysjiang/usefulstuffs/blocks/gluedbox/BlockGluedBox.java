@@ -36,11 +36,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGluedBox extends Block implements ITileEntityProvider {
 
-	public BlockGluedBox() {
+	public BlockGluedBox(boolean enabled) {
 		super(BlockMaterials.GLUEDBOX);
 		setUnlocalizedName(Reference.ModBlocks.GLUED_BOX.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.GLUED_BOX.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setSoundType(SoundType.SLIME);
 		setDefaultSlipperiness(0.8F);
 	}
@@ -66,7 +67,7 @@ public class BlockGluedBox extends Block implements ITileEntityProvider {
 			if (tile != null && tile instanceof TileEntityGluedBox) {
 				NBTTagCompound compound = ((TileEntityGluedBox)tile).getContent();
 				if (compound != null)
-					drop.setTagCompound(compound);	
+					drop.setTagCompound(compound);
 				worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
 			}
 		}

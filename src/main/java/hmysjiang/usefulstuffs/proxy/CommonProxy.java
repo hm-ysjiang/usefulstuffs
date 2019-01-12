@@ -1,10 +1,11 @@
 package hmysjiang.usefulstuffs.proxy;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
 import hmysjiang.usefulstuffs.blocks.fermenter.TileEntityMilkFermenter;
-import hmysjiang.usefulstuffs.blocks.filingcabinet.TileEntityFilingCabinet;
+import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.blocks.gluedbox.TileEntityGluedBox;
 import hmysjiang.usefulstuffs.blocks.playerdetector.TileEntityPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.TileEntityPortalMuffler;
@@ -48,8 +49,10 @@ public class CommonProxy {
 	public void init() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(UsefulStuffs.instance, new GuiHandler());
 		OreDictHelper.init();
-		GameRegistry.registerWorldGenerator(new BerryBushGenerator(), 0);
-		GameRegistry.registerWorldGenerator(new FieryLilyGenerator(), 0);
+		if (ConfigManager.berryEnabled)
+			GameRegistry.registerWorldGenerator(new BerryBushGenerator(), 0);
+		if (ConfigManager.fieryLilyEnabled)
+			GameRegistry.registerWorldGenerator(new FieryLilyGenerator(), 0);
 		
 		registerItemVariants();
 	}
@@ -65,16 +68,26 @@ public class CommonProxy {
 	public void registerItemVariants() {}
 	
 	private void registerTileEntity() {
-		GameRegistry.registerTileEntity(TileEntityCampfire.class, new ResourceLocation(Reference.MOD_ID, "campfire"));
-		GameRegistry.registerTileEntity(TileEntityFilingCabinet.class, new ResourceLocation(Reference.MOD_ID, "filing_cabinet"));
-		GameRegistry.registerTileEntity(TileEntityGluedBox.class, new ResourceLocation(Reference.MOD_ID, "glued_box"));
-		GameRegistry.registerTileEntity(TileEntityRainDetector.class, new ResourceLocation(Reference.MOD_ID, "rain_detector"));
-		GameRegistry.registerTileEntity(TileEntityTFlipFlop.class, new ResourceLocation(Reference.MOD_ID, "t_flipflop"));
-		GameRegistry.registerTileEntity(TileEntityWell.class, new ResourceLocation(Reference.MOD_ID, "well"));
-		GameRegistry.registerTileEntity(TileEntityPortalMuffler.class, new ResourceLocation(Reference.MOD_ID, "portal_muffler"));
-		GameRegistry.registerTileEntity(TileEntityPlayerDetector.class, new ResourceLocation(Reference.MOD_ID, "player_detector"));
-		GameRegistry.registerTileEntity(TileEntityMilkFermenter.class, new ResourceLocation(Reference.MOD_ID, "milk_fermenter"));
-		GameRegistry.registerTileEntity(TileEntityUniversalUser.class, new ResourceLocation(Reference.MOD_ID, "universal_user"));
+		if (ConfigManager.campfireEnabled)
+			GameRegistry.registerTileEntity(TileEntityCampfire.class, new ResourceLocation(Reference.MOD_ID, "campfire"));
+		if (ConfigManager.filingCabinetUnstackableEnabled)
+			GameRegistry.registerTileEntity(TileEntityFilingCabinetUnstackable.class, new ResourceLocation(Reference.MOD_ID, "filing_cabinet"));
+		if (ConfigManager.glueEnabled)
+			GameRegistry.registerTileEntity(TileEntityGluedBox.class, new ResourceLocation(Reference.MOD_ID, "glued_box"));
+		if (ConfigManager.rainDetectorEnabled)
+			GameRegistry.registerTileEntity(TileEntityRainDetector.class, new ResourceLocation(Reference.MOD_ID, "rain_detector"));
+		if (ConfigManager.tFlipFlopEnabled)
+			GameRegistry.registerTileEntity(TileEntityTFlipFlop.class, new ResourceLocation(Reference.MOD_ID, "t_flipflop"));
+		if (ConfigManager.wellEnabled)
+			GameRegistry.registerTileEntity(TileEntityWell.class, new ResourceLocation(Reference.MOD_ID, "well"));
+		if (ConfigManager.portalMufflerEnabled)
+			GameRegistry.registerTileEntity(TileEntityPortalMuffler.class, new ResourceLocation(Reference.MOD_ID, "portal_muffler"));
+		if (ConfigManager.playerDetectorEnabled)
+			GameRegistry.registerTileEntity(TileEntityPlayerDetector.class, new ResourceLocation(Reference.MOD_ID, "player_detector"));
+		if (ConfigManager.milkBagEnabled)
+			GameRegistry.registerTileEntity(TileEntityMilkFermenter.class, new ResourceLocation(Reference.MOD_ID, "milk_fermenter"));
+		if (ConfigManager.universalUserEnabled)
+			GameRegistry.registerTileEntity(TileEntityUniversalUser.class, new ResourceLocation(Reference.MOD_ID, "universal_user"));
 	}
 	
 }

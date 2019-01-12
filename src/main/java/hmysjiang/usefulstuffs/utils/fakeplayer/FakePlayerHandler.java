@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class FakePlayerHandler {
 	
 	public static final FakePlayerHandler INSTANCE = new FakePlayerHandler();
-	private Map<Integer, List<WeakReference<USFakePlayer>>> map;
+	private Map<Integer, List<USFakePlayer>> map;
 	
 	public FakePlayerHandler() {
 		map = new HashMap<>();
@@ -26,31 +26,29 @@ public class FakePlayerHandler {
 	
 	public WeakReference<USFakePlayer> getFakePlayer(@Nonnull WorldServer world){
 		int id = world.provider.getDimension();
-		WeakReference<USFakePlayer> ref = new WeakReference<USFakePlayer>(new USFakePlayer(world, Reference.MOD_PROFILE));
+		USFakePlayer new_p = new USFakePlayer(world, Reference.MOD_PROFILE);
 		if (!map.containsKey(id)) {
-			map.put(id, new ArrayList<WeakReference<USFakePlayer>>());
+			map.put(id, new ArrayList<USFakePlayer>());
 		}
-		map.get(id).add(ref);
-		return ref;
+		map.get(id).add(new_p);
+		return new WeakReference<USFakePlayer>(new_p);
 	}
 	
 	public WeakReference<USFakePlayer> getFakePlayer(@Nonnull WorldServer world, double x, double y, double z, EnumFacing facing){
 		int id = world.provider.getDimension();
-		WeakReference<USFakePlayer> ref = new WeakReference<USFakePlayer>(new USFakePlayer(world, Reference.MOD_PROFILE, x, y, z, facing));
+		USFakePlayer new_p = new USFakePlayer(world, Reference.MOD_PROFILE, x, y, z, facing);
 		if (!map.containsKey(id)) {
-			map.put(id, new ArrayList<WeakReference<USFakePlayer>>());
+			map.put(id, new ArrayList<USFakePlayer>());
 		}
-		map.get(id).add(ref);
-		return ref;
+		map.get(id).add(new_p);
+		return new WeakReference<USFakePlayer>(new_p);
 	}
 	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onWorldUnload(WorldEvent.Unload event) {
 		if (event.getWorld() instanceof WorldServer) {
 			if (map.containsKey(event.getWorld().provider.getDimension())) {
-				for (WeakReference<USFakePlayer> ref: map.get(event.getWorld().provider.getDimension())) {
-					ref.clear();
-				}
+				map.get(event.getWorld().provider.getDimension()).clear();
 				map.remove(event.getWorld().provider.getDimension());
 			}
 		}

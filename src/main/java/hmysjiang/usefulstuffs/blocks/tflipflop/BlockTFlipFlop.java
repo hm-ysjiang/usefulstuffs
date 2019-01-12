@@ -1,12 +1,10 @@
 package hmysjiang.usefulstuffs.blocks.tflipflop;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,11 +23,12 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0, 0, 1, 0.0625 * 2, 1);
 
-	public BlockTFlipFlop() {
+	public BlockTFlipFlop(boolean enabled) {
 		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.T_FLIPFLOP.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.T_FLIPFLOP.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setHardness(1.0F);
 	}
 	

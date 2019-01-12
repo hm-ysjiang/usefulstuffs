@@ -3,12 +3,8 @@ package hmysjiang.usefulstuffs.blocks.well;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.typesafe.config.Config;
-
-import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

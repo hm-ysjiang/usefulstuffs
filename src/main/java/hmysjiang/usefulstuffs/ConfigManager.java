@@ -2,64 +2,100 @@ package hmysjiang.usefulstuffs;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.common.MinecraftForge;
+import hmysjiang.usefulstuffs.init.ModBlocks;
+import hmysjiang.usefulstuffs.init.ModItems;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ConfigManager {
 	
+	private static Configuration config;
+	private static List<String> orderBlock;
+	private static List<String> orderItem;
+	private static List<String> orderGeneral;
+	private static List<String> orderEnable;
+	public static final String FILE_NAME = "usefulstuffs.cfg";
+	public static final String CATEGORY_BLOCK = "Blocks";
+	public static final String CATEGORY_ITEM = "Items";
+	public static final String CATEGORY_GENERAL = "General";
+	public static final String CATEGORY_ENABLE = "Enable";
+	
+	//Blocks
 	public static int bushGrowthChance;
 	public static int[] bush_banned_biomes;
 	public static int[] bush_banned_dims;
 	public static int bushSpawnMinHeight;
 	public static int bushSpawnRate;
+	public static boolean bushDropsAfterMature;
 	public static int playerDetectorRange;
 	public static int portalMufflerRange;
 	public static int wellTransRate;
 	public static int wellTransRange;
+	public static boolean enableCampfireCraft;
 	public static boolean campfireNeedsFuel;
 	public static boolean doPlacementCheck;
 	public static int milkFermentTime;
 	public static boolean onlyDetectOneSide;
 	
+	//Items
 	public static boolean bentoSpeed;
 	public static int buildingwandDurability;
 	public static int buildingwandRange;
 	public static int buildingwandRangeInfinite;
 	public static int shooterCD;
 	public static int glueDurability;
+	public static String[] glueBlackList;
 	public static int fierylilySpawnRate;
-	public static boolean enableInfiniteWater;
 	public static boolean fermentedMilkCauseNegativeEffect;
 	public static boolean cheeseDoesBuff;
 	public static boolean shooterAcceptBattery;
 	public static int shooterUseBattery;
 	
+	//General
 	public static boolean chickenDropsFeather;
 	
-	private static Configuration config;
-	private static List<String> orderBlock;
-	private static List<String> orderItem;
-	private static List<String> orderGeneral;
-	public static final String FILE_NAME = "usefulstuffs.cfg";
-	public static final String CATEGORY_BLOCK = "Blocks";
-	public static final String CATEGORY_ITEM = "Items";
-	public static final String CATEGORY_GENERAL = "General";
+	//Enable
+	public static boolean potionLilyEnabled;
+	public static boolean potionFieryLilyEnabled;
+	public static boolean potionParachuteEnabled;
+	public static boolean campfireEnabled;
+	public static boolean filingCabinetUnstackableEnabled;
+	public static boolean glueEnabled;
+	public static boolean lightBulbEnabled;
+	public static boolean rainDetectorEnabled;
+	public static boolean tFlipFlopEnabled;
+	public static boolean wellEnabled;
+	public static boolean berryEnabled;
+	public static boolean portalMufflerEnabled;
+	public static boolean playerDetectorEnabled;
+	public static boolean fieryLilyEnabled;
+	public static boolean milkFermenterEnabled;
+	public static boolean universalUserEnabled;
+	public static boolean bentoEnabled;
+	public static boolean buildingWandsEnabled;
+	public static boolean lightShootersEnabled;
+	public static boolean lilyBeltEnabled;
+	public static boolean bagStorageEnabled;
+	public static boolean backpackEnabled;
+	public static boolean miningBackpackEnabled;
+	public static boolean infiniteWaterEnabled;
+	public static boolean milkBagEnabled;
+	public static boolean lightBowEnabled;
+	public static boolean lightBatteryEnabled;
+	
 	
 	public static Configuration getConfig() {
 		return config;
 	}
 	
-	public static void loadConfigFile() {	//preInit
+	public static void loadConfigFile() {
 		File configfile = new File(Loader.instance().getConfigDir(), FILE_NAME);
 		config = new Configuration(configfile);
 		loadConfig();
@@ -69,10 +105,24 @@ public class ConfigManager {
 		orderBlock = new ArrayList<String>();
 		orderItem = new ArrayList<String>();
 		orderGeneral = new ArrayList<String>();
+		orderEnable = new ArrayList<String>();
 		config.load();
 		
+		loadEnableProperties();
+		loadBlocksProperties();
+		loadItemsProperties();
+		loadGeneralProperties();
 		
-		//Blocks
+		config.setCategoryPropertyOrder(CATEGORY_BLOCK, orderBlock);
+		config.setCategoryPropertyOrder(CATEGORY_ITEM, orderItem);
+		config.setCategoryPropertyOrder(CATEGORY_GENERAL, orderGeneral);
+		config.setCategoryPropertyOrder(CATEGORY_ENABLE, orderEnable);
+		
+		if (config.hasChanged())
+			config.save();
+	}
+	
+	private static void loadBlocksProperties() {
 		Property propertyBushGrowthChance = config.get(CATEGORY_BLOCK, "bush_growth_chance", 12);
 		propertyBushGrowthChance.setComment("When growth tick triggers, there is a chance of 1/n that a bush will grow. DEFAULT=12, MIN=7");
 		propertyBushGrowthChance.setMinValue(7);
@@ -80,13 +130,13 @@ public class ConfigManager {
 		propertyBushGrowthChance.set(bushGrowthChance);
 		orderBlock.add(propertyBushGrowthChance.getName());
 		
-		Property propertyBushBannedBiomes = config.get(CATEGORY_BLOCK, "bush_banned_biomes", new int[] {3, 11, 12, 25, 26, 140, 158});
+		Property propertyBushBannedBiomes = config.get(CATEGORY_BLOCK, "bush_banned_biome_ids", new int[] {3, 11, 12, 25, 26, 140, 158});
 		propertyBushBannedBiomes.setComment("Berry bushes will not generate in these biomes");
 		bush_banned_biomes = propertyBushBannedBiomes.getIntList();
 		propertyBushBannedBiomes.set(bush_banned_biomes);
 		orderBlock.add(propertyBushBannedBiomes.getName());
 		
-		Property propertyBushBannedDims = config.get(CATEGORY_BLOCK, "bush_banned_dims", new int[] {1, -1});
+		Property propertyBushBannedDims = config.get(CATEGORY_BLOCK, "bush_banned_dim_ids", new int[] {1, -1});
 		propertyBushBannedDims.setComment("Berry bushes will not generate in these dimensions");
 		bush_banned_dims = propertyBushBannedDims.getIntList();
 		propertyBushBannedDims.set(bush_banned_dims);
@@ -106,6 +156,12 @@ public class ConfigManager {
 		bushSpawnRate = propertyBushSpawnRate.getInt();
 		propertyBushSpawnRate.set(bushSpawnRate);
 		orderBlock.add(propertyBushSpawnRate.getName());
+		
+		Property propertyBushDropMature = config.get(CATEGORY_BLOCK, "bush_drop_mature", false);
+		propertyBushDropMature.setComment("If this is set to true, a mature bush will drop a berry on the ground at grow tick. DEFAULT=false");
+		bushDropsAfterMature = propertyBushDropMature.getBoolean();
+		propertyBushDropMature.set(bushDropsAfterMature);
+		orderBlock.add(propertyBushDropMature.getName());
 		
 		Property propertyPlayerDetectorRange = config.get(CATEGORY_BLOCK, "player_detector_range", 1);
 		propertyPlayerDetectorRange.setComment("The radius of the player detector. DEFAULT=1, MIN=1");
@@ -137,6 +193,12 @@ public class ConfigManager {
 		propertyWellTransRange.set(wellTransRange);
 		orderBlock.add(propertyWellTransRange.getName());
 		
+		Property propertyCampfireCraft = config.get(CATEGORY_BLOCK, "campfire_craftable", true);
+		propertyCampfireCraft.setComment("Is the campfire craftable? DEFAULT=true REQUIRE enable_campfire to be true");
+		enableCampfireCraft = propertyCampfireCraft.getBoolean() && campfireEnabled;
+		propertyCampfireCraft.set(enableCampfireCraft);
+		orderBlock.add(propertyCampfireCraft.getName());
+		
 		Property propertyCampfireFuel = config.get(CATEGORY_BLOCK, "campfire_needs_fuel", true);
 		propertyCampfireFuel.setComment("Does campfire requires fuel to work? DEFAULT=true");
 		campfireNeedsFuel = propertyCampfireFuel.getBoolean();
@@ -151,10 +213,16 @@ public class ConfigManager {
 		orderBlock.add(propertyFieryLilySpawnRate.getName());
 		
 		Property propertyDoPlacementCheck = config.get(CATEGORY_BLOCK, "glued_box_placement_check", true);
-		propertyDoPlacementCheck.setComment("Should the glued box check for the placement logic when being opened? DEFAULT=true NOTE:This may behavier strangely on non-full blocks");
+		propertyDoPlacementCheck.setComment("Should the glued box check for the placement logic when being opened? DEFAULT=true NOTE:This may behave strangely on non-full blocks");
 		doPlacementCheck = propertyDoPlacementCheck.getBoolean();
 		propertyDoPlacementCheck.set(doPlacementCheck);
 		orderBlock.add(propertyDoPlacementCheck.getName());
+		
+		Property propertyGlueBlackList = config.get(CATEGORY_BLOCK, "glue_blacklist", new String[] {"minecraft:dragon_egg"});
+		propertyGlueBlackList.setComment("Blocks that packing glue cannot pick up, format: \"<modname>:<blockname>\"");
+		glueBlackList = propertyGlueBlackList.getStringList();
+		propertyGlueBlackList.set(glueBlackList);
+		orderBlock.add(propertyGlueBlackList.getName());
 		
 		Property propertyMilkFermentTime = config.get(CATEGORY_BLOCK, "milk_ferment_time", 6000);
 		propertyMilkFermentTime.setComment("How many ticks does it take to ferment a bucket of milk into cheese? DEFAULT=6000");
@@ -169,8 +237,9 @@ public class ConfigManager {
 		onlyDetectOneSide = propertyOnlyDetectOneSide.getBoolean();
 		propertyOnlyDetectOneSide.set(onlyDetectOneSide);
 		orderBlock.add(propertyOnlyDetectOneSide.getName());
-		
-		//items
+	}
+	
+	private static void loadItemsProperties() {
 		Property propertyBentoSpeed = config.get(CATEGORY_ITEM, "bento_speed", true);
 		propertyBentoSpeed.setComment("Should the max using duration of bento simulates its content? DEFAULT=true");
 		bentoSpeed = propertyBentoSpeed.getBoolean();
@@ -212,12 +281,6 @@ public class ConfigManager {
 		propertyGlueDurability.set(glueDurability);
 		orderItem.add(propertyGlueDurability.getName());
 		
-		Property propertyEnableInfiniteWater = config.get(CATEGORY_ITEM, "enable_infinite_water", true);
-		propertyEnableInfiniteWater.setComment("Should the item usefulstuffs:infinite_water be registered into the game? DEFAUT=true");
-		enableInfiniteWater = propertyEnableInfiniteWater.getBoolean();
-		propertyEnableInfiniteWater.set(enableInfiniteWater);
-		orderItem.add(propertyEnableInfiniteWater.getName());
-		
 		Property propertyFermentedMilkNegativeEffect = config.get(CATEGORY_ITEM, "fermented_milk_negative_effect", true);
 		propertyFermentedMilkNegativeEffect.setComment("Does drinking a bucket of partially fermented milk causes negative effect? DEFAUT=true");
 		fermentedMilkCauseNegativeEffect = propertyFermentedMilkNegativeEffect.getBoolean();
@@ -241,22 +304,178 @@ public class ConfigManager {
 		shooterUseBattery = propertyShooterUseBattery.getInt();
 		propertyShooterUseBattery.set(shooterUseBattery);
 		orderItem.add(propertyShooterUseBattery.getName());
-		
-		//General
+	}
+	
+	private static void loadGeneralProperties() {
 		Property propertyChickenDropsFeather = config.get(CATEGORY_GENERAL, "chicken_drops_feather", true);
 		propertyChickenDropsFeather.setComment("Does chicken drops feather while falling? DEFAULT=true");
 		chickenDropsFeather = propertyChickenDropsFeather.getBoolean();
 		propertyChickenDropsFeather.set(chickenDropsFeather);
 		orderGeneral.add(propertyChickenDropsFeather.getName());
+	}
+	
+	private static void loadEnableProperties() {		
+		Property propertyPotionLilyEnabled = config.get(CATEGORY_ENABLE, "enable_potion_lily", true);
+		propertyPotionLilyEnabled.setComment("Enable Potion Effect Li-ly?");
+		potionLilyEnabled = propertyPotionLilyEnabled.getBoolean();
+		propertyPotionLilyEnabled.set(potionLilyEnabled);
+		orderEnable.add(propertyPotionLilyEnabled.getName());
 		
+		Property propertyParachuteEnabled = config.get(CATEGORY_ENABLE, "enable_potion_parachute", true);
+		propertyParachuteEnabled.setComment("Enable Potion Effect Parachute?");
+		potionParachuteEnabled = propertyParachuteEnabled.getBoolean();
+		propertyParachuteEnabled.set(potionParachuteEnabled);
+		orderEnable.add(propertyParachuteEnabled.getName());
 		
-		config.setCategoryPropertyOrder(CATEGORY_BLOCK, orderBlock);
-		config.setCategoryPropertyOrder(CATEGORY_ITEM, orderItem);
-		config.setCategoryPropertyOrder(CATEGORY_GENERAL, orderGeneral);
+		Property propertyCampfireEnabled = config.get(CATEGORY_ENABLE, "enable_campfire", true);
+		propertyCampfireEnabled.setComment("Enable Campfire of Traverller's Wisdom?");
+		campfireEnabled = propertyCampfireEnabled.getBoolean();
+		propertyCampfireEnabled.set(campfireEnabled);
+		orderEnable.add(propertyCampfireEnabled.getName());
 		
+		Property propertyFilingCabinetUnstackableEnabled = config.get(CATEGORY_ENABLE, "enable_unstackable_filing_cabinet", true);
+		propertyFilingCabinetUnstackableEnabled.setComment("Enable Unstackable Filing Cabinet?");
+		filingCabinetUnstackableEnabled = propertyFilingCabinetUnstackableEnabled.getBoolean();
+		propertyFilingCabinetUnstackableEnabled.set(filingCabinetUnstackableEnabled);
+		orderEnable.add(propertyFilingCabinetUnstackableEnabled.getName());
 		
-		if (config.hasChanged())
-			config.save();
+		Property propertyGlueEnabled = config.get(CATEGORY_ENABLE, "enable_glued", true);
+		propertyGlueEnabled.setComment("Enable Packing Glue and Glued Box?");
+		glueEnabled = propertyGlueEnabled.getBoolean();
+		propertyGlueEnabled.set(glueEnabled);
+		orderEnable.add(propertyGlueEnabled.getName());
+		
+		Property propertyLightBulbEnabled = config.get(CATEGORY_ENABLE, "enable_light_bulb", true);
+		propertyLightBulbEnabled.setComment("Enable Light Bulb?");
+		lightBulbEnabled = propertyLightBulbEnabled.getBoolean();
+		propertyLightBulbEnabled.set(lightBulbEnabled);
+		orderEnable.add(propertyLightBulbEnabled.getName());
+		
+		Property propertyRainDetectorEnabled = config.get(CATEGORY_ENABLE, "enable_rain_detector", true);
+		propertyRainDetectorEnabled.setComment("Enable Rain Detector?");
+		rainDetectorEnabled = propertyRainDetectorEnabled.getBoolean();
+		propertyRainDetectorEnabled.set(rainDetectorEnabled);
+		orderEnable.add(propertyRainDetectorEnabled.getName());
+		
+		Property propertyTFlipFlopEnabled = config.get(CATEGORY_ENABLE, "enable_t_flipflop", true);
+		propertyTFlipFlopEnabled.setComment("Enable T FlipFlop?");
+		tFlipFlopEnabled = propertyTFlipFlopEnabled.getBoolean();
+		propertyTFlipFlopEnabled.set(tFlipFlopEnabled);
+		orderEnable.add(propertyTFlipFlopEnabled.getName());
+		
+		Property propertyWellEnabled = config.get(CATEGORY_ENABLE, "enable_well", true);
+		propertyWellEnabled.setComment("Enable Well of Waterfall?");
+		wellEnabled = propertyWellEnabled.getBoolean();
+		propertyWellEnabled.set(wellEnabled);
+		orderEnable.add(propertyWellEnabled.getName());
+		
+		Property propertyBerryEnabled = config.get(CATEGORY_ENABLE, "enable_berries", true);
+		propertyBerryEnabled.setComment("Enable Berries and Berry Bushes?");
+		berryEnabled = propertyBerryEnabled.getBoolean();
+		propertyBerryEnabled.set(berryEnabled);
+		orderEnable.add(propertyBerryEnabled.getName());
+		
+		Property propertyPortalMufflerEnabled = config.get(CATEGORY_ENABLE, "enable_portal_muffler", true);
+		propertyPortalMufflerEnabled.setComment("Enable Portal Muffler?");
+		portalMufflerEnabled = propertyPortalMufflerEnabled.getBoolean();
+		propertyPortalMufflerEnabled.set(portalMufflerEnabled);
+		orderEnable.add(propertyPortalMufflerEnabled.getName());
+		
+		Property propertyPlayerDetectorEnabled = config.get(CATEGORY_ENABLE, "enable_player_detector", true);
+		propertyPlayerDetectorEnabled.setComment("Enable Player Detector?");
+		playerDetectorEnabled = propertyPlayerDetectorEnabled.getBoolean();
+		propertyPlayerDetectorEnabled.set(playerDetectorEnabled);
+		orderEnable.add(propertyPlayerDetectorEnabled.getName());
+		
+		Property propertyFieryLilyEnabled = config.get(CATEGORY_ENABLE, "enable_fiery_lily", true);
+		propertyFieryLilyEnabled.setComment("Enable Fiery Lily and Belt of Fiery Lily?");
+		fieryLilyEnabled = propertyFieryLilyEnabled.getBoolean();
+		propertyFieryLilyEnabled.set(fieryLilyEnabled);
+		orderEnable.add(propertyFieryLilyEnabled.getName());
+		
+		Property propertyPotionFieryLilyEnabled = config.get(CATEGORY_ENABLE, "enable_potion_fiery_lily", true);
+		propertyPotionFieryLilyEnabled.setComment("Enable Potion Effect Fiery Li-ly? REQUIRE enable_fiery_lily to be true");
+		potionFieryLilyEnabled = propertyPotionFieryLilyEnabled.getBoolean() && fieryLilyEnabled;
+		propertyPotionFieryLilyEnabled.set(potionFieryLilyEnabled);
+		orderEnable.add(propertyPotionFieryLilyEnabled.getName());
+		
+		Property propertyMilkBagEnabled = config.get(CATEGORY_ENABLE, "enable_milk_bag", true);
+		propertyMilkBagEnabled.setComment("Enable Milk Bag?");
+		milkBagEnabled = propertyMilkBagEnabled.getBoolean();
+		propertyMilkBagEnabled.set(milkBagEnabled);
+		orderEnable.add(propertyMilkBagEnabled.getName());
+		
+		Property propertyMilkFermenterEnabled = config.get(CATEGORY_ENABLE, "enable_milk_fermenter", true);
+		propertyMilkFermenterEnabled.setComment("Enable Milk Fermenter? REQUIRE enable_milk_bag to be true");
+		milkFermenterEnabled = propertyMilkFermenterEnabled.getBoolean() && milkBagEnabled;
+		propertyMilkFermenterEnabled.set(milkFermenterEnabled);
+		orderEnable.add(propertyMilkFermenterEnabled.getName());
+		
+		Property propertyUniversalUserEnabled = config.get(CATEGORY_ENABLE, "enable_universal_user", true);
+		propertyUniversalUserEnabled.setComment("Enable Universal User?");
+		universalUserEnabled = propertyUniversalUserEnabled.getBoolean();
+		propertyUniversalUserEnabled.set(universalUserEnabled);
+		orderEnable.add(propertyUniversalUserEnabled.getName());
+		
+		Property propertyBentoEnabled = config.get(CATEGORY_ENABLE, "enable_bento_box", true);
+		propertyBentoEnabled.setComment("Enable Bento Box?");
+		bentoEnabled = propertyBentoEnabled.getBoolean();
+		propertyBentoEnabled.set(bentoEnabled);
+		orderEnable.add(propertyBentoEnabled.getName());
+		
+		Property propertyBuildingWandsEnabled = config.get(CATEGORY_ENABLE, "enable_building_wands", true);
+		propertyBuildingWandsEnabled.setComment("Enable Building Wands?");
+		buildingWandsEnabled = propertyBuildingWandsEnabled.getBoolean();
+		propertyBuildingWandsEnabled.set(buildingWandsEnabled);
+		orderEnable.add(propertyBuildingWandsEnabled.getName());
+		
+		Property propertyLightShootersEnabled = config.get(CATEGORY_ENABLE, "enable_light_shooters", true);
+		propertyLightShootersEnabled.setComment("Enable Light Shooters? REQUIRE enable_light_blub to be true");
+		lightShootersEnabled = propertyLightShootersEnabled.getBoolean() && lightBulbEnabled;
+		propertyLightShootersEnabled.set(lightShootersEnabled);
+		orderEnable.add(propertyLightShootersEnabled.getName());
+		
+		Property propertyLiliBeltEnabled = config.get(CATEGORY_ENABLE, "enable_lily_belt", true);
+		propertyLiliBeltEnabled.setComment("Enable Lily Belt?");
+		lilyBeltEnabled = propertyLiliBeltEnabled.getBoolean();
+		propertyLiliBeltEnabled.set(lilyBeltEnabled);
+		orderEnable.add(propertyLiliBeltEnabled.getName());
+		
+		Property propertyBagStorageEnabled = config.get(CATEGORY_ENABLE, "enable_storage_body", true);
+		propertyBagStorageEnabled.setComment("Enable Storage Bag?");
+		bagStorageEnabled = propertyBagStorageEnabled.getBoolean();
+		propertyBagStorageEnabled.set(bagStorageEnabled);
+		orderEnable.add(propertyBagStorageEnabled.getName());
+		
+		Property propertyBackpackEnabled = config.get(CATEGORY_ENABLE, "enable_backpack", true);
+		propertyBackpackEnabled.setComment("Enable Backpack?");
+		backpackEnabled = propertyBackpackEnabled.getBoolean();
+		propertyBackpackEnabled.set(backpackEnabled);
+		orderEnable.add(propertyBackpackEnabled.getName());
+		
+		Property propertyMiningBackpackEnabled = config.get(CATEGORY_ENABLE, "enable_mining_backpack", true);
+		propertyMiningBackpackEnabled.setComment("Enable Mining Backpack?");
+		miningBackpackEnabled = propertyMiningBackpackEnabled.getBoolean();
+		propertyMiningBackpackEnabled.set(miningBackpackEnabled);
+		orderEnable.add(propertyMiningBackpackEnabled.getName());
+		
+		Property propertyInfiniteWaterEnabled = config.get(CATEGORY_ENABLE, "enable_infinite_water", true);
+		propertyInfiniteWaterEnabled.setComment("Enable Infinite Water (Item)?");
+		infiniteWaterEnabled = propertyInfiniteWaterEnabled.getBoolean();
+		propertyInfiniteWaterEnabled.set(infiniteWaterEnabled);
+		orderEnable.add(propertyInfiniteWaterEnabled.getName());
+		
+		Property propertyLightBowEnabled = config.get(CATEGORY_ENABLE, "enable_light_bow", true);
+		propertyLightBowEnabled.setComment("Enable Light Bow?");
+		lightBowEnabled = propertyLightBowEnabled.getBoolean();
+		propertyLightBowEnabled.set(lightBowEnabled);
+		orderEnable.add(propertyLightBowEnabled.getName());
+		
+		Property propertyLightBatteryEnabled = config.get(CATEGORY_ENABLE, "enable_light_battery", true);
+		propertyLightBatteryEnabled.setComment("Enable Light Battery?");
+		lightBatteryEnabled = propertyLightBatteryEnabled.getBoolean();
+		propertyLightBatteryEnabled.set(lightBatteryEnabled);
+		orderEnable.add(propertyLightBatteryEnabled.getName());
 	}
 
 }

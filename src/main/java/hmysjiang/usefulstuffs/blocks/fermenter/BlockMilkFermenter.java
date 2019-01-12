@@ -4,7 +4,6 @@ import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
-import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
@@ -30,11 +29,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 public class BlockMilkFermenter extends Block implements ITileEntityProvider {
 	
-	public BlockMilkFermenter() {
+	public BlockMilkFermenter(boolean enabled) {
 		super(Material.CACTUS);
 		setUnlocalizedName(Reference.ModBlocks.MILK_FERMENTER.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.MILK_FERMENTER.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setSoundType(SoundType.PLANT);
 		setHardness(0.5F);
 	}

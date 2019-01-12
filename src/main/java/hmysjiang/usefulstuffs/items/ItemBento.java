@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemSoup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -148,8 +149,7 @@ public class ItemBento extends ItemFood {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(I18n.format("usefulstuffs.bento.tooltip_1"));
-		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.bento.tooltip_2"));
+		tooltip.add(I18n.format("usefulstuffs.bento.tooltip"));
 	}
 
 }

@@ -35,11 +35,12 @@ import net.minecraftforge.items.IItemHandler;
 
 public class BlockUniversalUser extends BlockDirectional implements ITileEntityProvider {
 
-	public BlockUniversalUser() {
+	public BlockUniversalUser(boolean enabled) {
 		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.UNIVERSAL_USER.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.UNIVERSAL_USER.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setHardness(1.5F);
 		setSoundType(SoundType.METAL);

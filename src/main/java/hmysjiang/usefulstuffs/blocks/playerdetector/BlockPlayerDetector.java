@@ -5,9 +5,7 @@ import java.util.Random;
 
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModItems;
-import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -60,11 +58,12 @@ public class BlockPlayerDetector extends BlockHorizontal implements ITileEntityP
 		}
 	}
 
-	public BlockPlayerDetector() {
+	public BlockPlayerDetector(boolean enabled) {
 		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.PLAYER_DETECTOR.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.PLAYER_DETECTOR.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setSoundType(SoundType.METAL);
 		setHardness(0.8F);
 		setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH).withProperty(POWERED, false).withProperty(UP, false));

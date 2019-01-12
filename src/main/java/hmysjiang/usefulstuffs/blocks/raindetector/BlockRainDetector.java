@@ -4,7 +4,6 @@ import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
@@ -24,11 +23,12 @@ import net.minecraft.world.World;
 public class BlockRainDetector extends Block implements ITileEntityProvider {
 	public static final PropertyBool RAINING = PropertyBool.create("raining");
 
-	public BlockRainDetector() {
+	public BlockRainDetector(boolean enabled) {
 		super(Material.ROCK);
 		setUnlocalizedName(Reference.ModBlocks.RAIN_DETECTOR.getUnlocalizedName());
 		setRegistryName(Reference.ModBlocks.RAIN_DETECTOR.getRegistryName());
-		ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		if (enabled)
+			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(RAINING, Boolean.valueOf(false)));
 		this.setHardness(1.5F);
 	}

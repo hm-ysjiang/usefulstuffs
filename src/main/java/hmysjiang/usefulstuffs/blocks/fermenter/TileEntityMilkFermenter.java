@@ -41,7 +41,7 @@ public class TileEntityMilkFermenter extends TileEntity implements ITickable, IC
 			else {
 				if (stack.getItemDamage() == 8) return;
 				workTime++;
-				workTime %= workTimeSeq * (8 - stack.getItemDamage());
+				workTime %= (int) (Math.sqrt((8 - stack.getItemDamage())) * workTimeSeq);
 				if (workTime == 0) {
 					if (stack.isItemEqualIgnoreDurability(new ItemStack(ModItems.milk_bag))) {
 						if (!stack.hasTagCompound()) ItemMilkBag.setDefaultTag(stack);

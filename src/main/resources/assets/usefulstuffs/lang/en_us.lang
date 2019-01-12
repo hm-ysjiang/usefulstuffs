@@ -42,13 +42,14 @@ item.usefulstuffs.cheese.name=Cheese
 item.usefulstuffs.light_bow.name=Bow of Sunshine
 item.usefulstuffs.light_battery.name=Light Battery
 item.usefulstuffs.triangular_prism.name=Triangular Prism
+item.usefulstuffs.universal_core.name=Universal Core
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
 tile.usefulstuffs.well.name=Well of Water Fall
 tile.usefulstuffs.rain_detector.name=Rain Detector
 tile.usefulstuffs.campfire.name=Campfire of Traveller's Wisdom
-tile.usefulstuffs.filing_cabinet.name=Filing Cabinet
+tile.usefulstuffs.filing_cabinet.name=Unstackable Filing Cabinet
 tile.usefulstuffs.t_flipflop.name=T-FlipFlop
 tile.usefulstuffs.glued_box.name=Glued Box
 tile.usefulstuffs.berrybush_white.name=White Berry Bush
@@ -92,15 +93,14 @@ usefulstuffs.campfire.tooltip_1=Place logs in the 5x5 area beneath it to boost t
 usefulstuffs.campfire.tooltip_2=Acquire from lighting a log up while sneaking
 usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
 usefulstuffs.filing_cabinet.tooltip_2=1080 slots for unstackable items
-usefulstuffs.bento.tooltip_1=Holds 6 stacks of food
-usefulstuffs.bento.tooltip_2=Seems to not return the bowls...
+usefulstuffs.bento.tooltip=Holds 6 stacks of food
 usefulstuffs.building_wand.tooltip_1=Place blocks from the block player looking at to the player
 usefulstuffs.building_wand.tooltip_2=Put block in offhand to specify blocks to be placed
 usefulstuffs.building_wand.tooltip_normal=MaxRange: %s blocks
 usefulstuffs.building_wand.tooltip_infinite=MaxRange: %1$s blocks, %2$sUnlimited durability
 usefulstuffs.glued_box.tooltip_1=Nothing is in the box
 usefulstuffs.glued_box.tooltip_2=If you get this in the game, report to the author
-usefulstuffs.glued_box.tooltip_3=Block Stored:%s
+usefulstuffs.glued_box.tooltip_3=Block Stored: %s
 usefulstuffs.packing_glue.tooltip_1=Cannot pick up unbreakable blocks!
 usefulstuffs.packing_glue.tooltip_2=Shift-Right click to pick a block up
 usefulstuffs.packing_glue.tooltip_3=The durability cost per operation depends on the block.Try to enchant Frugal on this
@@ -136,6 +136,42 @@ usefulstuffs.light_battery.tooltip_2=Charges itself when exposed to sunlight
 usefulstuffs.universal_user.tooltip=Do the re-charge thingy in one machine!
 
 
+usefulstuffs.waterfilter.jei_1=Prevent Well of Water Fall to insert water into a set of specific block's sides.
+usefulstuffs.waterfilter.jei_2=Shift-Right click a side of a block to bind, and Right click on the well to insert.
+usefulstuffs.light_shooter.jei_1=Shoots Light Bulbs. Shift-Right click to open the container.
+usefulstuffs.light_shooter.jei_2=Prefer drawing 250 light unit per shot if there is a light battery in the inventory.
+usefulstuffs.light_shooter.jei_c=Will automatically put the picked up light bulbs into its container.
+usefulstuffs.packing_glue.jei_1=Shift-Right click to pick up a block. The durability used depends on the block's properties (hardness, amount of states, isTileEnt). Enchant with Frugal can reduce the durability cost.
+usefulstuffs.packing_glue.jei_2=Craft with slime balls to refill the durability.
+usefulstuffs.umbrella.jei=Reduce falling damage when equipped on head.
+usefulstuffs.belt_lily.jei=Makes you float on water like a lily-pad.
+usefulstuffs.bag_storage.jei=Provide 27 extra slots, press Useful Key to switch between them and the hotbar.
+usefulstuffs.belt_fiery_lily.jei=Lily belt with fire resistance!
+usefulstuffs.backpack.jei=A normal backpack. Press Useful Key to open the container when in Bauble slot.
+usefulstuffs.mining_backpack.jei_1=A mining backpack that will auto-collect mining resources. Press Useful Key to open the container when in Bauble slot.
+usefulstuffs.mining_backpack.jei_2=Shift-Right click to open configuration.
+usefulstuffs.cheese.jei=Gathered from milk bag with fermented milk. Very good to your health.
+usefulstuffs.campfire.jei=Buffs player inside a range. Place logs in the 5x5 area above it to increase the range. The maximum diameter is 16.
+usefulstuffs.campfire.jei_n=Consumes fuel to work, the bigger the radius, the faster the fuel goes out.
+usefulstuffs.campfire.jei_c=Sneak-Right click a log with a Flint and Steel to craft.
+usefulstuffs.campfire.jei_u=The craft is disabled in config.
+usefulstuffs.filing_cabinet.jei=Capable of storing 1080 unstackable items, and only capable of storing unstackables.
+usefulstuffs.well.jei=Transfers water to the surrounding area. Can be filtered with a Water Filter.
+usefulstuffs.portal_muffler.jei=Shuts the mouth of the nether portal beside it.
+usefulstuffs.player_detector.jei=Emit redstone signal if there is a player nearby.
+usefulstuffs.player_detector.jei_f=Emit redstone signal if there is a player nearby the area it is facing.
+usefulstuffs.fiery_lily.jei=Naturally generated above the lava sea in the nether.
+usefulstuffs.universal_user.jei=A machine that will simulate actions of a player with the recharge functionality planted in. No more piping in and out.
+usefulstuffs.berry.jei=An alternative food source, can be used in dyes in recipes.
+usefulstuffs.milk_bag.jei=Stores 8 buckets worth of milk inside. Put inside a Milk Fermenter to make cheese. Drinking partially fermented milk is known bad to health.
+usefulstuffs.fermenter.jei.gui=%sx√buckets ticks
+usefulstuffs.light_bow.jei=A bow that shoots arrow of light, recharge using the sunlight. The charging speed depends on the position of the sun. Those which are blessed by Artemis seem to be able to recharge using the moonlight.
+usefulstuffs.light_battery.jei=A battery that stores light, can provide energy to gadgets which use light.
+
+
+category.jei.usefulstuffs.milk_fermenter.title=Milk Fermenter
+
+
 entity.usefulstuffs.light_bulb.name=LightBulb
 
 
@@ -160,7 +196,7 @@ tipped_arrow.effect.umbrella=Arrow of Parachute
 
 usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
 usefulstuffs.gui.campfire.name=Campfire of Traveller's Wisdom
-usefulstuffs.gui.campfire.modifier=BuffRadius:%s
+usefulstuffs.gui.campfire.modifier=BuffDiameter:%s
 usefulstuffs.gui.fermenter.name=Milk Fermenter
 usefulstuffs.gui.user.name=Universal User
 

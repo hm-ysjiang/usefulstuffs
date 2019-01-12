@@ -1,6 +1,6 @@
 package hmysjiang.usefulstuffs.container;
 
-import hmysjiang.usefulstuffs.blocks.filingcabinet.TileEntityFilingCabinet;
+import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetUnstackable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -17,14 +17,14 @@ public class ContainerFilingCabinet extends ContainerBase {
 
 	protected EntityPlayer player;
 	protected BlockPos pos;
-	protected TileEntityFilingCabinet tile;
+	protected TileEntityFilingCabinetUnstackable tile;
 	protected int page;
 	
 	public ContainerFilingCabinet(EntityPlayer player, BlockPos pos, int page) {
-		super(player.inventory, (ItemStackHandler) ((TileEntityFilingCabinet) player.world.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
+		super(player.inventory, (ItemStackHandler) ((TileEntityFilingCabinetUnstackable) player.world.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
 		this.player = player;
 		this.pos = pos;
-		this.tile = (TileEntityFilingCabinet) player.world.getTileEntity(pos);
+		this.tile = (TileEntityFilingCabinetUnstackable) player.world.getTileEntity(pos);
 		this.page = page;
 		
 		int xFC = 7, yFC = 18, gap = 18;
@@ -98,7 +98,7 @@ public class ContainerFilingCabinet extends ContainerBase {
 		return player;
 	}
 	
-	public TileEntityFilingCabinet getTile() {
+	public TileEntityFilingCabinetUnstackable getTile() {
 		return tile;
 	}
 	

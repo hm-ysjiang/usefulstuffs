@@ -38,18 +38,20 @@ public class PortalMufflerManager extends TileEntityManager<TileEntityPortalMuff
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onSoundPlay(PlaySoundEvent event) {
-		if (clients == null)
-			clients = new ArrayList<TileEntityPortalMuffler>();
-		WorldClient world = Minecraft.getMinecraft().world;
-		if (world != null) {
-			ISound sound = event.getSound();
-			if (sound.getSoundLocation().equals(SOUND_PORTAL)) {
-				BlockPos soundPos = new BlockPos(sound.getXPosF(), sound.getYPosF(), sound.getZPosF());
-				for (TileEntityPortalMuffler tile: clients) {
-					if (!world.isAreaLoaded(tile.getPos(), 1)) continue;
-					if (world.provider.getDimension() == tile.getWorld().provider.getDimension() && isPosInRange(tile.getPos(), soundPos)) {
-						event.setResultSound(new SoundMuted(sound, 0));
-						break;
+		if (ConfigManager.portalMufflerEnabled) {
+			if (clients == null)
+				clients = new ArrayList<TileEntityPortalMuffler>();
+			WorldClient world = Minecraft.getMinecraft().world;
+			if (world != null) {
+				ISound sound = event.getSound();
+				if (sound.getSoundLocation().equals(SOUND_PORTAL)) {
+					BlockPos soundPos = new BlockPos(sound.getXPosF(), sound.getYPosF(), sound.getZPosF());
+					for (TileEntityPortalMuffler tile: clients) {
+						if (!world.isAreaLoaded(tile.getPos(), 1)) continue;
+						if (world.provider.getDimension() == tile.getWorld().provider.getDimension() && isPosInRange(tile.getPos(), soundPos)) {
+							event.setResultSound(new SoundMuted(sound, 0));
+							break;
+						}
 					}
 				}
 			}
