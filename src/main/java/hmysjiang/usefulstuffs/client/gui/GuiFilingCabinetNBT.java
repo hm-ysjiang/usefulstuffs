@@ -48,7 +48,7 @@ public class GuiFilingCabinetNBT extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		this.fontRenderer.drawString(I18n.format("usefulstuffs.gui.filing_cabinet.name"), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("usefulstuffs.gui.filing_cabinet.name", "NBT"), 8, 6, 4210752);
 	}
 	
 	@Override

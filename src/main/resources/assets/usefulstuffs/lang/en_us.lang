@@ -50,6 +50,7 @@ tile.usefulstuffs.well.name=Well of Water Fall
 tile.usefulstuffs.rain_detector.name=Rain Detector
 tile.usefulstuffs.campfire.name=Campfire of Traveller's Wisdom
 tile.usefulstuffs.filing_cabinet.name=Unstackable Filing Cabinet
+tile.usefulstuffs.filing_cabinet_nbt.name=NBT Filing Cabinet
 tile.usefulstuffs.t_flipflop.name=T-FlipFlop
 tile.usefulstuffs.glued_box.name=Glued Box
 tile.usefulstuffs.berrybush_white.name=White Berry Bush
@@ -91,8 +92,8 @@ usefulstuffs.waterfilter.tooltip_2=Shift+Right click to bind a side of the block
 usefulstuffs.waterfilter.tooltip_3=Right click on a Well to install
 usefulstuffs.campfire.tooltip_1=Place logs in the 5x5 area beneath it to boost the effect
 usefulstuffs.campfire.tooltip_2=Acquire from lighting a log up while sneaking
-usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
-usefulstuffs.filing_cabinet.tooltip_2=1080 slots for unstackable items
+usefulstuffs.filing_cabinet.tooltip=1080 slots for unstackable items
+usefulstuffs.filing_cabinet2.tooltip=1080 slots for stacks with NBT
 usefulstuffs.bento.tooltip=Holds 6 stacks of food
 usefulstuffs.building_wand.tooltip_1=Place blocks from the block player looking at to the player
 usefulstuffs.building_wand.tooltip_2=Put block in offhand to specify blocks to be placed
@@ -156,6 +157,7 @@ usefulstuffs.campfire.jei_n=Consumes fuel to work, the bigger the radius, the fa
 usefulstuffs.campfire.jei_c=Sneak-Right click a log with a Flint and Steel to craft.
 usefulstuffs.campfire.jei_u=The craft is disabled in config.
 usefulstuffs.filing_cabinet.jei=Capable of storing 1080 unstackable items, and only capable of storing unstackables.
+usefulstuffs.filing_cabinet2.jei=Capable of storing 1080 stacks that has NBT data, and only capable of storing them.
 usefulstuffs.well.jei=Transfers water to the surrounding area. Can be filtered with a Water Filter.
 usefulstuffs.portal_muffler.jei=Shuts the mouth of the nether portal beside it.
 usefulstuffs.player_detector.jei=Emit redstone signal if there is a player nearby.
@@ -167,6 +169,8 @@ usefulstuffs.milk_bag.jei=Stores 8 buckets worth of milk inside. Put inside a Mi
 usefulstuffs.fermenter.jei.gui=%sx√buckets ticks
 usefulstuffs.light_bow.jei=A bow that shoots arrow of light, recharge using the sunlight. The charging speed depends on the position of the sun. Those which are blessed by Artemis seem to be able to recharge using the moonlight.
 usefulstuffs.light_battery.jei=A battery that stores light, can provide energy to gadgets which use light.
+usefulstuffs.feather.jei_1=There is a chance that chickens will drop them when falling.
+usefulstuffs.feather.jei_2=Enabled in UsefulStuffs config.
 
 
 category.jei.usefulstuffs.milk_fermenter.title=Milk Fermenter
@@ -194,7 +198,7 @@ effect.usefulstuffs.umbrella=Parachute
 tipped_arrow.effect.umbrella=Arrow of Parachute
 
 
-usefulstuffs.gui.filing_cabinet.name=Filing Cabinet
+usefulstuffs.gui.filing_cabinet.name=%s Filing Cabinet
 usefulstuffs.gui.campfire.name=Campfire of Traveller's Wisdom
 usefulstuffs.gui.campfire.modifier=BuffDiameter:%s
 usefulstuffs.gui.fermenter.name=Milk Fermenter

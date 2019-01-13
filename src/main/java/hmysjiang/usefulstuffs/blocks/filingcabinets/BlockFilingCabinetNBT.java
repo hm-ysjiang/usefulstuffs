@@ -95,8 +95,7 @@ public class BlockFilingCabinetNBT extends BlockHorizontal implements ITileEntit
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
-		super.addInformation(stack, worldIn, tooltip, advanced);
-		tooltip.add(TextFormatting.GOLD + I18n.format("usefulstuffs.filing_cabinet2.tooltip"));
+		tooltip.add(I18n.format("usefulstuffs.filing_cabinet2.tooltip"));
 	}
 
 }

@@ -8,6 +8,7 @@ import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ingredients.VanillaTypes;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class ItemJeiDescription {
@@ -66,6 +67,7 @@ public class ItemJeiDescription {
 			}
 		}
 		registry.addIngredientInfo(new ItemStack(ModBlocks.filing_cabinet_unstackable), VanillaTypes.ITEM, "usefulstuffs.filing_cabinet.jei");
+		registry.addIngredientInfo(new ItemStack(ModBlocks.filing_cabinet_nbt), VanillaTypes.ITEM, "usefulstuffs.filing_cabinet2.jei");
 		registry.addIngredientInfo(new ItemStack(ModBlocks.well), VanillaTypes.ITEM, "usefulstuffs.well.jei");
 		registry.addIngredientInfo(new ItemStack(ModBlocks.portal_muffler), VanillaTypes.ITEM, "usefulstuffs.portal_muffler.jei");
 		if (ConfigManager.onlyDetectOneSide) 
@@ -79,6 +81,10 @@ public class ItemJeiDescription {
 		registry.addIngredientInfo(new ItemStack(ModItems.milk_bag), VanillaTypes.ITEM, "usefulstuffs.milk_bag.jei");
 		registry.addIngredientInfo(new ItemStack(ModItems.light_bow), VanillaTypes.ITEM, "usefulstuffs.light_bow.jei");
 		registry.addIngredientInfo(new ItemStack(ModItems.light_battery), VanillaTypes.ITEM, "usefulstuffs.light_battery.jei");
+		if (ConfigManager.chickenDropsFeather) {
+			registry.addIngredientInfo(new ItemStack(Items.FEATHER), VanillaTypes.ITEM, "usefulstuffs.feather.jei_1",
+																						"usefulstuffs.feather.jei_2");
+		}
 	}
 	
 }

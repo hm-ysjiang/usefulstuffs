@@ -124,8 +124,9 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 		}
 		else if (ConfigManager.bushDropsAfterMature){
 			if (!worldIn.isRemote) {
-				worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(AGE, 1));
+				worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(AGE, RANDOM.nextInt(2) + 1));
 				EntityItem entity = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.berry, 1, this.color.getMetadata()));
+				entity.lifespan = 1200;
 				worldIn.spawnEntity(entity);
 			}
 		}

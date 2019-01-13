@@ -95,9 +95,7 @@ public class BlockFilingCabinetUnstackable extends BlockHorizontal implements IT
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
-		super.addInformation(stack, worldIn, tooltip, advanced);
-		tooltip.add(TextFormatting.GOLD + I18n.format("usefulstuffs.filing_cabinet.tooltip_1"));
-		tooltip.add(TextFormatting.WHITE + I18n.format("usefulstuffs.filing_cabinet.tooltip_2"));
+		tooltip.add(I18n.format("usefulstuffs.filing_cabinet.tooltip"));
 	}
 
 }

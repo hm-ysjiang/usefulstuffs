@@ -158,8 +158,8 @@ public class ConfigManager {
 		propertyBushSpawnRate.set(bushSpawnRate);
 		orderBlock.add(propertyBushSpawnRate.getName());
 		
-		Property propertyBushDropMature = config.get(CATEGORY_BLOCK, "bush_drop_mature", false);
-		propertyBushDropMature.setComment("If this is set to true, a mature bush will drop a berry on the ground at grow tick. DEFAULT=false");
+		Property propertyBushDropMature = config.get(CATEGORY_BLOCK, "bush_drop_mature", true);
+		propertyBushDropMature.setComment("If this is set to true, a mature bush will drop a berry on the ground at grow tick (Note that the entity spawn will have a shorter lifespan). DEFAULT=true");
 		bushDropsAfterMature = propertyBushDropMature.getBoolean();
 		propertyBushDropMature.set(bushDropsAfterMature);
 		orderBlock.add(propertyBushDropMature.getName());
