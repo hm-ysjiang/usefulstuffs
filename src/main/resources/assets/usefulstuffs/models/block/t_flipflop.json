@@ -8,6 +8,18 @@
         "2": "usefulstuffs:blocks/redstone_unactivated",
         "3": "usefulstuffs:items/flipflop_core"
     },
+    "display": {
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.625, 0.625, 0.625 ]
+        },
+        "fixed": {
+            "rotation": [ 270, 180, 0 ],
+            "translation": [ 0, 0, -4 ],
+            "scale":[ 0.7, 0.7, 0.7 ]
+        }
+    },
     "elements": [
         {
             "name": "Bottom",

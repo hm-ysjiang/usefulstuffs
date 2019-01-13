@@ -11,7 +11,6 @@ import hmysjiang.usefulstuffs.blocks.gluedbox.TileEntityGluedBox;
 import hmysjiang.usefulstuffs.blocks.playerdetector.TileEntityPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.TileEntityPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.TileEntityRainDetector;
-import hmysjiang.usefulstuffs.blocks.tflipflop.TileEntityTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser;
 import hmysjiang.usefulstuffs.blocks.well.TileEntityWell;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
@@ -77,8 +76,6 @@ public class CommonProxy {
 			GameRegistry.registerTileEntity(TileEntityGluedBox.class, new ResourceLocation(Reference.MOD_ID, "glued_box"));
 		if (ConfigManager.rainDetectorEnabled)
 			GameRegistry.registerTileEntity(TileEntityRainDetector.class, new ResourceLocation(Reference.MOD_ID, "rain_detector"));
-		if (ConfigManager.tFlipFlopEnabled)
-			GameRegistry.registerTileEntity(TileEntityTFlipFlop.class, new ResourceLocation(Reference.MOD_ID, "t_flipflop"));
 		if (ConfigManager.wellEnabled)
 			GameRegistry.registerTileEntity(TileEntityWell.class, new ResourceLocation(Reference.MOD_ID, "well"));
 		if (ConfigManager.portalMufflerEnabled)

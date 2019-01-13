@@ -2,26 +2,26 @@ package hmysjiang.usefulstuffs.blocks.tflipflop;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
+import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvider {
+public class BlockTFlipFlop extends BlockHorizontal {
 
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0, 0, 1, 0.0625 * 2, 1);
+	public static final PropertyBool OUTPUT = PropertyBool.create("output");
 
 	public BlockTFlipFlop(boolean enabled) {
 		super(Material.ROCK);
@@ -30,12 +30,7 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 		if (enabled)
 			ModItems.itemblocks.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setHardness(1.0F);
-	}
-	
-	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
-		((TileEntityTFlipFlop)worldIn.getTileEntity(pos)).setSides(state);
+		setDefaultState(this.blockState.getBaseState().withProperty(OUTPUT, false));
 	}
 	
 	@Override
@@ -60,20 +55,8 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 	
 	@Override
 	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		if (blockAccess != null && blockAccess.getBlockState(pos).getBlock() == this) {
-			TileEntityTFlipFlop tile = (TileEntityTFlipFlop)blockAccess.getTileEntity(pos);
-			EnumFacing output = tile.getOutputSide();
-			boolean q = tile.shouldQOutput();
-			if (output != null) {
-				if (output == side) {
-					return q ? 15 : 0;
-				}
-				else if (output.getOpposite() == side) {
-					return q ? 0 : 15;
-				}
-			}
-		}
-		return 0;
+		EnumFacing output = blockState.getValue(OUTPUT) ? blockState.getValue(FACING).rotateY() : blockState.getValue(FACING).rotateYCCW();
+		return side == output ? 15 : 0;
 	}
 	
 	@Override
@@ -83,41 +66,65 @@ public class BlockTFlipFlop extends BlockHorizontal implements ITileEntityProvid
 	
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		((TileEntityTFlipFlop) worldIn.getTileEntity(pos)).notifyNeighbors(worldIn, pos);
-		
+		EnumFacing facing = state.getValue(FACING);
+		worldIn.notifyNeighborsOfStateChange(pos, this, false);
+		worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateY()), this, false);
+		worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateYCCW()), this, false);
 		super.breakBlock(worldIn, pos, state);
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (worldIn!= null && !worldIn.isRemote && worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileEntityTFlipFlop)
-			((TileEntityTFlipFlop) worldIn.getTileEntity(pos)).updateSignal();
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		EnumFacing facing = state.getValue(FACING);
+		worldIn.notifyNeighborsOfStateChange(pos, this, false);
+		worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateY()), this, false);
+		worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateYCCW()), this, false);
 	}
 	
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityTFlipFlop();
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (worldIn != null && !worldIn.isRemote) {
+			EnumFacing from = WorldHelper.getRelationBetweenAdjacentBlocks(pos, fromPos);
+			EnumFacing facing = state.getValue(FACING);
+			if (from == facing) {
+				IBlockState inputState = worldIn.getBlockState(fromPos);
+				if (worldIn.getRedstonePower(fromPos, facing.getOpposite()) > 0) {
+					worldIn.setBlockState(pos, state.cycleProperty(OUTPUT));
+					worldIn.notifyNeighborsOfStateChange(pos, this, false);
+					worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateY()), this, false);
+					worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateYCCW()), this, false);
+				}
+			}
+			else if (from == facing.getOpposite()) {
+				if (worldIn.getRedstonePower(fromPos, facing) > 0) {
+					worldIn.setBlockState(pos, state.withProperty(OUTPUT, false));
+					worldIn.notifyNeighborsOfStateChange(pos, this, false);
+					worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateY()), this, false);
+					worldIn.notifyNeighborsOfStateChange(pos.offset(facing.rotateYCCW()), this, false);
+				}
+			}
+		}
 	}
 	
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
 			int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta % 4)).withProperty(OUTPUT, meta >= 4);
 	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getHorizontalIndex();
+		return state.getValue(FACING).getHorizontalIndex() + (state.getValue(OUTPUT) ? 4 : 0);
 	}
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING);
+		return new BlockStateContainer(this, FACING, OUTPUT);
 	}
 	
 	@Override

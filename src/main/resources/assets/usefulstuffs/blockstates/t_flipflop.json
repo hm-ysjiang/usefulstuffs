@@ -1,8 +1,12 @@
 {
     "variants": {
-        "facing=north": { "model": "usefulstuffs:t_flipflop", "y": 180},
-        "facing=south": { "model": "usefulstuffs:t_flipflop"},
-        "facing=west":  { "model": "usefulstuffs:t_flipflop", "y": 90},
-        "facing=east":  { "model": "usefulstuffs:t_flipflop", "y": 270}
+        "facing=north,output=false": { "model": "usefulstuffs:t_flipflop"},
+        "facing=south,output=false": { "model": "usefulstuffs:t_flipflop", "y": 180},
+        "facing=west,output=false":  { "model": "usefulstuffs:t_flipflop", "y": 270},
+        "facing=east,output=false":  { "model": "usefulstuffs:t_flipflop", "y": 90},
+        "facing=north,output=true": { "model": "usefulstuffs:t_flipflop"},
+        "facing=south,output=true": { "model": "usefulstuffs:t_flipflop", "y": 180},
+        "facing=west,output=true":  { "model": "usefulstuffs:t_flipflop", "y": 270},
+        "facing=east,output=true":  { "model": "usefulstuffs:t_flipflop", "y": 90}
     }
 }

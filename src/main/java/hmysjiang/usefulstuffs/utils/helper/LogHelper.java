@@ -14,16 +14,32 @@ public class LogHelper {
 		LOGGER.log(Level.INFO, msg);
 	}
 	
+	public static void info(Object obj) {
+		LOGGER.log(Level.INFO, obj.toString());
+	}
+	
 	public static void error(String msg) {
 		LOGGER.log(Level.ERROR, msg);
+	}
+	
+	public static void error(Object obj) {
+		LOGGER.log(Level.INFO, obj.toString());
 	}
 	
 	public static void warn(String msg) {
 		LOGGER.log(Level.WARN, msg);
 	}
 	
+	public static void warn(Object obj) {
+		LOGGER.log(Level.INFO, obj.toString());
+	}
+	
 	public static void debug(String msg) {
 		LOGGER.log(Level.INFO, msg);
+	}
+	
+	public static void debug(Object obj) {
+		LOGGER.log(Level.INFO, obj.toString());
 	}
 	
 }
