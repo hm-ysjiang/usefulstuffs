@@ -62,6 +62,7 @@ public class Reference {
 		RAIN_DETECTOR("rain_detector"),
 		CAMPFIRE("campfire"),
 		FILING_CABINET("filing_cabinet"),
+		FILING_CABINET2("filing_cabinet_nbt"),
 		GLUED_BOX("glued_box"),
 		T_FLIPFLOP("t_flipflop"),
 		BERRYBUSH("berrybush"),

@@ -7,6 +7,7 @@ import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.blocks.campfire.BlockCampfire;
 import hmysjiang.usefulstuffs.blocks.fermenter.BlockMilkFermenter;
 import hmysjiang.usefulstuffs.blocks.fierylily.BlockFieryLilyPad;
+import hmysjiang.usefulstuffs.blocks.filingcabinets.BlockFilingCabinetNBT;
 import hmysjiang.usefulstuffs.blocks.filingcabinets.BlockFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
@@ -44,6 +45,7 @@ public class ModBlocks {
 	public static Block fiery_lily;
 	public static Block milk_fermenter;
 	public static Block universal_user;
+	public static Block filing_cabinet_nbt;
 	
 	public static void init() {
 		campfire = new BlockCampfire(ConfigManager.campfireEnabled);
@@ -60,6 +62,7 @@ public class ModBlocks {
 		fiery_lily = new BlockFieryLilyPad(ConfigManager.fieryLilyEnabled);
 		milk_fermenter = new BlockMilkFermenter(ConfigManager.milkFermenterEnabled);
 		universal_user = new BlockUniversalUser(ConfigManager.universalUserEnabled);
+		filing_cabinet_nbt = new BlockFilingCabinetNBT(ConfigManager.filingCabinetNbtEnabled);
 	}
 	
 	@SubscribeEvent
@@ -70,6 +73,9 @@ public class ModBlocks {
 		}
 		if (ConfigManager.filingCabinetUnstackableEnabled) {
 			registry.register(filing_cabinet_unstackable);
+		}
+		if (ConfigManager.filingCabinetNbtEnabled) {
+			register(registry, filing_cabinet_nbt);
 		}
 		if (ConfigManager.glueEnabled) {
 			registry.register(glued_box);
@@ -120,6 +126,7 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(fiery_lily));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(milk_fermenter));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(universal_user));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(filing_cabinet_nbt));
 		for (Block block: berrybushes)
 			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(block));
 	}

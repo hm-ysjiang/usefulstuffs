@@ -89,6 +89,7 @@ public class ConfigManager {
 	public static boolean milkBagEnabled;
 	public static boolean lightBowEnabled;
 	public static boolean lightBatteryEnabled;
+	public static boolean filingCabinetNbtEnabled;
 	
 	
 	public static Configuration getConfig() {
@@ -338,6 +339,12 @@ public class ConfigManager {
 		filingCabinetUnstackableEnabled = propertyFilingCabinetUnstackableEnabled.getBoolean();
 		propertyFilingCabinetUnstackableEnabled.set(filingCabinetUnstackableEnabled);
 		orderEnable.add(propertyFilingCabinetUnstackableEnabled.getName());
+		
+		Property propertyFilingCabinetNbtEnabled = config.get(CATEGORY_ENABLE, "enable_nbt_filing_cabinet", true);
+		propertyFilingCabinetNbtEnabled.setComment("Enable NBT Filing Cabinet?");
+		filingCabinetNbtEnabled = propertyFilingCabinetNbtEnabled.getBoolean();
+		propertyFilingCabinetNbtEnabled.set(filingCabinetNbtEnabled);
+		orderEnable.add(propertyFilingCabinetNbtEnabled.getName());
 		
 		Property propertyGlueEnabled = config.get(CATEGORY_ENABLE, "enable_glued", true);
 		propertyGlueEnabled.setComment("Enable Packing Glue and Glued Box?");

@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "usefulstuffs:blocks/filing_cabinet_2",
+        "front": "usefulstuffs:blocks/filing_cabinet_2_front",
+        "side": "usefulstuffs:blocks/filing_cabinet_2"
+    }
+}

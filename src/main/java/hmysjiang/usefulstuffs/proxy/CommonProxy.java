@@ -5,6 +5,7 @@ import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
 import hmysjiang.usefulstuffs.blocks.fermenter.TileEntityMilkFermenter;
+import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetNBT;
 import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.blocks.gluedbox.TileEntityGluedBox;
 import hmysjiang.usefulstuffs.blocks.playerdetector.TileEntityPlayerDetector;
@@ -88,6 +89,8 @@ public class CommonProxy {
 			GameRegistry.registerTileEntity(TileEntityMilkFermenter.class, new ResourceLocation(Reference.MOD_ID, "milk_fermenter"));
 		if (ConfigManager.universalUserEnabled)
 			GameRegistry.registerTileEntity(TileEntityUniversalUser.class, new ResourceLocation(Reference.MOD_ID, "universal_user"));
+		if (ConfigManager.filingCabinetNbtEnabled)
+			GameRegistry.registerTileEntity(TileEntityFilingCabinetNBT.class, new ResourceLocation(Reference.MOD_ID, "filing_cabinet2"));
 	}
 	
 }

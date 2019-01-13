@@ -1,9 +1,7 @@
 package hmysjiang.usefulstuffs.container;
 
-import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetUnstackable;
+import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetNBT;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -13,18 +11,18 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerFilingCabinet extends ContainerBase {
+public class ContainerFilingCabinetNBT extends ContainerBase {
 
 	protected EntityPlayer player;
 	protected BlockPos pos;
-	protected TileEntityFilingCabinetUnstackable tile;
+	protected TileEntityFilingCabinetNBT tile;
 	protected int page;
 	
-	public ContainerFilingCabinet(EntityPlayer player, BlockPos pos, int page) {
-		super(player.inventory, (ItemStackHandler) ((TileEntityFilingCabinetUnstackable) player.world.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
+	public ContainerFilingCabinetNBT(EntityPlayer player, BlockPos pos, int page) {
+		super(player.inventory, (ItemStackHandler) ((TileEntityFilingCabinetNBT) player.world.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
 		this.player = player;
 		this.pos = pos;
-		this.tile = (TileEntityFilingCabinetUnstackable) player.world.getTileEntity(pos);
+		this.tile = (TileEntityFilingCabinetNBT) player.world.getTileEntity(pos);
 		this.page = page;
 		
 		int xFC = 7, yFC = 18, gap = 18;
@@ -98,7 +96,7 @@ public class ContainerFilingCabinet extends ContainerBase {
 		return player;
 	}
 	
-	public TileEntityFilingCabinetUnstackable getTile() {
+	public TileEntityFilingCabinetNBT getTile() {
 		return tile;
 	}
 	
@@ -114,7 +112,7 @@ public class ContainerFilingCabinet extends ContainerBase {
 		
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return super.isItemValid(stack) && stack.getItem().getItemStackLimit(stack) == 1;
+			return super.isItemValid(stack) && stack.hasTagCompound();
 		}
 
 	}

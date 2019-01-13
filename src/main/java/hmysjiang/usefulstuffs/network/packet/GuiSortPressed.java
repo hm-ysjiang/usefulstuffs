@@ -1,8 +1,10 @@
 package hmysjiang.usefulstuffs.network.packet;
 
+import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetNBT;
 import hmysjiang.usefulstuffs.blocks.filingcabinets.TileEntityFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -49,7 +51,11 @@ public class GuiSortPressed implements IMessage {
 				World world = WorldHelper.getServerWorldFromId(message.world);
 				if (world == null)	return null;
 				BlockPos pos = new BlockPos(message.x, message.y, message.z);
-				((TileEntityFilingCabinetUnstackable)world.getTileEntity(pos)).sort();	
+				TileEntity tile = world.getTileEntity(pos);
+				if (tile instanceof TileEntityFilingCabinetUnstackable)
+					((TileEntityFilingCabinetUnstackable)tile).sort();	
+				if (tile instanceof TileEntityFilingCabinetNBT)
+					((TileEntityFilingCabinetNBT)tile).sort();	
 			}
 			return null;
 		}

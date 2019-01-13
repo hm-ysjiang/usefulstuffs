@@ -5,7 +5,7 @@ import java.util.List;
 import java.io.IOException;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
+import hmysjiang.usefulstuffs.container.ContainerFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.network.packet.GuiButtonPressed;
 import hmysjiang.usefulstuffs.network.packet.GuiSortPressed;
@@ -18,15 +18,15 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
-public class GuiFilingCabinet extends GuiContainer {
+public class GuiFilingCabinetUnstackable extends GuiContainer {
 	private static final int BUTTON_SIZE = 20;
 
 	protected int page;
 	
-	public GuiFilingCabinet(Container inventorySlotsIn) {
+	public GuiFilingCabinetUnstackable(Container inventorySlotsIn) {
 		super(inventorySlotsIn);
 		
-		this.page = ((ContainerFilingCabinet)inventorySlotsIn).getPage();
+		this.page = ((ContainerFilingCabinetUnstackable)inventorySlotsIn).getPage();
 
 		this.xSize = 336;
 		this.ySize = 222;
@@ -74,13 +74,13 @@ public class GuiFilingCabinet extends GuiContainer {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		if (button.id != 10) {
-			EntityPlayer player = ((ContainerFilingCabinet)this.inventorySlots).getPlayer();
-			BlockPos pos = ((ContainerFilingCabinet)this.inventorySlots).getPos();
+			EntityPlayer player = ((ContainerFilingCabinetUnstackable)this.inventorySlots).getPlayer();
+			BlockPos pos = ((ContainerFilingCabinetUnstackable)this.inventorySlots).getPos();
 			PacketHandler.INSTANCE.sendToServer(new GuiButtonPressed(player.world, player, pos.getX(), pos.getY(), pos.getZ(), button.id));	
 		}
 		else {
-			EntityPlayer player = ((ContainerFilingCabinet)this.inventorySlots).getPlayer();
-			BlockPos pos = ((ContainerFilingCabinet)this.inventorySlots).getPos();
+			EntityPlayer player = ((ContainerFilingCabinetUnstackable)this.inventorySlots).getPlayer();
+			BlockPos pos = ((ContainerFilingCabinetUnstackable)this.inventorySlots).getPos();
 			PacketHandler.INSTANCE.sendToServer(new GuiSortPressed(player.world, pos));	
 		}
 		super.actionPerformed(button);

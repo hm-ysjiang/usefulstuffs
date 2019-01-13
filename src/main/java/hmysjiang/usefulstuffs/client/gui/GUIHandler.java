@@ -1,25 +1,21 @@
 package hmysjiang.usefulstuffs.client.gui;
 
 import baubles.api.cap.BaublesCapabilities;
-import hmysjiang.usefulstuffs.blocks.campfire.TileEntityCampfire;
 import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser;
+import hmysjiang.usefulstuffs.container.ContainerBackpack;
 import hmysjiang.usefulstuffs.container.ContainerBento;
 import hmysjiang.usefulstuffs.container.ContainerCampfire;
-import hmysjiang.usefulstuffs.container.ContainerFilingCabinet;
-import hmysjiang.usefulstuffs.container.ContainerBackpack;
+import hmysjiang.usefulstuffs.container.ContainerFilingCabinetNBT;
+import hmysjiang.usefulstuffs.container.ContainerFilingCabinetUnstackable;
 import hmysjiang.usefulstuffs.container.ContainerLightShooter;
 import hmysjiang.usefulstuffs.container.ContainerMilkFermenter;
 import hmysjiang.usefulstuffs.container.ContainerMiningBackpackConfig;
 import hmysjiang.usefulstuffs.container.ContainerUniversalUser;
 import hmysjiang.usefulstuffs.items.ItemBento;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -41,30 +37,40 @@ public class GuiHandler implements IGuiHandler {
 	public static final int GUI_BACKPACK_MINING_CONFIG = 15;
 	public static final int GUI_FERMENTER = 16;
 	public static final int GUI_USER = 17;
+	public static final int GUI_FILING_CABINET2_1 = 18;
+	public static final int GUI_FILING_CABINET2_2 = 19;
+	public static final int GUI_FILING_CABINET2_3 = 20;
+	public static final int GUI_FILING_CABINET2_4 = 21;
+	public static final int GUI_FILING_CABINET2_5 = 22;
+	public static final int GUI_FILING_CABINET2_6 = 23;
+	public static final int GUI_FILING_CABINET2_7 = 24;
+	public static final int GUI_FILING_CABINET2_8 = 25;
+	public static final int GUI_FILING_CABINET2_9 = 26;
+	public static final int GUI_FILING_CABINET2_10 = 27;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch(ID) {
 		case GUI_FILING_CABINET_1:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 0);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 0);
 		case GUI_FILING_CABINET_2:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 1);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 1);
 		case GUI_FILING_CABINET_3:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 2);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 2);
 		case GUI_FILING_CABINET_4:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 3);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 3);
 		case GUI_FILING_CABINET_5:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 4);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 4);
 		case GUI_FILING_CABINET_6:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 5);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 5);
 		case GUI_FILING_CABINET_7:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 6);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 6);
 		case GUI_FILING_CABINET_8:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 7);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 7);
 		case GUI_FILING_CABINET_9:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 8);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 8);
 		case GUI_FILING_CABINET_10:
-			return new ContainerFilingCabinet(player, new BlockPos(x, y, z), 9);
+			return new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 9);
 		case GUI_BENTO:
 			if (player.getHeldItemMainhand().getItem() instanceof ItemBento)
 				return new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6);
@@ -82,6 +88,26 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerMilkFermenter(player, new BlockPos(x, y, z));
 		case GUI_USER:
 			return new ContainerUniversalUser(player.inventory, (TileEntityUniversalUser) world.getTileEntity(new BlockPos(x, y, z)));
+		case GUI_FILING_CABINET2_1:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 0);
+		case GUI_FILING_CABINET2_2:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 1);
+		case GUI_FILING_CABINET2_3:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 2);
+		case GUI_FILING_CABINET2_4:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 3);
+		case GUI_FILING_CABINET2_5:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 4);
+		case GUI_FILING_CABINET2_6:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 5);
+		case GUI_FILING_CABINET2_7:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 6);
+		case GUI_FILING_CABINET2_8:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 7);
+		case GUI_FILING_CABINET2_9:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 8);
+		case GUI_FILING_CABINET2_10:
+			return new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 9);
 		default:
 			return null;
 		}
@@ -91,25 +117,25 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch(ID) {
 		case GUI_FILING_CABINET_1:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 0));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 0));
 		case GUI_FILING_CABINET_2:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 1));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 1));
 		case GUI_FILING_CABINET_3:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 2));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 2));
 		case GUI_FILING_CABINET_4:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 3));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 3));
 		case GUI_FILING_CABINET_5:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 4));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 4));
 		case GUI_FILING_CABINET_6:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 5));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 5));
 		case GUI_FILING_CABINET_7:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 6));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 6));
 		case GUI_FILING_CABINET_8:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 7));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 7));
 		case GUI_FILING_CABINET_9:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 8));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 8));
 		case GUI_FILING_CABINET_10:
-			return new GuiFilingCabinet(new ContainerFilingCabinet(player, new BlockPos(x, y, z), 9));
+			return new GuiFilingCabinetUnstackable(new ContainerFilingCabinetUnstackable(player, new BlockPos(x, y, z), 9));
 		case GUI_BENTO:
 			return new GuiBento(new ContainerBento(player.inventory, player.getHeldItemMainhand(), 6));
 		case GUI_LIGHT_SHOOTER:
@@ -126,6 +152,26 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiMilkFermenter(new ContainerMilkFermenter(player, new BlockPos(x, y, z)));
 		case GUI_USER:
 			return new GuiUniversalUser(new ContainerUniversalUser(player.inventory, (TileEntityUniversalUser) world.getTileEntity(new BlockPos(x, y, z))));
+		case GUI_FILING_CABINET2_1:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 0));
+		case GUI_FILING_CABINET2_2:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 1));
+		case GUI_FILING_CABINET2_3:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 2));
+		case GUI_FILING_CABINET2_4:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 3));
+		case GUI_FILING_CABINET2_5:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 4));
+		case GUI_FILING_CABINET2_6:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 5));
+		case GUI_FILING_CABINET2_7:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 6));
+		case GUI_FILING_CABINET2_8:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 7));
+		case GUI_FILING_CABINET2_9:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 8));
+		case GUI_FILING_CABINET2_10:
+			return new GuiFilingCabinetNBT(new ContainerFilingCabinetNBT(player, new BlockPos(x, y, z), 9));
 		default:
 			return null;
 		}
