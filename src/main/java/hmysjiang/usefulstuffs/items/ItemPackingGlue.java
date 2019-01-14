@@ -15,6 +15,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -87,6 +88,7 @@ public class ItemPackingGlue extends Item {
 					drop.setTagCompound(compound);
 					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, drop));
 					world.setBlockToAir(pos);
+					world.notifyNeighborsOfStateChange(pos, Blocks.AIR, false);
 					return EnumActionResult.SUCCESS;
 				}
 				else if (stack.getMaxDamage() >= cost) {

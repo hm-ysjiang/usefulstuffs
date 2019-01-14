@@ -38,7 +38,8 @@ public class Reference {
 		LIGHT_BOW("light_bow"),
 		LIGHT_BATTERY("light_battery"),
 		TRIANGULAR_PRISM("triangular_prism"),
-		UNIVERSAL_CORE("universal_core");
+		UNIVERSAL_CORE("universal_core"),
+		POTATO_CHARM("potato_charm");
 		
 		private String unlocalizedName;
 		

@@ -85,6 +85,8 @@ public class ItemJeiDescription {
 			registry.addIngredientInfo(new ItemStack(Items.FEATHER), VanillaTypes.ITEM, "usefulstuffs.feather.jei_1",
 																						"usefulstuffs.feather.jei_2");
 		}
+		registry.addIngredientInfo(new ItemStack(ModItems.charm_potato), VanillaTypes.ITEM, "usefulstuffs.potato_charm.jei_1",
+																							"usefulstuffs.potato_charm.jei_2");
 	}
 	
 }

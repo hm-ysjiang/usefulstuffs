@@ -43,6 +43,7 @@ item.usefulstuffs.light_bow.name=Bow of Sunshine
 item.usefulstuffs.light_battery.name=Light Battery
 item.usefulstuffs.triangular_prism.name=Triangular Prism
 item.usefulstuffs.universal_core.name=Universal Core
+item.usefulstuffs.potato_charm.name=Charm of Potato (WIP)
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -135,6 +136,7 @@ usefulstuffs.light_battery.tooltip_1=Provides light unit to gadgets that use lig
 usefulstuffs.light_battery.tooltip_charge=%s/32000 light unit
 usefulstuffs.light_battery.tooltip_2=Charges itself when exposed to sunlight
 usefulstuffs.universal_user.tooltip=Do the re-charge thingy in one machine!
+usefulstuffs.potato_charm.tooltip=Being a couch potato, one can sleep at any time he want.
 
 
 usefulstuffs.waterfilter.jei_1=Prevent Well of Water Fall to insert water into a set of specific block's sides.
@@ -171,6 +173,8 @@ usefulstuffs.light_bow.jei=A bow that shoots arrow of light, recharge using the 
 usefulstuffs.light_battery.jei=A battery that stores light, can provide energy to gadgets which use light.
 usefulstuffs.feather.jei_1=There is a chance that chickens will drop them when falling.
 usefulstuffs.feather.jei_2=Enabled in UsefulStuffs config.
+usefulstuffs.potato_charm.jei_1=Makes player able to get on bed even it is not night time. The power of couch potato will make you fall asleep immediately, straight to the start of the next day.
+usefulstuffs.potato_charm.jei_2=Only works when there is exact one player in the world. (WIP Item)
 
 
 category.jei.usefulstuffs.milk_fermenter.title=Milk Fermenter
@@ -212,6 +216,8 @@ key.usefulstuffs.switchinv.desc=Useful Key
 enchantment.usefulstuffs.xl.name=Frugal
 enchantment.usefulstuffs.moonlight.name=Blessing of Artemis
 enchantment.usefulstuffs.fast_draw.name=Fast Draw
+
+usefulstuffs.potato_charm.statushint=Look at yourself. A couch potato.
 
 
 

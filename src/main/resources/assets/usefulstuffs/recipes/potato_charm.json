@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "NDN", 
+		"GPG", 
+		"NBN"
+    ],
+    "key": {
+        "N": {
+            "item": "minecraft:gold_nugget"
+        },
+        "D": {
+            "item": "minecraft:diamond"
+        },
+        "G": {
+            "item": "minecraft:gold_ingot"
+        },
+        "P": {
+            "item": "minecraft:potato"
+        },
+        "B": {
+            "item": "minecraft:bed",
+            "data": 32767
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:potato_charm"
+    }
+}

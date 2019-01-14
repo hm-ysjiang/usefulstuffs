@@ -90,6 +90,7 @@ public class ConfigManager {
 	public static boolean lightBowEnabled;
 	public static boolean lightBatteryEnabled;
 	public static boolean filingCabinetNbtEnabled;
+	public static boolean charmPotatoEnabled;
 	
 	
 	public static Configuration getConfig() {
@@ -483,6 +484,12 @@ public class ConfigManager {
 		lightBatteryEnabled = propertyLightBatteryEnabled.getBoolean();
 		propertyLightBatteryEnabled.set(lightBatteryEnabled);
 		orderEnable.add(propertyLightBatteryEnabled.getName());
+		
+		Property propertyPotatoCharmEnabled = config.get(CATEGORY_ENABLE, "enable_potato_charm", false);
+		propertyPotatoCharmEnabled.setComment("Enable Charm of Potato (WIP)? DEFAULT=false");
+		charmPotatoEnabled = propertyPotatoCharmEnabled.getBoolean();
+		propertyPotatoCharmEnabled.set(charmPotatoEnabled);
+		orderEnable.add(propertyPotatoCharmEnabled.getName());
 	}
 
 }
