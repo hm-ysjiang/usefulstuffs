@@ -25,6 +25,7 @@ import hmysjiang.usefulstuffs.items.baubles.ItemFieryLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemLilyBelt;
 import hmysjiang.usefulstuffs.items.baubles.ItemMiningBackpack;
 import hmysjiang.usefulstuffs.items.baubles.ItemPotatoCharm;
+import hmysjiang.usefulstuffs.items.baubles.ItemStabilizingRing;
 import hmysjiang.usefulstuffs.items.baubles.ItemStorageBag;
 import hmysjiang.usefulstuffs.items.crafting.ItemCraftingIngredient;
 import hmysjiang.usefulstuffs.items.crafting.ItemUmbrella;
@@ -65,6 +66,7 @@ public class ModItems {
 	public static Item triangular_prism;
 	public static Item universal_core;
 	public static Item charm_potato;
+	public static Item ring_stablizing;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -92,6 +94,7 @@ public class ModItems {
 		triangular_prism = new ItemCraftingIngredient(Reference.ModItems.TRIANGULAR_PRISM.getRegistryName(), Reference.ModItems.TRIANGULAR_PRISM.getUnlocalizedName());
 		universal_core = new ItemCraftingIngredient(Reference.ModItems.UNIVERSAL_CORE.getRegistryName(), Reference.ModItems.UNIVERSAL_CORE.getUnlocalizedName());
 		charm_potato = new ItemPotatoCharm();
+		ring_stablizing = new ItemStabilizingRing();
 	}
 	
 	@SubscribeEvent
@@ -157,6 +160,9 @@ public class ModItems {
 		if (ConfigManager.charmPotatoEnabled) {
 			registry.register(charm_potato);
 		}
+		if (ConfigManager.stabilizingRingEnabled) {
+			registry.register(ring_stablizing);
+		}
 		register(registry, 
 				compact_storage_unit,
 				umbrella,
@@ -191,6 +197,7 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(triangular_prism);
 		UsefulStuffs.proxy.registerItemRenders(universal_core);
 		UsefulStuffs.proxy.registerItemRenders(charm_potato);
+		UsefulStuffs.proxy.registerItemRenders(ring_stablizing);
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());

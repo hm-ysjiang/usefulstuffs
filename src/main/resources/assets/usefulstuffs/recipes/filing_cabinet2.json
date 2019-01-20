@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "IUI", 
+		"UUU", 
+		"IUI"
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:iron_block"
+        },
+        "U": {
+            "item": "usefulstuffs:compact_storage_unit"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:filing_cabinet_nbt"
+    }
+}

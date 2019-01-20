@@ -44,6 +44,7 @@ item.usefulstuffs.light_battery.name=Light Battery
 item.usefulstuffs.triangular_prism.name=Triangular Prism
 item.usefulstuffs.universal_core.name=Universal Core
 item.usefulstuffs.potato_charm.name=Charm of Potato (WIP)
+item.usefulstuffs.stabilizing_ring.name=Ring of Stabilizing
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -137,6 +138,7 @@ usefulstuffs.light_battery.tooltip_charge=%s/32000 light unit
 usefulstuffs.light_battery.tooltip_2=Charges itself when exposed to sunlight
 usefulstuffs.universal_user.tooltip=Do the re-charge thingy in one machine!
 usefulstuffs.potato_charm.tooltip=Being a couch potato, one can sleep at any time he want.
+usefulstuffs.stabilizing_ring.tooltip=Stabilize your pose
 
 
 usefulstuffs.waterfilter.jei_1=Prevent Well of Water Fall to insert water into a set of specific block's sides.
@@ -175,6 +177,7 @@ usefulstuffs.feather.jei_1=There is a chance that chickens will drop them when f
 usefulstuffs.feather.jei_2=Enabled in UsefulStuffs config.
 usefulstuffs.potato_charm.jei_1=Makes player able to get on bed even it is not night time. The power of couch potato will make you fall asleep immediately, straight to the start of the next day.
 usefulstuffs.potato_charm.jei_2=Only works when there is exact one player in the world. (WIP Item)
+usefulstuffs.stabilizing_ring.jei=Remove the mining speed debuff when you are not on the ground.
 
 
 category.jei.usefulstuffs.milk_fermenter.title=Milk Fermenter

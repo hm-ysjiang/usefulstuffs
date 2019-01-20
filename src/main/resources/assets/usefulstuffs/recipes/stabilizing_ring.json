@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "FGN", 
+		"G G", 
+		"NGN"
+    ],
+    "key": {
+        "N": {
+            "item": "minecraft:gold_nugget"
+        },
+        "F": {
+            "item": "minecraft:feather"
+        },
+        "G": {
+            "item": "minecraft:gold_ingot"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:stabilizing_ring"
+    }
+}

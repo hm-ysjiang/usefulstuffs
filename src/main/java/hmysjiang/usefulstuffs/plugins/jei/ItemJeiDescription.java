@@ -87,6 +87,7 @@ public class ItemJeiDescription {
 		}
 		registry.addIngredientInfo(new ItemStack(ModItems.charm_potato), VanillaTypes.ITEM, "usefulstuffs.potato_charm.jei_1",
 																							"usefulstuffs.potato_charm.jei_2");
+		registry.addIngredientInfo(new ItemStack(ModItems.ring_stablizing), VanillaTypes.ITEM, "usefulstuffs.stabilizing_ring.jei");
 	}
 	
 }

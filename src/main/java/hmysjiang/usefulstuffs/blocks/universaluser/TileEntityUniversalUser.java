@@ -3,8 +3,6 @@ package hmysjiang.usefulstuffs.blocks.universaluser;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 
-import hmysjiang.usefulstuffs.network.PacketHandler;
-import hmysjiang.usefulstuffs.network.packet.SyncUser;
 import hmysjiang.usefulstuffs.utils.fakeplayer.FakePlayerHandler;
 import hmysjiang.usefulstuffs.utils.fakeplayer.USFakePlayer;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
@@ -15,6 +13,8 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -74,7 +74,52 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 		if (!world.isRemote) {
-			PacketHandler.INSTANCE.sendToDimension(new SyncUser(pos.getX(), pos.getY(), pos.getZ(), writeToNBT(new NBTTagCompound())), world.provider.getDimension());
+			this.callUpdate();
+			if (innerCapacitor.getEnergyStored() < innerCapacitor.getMaxEnergyStored()) {
+				//Transfer energy
+				int charge = innerCapacitor.receiveEnergy(capacitor.extractEnergy(10000, true), true);
+				innerCapacitor.receiveEnergy(capacitor.extractEnergy(charge, false), false);
+				this.markDirty();
+			}
+			for (int i = 0 ; i<inventory.getSlots() ; i++) {
+				ItemStack stack = inventory.getStackInSlot(i);
+				if (stack.isEmpty())
+					continue;
+				if (stack.hasCapability(CapabilityEnergy.ENERGY, null)) {
+					IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
+					//Do charge
+					int charge = storage.receiveEnergy(innerCapacitor.extractEnergy(10000, true), true);
+					storage.receiveEnergy(innerCapacitor.extractEnergy(charge, false), false);
+					this.markDirty();
+				}
+				if (stack.getItem() == Items.BUCKET) {
+					if (tank.getFluid() != null && tank.drain(1000, false).amount == 1000) {
+						boolean flag = false;
+						ItemStack bucket = FluidUtil.getFilledBucket(tank.getFluid());
+						stack.shrink(1);
+						for (int j = 0 ; j<9 ; j++) {
+							if (inventory.insertItem(j, bucket, false).isEmpty()) {
+								flag = true;
+								break;
+							}
+						}
+						if (!flag)
+							world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, bucket));
+						tank.drain(1000, true);
+						this.markDirty();
+					}
+				}
+				else if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+					IFluidHandlerItem handler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+					if (tank.getFluid() != null && handler.fill(tank.getFluid(), false) > 0) {
+						//Do refill
+						FluidStack fluid = tank.drain(250, true);
+						fluid.amount -= handler.fill(fluid.copy(), true);
+						tank.fill(fluid, true);
+						this.markDirty();
+					}
+				}
+			}
 			if (workTime == operateSpeed.cooldown) {
 				if (redstone != Redstone.ALWAYS_ACTIVE && (redstone == Redstone.ACTIVE_ON_REDSTONE ^ world.isBlockPowered(pos))) 
 					return;
@@ -181,52 +226,12 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 			else {
 				workTime++;
 			}
-			if (innerCapacitor.getEnergyStored() < innerCapacitor.getMaxEnergyStored()) {
-				//Transfer energy
-				int charge = innerCapacitor.receiveEnergy(capacitor.extractEnergy(10000, true), true);
-				innerCapacitor.receiveEnergy(capacitor.extractEnergy(charge, false), false);
-				this.markDirty();
-			}
-			for (int i = 0 ; i<inventory.getSlots() ; i++) {
-				ItemStack stack = inventory.getStackInSlot(i);
-				if (stack.isEmpty())
-					continue;
-				if (stack.hasCapability(CapabilityEnergy.ENERGY, null)) {
-					IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
-					//Do charge
-					int charge = storage.receiveEnergy(innerCapacitor.extractEnergy(10000, true), true);
-					storage.receiveEnergy(innerCapacitor.extractEnergy(charge, false), false);
-					this.markDirty();
-				}
-				if (stack.getItem() == Items.BUCKET) {
-					if (tank.getFluid() != null && tank.drain(1000, false).amount == 1000) {
-						boolean flag = false;
-						ItemStack bucket = FluidUtil.getFilledBucket(tank.getFluid());
-						stack.shrink(1);
-						for (int j = 0 ; j<9 ; j++) {
-							if (inventory.insertItem(j, bucket, false).isEmpty()) {
-								flag = true;
-								break;
-							}
-						}
-						if (!flag)
-							world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, bucket));
-						tank.drain(1000, true);
-						this.markDirty();
-					}
-				}
-				else if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-					IFluidHandlerItem handler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-					if (tank.getFluid() != null && handler.fill(tank.getFluid(), false) > 0) {
-						//Do refill
-						FluidStack fluid = tank.drain(250, true);
-						fluid.amount -= handler.fill(fluid.copy(), true);
-						tank.fill(fluid, true);
-						this.markDirty();
-					}
-				}
-			}
 		}
+	}
+	
+	protected void callUpdate() {
+		this.world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
+		this.world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
 	}
 	
 	@Override
@@ -326,6 +331,16 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 		compound.setInteger("select", select.getId());
 		compound.setInteger("redstone", redstone.getId());
 		return compound;
+	}
+	
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(pos, 1, writeToNBT(new NBTTagCompound()));
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		readFromNBT(pkt.getNbtCompound());
 	}
 	
 	public static enum OperateSpeed {

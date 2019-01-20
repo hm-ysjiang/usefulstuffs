@@ -91,6 +91,7 @@ public class ConfigManager {
 	public static boolean lightBatteryEnabled;
 	public static boolean filingCabinetNbtEnabled;
 	public static boolean charmPotatoEnabled;
+	public static boolean stabilizingRingEnabled;
 	
 	
 	public static Configuration getConfig() {
@@ -490,6 +491,12 @@ public class ConfigManager {
 		charmPotatoEnabled = propertyPotatoCharmEnabled.getBoolean();
 		propertyPotatoCharmEnabled.set(charmPotatoEnabled);
 		orderEnable.add(propertyPotatoCharmEnabled.getName());
+		
+		Property propertyStabilizingRingEnabled = config.get(CATEGORY_ENABLE, "enable_stabilizing_ring", true);
+		propertyStabilizingRingEnabled.setComment("Enable Ring of Stabilizing? DEFAULT=true");
+		stabilizingRingEnabled = propertyStabilizingRingEnabled.getBoolean();
+		propertyStabilizingRingEnabled.set(stabilizingRingEnabled);
+		orderEnable.add(propertyStabilizingRingEnabled.getName());
 	}
 
 }
