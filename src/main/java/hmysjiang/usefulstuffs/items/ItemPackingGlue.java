@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
@@ -105,6 +106,13 @@ public class ItemPackingGlue extends Item {
 	@Override
 	public int getItemEnchantability() {
 		return 2;
+	}
+	
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if (tab == UsefulStuffs.TAB) {
+			items.add(new ItemStack(this, 1, 0));
+		}
 	}
 	
 	@SideOnly(Side.CLIENT)
