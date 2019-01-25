@@ -334,6 +334,11 @@ public class TileEntityUniversalUser extends TileEntity implements ITickable {
 	}
 	
 	@Override
+	public NBTTagCompound getUpdateTag() {
+		return writeToNBT(new NBTTagCompound());
+	}
+	
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, writeToNBT(new NBTTagCompound()));
 	}

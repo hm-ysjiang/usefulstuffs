@@ -11,6 +11,7 @@ import hmysjiang.usefulstuffs.blocks.gluedbox.TileEntityGluedBox;
 import hmysjiang.usefulstuffs.blocks.playerdetector.TileEntityPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.TileEntityPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.TileEntityRainDetector;
+import hmysjiang.usefulstuffs.blocks.tank.TileEntityTankFrame;
 import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser;
 import hmysjiang.usefulstuffs.blocks.well.TileEntityWell;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
@@ -88,6 +89,8 @@ public class CommonProxy {
 			GameRegistry.registerTileEntity(TileEntityUniversalUser.class, new ResourceLocation(Reference.MOD_ID, "universal_user"));
 		if (ConfigManager.filingCabinetNbtEnabled)
 			GameRegistry.registerTileEntity(TileEntityFilingCabinetNBT.class, new ResourceLocation(Reference.MOD_ID, "filing_cabinet2"));
+		if (ConfigManager.tankEnabled)
+			GameRegistry.registerTileEntity(TileEntityTankFrame.class, new ResourceLocation(Reference.MOD_ID, "tank"));
 	}
 	
 }

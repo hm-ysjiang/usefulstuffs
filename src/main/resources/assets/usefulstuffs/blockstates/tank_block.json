@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "tier=basic": { "model": "usefulstuffs:tank_basic"},
+        "tier=better": { "model": "usefulstuffs:tank_better"},
+        "tier=advanced": { "model": "usefulstuffs:tank_advanced"},
+        "tier=reinforced": { "model": "usefulstuffs:tank_reinforced"},
+        "tier=extraordinary": { "model": "usefulstuffs:tank_ex"},
+        "tier=none": { "model": "usefulstuffs:tank_empty"}
+    }
+}

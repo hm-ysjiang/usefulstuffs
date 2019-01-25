@@ -19,6 +19,8 @@ import hmysjiang.usefulstuffs.items.ItemLightShooter;
 import hmysjiang.usefulstuffs.items.ItemLightShooterCollector;
 import hmysjiang.usefulstuffs.items.ItemMilkBag;
 import hmysjiang.usefulstuffs.items.ItemPackingGlue;
+import hmysjiang.usefulstuffs.items.ItemTankContainer;
+import hmysjiang.usefulstuffs.items.ItemTankContainer.TankTier;
 import hmysjiang.usefulstuffs.items.ItemWaterBlackList;
 import hmysjiang.usefulstuffs.items.baubles.ItemBackpack;
 import hmysjiang.usefulstuffs.items.baubles.ItemFieryLilyBelt;
@@ -67,6 +69,7 @@ public class ModItems {
 	public static Item universal_core;
 	public static Item charm_potato;
 	public static Item ring_stablizing;
+	public static Item tank_container;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -95,73 +98,77 @@ public class ModItems {
 		universal_core = new ItemCraftingIngredient(Reference.ModItems.UNIVERSAL_CORE.getRegistryName(), Reference.ModItems.UNIVERSAL_CORE.getUnlocalizedName());
 		charm_potato = new ItemPotatoCharm();
 		ring_stablizing = new ItemStabilizingRing();
+		tank_container = new ItemTankContainer();
 	}
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> registry = event.getRegistry();
 		if (ConfigManager.wellEnabled) {
-			registry.register(water_blacklist);
+			register(registry, water_blacklist);
 		}
 		if (ConfigManager.bentoEnabled) {
-			registry.register(bento);
+			register(registry, bento);
 		}
 		if (ConfigManager.buildingWandsEnabled) {
-			registry.register(building_wand);
-			registry.register(building_wand_infinite);
-			registry.register(building_wizard);
+			register(registry, building_wand);
+			register(registry, building_wand_infinite);
+			register(registry, building_wizard);
 		}
 		if (ConfigManager.lightShootersEnabled) {
-			registry.register(light_shooter);
-			registry.register(light_shooter_collecter);
+			register(registry, light_shooter);
+			register(registry, light_shooter_collecter);
 		}
 		if (ConfigManager.glueEnabled) {
-			registry.register(packing_glue);
+			register(registry, packing_glue);
 		}
 		if (ConfigManager.lilyBeltEnabled) {
-			registry.register(belt_lily);
+			register(registry, belt_lily);
 		}
 		if (ConfigManager.bagStorageEnabled) {
-			registry.register(bag_storage);
+			register(registry, bag_storage);
 		}
 		if (ConfigManager.tFlipFlopEnabled) {
-			registry.register(flipflop_core);
+			register(registry, flipflop_core);
 		}
 		if (ConfigManager.berryEnabled) {
-			registry.register(berry);
+			register(registry, berry);
 		}
 		if (ConfigManager.fieryLilyEnabled) {
-			registry.register(belt_fiery_lily);
+			register(registry, belt_fiery_lily);
 		}
 		if (ConfigManager.backpackEnabled) {
-			registry.register(backpack);
+			register(registry, backpack);
 		}
 		if (ConfigManager.miningBackpackEnabled) {
-			registry.register(mining_backpack);
+			register(registry, mining_backpack);
 		}
 		if (ConfigManager.infiniteWaterEnabled) {
-			registry.register(infinite_water);
+			register(registry, infinite_water);
 		}
 		if (ConfigManager.milkBagEnabled) {
-			registry.register(milk_bag);
+			register(registry, milk_bag);
 		}
 		if (ConfigManager.milkFermenterEnabled) {
-			registry.register(cheese);
+			register(registry, cheese);
 		}
 		if (ConfigManager.lightBowEnabled) {
-			registry.register(light_bow);
+			register(registry, light_bow);
 		}
 		if (ConfigManager.lightBatteryEnabled) {
-			registry.register(light_battery);
+			register(registry, light_battery);
 		}
 		if (ConfigManager.universalUserEnabled) {
-			registry.register(universal_core);
+			register(registry, universal_core);
 		}
 		if (ConfigManager.charmPotatoEnabled) {
-			registry.register(charm_potato);
+			register(registry, charm_potato);
 		}
 		if (ConfigManager.stabilizingRingEnabled) {
-			registry.register(ring_stablizing);
+			register(registry, ring_stablizing);
+		}
+		if (ConfigManager.tankEnabled) {
+			register(registry, tank_container);
 		}
 		register(registry, 
 				compact_storage_unit,
@@ -201,6 +208,9 @@ public class ModItems {
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());
+		for (TankTier tier: TankTier.values())
+			if (tier.availiable())
+				UsefulStuffs.proxy.registerItemRenders(tank_container, tier.getMeta(), tier.getName());
 		
 		for (Item item: itemblocks)
 			UsefulStuffs.proxy.registerItemRenders(item);

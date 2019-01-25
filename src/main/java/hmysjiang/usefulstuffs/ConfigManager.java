@@ -92,6 +92,7 @@ public class ConfigManager {
 	public static boolean filingCabinetNbtEnabled;
 	public static boolean charmPotatoEnabled;
 	public static boolean stabilizingRingEnabled;
+	public static boolean tankEnabled;
 	
 	
 	public static Configuration getConfig() {
@@ -497,6 +498,12 @@ public class ConfigManager {
 		stabilizingRingEnabled = propertyStabilizingRingEnabled.getBoolean();
 		propertyStabilizingRingEnabled.set(stabilizingRingEnabled);
 		orderEnable.add(propertyStabilizingRingEnabled.getName());
+		
+		Property propertyTankEnabled = config.get(CATEGORY_ENABLE, "enable_tank", true);
+		propertyTankEnabled.setComment("Enable Tank? DEFAULT=true");
+		tankEnabled = propertyTankEnabled.getBoolean();
+		propertyTankEnabled.set(tankEnabled);
+		orderEnable.add(propertyTankEnabled.getName());
 	}
 
 }

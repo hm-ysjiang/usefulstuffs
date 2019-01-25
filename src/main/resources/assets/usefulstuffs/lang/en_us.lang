@@ -45,6 +45,21 @@ item.usefulstuffs.triangular_prism.name=Triangular Prism
 item.usefulstuffs.universal_core.name=Universal Core
 item.usefulstuffs.potato_charm.name=Charm of Potato (WIP)
 item.usefulstuffs.stabilizing_ring.name=Ring of Stabilizing
+item.usefulstuffs.tank_container_basic.name=Basic Fluid Container
+item.usefulstuffs.tank_container_better.name=Better Fluid Container
+item.usefulstuffs.tank_container_advanced.name=Advanced Fluid Container
+item.usefulstuffs.tank_container_reinforced.name=Reinforced Fluid Container
+item.usefulstuffs.tank_container_extraordinary.name=Extraordinary Fluid Container
+item.usefulstuffs.tank_container_basic_place.name=Basic Fluid Container (Place)
+item.usefulstuffs.tank_container_better_place.name=Better Fluid Container (Place)
+item.usefulstuffs.tank_container_advanced_place.name=Advanced Fluid Container (Place)
+item.usefulstuffs.tank_container_reinforced_place.name=Reinforced Fluid Container (Place)
+item.usefulstuffs.tank_container_extraordinary_place.name=Extraordinary Fluid Container (Place)
+item.usefulstuffs.tank_container_basic_fill.name=Basic Fluid Container (Fill)
+item.usefulstuffs.tank_container_better_fill.name=Better Fluid Container (Fill)
+item.usefulstuffs.tank_container_advanced_fill.name=Advanced Fluid Container (Fill)
+item.usefulstuffs.tank_container_reinforced_fill.name=Reinforced Fluid Container (Fill)
+item.usefulstuffs.tank_container_extraordinary_fill.name=Extraordinary Fluid Container (Fill)
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -76,6 +91,7 @@ tile.usefulstuffs.player_detector.name=Player Detector
 tile.usefulstuffs.fiery_lily.name=Fiery Lily
 tile.usefulstuffs.milk_fermenter.name=Milk Fermenter
 tile.usefulstuffs.universal_user.name=Universal User
+tile.usefulstuffs.tank_block.name=Tank Frame
 
 
 usefulstuffs.ingredient.tooltip=Crafting ingredient
@@ -139,6 +155,12 @@ usefulstuffs.light_battery.tooltip_2=Charges itself when exposed to sunlight
 usefulstuffs.universal_user.tooltip=Do the re-charge thingy in one machine!
 usefulstuffs.potato_charm.tooltip=Being a couch potato, one can sleep at any time he want.
 usefulstuffs.stabilizing_ring.tooltip=Stabilize your pose
+usefulstuffs.tank_container.tooltip_1=Work as a big bucket, Shift-Right click to toggle mode
+usefulstuffs.tank_container.tooltip_2=Fluid: %s
+usefulstuffs.tank_container.tooltip_3=Amount: %1$s/%2$s mB
+usefulstuffs.tank_container.tooltip_4=Mode: %s
+usefulstuffs.tank.tooltip_1=Work along with Fluid Containers, put them inside to form a tank
+usefulstuffs.tank.tooltip_2=Right click with a Fluid Container to insert, Shift-Right click to take out
 
 
 usefulstuffs.waterfilter.jei_1=Prevent Well of Water Fall to insert water into a set of specific block's sides.

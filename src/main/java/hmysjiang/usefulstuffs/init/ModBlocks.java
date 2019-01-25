@@ -14,6 +14,7 @@ import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
 import hmysjiang.usefulstuffs.blocks.playerdetector.BlockPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.BlockPortalMuffler;
 import hmysjiang.usefulstuffs.blocks.raindetector.BlockRainDetector;
+import hmysjiang.usefulstuffs.blocks.tank.BlockTankFrame;
 import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.universaluser.BlockUniversalUser;
 import hmysjiang.usefulstuffs.blocks.well.BlockWell;
@@ -46,6 +47,7 @@ public class ModBlocks {
 	public static Block milk_fermenter;
 	public static Block universal_user;
 	public static Block filing_cabinet_nbt;
+	public static Block tank;
 	
 	public static void init() {
 		campfire = new BlockCampfire(ConfigManager.campfireEnabled);
@@ -63,52 +65,56 @@ public class ModBlocks {
 		milk_fermenter = new BlockMilkFermenter(ConfigManager.milkFermenterEnabled);
 		universal_user = new BlockUniversalUser(ConfigManager.universalUserEnabled);
 		filing_cabinet_nbt = new BlockFilingCabinetNBT(ConfigManager.filingCabinetNbtEnabled);
+		tank = new BlockTankFrame(ConfigManager.tankEnabled);
 	}
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
 		if (ConfigManager.campfireEnabled) {
-			registry.register(campfire);
+			register(registry, campfire);
 		}
 		if (ConfigManager.filingCabinetUnstackableEnabled) {
-			registry.register(filing_cabinet_unstackable);
+			register(registry, filing_cabinet_unstackable);
 		}
 		if (ConfigManager.filingCabinetNbtEnabled) {
 			register(registry, filing_cabinet_nbt);
 		}
 		if (ConfigManager.glueEnabled) {
-			registry.register(glued_box);
+			register(registry, glued_box);
 		}
 		if (ConfigManager.lightBulbEnabled) {
-			registry.register(light_bulb);
+			register(registry, light_bulb);
 		}
 		if (ConfigManager.rainDetectorEnabled) {
-			registry.register(rain_detector);
+			register(registry, rain_detector);
 		}
 		if (ConfigManager.tFlipFlopEnabled) {
-			registry.register(t_flipflop);
+			register(registry, t_flipflop);
 		}
 		if (ConfigManager.wellEnabled) {
-			registry.register(well);
+			register(registry, well);
 		}
 		if (ConfigManager.portalMufflerEnabled) {
-			registry.register(portal_muffler);
+			register(registry, portal_muffler);
 		}
 		if (ConfigManager.playerDetectorEnabled) {
-			registry.register(player_detector);
+			register(registry, player_detector);
 		}
 		if (ConfigManager.fieryLilyEnabled) {
-			registry.register(fiery_lily);
+			register(registry, fiery_lily);
 		}
 		if (ConfigManager.milkFermenterEnabled) {
-			registry.register(milk_fermenter);
+			register(registry, milk_fermenter);
 		}
 		if (ConfigManager.universalUserEnabled) {
-			registry.register(universal_user);
+			register(registry, universal_user);
 		}
 		if (ConfigManager.berryEnabled) {
 			register(registry, berrybushes);
+		}
+		if (ConfigManager.tankEnabled) {
+			register(registry, tank);
 		}
 	}
 	
@@ -127,6 +133,7 @@ public class ModBlocks {
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(milk_fermenter));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(universal_user));
 		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(filing_cabinet_nbt));
+		UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(tank));
 		for (Block block: berrybushes)
 			UsefulStuffs.proxy.registerItemRenders(Item.getItemFromBlock(block));
 	}
