@@ -6,6 +6,7 @@ import java.util.List;
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
+import hmysjiang.usefulstuffs.items.ItemTankContainer;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.minecraft.init.Items;
@@ -13,10 +14,14 @@ import net.minecraft.item.ItemStack;
 
 public class ItemJeiDescription {
 	private static List<ItemStack> berries = new ArrayList<ItemStack>();
+	private static List<ItemStack> tankItems = new ArrayList<ItemStack>();
 	
 	static {
 		for (int i = 0 ; i<16 ; i++)
 			berries.add(new ItemStack(ModItems.berry, 1, i));
+		for (ItemTankContainer.TankTier tier: ItemTankContainer.TankTier.values())
+			if (tier.availiable())
+				tankItems.add(new ItemStack(ModItems.tank_container, 1, tier.getMeta()));
 	}
 	
 	public static void registerDescription(IModRegistry registry) {
@@ -88,6 +93,10 @@ public class ItemJeiDescription {
 		registry.addIngredientInfo(new ItemStack(ModItems.charm_potato), VanillaTypes.ITEM, "usefulstuffs.potato_charm.jei_1",
 																							"usefulstuffs.potato_charm.jei_2");
 		registry.addIngredientInfo(new ItemStack(ModItems.ring_stablizing), VanillaTypes.ITEM, "usefulstuffs.stabilizing_ring.jei");
+		registry.addIngredientInfo(tankItems, VanillaTypes.ITEM, "usefulstuffs.tank_container.jei", 
+																 "usefulstuffs.tank_formation.jei");
+		registry.addIngredientInfo(new ItemStack(ModBlocks.tank), VanillaTypes.ITEM, "usefulstuffs.tank_block.jei", 
+																					 "usefulstuffs.tank_formation.jei");
 	}
 	
 }

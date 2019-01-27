@@ -167,7 +167,7 @@ public class ModItems {
 		if (ConfigManager.stabilizingRingEnabled) {
 			register(registry, ring_stablizing);
 		}
-		if (ConfigManager.tankEnabled) {
+		if (ConfigManager.tankItemEnabled) {
 			register(registry, tank_container);
 		}
 		register(registry, 

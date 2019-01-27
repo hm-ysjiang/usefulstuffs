@@ -4,6 +4,7 @@ import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.recipe.RecipeLightShooterCollector;
 import hmysjiang.usefulstuffs.recipe.RecipeMiningBackpack;
 import hmysjiang.usefulstuffs.recipe.RecipePackingGlueReloader;
+import hmysjiang.usefulstuffs.recipe.RecipeTankContainer;
 import hmysjiang.usefulstuffs.recipe.RecipeWell;
 import hmysjiang.usefulstuffs.recipe.RecipeWellNew;
 import net.minecraft.init.Blocks;
@@ -48,6 +49,11 @@ public class ModRecipe {
 				event.getRegistry().register(new RecipeWellNew());
 			else 
 				event.getRegistry().register(new RecipeWell());
+		}
+		if (ConfigManager.tankItemEnabled) {
+			for (int i = 1 ; i<5 ; i++) {
+				event.getRegistry().register(new RecipeTankContainer(i));
+			}
 		}
 	}
 	

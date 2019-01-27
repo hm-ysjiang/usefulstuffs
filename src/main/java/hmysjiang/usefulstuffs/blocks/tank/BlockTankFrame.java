@@ -10,6 +10,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -17,16 +18,26 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -49,28 +60,32 @@ public class BlockTankFrame extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
-			ItemStack stack = playerIn.getHeldItem(hand);
-			if (stack.isEmpty() && playerIn.isSneaking() && state.getValue(TIER).availiable()) {
-				TileEntityTankFrame tile = (TileEntityTankFrame) worldIn.getTileEntity(pos);
-				if (tile != null) {
-					ItemStack tank = tile.getTank();
-					worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, tank.copy()));
-					tile.setTank(ItemStack.EMPTY);
-				}
+		ItemStack stack = playerIn.getHeldItem(hand);
+		TileEntityTankFrame tile = (TileEntityTankFrame) worldIn.getTileEntity(pos);
+		if (tile != null) {
+			if (!worldIn.isRemote && stack.isEmpty() && playerIn.isSneaking() && state.getValue(TIER).availiable()) {
+				ItemStack tank = tile.getTank();
+				EntityItem item = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, tank.copy());
+				worldIn.spawnEntity(item);
+				item.onCollideWithPlayer(playerIn);
+				tile.setTank(ItemStack.EMPTY);
+				return true;
 			}
 			else if (stack.getItem() == ModItems.tank_container && !state.getValue(TIER).availiable()) {
-				TileEntityTankFrame tile = (TileEntityTankFrame) worldIn.getTileEntity(pos);
-				if (tile != null) {
+				if (!worldIn.isRemote) {
 					tile.setTank(stack.copy());
 					stack.setCount(0);
 				}
+				worldIn.playSound(playerIn, pos, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				return true;
 			}
-			else {
-//				playerIn.openGui(mod, modGuiId, world, x, y, z);
+			else if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+				if (!worldIn.isRemote)
+					return FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, facing);
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -113,8 +128,21 @@ public class BlockTankFrame extends Block implements ITileEntityProvider {
 	}
 	
 	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return BOUNDING_BOX;
+	}
+	
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		for (EnumFacing facing: EnumFacing.HORIZONTALS)
+			if (face == facing)
+				return BlockFaceShape.UNDEFINED;
+		return super.getBlockFaceShape(worldIn, state, pos, face);
 	}
 	
 	@SideOnly(Side.CLIENT)

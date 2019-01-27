@@ -92,7 +92,8 @@ public class ConfigManager {
 	public static boolean filingCabinetNbtEnabled;
 	public static boolean charmPotatoEnabled;
 	public static boolean stabilizingRingEnabled;
-	public static boolean tankEnabled;
+	public static boolean tankItemEnabled;
+	public static boolean tankBlockEnabled;
 	
 	
 	public static Configuration getConfig() {
@@ -198,7 +199,7 @@ public class ConfigManager {
 		orderBlock.add(propertyWellTransRange.getName());
 		
 		Property propertyCampfireCraft = config.get(CATEGORY_BLOCK, "campfire_craftable", true);
-		propertyCampfireCraft.setComment("Is the campfire craftable? DEFAULT=true REQUIRE enable_campfire to be true");
+		propertyCampfireCraft.setComment("Is the campfire craftable? DEFAULT=true, REQUIRE enable_campfire to be true");
 		enableCampfireCraft = propertyCampfireCraft.getBoolean() && campfireEnabled;
 		propertyCampfireCraft.set(enableCampfireCraft);
 		orderBlock.add(propertyCampfireCraft.getName());
@@ -404,7 +405,7 @@ public class ConfigManager {
 		orderEnable.add(propertyFieryLilyEnabled.getName());
 		
 		Property propertyPotionFieryLilyEnabled = config.get(CATEGORY_ENABLE, "enable_potion_fiery_lily", true);
-		propertyPotionFieryLilyEnabled.setComment("Enable Potion Effect Fiery Li-ly? REQUIRE enable_fiery_lily to be true");
+		propertyPotionFieryLilyEnabled.setComment("Enable Potion Effect Fiery Li-ly? DEFAULT=true, REQUIRE enable_fiery_lily to be true");
 		potionFieryLilyEnabled = propertyPotionFieryLilyEnabled.getBoolean() && fieryLilyEnabled;
 		propertyPotionFieryLilyEnabled.set(potionFieryLilyEnabled);
 		orderEnable.add(propertyPotionFieryLilyEnabled.getName());
@@ -416,7 +417,7 @@ public class ConfigManager {
 		orderEnable.add(propertyMilkBagEnabled.getName());
 		
 		Property propertyMilkFermenterEnabled = config.get(CATEGORY_ENABLE, "enable_milk_fermenter", true);
-		propertyMilkFermenterEnabled.setComment("Enable Milk Fermenter? REQUIRE enable_milk_bag to be true");
+		propertyMilkFermenterEnabled.setComment("Enable Milk Fermenter? DEFAULT=true, REQUIRE enable_milk_bag to be true");
 		milkFermenterEnabled = propertyMilkFermenterEnabled.getBoolean() && milkBagEnabled;
 		propertyMilkFermenterEnabled.set(milkFermenterEnabled);
 		orderEnable.add(propertyMilkFermenterEnabled.getName());
@@ -440,7 +441,7 @@ public class ConfigManager {
 		orderEnable.add(propertyBuildingWandsEnabled.getName());
 		
 		Property propertyLightShootersEnabled = config.get(CATEGORY_ENABLE, "enable_light_shooters", true);
-		propertyLightShootersEnabled.setComment("Enable Light Shooters? REQUIRE enable_light_blub to be true");
+		propertyLightShootersEnabled.setComment("Enable Light Shooters? DEFAULT=true, REQUIRE enable_light_blub to be true");
 		lightShootersEnabled = propertyLightShootersEnabled.getBoolean() && lightBulbEnabled;
 		propertyLightShootersEnabled.set(lightShootersEnabled);
 		orderEnable.add(propertyLightShootersEnabled.getName());
@@ -499,11 +500,17 @@ public class ConfigManager {
 		propertyStabilizingRingEnabled.set(stabilizingRingEnabled);
 		orderEnable.add(propertyStabilizingRingEnabled.getName());
 		
-		Property propertyTankEnabled = config.get(CATEGORY_ENABLE, "enable_tank", true);
-		propertyTankEnabled.setComment("Enable Tank? DEFAULT=true");
-		tankEnabled = propertyTankEnabled.getBoolean();
-		propertyTankEnabled.set(tankEnabled);
-		orderEnable.add(propertyTankEnabled.getName());
+		Property propertyTankItemEnabled = config.get(CATEGORY_ENABLE, "enable_fluid_container", true);
+		propertyTankItemEnabled.setComment("Enable Fluid Container? DEFAULT=true");
+		tankItemEnabled = propertyTankItemEnabled.getBoolean();
+		propertyTankItemEnabled.set(tankItemEnabled);
+		orderEnable.add(propertyTankItemEnabled.getName());
+		
+		Property propertyTankBlockEnabled = config.get(CATEGORY_ENABLE, "enable_tank_frame", true);
+		propertyTankBlockEnabled.setComment("Enable Tank Frame? DEFAULT=true, REQUIRE enable_fluid_container to be true");
+		tankBlockEnabled = propertyTankBlockEnabled.getBoolean() && tankItemEnabled;
+		propertyTankBlockEnabled.set(tankBlockEnabled);
+		orderEnable.add(propertyTankBlockEnabled.getName());
 	}
 
 }

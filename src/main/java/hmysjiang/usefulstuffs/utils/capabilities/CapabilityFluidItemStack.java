@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.utils.capabilities;
 import hmysjiang.usefulstuffs.items.ItemTankContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
@@ -38,9 +39,9 @@ public class CapabilityFluidItemStack implements ICapabilityProvider {
 				public int fill(FluidStack resource, boolean doFill) {
 					if (resource == null) 
 						return 0;
+					int cap = ItemTankContainer.getCapacity(stack);
 					if (ItemTankContainer.getFluid(stack) == null || ItemTankContainer.getFluid(stack).isFluidEqual(resource)) {
 						FluidStack destination = ItemTankContainer.getFluid(stack);
-						int cap = ItemTankContainer.getCapacity(stack);
 						if (destination != null) {
 							int space = cap - destination.amount;
 							if (doFill) {
@@ -59,9 +60,10 @@ public class CapabilityFluidItemStack implements ICapabilityProvider {
 					else if (ItemTankContainer.getFluid(stack).amount == 0) {
 						if (doFill) {
 							FluidStack newFluid = resource.copy();
+							newFluid.amount = resource.amount > cap ? cap : resource.amount;
 							ItemTankContainer.setFluid(stack, resource);
 						}
-						return resource.amount;
+						return resource.amount > cap ? cap : resource.amount;
 					}
 					return 0;
 				}
@@ -81,7 +83,7 @@ public class CapabilityFluidItemStack implements ICapabilityProvider {
 				
 				@Override
 				public FluidStack drain(FluidStack resource, boolean doDrain) {
-					if (ItemTankContainer.getFluid(stack).isFluidEqual(resource))
+					if (ItemTankContainer.getFluid(stack) != null && ItemTankContainer.getFluid(stack).isFluidEqual(resource))
 						return drain(resource.amount, doDrain);
 					return null;
 				}

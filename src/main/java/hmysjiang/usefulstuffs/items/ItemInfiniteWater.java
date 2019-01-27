@@ -30,6 +30,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -67,9 +68,12 @@ public class ItemInfiniteWater extends Item {
 					if (worldIn.getTileEntity(ray2.getBlockPos()) != null && worldIn.getTileEntity(ray2.getBlockPos()).hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, ray2.sideHit)) {
 						IFluidHandler handler = worldIn.getTileEntity(ray2.getBlockPos()).getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, ray2.sideHit);
 						if (handler.fill(new FluidStack(FluidRegistry.WATER, 1000), false) > 0) {
-							handler.fill(new FluidStack(FluidRegistry.WATER, 1000), true);
+							if (fillLevel == 1)
+								bucket.setItemDamage(2);
 							if (worldIn.isRemote)
 								worldIn.playSound(playerIn, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+							else 
+								handler.fill(new FluidStack(FluidRegistry.WATER, 1000), true);
 							return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, bucket);
 						}
 					}

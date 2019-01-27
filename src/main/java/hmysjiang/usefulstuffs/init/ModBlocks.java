@@ -65,7 +65,7 @@ public class ModBlocks {
 		milk_fermenter = new BlockMilkFermenter(ConfigManager.milkFermenterEnabled);
 		universal_user = new BlockUniversalUser(ConfigManager.universalUserEnabled);
 		filing_cabinet_nbt = new BlockFilingCabinetNBT(ConfigManager.filingCabinetNbtEnabled);
-		tank = new BlockTankFrame(ConfigManager.tankEnabled);
+		tank = new BlockTankFrame(ConfigManager.tankItemEnabled);
 	}
 	
 	@SubscribeEvent
@@ -113,7 +113,7 @@ public class ModBlocks {
 		if (ConfigManager.berryEnabled) {
 			register(registry, berrybushes);
 		}
-		if (ConfigManager.tankEnabled) {
+		if (ConfigManager.tankBlockEnabled) {
 			register(registry, tank);
 		}
 	}

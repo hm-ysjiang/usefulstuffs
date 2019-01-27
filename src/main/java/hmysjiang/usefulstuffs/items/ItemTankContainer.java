@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.utils.capabilities.CapabilityFluidItemStack;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -35,6 +36,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -56,8 +58,13 @@ public class ItemTankContainer extends Item {
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		if (!stack.hasTagCompound()) {
 			stack.setTagCompound(new NBTTagCompound());
-			(new FluidStack(FluidRegistry.WATER, 0)).writeToNBT(stack.getTagCompound());
 			stack.getTagCompound().setBoolean("Place", false);
+		}
+		else {
+			if (stack.getTagCompound().hasKey("Amount") && stack.getTagCompound().getInteger("Amount") == 0) {
+				stack.getTagCompound().removeTag("Amount");
+				stack.getTagCompound().removeTag("FluidName");
+			}
 		}
 	}
 	
@@ -101,20 +108,9 @@ public class ItemTankContainer extends Item {
 				
 				//Try to access the fluid handler
 				RayTraceResult ray2 = this.rayTrace(worldIn, player, true);
-				if (worldIn.getTileEntity(ray2.getBlockPos()) != null && worldIn.getTileEntity(ray2.getBlockPos()).hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, ray2.sideHit)) {
-					IFluidHandler handler = worldIn.getTileEntity(ray2.getBlockPos()).getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, ray2.sideHit);
-					FluidStack fluid = getFluid(tank);
-					if (tank != null) {
-						int toFill = handler.fill(fluid.copy(), false);
-						if (toFill > 0) {
-							handler.fill(new FluidStack(fluid, toFill), true);
-							fluid.amount -= toFill;
-							fluid.writeToNBT(tank.getTagCompound());
-							if (worldIn.isRemote)
-								worldIn.playSound(player, pos, fluid.getFluid().getEmptySound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-							return EnumActionResult.SUCCESS;
-						}
-					}
+				if (worldIn.getBlockState(ray2.getBlockPos()).getBlock() != ModBlocks.tank) {
+					if (worldIn.getTileEntity(ray2.getBlockPos()) != null && FluidUtil.interactWithFluidHandler(player, hand, worldIn, ray2.getBlockPos(), ray2.sideHit))
+						return EnumActionResult.SUCCESS;
 				}
 				
 				boolean replace = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
@@ -166,9 +162,16 @@ public class ItemTankContainer extends Item {
 		if (!worldIn.isAirBlock(pos) && !notSolid) {
 			return false;
 		}
-		if (state.getBlock() instanceof IFluidBlock || state.getBlock() instanceof BlockLiquid)
-			return false;
-		else if (fluid.getFluid().canBePlacedInWorld()) {
+		if (state.getBlock() instanceof IFluidBlock) {
+			if (((IFluidBlock) state.getBlock()).canDrain(worldIn, pos)) {
+				return false;
+			}
+		}
+		if (state.getBlock() instanceof BlockLiquid) {
+			if ((new BlockLiquidWrapper((BlockLiquid) state.getBlock(), worldIn, pos)).drain(1000, false) != null)
+				return false;
+		}
+		if (fluid.getFluid().canBePlacedInWorld()) {
 			if (fluid.getFluid().doesVaporize(fluid) && worldIn.provider.doesWaterVaporize()) {
 				int x = pos.getX();
 				int y = pos.getY();
@@ -232,17 +235,6 @@ public class ItemTankContainer extends Item {
 		}
 		return tank.getTagCompound().getBoolean("Place");
 	}
-
-//	@Override
-//	public int getRGBDurabilityForDisplay(ItemStack stack) {
-//		if (!stack.hasTagCompound())
-//			stack.setTagCompound(new NBTTagCompound());
-//		FluidStack fluid = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
-//		if (fluid == null)
-//			return super.getRGBDurabilityForDisplay(stack);
-//		LogHelper.info(fluid.getFluid().getColor(fluid) & 0xFFFFFF);
-//		return fluid.getFluid().getColor(fluid) & 0xFFFFFF;
-//	}
 	
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
@@ -282,22 +274,27 @@ public class ItemTankContainer extends Item {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.tank_container.tooltip_1"));
+		tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_1"));
+		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.tank_container.tooltip_2"));
 		if (GuiScreen.isShiftKeyDown()) {
 			if (stack.hasTagCompound()) {
 				if (stack.getTagCompound().hasKey("FluidName")) {
 					FluidStack fluid = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
 					if (fluid != null) {
-						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_2", fluid.amount > 0 ? fluid.getLocalizedName() : "None"));
-						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_3", fluid.amount, getCapacity(stack)));
+						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_3", fluid.amount > 0 ? fluid.getLocalizedName() : "None"));
+						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_4", fluid.amount, getCapacity(stack)));
 					}
 					else {
-						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_2", "None"));
-						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_3", 0, getCapacity(stack)));
+						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_3", "None"));
+						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_4", 0, getCapacity(stack)));
 					}
 				}
+				else {
+					tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_3", "None"));
+					tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_4", 0, getCapacity(stack)));
+				}
 				if (stack.getTagCompound().hasKey("Place"))
-					tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_4", stack.getTagCompound().getBoolean("Place") ? "Place" : "Fill"));
+					tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_5", stack.getTagCompound().getBoolean("Place") ? "Place" : "Fill"));
 			}
 		}
 		else {
@@ -368,7 +365,9 @@ public class ItemTankContainer extends Item {
 		}
 		
 		public static TankTier byMeta(int meta) {
-			return META_LOOKUP[meta];
+			if (meta >= 0 && meta < 6)
+				return META_LOOKUP[meta];
+			return NONE;
 		}
 		
 		public static int getCapacity(int meta) {

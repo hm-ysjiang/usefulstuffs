@@ -21,12 +21,13 @@ public class UsefulStuffsJeiPlugin implements IModPlugin{
 		//Item Description
 		ItemJeiDescription.registerDescription(registry);
 		if (ConfigManager.milkFermenterEnabled) {
-			//Custom Recipes
 			registry.addRecipes(MilkFermenterJei.getRecipes(jeiHelper), MilkFermenterJei.UID);
-			//Recipe Catalyst
 			registry.addRecipeCatalyst(new ItemStack(ModBlocks.milk_fermenter), MilkFermenterJei.UID);
-			//Click Recipe
 			registry.addRecipeClickArea(GuiMilkFermenter.class, 80, 48, 16, 16, MilkFermenterJei.UID);
+		}
+		if (ConfigManager.tankBlockEnabled) {
+			registry.addRecipes(TankFormationJei.getRecipes(jeiHelper), TankFormationJei.UID);
+			registry.addRecipeCatalyst(new ItemStack(ModBlocks.tank), TankFormationJei.UID);
 		}
 	}
 	
@@ -35,6 +36,8 @@ public class UsefulStuffsJeiPlugin implements IModPlugin{
 		IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 		if (ConfigManager.milkFermenterEnabled)
 			registry.addRecipeCategories(new MilkFermenterJei.MilkFermenterCategory(guiHelper));
+		if (ConfigManager.tankBlockEnabled)
+			registry.addRecipeCategories(new TankFormationJei.TankFormationCategory(guiHelper));
 	}
 	
 }

@@ -89,7 +89,7 @@ public class CommonProxy {
 			GameRegistry.registerTileEntity(TileEntityUniversalUser.class, new ResourceLocation(Reference.MOD_ID, "universal_user"));
 		if (ConfigManager.filingCabinetNbtEnabled)
 			GameRegistry.registerTileEntity(TileEntityFilingCabinetNBT.class, new ResourceLocation(Reference.MOD_ID, "filing_cabinet2"));
-		if (ConfigManager.tankEnabled)
+		if (ConfigManager.tankItemEnabled)
 			GameRegistry.registerTileEntity(TileEntityTankFrame.class, new ResourceLocation(Reference.MOD_ID, "tank"));
 	}
 	

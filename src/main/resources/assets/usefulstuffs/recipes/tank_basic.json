@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "IPI", 
+		"IBI", 
+		"IPI"
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:iron_ingot"
+        },
+        "P": {
+            "item": "minecraft:stone_pressure_plate"
+        },
+        "B": {
+            "item": "minecraft:bucket"
+        }
+    },
+    "result": {
+        "item": "usefulstuffs:tank_container",
+        "data": 0
+    }
+}

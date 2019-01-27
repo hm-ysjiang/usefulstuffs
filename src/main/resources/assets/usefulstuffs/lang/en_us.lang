@@ -155,12 +155,13 @@ usefulstuffs.light_battery.tooltip_2=Charges itself when exposed to sunlight
 usefulstuffs.universal_user.tooltip=Do the re-charge thingy in one machine!
 usefulstuffs.potato_charm.tooltip=Being a couch potato, one can sleep at any time he want.
 usefulstuffs.stabilizing_ring.tooltip=Stabilize your pose
-usefulstuffs.tank_container.tooltip_1=Work as a big bucket, Shift-Right click to toggle mode
-usefulstuffs.tank_container.tooltip_2=Fluid: %s
-usefulstuffs.tank_container.tooltip_3=Amount: %1$s/%2$s mB
-usefulstuffs.tank_container.tooltip_4=Mode: %s
+usefulstuffs.tank_container.tooltip_1=Work along with Tank Frame, put this inside to form a tank
+usefulstuffs.tank_container.tooltip_2=Work as a big bucket, Shift-Right click to toggle mode
+usefulstuffs.tank_container.tooltip_3=Fluid: %s
+usefulstuffs.tank_container.tooltip_4=Amount: %1$s/%2$s mB
+usefulstuffs.tank_container.tooltip_5=Mode: %s
 usefulstuffs.tank.tooltip_1=Work along with Fluid Containers, put them inside to form a tank
-usefulstuffs.tank.tooltip_2=Right click with a Fluid Container to insert, Shift-Right click to take out
+usefulstuffs.tank.tooltip_2=Right click with a Fluid Container to insert, Shift-Right click with empty hand to take out, or use a pipe
 
 
 usefulstuffs.waterfilter.jei_1=Prevent Well of Water Fall to insert water into a set of specific block's sides.
@@ -200,9 +201,13 @@ usefulstuffs.feather.jei_2=Enabled in UsefulStuffs config.
 usefulstuffs.potato_charm.jei_1=Makes player able to get on bed even it is not night time. The power of couch potato will make you fall asleep immediately, straight to the start of the next day.
 usefulstuffs.potato_charm.jei_2=Only works when there is exact one player in the world. (WIP Item)
 usefulstuffs.stabilizing_ring.jei=Remove the mining speed debuff when you are not on the ground.
+usefulstuffs.tank_container.jei=Work as a big bucket, Shift-Right click to toggle mode.
+usefulstuffs.tank_block.jei=Work along with Fluid Containers.
+usefulstuffs.tank_formation.jei=Right click a Tank Frame with a Fluid Container or use a pipe to form a tank, Shift-Right click with empty hand to take the Fluid Container out.
 
 
 category.jei.usefulstuffs.milk_fermenter.title=Milk Fermenter
+category.jei.usefulstuffs.tank_formation.title=Forming a Tank
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb
