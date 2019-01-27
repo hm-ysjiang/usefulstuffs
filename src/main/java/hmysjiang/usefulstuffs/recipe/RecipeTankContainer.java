@@ -3,7 +3,6 @@ package hmysjiang.usefulstuffs.recipe;
 import javax.annotation.Nonnull;
 
 import hmysjiang.usefulstuffs.Reference;
-import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemTankContainer;
 import net.minecraft.init.Blocks;

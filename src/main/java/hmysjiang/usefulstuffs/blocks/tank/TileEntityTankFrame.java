@@ -51,10 +51,12 @@ public class TileEntityTankFrame extends TileEntity implements ITickable {
 			if (state.getValue(BlockTankFrame.TIER).availiable()) {
 				if (state.getValue(BlockTankFrame.TIER).getMeta() != getTankTier()) {
 					world.setBlockState(pos, state.withProperty(BlockTankFrame.TIER, ItemTankContainer.TankTier.byMeta(getTankTier())));
+					this.markDirty();
 				}
 			}
 			else if (!getTank().isEmpty()) {
 				world.setBlockState(pos, state.withProperty(BlockTankFrame.TIER, ItemTankContainer.TankTier.byMeta(getTankTier())));
+				this.markDirty();
 			}
 		}
 	}
@@ -62,7 +64,6 @@ public class TileEntityTankFrame extends TileEntity implements ITickable {
 	public void callUpdate() {
 		this.world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
 		this.world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
-		this.markDirty();
 	}
 	
 	@Override

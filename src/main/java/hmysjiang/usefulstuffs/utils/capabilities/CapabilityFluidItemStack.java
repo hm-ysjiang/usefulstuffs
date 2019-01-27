@@ -3,7 +3,6 @@ package hmysjiang.usefulstuffs.utils.capabilities;
 import hmysjiang.usefulstuffs.items.ItemTankContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
@@ -70,7 +69,7 @@ public class CapabilityFluidItemStack implements ICapabilityProvider {
 				
 				@Override
 				public FluidStack drain(int maxDrain, boolean doDrain) {
-					FluidStack fluid = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
+					FluidStack fluid = ItemTankContainer.getFluid(stack);
 					if (fluid == null)
 						return null;
 					int amount = fluid.amount;

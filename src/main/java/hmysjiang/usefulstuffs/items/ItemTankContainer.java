@@ -34,11 +34,9 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidBlock;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.wrappers.BlockLiquidWrapper;
 import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
@@ -61,9 +59,8 @@ public class ItemTankContainer extends Item {
 			stack.getTagCompound().setBoolean("Place", false);
 		}
 		else {
-			if (stack.getTagCompound().hasKey("Amount") && stack.getTagCompound().getInteger("Amount") == 0) {
-				stack.getTagCompound().removeTag("Amount");
-				stack.getTagCompound().removeTag("FluidName");
+			if (stack.getTagCompound().hasKey("Fluid") && stack.getTagCompound().getCompoundTag("Fluid").getInteger("Amount") == 0) {
+				stack.getTagCompound().removeTag("Fluid");
 			}
 		}
 	}
@@ -193,7 +190,7 @@ public class ItemTankContainer extends Item {
 				}
 			}
 			fluid.amount -= 1000;
-			fluid.writeToNBT(tank.getTagCompound());
+			setFluid(tank, fluid);
 			return true;
 		}
 		return false;
@@ -203,24 +200,24 @@ public class ItemTankContainer extends Item {
 		if (!tank.hasTagCompound()) {
 			tank.setTagCompound(new NBTTagCompound());
 		}
-		FluidStack fluid = FluidStack.loadFluidStackFromNBT(tank.getTagCompound());
+		FluidStack fluid = getFluid(tank);
 		if (fluid == null) {
 			fluid = fluidStack.copy();
 			fluid.amount = 1000;
-			fluid.writeToNBT(tank.getTagCompound());
+			setFluid(tank, fluid);
 			return true;
 		}
 		if (fluidStack.isFluidEqual(fluid)) {
 			if (getCapacity(tank) - fluid.amount >= 1000) {
 				fluid.amount += 1000;
-				fluid.writeToNBT(tank.getTagCompound());
+				setFluid(tank, fluid);
 				return true;
 			}
 		}
 		else if (fluid.amount == 0) {
 			FluidStack newFluid = fluidStack.copy();
 			newFluid.amount = 1000;
-			newFluid.writeToNBT(tank.getTagCompound());
+			setFluid(tank, newFluid);
 			return true;
 		}
 		return false;
@@ -240,7 +237,7 @@ public class ItemTankContainer extends Item {
 	public double getDurabilityForDisplay(ItemStack stack) {
 		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		FluidStack fluid = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
+		FluidStack fluid = getFluid(stack);
 		int cap = getCapacity(stack), amount = (fluid == null ? 0 : fluid.amount);
 		return 1 -(((double) amount) / ((double) cap));
 	}
@@ -278,8 +275,8 @@ public class ItemTankContainer extends Item {
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.tank_container.tooltip_2"));
 		if (GuiScreen.isShiftKeyDown()) {
 			if (stack.hasTagCompound()) {
-				if (stack.getTagCompound().hasKey("FluidName")) {
-					FluidStack fluid = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
+				if (stack.getTagCompound().hasKey("Fluid")) {
+					FluidStack fluid = getFluid(stack);
 					if (fluid != null) {
 						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_3", fluid.amount > 0 ? fluid.getLocalizedName() : "None"));
 						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_4", fluid.amount, getCapacity(stack)));
@@ -304,17 +301,21 @@ public class ItemTankContainer extends Item {
 	
 	@Nullable
 	public static FluidStack getFluid(ItemStack stack) {
-		if (stack.hasTagCompound()) {
-			return FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("Fluid")) {
+			return FluidStack.loadFluidStackFromNBT(stack.getTagCompound().getCompoundTag("Fluid"));
 		}
 		return null;
 	}
 	
 	public static void setFluid(ItemStack stack, @Nullable FluidStack fluid) {
 		if (fluid != null) {
-			if (!stack.hasTagCompound())
+			if (!stack.hasTagCompound()) {
 				stack.setTagCompound(new NBTTagCompound());
-			fluid.writeToNBT(stack.getTagCompound());
+			}
+			if (!stack.getTagCompound().hasKey("Fluid")) {
+				stack.getTagCompound().setTag("Fluid", new NBTTagCompound());
+			}
+			fluid.writeToNBT(stack.getTagCompound().getCompoundTag("Fluid"));
 		}
 	}
 	
@@ -328,11 +329,11 @@ public class ItemTankContainer extends Item {
 	}
 	
 	public static enum TankTier implements IStringSerializable{
-		BASIC(0, 16000, "basic"),
-		BETTER(1, 32000, "better"),
-		ADVANCED(2, 64000, "advanced"),
-		REINFORCED(3, 128000, "reinforced"),
-		EXTRAODINARY(4, 256000, "extraordinary"),
+		BASIC(0, 32000, "basic"),
+		BETTER(1, 64000, "better"),
+		ADVANCED(2, 128000, "advanced"),
+		REINFORCED(3, 256000, "reinforced"),
+		EXTRAODINARY(4, 1024000, "extraordinary"),
 		NONE(5, 0, "none");
 		
 		private static TankTier[] META_LOOKUP = new TankTier[6];
