@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.plugins.jei;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import hmysjiang.usefulstuffs.Reference;
@@ -18,7 +19,6 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import scala.actors.threadpool.Arrays;
 
 public class TankFormationJei {
 	public static final String UID = Reference.MOD_ID + ".tank_formation";
@@ -90,8 +90,15 @@ public class TankFormationJei {
 
 		@Override
 		public void getIngredients(IIngredients ingredients) {
-			ingredients.setInputLists(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(new List[] {Arrays.asList(this.items)})));
+			ingredients.setInputLists(VanillaTypes.ITEM, getInputs());
 			ingredients.setOutput(VanillaTypes.ITEM, block);
+		}
+		
+		public List<List<ItemStack>> getInputs() {
+			List<List<ItemStack>> list = new ArrayList<>();
+			List<ItemStack> sub = Arrays.asList(this.items);
+			list.add(sub);
+			return list;
 		}
 		
 	}
