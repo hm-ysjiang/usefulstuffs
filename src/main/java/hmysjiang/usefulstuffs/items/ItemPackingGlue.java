@@ -6,6 +6,7 @@ import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentXL;
 import hmysjiang.usefulstuffs.init.ModBlocks;
+import hmysjiang.usefulstuffs.utils.helper.LogHelper;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -51,9 +52,22 @@ public class ItemPackingGlue extends Item {
 			if (player.isSneaking() && state.getBlock() != ModBlocks.glued_box && state.getBlockHardness(world, pos) >= 0) {
 				Block block = state.getBlock();
 				for (String blacklistedBlock: ConfigManager.glueBlackList) {
-					if (blacklistedBlock.equals(block.getRegistryName().toString())) {
-						player.sendMessage(new TextComponentString("This block is blacklisted in the config"));
-						return EnumActionResult.PASS;
+					String[] metaSet = blacklistedBlock.split(" ");
+					if (metaSet.length == 1) {
+						if (blacklistedBlock.equals(block.getRegistryName().toString())) {
+							player.sendMessage(new TextComponentString("This block is blacklisted in the config"));
+							return EnumActionResult.PASS;
+						}
+					}
+					else {
+						try {
+							if (metaSet[0].equals(block.getRegistryName().toString()) && block.getMetaFromState(block.getExtendedState(state, world, pos)) == Integer.parseInt(metaSet[1])) {
+								player.sendMessage(new TextComponentString("This block is blacklisted in the config"));
+								return EnumActionResult.PASS;
+							}
+						}catch (NumberFormatException exception) {
+							LogHelper.error("Error occured while parsing data <" + blacklistedBlock + "> in usefulstuffs.cfg.");
+						}
 					}
 				}
 				ItemStack stack = player.getHeldItem(hand);

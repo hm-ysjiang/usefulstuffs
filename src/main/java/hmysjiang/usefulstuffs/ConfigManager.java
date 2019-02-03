@@ -223,8 +223,8 @@ public class ConfigManager {
 		propertyDoPlacementCheck.set(doPlacementCheck);
 		orderBlock.add(propertyDoPlacementCheck.getName());
 		
-		Property propertyGlueBlackList = config.get(CATEGORY_BLOCK, "glue_blacklist", new String[] {"minecraft:dragon_egg"});
-		propertyGlueBlackList.setComment("Blocks that packing glue cannot pick up, format: \"<modname>:<blockname>\"");
+		Property propertyGlueBlackList = config.get(CATEGORY_BLOCK, "glue_blacklist", new String[] {"minecraft:dragon_egg 0"});
+		propertyGlueBlackList.setComment("Blocks that packing glue cannot pick up, format: \"<modname>:<blockname> meta\", all meta will be blacklisted if the meta is not presented");
 		glueBlackList = propertyGlueBlackList.getStringList();
 		propertyGlueBlackList.set(glueBlackList);
 		orderBlock.add(propertyGlueBlackList.getName());
