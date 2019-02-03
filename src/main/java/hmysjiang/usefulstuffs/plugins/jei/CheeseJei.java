@@ -8,6 +8,7 @@ import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemMilkBag;
+import hmysjiang.usefulstuffs.plugins.jei.MilkFermenterJei.MilkFermenterRecipe;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -23,26 +24,23 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class MilkFermenterJei {
-	public static final String UID = Reference.MOD_ID + ".jei.milk_fermenter";
+public class CheeseJei {
+	public static final String UID = Reference.MOD_ID + ".jei.cheese";
 	
-	public static List<MilkFermenterRecipe> getRecipes(IJeiHelpers jeiHelper){
-		List<MilkFermenterRecipe> recipes = new ArrayList<MilkFermenterRecipe>();
-		recipes.add(new MilkFermenterRecipe(new ItemStack(ModItems.milk_bag), ItemMilkBag.fermented));
+	public static List<CheeseRecipe> getRecipes(IJeiHelpers jeiHelper){
+		List<CheeseRecipe> recipes = new ArrayList<CheeseRecipe>();
+		recipes.add(new CheeseRecipe(ItemMilkBag.fermented, new ItemStack(ModItems.cheese)));
 		return recipes;
 	}
 	
-	public static class MilkFermenterCategory implements IRecipeCategory<MilkFermenterRecipe>{
+	public static class CheeseCategory implements IRecipeCategory<CheeseRecipe>{
 
-		protected final IDrawableAnimated cheese;
 		protected final IDrawable background;
 		protected final IDrawable icon;
 		
-		public MilkFermenterCategory(IGuiHelper guiHelper) {
-			cheese = guiHelper.drawableBuilder(new ResourceLocation(Reference.MOD_ID, "textures/gui/container/fermenter.png"), 176, 0, 16, 16)
-					 		  .buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
-			background = guiHelper.createDrawable(new ResourceLocation(Reference.MOD_ID, "textures/gui/plugin/gui.png"), 0, 0, 100, 50);
-			icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.milk_fermenter));
+		public CheeseCategory(IGuiHelper guiHelper) {
+			background = guiHelper.createDrawable(new ResourceLocation(Reference.MOD_ID, "textures/gui/plugin/gui.png"), 101, 0, 80, 34);
+			icon = guiHelper.createDrawableIngredient(new ItemStack(ModItems.cheese));
 		}
 		
 		@Override
@@ -52,7 +50,7 @@ public class MilkFermenterJei {
 		
 		@Override
 		public String getTitle() {
-			return I18n.format("category.jei.usefulstuffs.milk_fermenter.title");
+			return I18n.format("category.jei.usefulstuffs.cheese.title");
 		}
 
 		@Override
@@ -69,28 +67,24 @@ public class MilkFermenterJei {
 		public IDrawable getIcon() {
 			return icon;
 		}
-		
-		public void drawExtras(net.minecraft.client.Minecraft minecraft) {
-			cheese.draw(minecraft, 42, 17);
-		}
 
 		@Override
-		public void setRecipe(IRecipeLayout recipeLayout, MilkFermenterRecipe recipeWrapper, IIngredients ingredients) {
+		public void setRecipe(IRecipeLayout recipeLayout, CheeseRecipe recipeWrapper, IIngredients ingredients) {
 			IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 			
-			guiItemStacks.init(0, true, 15, 16);
-			guiItemStacks.init(1, false, 67, 16);
+			guiItemStacks.init(0, true, 8, 8);
+			guiItemStacks.init(1, false, 54, 8);
 			
 			guiItemStacks.set(ingredients);
 		}
 		
 	}
 	
-	public static class MilkFermenterRecipe implements IRecipeWrapper{
+	public static class CheeseRecipe implements IRecipeWrapper{
 		private final ItemStack input;
 		private final ItemStack output;
 		
-		public MilkFermenterRecipe(ItemStack input, ItemStack output) {
+		public CheeseRecipe(ItemStack input, ItemStack output) {
 			this.input = input;
 			this.output = output;
 		}
@@ -101,11 +95,6 @@ public class MilkFermenterJei {
 			ingredients.setOutput(VanillaTypes.ITEM, output);
 		}
 		
-		@Override
-		public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-			minecraft.fontRenderer.drawString(I18n.format("usefulstuffs.fermenter.jei.gui", ConfigManager.milkFermentTime), 0, 37, 4210752);
-		}
-		
 	}
-	
+
 }

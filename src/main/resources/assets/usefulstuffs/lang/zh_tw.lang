@@ -30,13 +30,41 @@ item.usefulstuffs.berry_black.name=黑色莓果
 item.usefulstuffs.fiery_lily_belt.name=紅蓮腰帶
 item.usefulstuffs.backpack.name=背包
 item.usefulstuffs.mining_backpack.name=採礦背包
+item.usefulstuffs.infinite_water.name=水源
+item.usefulstuffs.milk_bag.name=牛奶袋
+item.usefulstuffs.milk_bag_empty.name=牛奶袋 (空)
+item.usefulstuffs.milk_bag_fermented.name=牛奶袋 (已發酵)
+item.usefulstuffs.milk_bag_fermented_par.name=牛奶袋 (部分發酵)
+item.usefulstuffs.cheese.name=起司
+item.usefulstuffs.light_bow.name=陽光之弓
+item.usefulstuffs.light_battery.name=光電池
+item.usefulstuffs.triangular_prism.name=三稜鏡
+item.usefulstuffs.universal_core.name=廣用核心
+item.usefulstuffs.potato_charm.name=肥宅護符 (WIP)
+item.usefulstuffs.stabilizing_ring.name=空力之戒
+item.usefulstuffs.tank_container_basic.name=基礎液體容器
+item.usefulstuffs.tank_container_better.name=優良液體容器
+item.usefulstuffs.tank_container_advanced.name=進階液體容器
+item.usefulstuffs.tank_container_reinforced.name=強化液體容器
+item.usefulstuffs.tank_container_extraordinary.name=超級液體容器
+item.usefulstuffs.tank_container_basic_place.name=基礎液體容器 (倒出)
+item.usefulstuffs.tank_container_better_place.name=優良液體容器 (倒出)
+item.usefulstuffs.tank_container_advanced_place.name=進階液體容器 (倒出)
+item.usefulstuffs.tank_container_reinforced_place.name=強化液體容器 (倒出)
+item.usefulstuffs.tank_container_extraordinary_place.name=超級液體容器 (倒出)
+item.usefulstuffs.tank_container_basic_fill.name=基礎液體容器 (填入)
+item.usefulstuffs.tank_container_better_fill.name=優良液體容器 (填入)
+item.usefulstuffs.tank_container_advanced_fill.name=進階液體容器 (填入)
+item.usefulstuffs.tank_container_reinforced_fill.name=強化液體容器 (填入)
+item.usefulstuffs.tank_container_extraordinary_fill.name=超級液體容器 (填入)
 
 
 tile.usefulstuffs.light_bulb.name=光球
 tile.usefulstuffs.well.name=水瀑之井
 tile.usefulstuffs.rain_detector.name=下雨感測器
 tile.usefulstuffs.campfire.name=旅人的睿智之火
-tile.usefulstuffs.filing_cabinet.name=收納櫃
+tile.usefulstuffs.filing_cabinet.name=Unstackable 收納櫃
+tile.usefulstuffs.filing_cabinet_nbt.name=NBT 收納櫃
 tile.usefulstuffs.t_flipflop.name=T型正反器
 tile.usefulstuffs.glued_box.name=被膠水封起來的箱子
 tile.usefulstuffs.berrybush_white.name=白色莓果叢
@@ -58,6 +86,9 @@ tile.usefulstuffs.berrybush_black.name=黑色莓果叢
 tile.usefulstuffs.portal_muffler.name=傳送們靜音器
 tile.usefulstuffs.player_detector.name=玩家偵測器
 tile.usefulstuffs.fiery_lily.name=烈焰荷葉
+tile.usefulstuffs.milk_fermenter.name=牛奶發酵箱
+tile.usefulstuffs.universal_user.name=廣用模擬器
+tile.usefulstuffs.tank_block.name=水塔框架
 
 
 usefulstuffs.ingredient.tooltip=合成材料
@@ -67,6 +98,8 @@ usefulstuffs.light_shooter.tooltip_1=彈藥: %1$s/%2$s
 usefulstuffs.light_shooter.tooltip_2=右鍵發射
 usefulstuffs.light_shooter.tooltip_3=蹲下-右鍵打開GUI
 usefulstuffs.light_shooter.tooltip_c=因為跟漏斗結合了，當撿起光球時會自動裝填
+usefulstuffs.light_shooter.tooltip_battery_true=使用 %s 光能射出
+usefulstuffs.light_shooter.tooltip_battery_false=使用光電池供能在設定檔中被禁用了
 usefulstuffs.well.tooltip_1=會嘗試幫附近 %1$sx%2$s區域中的機器裝水
 usefulstuffs.well.tooltip_2=傳送速率: %smB 每tick*面
 usefulstuffs.waterfilter.tooltip_1=安裝在水瀑之井中以防止它送水至某方塊的特定面
@@ -74,8 +107,8 @@ usefulstuffs.waterfilter.tooltip_2=蹲下-右鍵以選取某方塊的一面
 usefulstuffs.waterfilter.tooltip_3=對著水瀑之井右鍵安裝
 usefulstuffs.campfire.tooltip_1=在它下方5x5的空間放置原木以增加效果範圍
 usefulstuffs.campfire.tooltip_2=蹲下時點燃一塊原木獲得
-usefulstuffs.filing_cabinet.tooltip_1=For AE2 lovers
-usefulstuffs.filing_cabinet.tooltip_2=存放1080個不可堆疊的物品
+usefulstuffs.filing_cabinet.tooltip=存放1080個不可堆疊的物品
+usefulstuffs.filing_cabinet2.tooltip=存放1080個有NBT標籤的物品
 usefulstuffs.bento.tooltip_1=容納6組食物
 usefulstuffs.bento.tooltip_2=有時候似乎不會返還木碗...
 usefulstuffs.building_wand.tooltip_1=從玩家看著的方塊那放置方塊到玩家的位置
@@ -96,6 +129,86 @@ usefulstuffs.portal_muffler.tooltip_2=你給我安靜一點好不好？
 usefulstuffs.player_detector.tooltip=當附近的 %1$sx%2$sx%3$s 區域中有玩家的話會發出紅石訊號
 usefulstuffs.fiery_lily_belt.tooltip=火焰免疫！
 usefulstuffs.umbrella.tooltip=裝在頭上時，減低30%s的降落傷害
+usefulstuffs.backpack.tooltip=裝在Bauble格中時，按下 %s 來打開包包
+usefulstuffs.backpack.tooltip_normal=只是個普通的包包
+usefulstuffs.backpack.tooltip_mining_1=自動撿拾挖礦資源
+usefulstuffs.backpack.tooltip_mining_2=蹲下-右鍵打開設定頁面，裝在Bauble格中以啟用自動撿拾
+usefulstuffs.milk_fermenter.tooltip=發酵牛奶袋中的牛奶來取得起司
+usefulstuffs.milk_bag.tooltip_1=%s/8 桶牛奶
+usefulstuffs.milk_bag.tooltip_1_1=%s/8 桶牛奶
+usefulstuffs.milk_bag.tooltip_2=發酵 %s
+usefulstuffs.milk_bag.tooltip_3=放進牛奶發酵箱中來製作起司
+usefulstuffs.milk_bag.tooltip_4=蹲下-右鍵裝填，右鍵使用
+usefulstuffs.infinite_water.tooltip_1=填進兩桶水變成無限水源
+usefulstuffs.infinite_water.tooltip_2=右鍵放置，蹲下-右鍵填充
+usefulstuffs.infinite_water.tooltip_2_1=右鍵填充
+usefulstuffs.cheese.tooltip=有益身體健康！
+usefulstuffs.light_bow.tooltip_1=射出光箭！
+usefulstuffs.light_bow.tooltip_2=照到太陽光時填充
+usefulstuffs.light_bow.tooltip_3=呃，其實月光是陽光的反射...說不定...？
+usefulstuffs.light_bow.tooltip_charge=%s/400 光能
+usefulstuffs.light_battery.tooltip_1=提供光能給使用光的道具
+usefulstuffs.light_battery.tooltip_charge=%s/32000 光能
+usefulstuffs.light_battery.tooltip_2=照到太陽光時填充
+usefulstuffs.universal_user.tooltip=在同一個機器中幫你充填!
+usefulstuffs.potato_charm.tooltip=一個肥宅，可以在任何他想睡的時候睡覺.
+usefulstuffs.stabilizing_ring.tooltip=穩定你的挖掘姿勢
+usefulstuffs.tank_container.tooltip_1=把這放進一個水塔框架來組成一個水塔
+usefulstuffs.tank_container.tooltip_2=一個大桶子，蹲下-右鍵切換模式
+usefulstuffs.tank_container.tooltip_3=液體: %s
+usefulstuffs.tank_container.tooltip_4=含量: %1$s/%2$s mB
+usefulstuffs.tank_container.tooltip_5_p=模式: 倒出
+usefulstuffs.tank_container.tooltip_5_f=模式: 填入
+usefulstuffs.tank.tooltip_1=放入一個液體容器來組成一個水塔
+usefulstuffs.tank.tooltip_2=拿著液體容器右鍵裝入，空手蹲下-右鍵移出，或使用傳輸管
+
+
+usefulstuffs.waterfilter.jei_1=安裝在水瀑之井中以防止它送水至某方塊的特定面
+usefulstuffs.waterfilter.jei_2=蹲下-右鍵以選取某方塊的一面，對著水瀑之井右鍵安裝
+usefulstuffs.light_shooter.jei_1=發射光球，蹲下-右鍵打開GUI
+usefulstuffs.light_shooter.jei_2=如果背包裡有光電池，優先抽取250點光能
+usefulstuffs.light_shooter.jei_c=當撿起光球時會自動裝填
+usefulstuffs.packing_glue.jei_1=蹲下-右鍵封裝方塊，消耗的耐久度取決於方塊的性質 (硬度, 狀態數量, 是TileEntity)，附上節儉的附魔以減少耐久度消耗
+usefulstuffs.packing_glue.jei_2=跟史萊姆球合成來補充耐久度
+usefulstuffs.umbrella.jei=裝在頭上時會減低降落傷害
+usefulstuffs.belt_lily.jei=讓你能像荷葉一樣浮在水上
+usefulstuffs.bag_storage.jei=多提供27格欄位, 按下Useful Key在他們和你手上9格之間切換
+usefulstuffs.belt_fiery_lily.jei=火焰免疫的荷葉腰帶!
+usefulstuffs.backpack.jei=一個普通的包包，在Bauble格中時，按下Useful Key來開啟包包
+usefulstuffs.mining_backpack.jei_1=一個會自動撿拾挖礦資源的包包，在Bauble格中時，按下Useful Key來開啟包包
+usefulstuffs.mining_backpack.jei_2=蹲下-右鍵打開設定頁面
+usefulstuffs.cheese.jei=從發酵完畢的牛奶袋中取得，非常有益身體健康
+usefulstuffs.campfire.jei=給在一定範圍內的玩家增益效果，在它下方5x5的空間放置原木以增加效果範圍，最大直徑是16格
+usefulstuffs.campfire.jei_n=需要燃料，效果範圍越大，消耗速度越快
+usefulstuffs.campfire.jei_c=蹲下時使用打火石點燃一塊原木獲得
+usefulstuffs.campfire.jei_u=在設定檔中被禁止獲得了
+usefulstuffs.filing_cabinet.jei=存放1080個不可堆疊的物品，也只能放進不可堆疊的物品
+usefulstuffs.filing_cabinet2.jei=存放1080個有NBT標籤的物品，也只能放進有NBT標籤的物品
+usefulstuffs.bento.tooltip=可以裝6組食物
+usefulstuffs.well.jei=會嘗試幫附近的機器裝水，可以使用供水黑名單來限制傳輸
+usefulstuffs.portal_muffler.jei=讓附近的地獄傳送門閉上它們的嘴巴
+usefulstuffs.player_detector.jei=當附近有玩家的話會發出紅石訊號
+usefulstuffs.player_detector.jei_f=當他面向的區域中有玩家的話會發出紅石訊號
+usefulstuffs.fiery_lily.jei=生成在地獄的岩漿上
+usefulstuffs.universal_user.jei=一個會模擬玩家動作的機器，自帶機器內充能和填充液體的功能！
+usefulstuffs.berry.jei=可以食用，在合成時可以充當染料
+usefulstuffs.milk_bag.jei=可以裝進8桶牛奶，放進牛奶發酵箱來製作起司。飲用發酵到一半的牛奶可能會對身體造成傷害
+usefulstuffs.fermenter.jei.gui=%sx√buckets ticks
+usefulstuffs.light_bow.jei=一把會射光箭的弓，使用陽光充能。充能速度取決於太陽高度。那些被阿爾忒霓斯女神祝福過的似乎也能用月光來充能
+usefulstuffs.light_battery.jei=一個能儲存光的電池，可以為其他使用光能的工具充能
+usefulstuffs.feather.jei_1=雞在落下時會拍動翅膀，有時候會掉落羽毛
+usefulstuffs.feather.jei_2=在UsefulStuffs的設定中被啟用
+usefulstuffs.potato_charm.jei_1=讓玩家能夠在白天睡覺，肥宅的力量會讓你立刻睡著，一覺到天亮
+usefulstuffs.potato_charm.jei_2=只在世界中有一個玩家時有用 (WIP Item)
+usefulstuffs.stabilizing_ring.jei=移除在空中挖掘時帶來的挖掘減速
+usefulstuffs.tank_container.jei=一個大桶子，蹲下-右鍵切換模式
+usefulstuffs.tank_block.jei=與液體容器一起使用
+usefulstuffs.tank_formation.jei=拿著一個液體容器右鍵一個水塔框架來組成一個水塔，空手蹲下-右鍵移出，或使用傳輸管
+
+
+category.jei.usefulstuffs.milk_fermenter.title=牛奶發酵箱
+category.jei.usefulstuffs.tank_formation.title=組成水塔
+category.jei.usefulstuffs.cheese.title=製作起司
 
 
 entity.usefulstuffs.light_bulb.name=光球
@@ -120,12 +233,19 @@ effect.usefulstuffs.umbrella=空降
 tipped_arrow.effect.umbrella=空降之箭
 
 
-usefulstuffs.gui.filing_cabinet.name=收納櫃
+usefulstuffs.gui.filing_cabinet.name=%s 收納櫃
 usefulstuffs.gui.campfire.name=旅人的睿智之火
 usefulstuffs.gui.campfire.modifier=Buff範圍:%s
+usefulstuffs.gui.fermenter.name=牛奶發酵箱
+usefulstuffs.gui.user.name=廣用模擬器
 
 
 enchantment.usefulstuffs.xl.name=節儉
+enchantment.usefulstuffs.moonlight.name=阿爾忒霓斯的祝福
+enchantment.usefulstuffs.fast_draw.name=高速拉弓
+
+
+usefulstuffs.potato_charm.statushint=看看你自己   一個臭肥宅
 
 
 

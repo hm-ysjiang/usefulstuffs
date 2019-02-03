@@ -290,8 +290,14 @@ public class ItemTankContainer extends Item {
 					tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_3", "None"));
 					tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_4", 0, getCapacity(stack)));
 				}
-				if (stack.getTagCompound().hasKey("Place"))
-					tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_5", stack.getTagCompound().getBoolean("Place") ? "Place" : "Fill"));
+				if (stack.getTagCompound().hasKey("Place")) {
+					if (stack.getTagCompound().getBoolean("Place")) {
+						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_5_p"));
+					}
+					else {
+						tooltip.add(I18n.format("usefulstuffs.tank_container.tooltip_5_f"));
+					}
+				}
 			}
 		}
 		else {

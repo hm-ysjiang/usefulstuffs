@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class TankFormationJei {
-	public static final String UID = Reference.MOD_ID + ".tank_formation";
+	public static final String UID = Reference.MOD_ID + ".jei.tank_formation";
 	
 	public static List<TankFormationRecipe> getRecipes(IJeiHelpers jeiHelper){
 		List<TankFormationRecipe> recipes = new ArrayList<TankFormationRecipe>();

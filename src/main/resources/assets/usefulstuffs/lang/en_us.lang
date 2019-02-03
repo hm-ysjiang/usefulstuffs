@@ -159,7 +159,8 @@ usefulstuffs.tank_container.tooltip_1=Work along with Tank Frame, put this insid
 usefulstuffs.tank_container.tooltip_2=Work as a big bucket, Shift-Right click to toggle mode
 usefulstuffs.tank_container.tooltip_3=Fluid: %s
 usefulstuffs.tank_container.tooltip_4=Amount: %1$s/%2$s mB
-usefulstuffs.tank_container.tooltip_5=Mode: %s
+usefulstuffs.tank_container.tooltip_5_p=Mode: Place
+usefulstuffs.tank_container.tooltip_5_f=Mode: Fill
 usefulstuffs.tank.tooltip_1=Work along with Fluid Containers, put them inside to form a tank
 usefulstuffs.tank.tooltip_2=Right click with a Fluid Container to insert, Shift-Right click with empty hand to take out, or use a pipe
 
@@ -208,6 +209,7 @@ usefulstuffs.tank_formation.jei=Right click a Tank Frame with a Fluid Container 
 
 category.jei.usefulstuffs.milk_fermenter.title=Milk Fermenter
 category.jei.usefulstuffs.tank_formation.title=Forming a Tank
+category.jei.usefulstuffs.cheese.title=Collecting Cheese
 
 
 entity.usefulstuffs.light_bulb.name=LightBulb
@@ -246,6 +248,7 @@ key.usefulstuffs.switchinv.desc=Useful Key
 enchantment.usefulstuffs.xl.name=Frugal
 enchantment.usefulstuffs.moonlight.name=Blessing of Artemis
 enchantment.usefulstuffs.fast_draw.name=Fast Draw
+
 
 usefulstuffs.potato_charm.statushint=Look at yourself. A couch potato.
 

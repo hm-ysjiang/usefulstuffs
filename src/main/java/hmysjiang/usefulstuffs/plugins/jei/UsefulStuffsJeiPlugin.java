@@ -24,6 +24,8 @@ public class UsefulStuffsJeiPlugin implements IModPlugin{
 			registry.addRecipes(MilkFermenterJei.getRecipes(jeiHelper), MilkFermenterJei.UID);
 			registry.addRecipeCatalyst(new ItemStack(ModBlocks.milk_fermenter), MilkFermenterJei.UID);
 			registry.addRecipeClickArea(GuiMilkFermenter.class, 80, 48, 16, 16, MilkFermenterJei.UID);
+			
+			registry.addRecipes(CheeseJei.getRecipes(jeiHelper), CheeseJei.UID);
 		}
 		if (ConfigManager.tankBlockEnabled) {
 			registry.addRecipes(TankFormationJei.getRecipes(jeiHelper), TankFormationJei.UID);
@@ -34,8 +36,10 @@ public class UsefulStuffsJeiPlugin implements IModPlugin{
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
 		IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
-		if (ConfigManager.milkFermenterEnabled)
+		if (ConfigManager.milkFermenterEnabled) {
 			registry.addRecipeCategories(new MilkFermenterJei.MilkFermenterCategory(guiHelper));
+			registry.addRecipeCategories(new CheeseJei.CheeseCategory(guiHelper));
+		}
 		if (ConfigManager.tankBlockEnabled)
 			registry.addRecipeCategories(new TankFormationJei.TankFormationCategory(guiHelper));
 	}
