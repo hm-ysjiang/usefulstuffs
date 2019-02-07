@@ -29,6 +29,9 @@ public class GuiBento extends GuiContainer {
 		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		renderHoveredToolTip(mouseX, mouseY);
+		if (mouseX >= this.guiLeft + 148 && mouseX < this.guiLeft + 166 && mouseY >= this.guiTop + 19 && mouseY < this.guiTop + 37) {
+			this.drawHoveringText(((ContainerBento)inventorySlots).getStack().getTagCompound().getInteger("Next") >= 0 ? "Next per use" : "Next per stack", mouseX, mouseY);
+		}
 	}
 
 	@Override

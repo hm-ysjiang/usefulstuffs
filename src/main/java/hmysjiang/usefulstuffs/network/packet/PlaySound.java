@@ -76,14 +76,13 @@ public class PlaySound implements IMessage {
 		@Override
 		public IMessage onMessage(PlaySound message, MessageContext ctx) {
 			if (message != null) {
-				World world = Minecraft.getMinecraft().world;
 				SoundEvent event = SoundEvent.REGISTRY.getObject(new ResourceLocation(message.resource));
 				if (event != null) {
 					SoundCategory category = SoundCategory.getByName(message.category);
 					if (category != null) {
-						Entity player = world.getEntityByID(message.playerEntId);
+						Entity player = Minecraft.getMinecraft().world.getEntityByID(message.playerEntId);
 						if (player != null && player instanceof EntityPlayer) {
-							world.playSound((EntityPlayer) player, new BlockPos(message.x, message.y, message.z), event, category, message.volume, message.pitch);
+							Minecraft.getMinecraft().world.playSound((EntityPlayer) player, new BlockPos(message.x, message.y, message.z), event, category, message.volume, message.pitch);
 						}
 					}
 				}
