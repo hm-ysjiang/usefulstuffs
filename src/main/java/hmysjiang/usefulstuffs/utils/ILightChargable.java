@@ -14,6 +14,7 @@ public interface ILightChargable {
 	
 	default void charge(World world, ItemStack stack, BlockPos pos) {
 		if (world.isRemote)	return;
+		if (!world.canBlockSeeSky(pos)) return;
 		double angY = (double) world.getCelestialAngle(0) * DOUBLE_PI + HALF_PI;
 		if (angY >= DOUBLE_PI)
 			angY -= DOUBLE_PI;

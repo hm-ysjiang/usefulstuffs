@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiImageButton extends GuiButton {
+public class GuiSpriteButton extends GuiButton {
 	
 	private ResourceLocation image;
 	private int imgoffsetX;
@@ -13,7 +13,7 @@ public class GuiImageButton extends GuiButton {
 	private int imgWidth;
 	private int imgHeight;
 	
-	public GuiImageButton(int buttonId, int x, int y, ResourceLocation image, int imgoffsetX, int imgoffsetY, int imgWidth, int imgHeight) {
+	public GuiSpriteButton(int buttonId, int x, int y, ResourceLocation image, int imgoffsetX, int imgoffsetY, int imgWidth, int imgHeight) {
 		super(buttonId, x, y, "");
 		this.image = image;
 		this.imgoffsetX = imgoffsetX;
@@ -22,7 +22,7 @@ public class GuiImageButton extends GuiButton {
 		this.imgHeight = imgHeight;
 	}
 
-	public GuiImageButton(int buttonId, int x, int y, int widthIn, int heightIn, ResourceLocation image, int imgoffsetX, int imgoffsetY, int imgWidth, int imgHeight) {
+	public GuiSpriteButton(int buttonId, int x, int y, int widthIn, int heightIn, ResourceLocation image, int imgoffsetX, int imgoffsetY, int imgWidth, int imgHeight) {
 		super(buttonId, x, y, widthIn, heightIn, "");
 		this.image = image;
 		this.imgoffsetX = imgoffsetX;

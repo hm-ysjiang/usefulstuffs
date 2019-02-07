@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.container;
 
 import hmysjiang.usefulstuffs.items.baubles.ItemBackpack;
 import invtweaks.api.container.ChestContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -11,8 +12,8 @@ import net.minecraftforge.items.SlotItemHandler;
 @ChestContainer
 public class ContainerBackpack extends ContainerItem {
 	
-	public ContainerBackpack(IInventory inv, ItemStack stack, int size, boolean onKey) {
-		super(inv, stack, size);
+	public ContainerBackpack(EntityPlayer player, IInventory inv, ItemStack stack, int size, boolean onKey) {
+		super(player, inv, stack, size);
 		
 		if (onKey)
 			blocked = -1;

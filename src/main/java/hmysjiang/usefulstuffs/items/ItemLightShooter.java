@@ -52,7 +52,7 @@ public class ItemLightShooter extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack shooter = playerIn.getHeldItem(handIn);
 		//charge
-		if (playerIn.isSneaking()) {
+		if (playerIn.isSneaking() && handIn == EnumHand.MAIN_HAND) {
 			if (!worldIn.isRemote) 
 				playerIn.openGui(UsefulStuffs.instance, GuiHandler.GUI_LIGHT_SHOOTER, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, shooter);

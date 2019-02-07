@@ -6,6 +6,7 @@ import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
+import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -13,22 +14,36 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemSoup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
+@EventBusSubscriber
 public class ItemBento extends ItemFood {
 	
 	public static boolean speed;
+	
+	@SubscribeEvent(priority=EventPriority.HIGH)
+	public static void onPlayerFinishUsing(LivingEntityUseItemEvent.Finish event) {
+		if (event.getEntityLiving() instanceof EntityPlayer) {
+			ItemStack stack = event.getItem();
+			if (stack.getItem() == ModItems.bento) {
+				ForgeEventFactory.onItemUseFinish(event.getEntityLiving(), getNextFood(stack), stack.getItem().getMaxItemUseDuration(stack), stack);
+			}
+		}
+	}
 	
 	public ItemBento() {
 		super(0, 0, false);
@@ -45,8 +60,11 @@ public class ItemBento extends ItemFood {
 			ItemStackHandler handler = new ItemStackHandler(6);
 			NBTTagCompound compound = new NBTTagCompound();
 			compound.setTag("Cont", handler.serializeNBT());
+			compound.setInteger("Next", -1);
 			stack.setTagCompound(compound);
 		}
+		if (!stack.getTagCompound().hasKey("Next"))
+			stack.getTagCompound().setInteger("Next", -1);
 	}
 	
 	@Override
@@ -76,9 +94,7 @@ public class ItemBento extends ItemFood {
 				playerIn.setActiveHand(hand);
 				return new ActionResult(EnumActionResult.SUCCESS, stack);
 			}
-			else {
-				return new ActionResult(EnumActionResult.FAIL, stack);
-			}
+			return new ActionResult(EnumActionResult.FAIL, stack);
 		}
 	}
 
@@ -99,16 +115,31 @@ public class ItemBento extends ItemFood {
 		return stack;
 	}
 	
-	public ItemStack getNextFood(ItemStack stack) {
+	public static ItemStack getNextFood(ItemStack stack) {
 		if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("Cont")) {
 			return ItemStack.EMPTY;
 		}
 		ItemStackHandler handler = new ItemStackHandler(6);
 		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
-		for (int i = 0 ; i<handler.getSlots() ; i++) {
-			if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
-				return handler.getStackInSlot(i);
+		int next = stack.getTagCompound().getInteger("Next");
+		if (next == -1) {
+			for (int i = 0 ; i<handler.getSlots() ; i++) {
+				if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
+					return handler.getStackInSlot(i);
+				}
 			}
+		}
+		else {
+			if (next == 6) {
+				next = setNext(stack);
+				if (next == 6)
+					return ItemStack.EMPTY;
+			}
+			if (handler.getStackInSlot(next).isEmpty())
+				next = setNext(stack);
+			if (next == 6)
+				return ItemStack.EMPTY;
+			return handler.getStackInSlot(next);
 		}
 		return ItemStack.EMPTY;
 	}
@@ -117,21 +148,67 @@ public class ItemBento extends ItemFood {
 		ItemStack food = ItemStack.EMPTY;
 		ItemStackHandler handler = new ItemStackHandler(6);
 		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
-		for (int i = 0 ; i<handler.getSlots() ; i++) {
-			if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
-				food = handler.getStackInSlot(i);
+		int next = stack.getTagCompound().getInteger("Next");
+		if (next == -1) {
+			for (int i = 0 ; i<handler.getSlots() ; i++) {
+				if (!handler.getStackInSlot(i).isEmpty() && handler.getStackInSlot(i).getItem() instanceof ItemFood) {
+					food = handler.getStackInSlot(i);
+					food = food.onItemUseFinish(worldIn, entityLiving);
+					handler.setStackInSlot(i, food);
+					break;
+				}
+			}
+		}
+		else {
+			if (!handler.getStackInSlot(next).isEmpty() && handler.getStackInSlot(next).getItem() instanceof ItemFood) {
+				food = handler.getStackInSlot(next);
 				food = food.onItemUseFinish(worldIn, entityLiving);
-				handler.setStackInSlot(i, food.getCount() == 0 ? ItemStack.EMPTY : food);
+				handler.setStackInSlot(next, food);
+				setNext(stack);
+			}
+		}
+		stack.getTagCompound().setTag("Cont", handler.serializeNBT());
+	}
+	
+	public static boolean isEmpty(ItemStack stack) {
+		ItemStackHandler handler = new ItemStackHandler(6);
+		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+		for (int i = 0 ; i<6 ; i++) {
+			if (!handler.getStackInSlot(i).isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	// Returns the set next
+	private static int setNext(ItemStack stack) {
+		ItemStackHandler handler = new ItemStackHandler(6);
+		handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+		if (isEmpty(stack)) {
+			stack.getTagCompound().setInteger("Next", 6);
+			return 6;
+		}
+		int next = stack.getTagCompound().getInteger("Next");
+		// Not in round mode
+		if (next == -1)
+			return -1;
+		// Test if food added
+		if (next == 6)
+			next = 5;
+		// Decide the next slot
+		next += 1;
+		for (int i = 0 ; i<6 ; i++) {
+			if (!handler.getStackInSlot((next + i) % 6).isEmpty()) {
+				next += i;
+				next %= 6;
 				break;
 			}
 		}
-		NBTTagCompound compound = stack.getTagCompound();
-		compound.setTag("Cont", handler.serializeNBT());
-		stack.setTagCompound(compound);
-	}
-	
-	public boolean isEmpty(ItemStack stack) {
-		return getNextFood(stack) == null;
+		if (handler.getStackInSlot(next).isEmpty())
+			next = 6;
+		stack.getTagCompound().setInteger("Next", next);
+		return next;
 	}
 	
 	@Override

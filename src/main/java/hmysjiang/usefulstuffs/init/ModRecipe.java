@@ -20,16 +20,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @EventBusSubscriber
 public class ModRecipe {
 	
-	public static NonNullList<Ingredient> recipeLightShooterCollector;
-	
-	public static void init() {
-		recipeLightShooterCollector = NonNullList.<Ingredient>create();
-		if (ConfigManager.lightShootersEnabled) {
-			recipeLightShooterCollector.add(Ingredient.fromStacks(new ItemStack(Blocks.HOPPER, 1)));
-			recipeLightShooterCollector.add(Ingredient.fromStacks(new ItemStack(ModItems.light_shooter, 1)));
-		}
-	}
-		
 	private static void registerMiscs() {
 		ModPotion.registerBrewingRecipe();
 	}
@@ -39,7 +29,7 @@ public class ModRecipe {
 		registerMiscs();
 		
 		if (ConfigManager.lightShootersEnabled)
-			event.getRegistry().register(new RecipeLightShooterCollector(recipeLightShooterCollector));
+			event.getRegistry().register(new RecipeLightShooterCollector());
 		if (ConfigManager.glueEnabled)
 			event.getRegistry().register(new RecipePackingGlueReloader());
 		if (ConfigManager.miningBackpackEnabled)

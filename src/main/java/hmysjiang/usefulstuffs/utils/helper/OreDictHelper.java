@@ -57,6 +57,8 @@ public class OreDictHelper {
 	}
 
 	public static boolean isRegisterOre(ItemStack stack) {
+		if (stack.isEmpty())
+			return false;
 		int[] ids = OreDictionary.getOreIDs(stack);
 		for (int id: ids) {
 			String oreName = OreDictionary.getOreName(id);

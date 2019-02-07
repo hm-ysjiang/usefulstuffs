@@ -8,6 +8,8 @@ import hmysjiang.usefulstuffs.blocks.BlockMaterials;
 import hmysjiang.usefulstuffs.init.ModBlocks;
 import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.items.ItemLightShooter;
+import hmysjiang.usefulstuffs.network.PacketHandler;
+import hmysjiang.usefulstuffs.network.packet.PlaySound;
 import hmysjiang.usefulstuffs.utils.helper.InventoryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -16,11 +18,14 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -42,6 +47,9 @@ public class BlockLightBulb extends Block {
 				ItemStack collector = InventoryHelper.findStackInPlayerInventory(player, new ItemStack(ModItems.light_shooter_collecter), false);
 				if (!collector.isEmpty()) {
 					stack.setCount(ItemLightShooter.incrAmmoCount(collector, stack.getCount()));
+					if (stack.getCount() == 0) {
+						PacketHandler.INSTANCE.sendTo(new PlaySound(player.getEntityId(), player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP.getRegistryName(), SoundCategory.PLAYERS, 0.2F, (RANDOM.nextFloat() - RANDOM.nextFloat()) * 1.4F + 2.0F), (EntityPlayerMP) player);
+					}
 				}
 			}
 		}

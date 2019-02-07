@@ -1,8 +1,8 @@
 package hmysjiang.usefulstuffs.container;
 
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
-import hmysjiang.usefulstuffs.container.ContainerBento.SlotFood;
 import invtweaks.api.container.ChestContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemBlock;
@@ -13,8 +13,8 @@ import net.minecraftforge.items.SlotItemHandler;
 @ChestContainer
 public class ContainerLightShooter extends ContainerItem {
 
-	public ContainerLightShooter(IInventory inv, ItemStack stack, int size) {
-		super(inv, stack, size);
+	public ContainerLightShooter(EntityPlayer player, IInventory inv, ItemStack stack, int size) {
+		super(player, inv, stack, size);
 		
 		this.addSlotToContainer(new SlotLightBulb(handler, 0, 53, 20));
 		this.addSlotToContainer(new SlotLightBulb(handler, 1, 71, 20));

@@ -45,7 +45,7 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 				if (world.getBlockState(new BlockPos(pos)).getBlock().isReplaceable(world, new BlockPos(pos))) {
 					world.setBlockState(new BlockPos(pos), ModBlocks.light_bulb.getDefaultState().withProperty(BlockLightBulb.REAL, this.fromBulb));
 				}
-				else {
+				else if (this.fromBulb) {
 					world.spawnEntity(new EntityItem(world, pos.x, pos.y, pos.z, new ItemStack(ModBlocks.light_bulb, 1)));
 				}
 				

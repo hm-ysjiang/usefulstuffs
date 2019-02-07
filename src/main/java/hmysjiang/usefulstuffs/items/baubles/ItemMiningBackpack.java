@@ -8,17 +8,22 @@ import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
 import hmysjiang.usefulstuffs.init.ModItems;
+import hmysjiang.usefulstuffs.network.PacketHandler;
+import hmysjiang.usefulstuffs.network.packet.PlaySound;
 import hmysjiang.usefulstuffs.utils.handler.KeyBindingHandler;
 import hmysjiang.usefulstuffs.utils.helper.OreDictHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -81,6 +86,9 @@ public class ItemMiningBackpack extends ItemBackpack {
 								}
 							}
 							event.getItem().getItem().setCount(stack.getCount());
+							if (stack.getCount() == 0) {
+								PacketHandler.INSTANCE.sendTo(new PlaySound(player.getEntityId(), player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP.getRegistryName(), SoundCategory.PLAYERS, 0.2F, (itemRand.nextFloat() - itemRand.nextFloat()) * 1.4F + 2.0F), (EntityPlayerMP) player);
+							}
 							backpack.getTagCompound().setTag("Cont", handler.serializeNBT());
 							return;
 						}

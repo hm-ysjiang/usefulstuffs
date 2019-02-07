@@ -9,7 +9,7 @@ import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser.Butto
 import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser.OperateSpeed;
 import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser.Redstone;
 import hmysjiang.usefulstuffs.blocks.universaluser.TileEntityUniversalUser.Select;
-import hmysjiang.usefulstuffs.client.gui.elements.GuiImageButton;
+import hmysjiang.usefulstuffs.client.gui.elements.GuiSpriteButton;
 import hmysjiang.usefulstuffs.container.ContainerUniversalUser;
 import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.network.packet.UserPropertyUpdate;
@@ -48,7 +48,7 @@ public class GuiUniversalUser extends GuiContainer {
 	@Override
 	public void initGui() {
 		super.initGui();
-		GuiImageButton redstone_mode = new GuiImageButton(4, this.guiLeft + 152, this.guiTop + 16, 16, 16, redstone.getImgLocation(), 0, 0, 16, 16);
+		GuiSpriteButton redstone_mode = new GuiSpriteButton(4, this.guiLeft + 152, this.guiTop + 16, 16, 16, redstone.getImgLocation(), 0, 0, 16, 16);
 		
 		this.buttonList.add(new GuiButton(0, this.guiLeft + 8, this.guiTop + 77, 80, 16, activation.toString()));
 		this.buttonList.add(new GuiButton(1, this.guiLeft + 88, this.guiTop + 77, 80, 16, speed.toString()));
@@ -163,7 +163,7 @@ public class GuiUniversalUser extends GuiContainer {
 			break;
 		case 4:
 			this.redstone = this.redstone.next(counter);
-			((GuiImageButton) this.buttonList.get(button.id)).setImage(redstone.getImgLocation());
+			((GuiSpriteButton) this.buttonList.get(button.id)).setImage(redstone.getImgLocation());
 			break;
 		}
 	}

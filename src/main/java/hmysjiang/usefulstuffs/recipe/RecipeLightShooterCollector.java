@@ -7,6 +7,7 @@ import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.init.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipes;
@@ -15,8 +16,9 @@ import net.minecraft.world.World;
 
 public class RecipeLightShooterCollector extends ShapelessRecipes {
 
-	public RecipeLightShooterCollector(NonNullList<Ingredient> recipe) {
-		super(Reference.MOD_ID + ":recipe", new ItemStack(ModItems.light_shooter_collecter), recipe);
+	public RecipeLightShooterCollector() {
+		super(Reference.MOD_ID + ":recipe", new ItemStack(ModItems.light_shooter_collecter), 
+				NonNullList.<Ingredient>from(Ingredient.EMPTY, Ingredient.fromItem(Item.getItemFromBlock(Blocks.HOPPER)), Ingredient.fromItem(ModItems.light_shooter)));
 		setRegistryName(Reference.MOD_ID, "recipe_lightshootercollector");
 	}
 

@@ -36,7 +36,6 @@ public class CommonProxy {
 	public void preInit() {
 		ModBlocks.init();
 		ModItems.init();
-		ModRecipe.init();
 		
 		ModEntities.register();
 		PacketHandler.init();

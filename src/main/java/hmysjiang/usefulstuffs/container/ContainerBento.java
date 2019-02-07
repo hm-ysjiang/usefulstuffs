@@ -2,6 +2,7 @@ package hmysjiang.usefulstuffs.container;
 
 import hmysjiang.usefulstuffs.items.ItemBento;
 import invtweaks.api.container.ChestContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemFood;
@@ -12,8 +13,8 @@ import net.minecraftforge.items.SlotItemHandler;
 @ChestContainer
 public class ContainerBento extends ContainerItem {
 	
-	public ContainerBento(IInventory inv, ItemStack stack, int size) {
-		super(inv, stack, size);
+	public ContainerBento(EntityPlayer player, IInventory inv, ItemStack stack, int size) {
+		super(player, inv, stack, size);
 		
 		this.addSlotToContainer(new SlotFood(handler, 0, 35, 20));
 		this.addSlotToContainer(new SlotFood(handler, 1, 53, 20));

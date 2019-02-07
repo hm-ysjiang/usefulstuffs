@@ -2,10 +2,12 @@ package hmysjiang.usefulstuffs.network;
 
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.network.packet.BackpackPropertyUpdate;
+import hmysjiang.usefulstuffs.network.packet.BentoUpdateMode;
 import hmysjiang.usefulstuffs.network.packet.FieryRemoved;
 import hmysjiang.usefulstuffs.network.packet.GuiButtonPressed;
 import hmysjiang.usefulstuffs.network.packet.GuiSortPressed;
 import hmysjiang.usefulstuffs.network.packet.KeyInput;
+import hmysjiang.usefulstuffs.network.packet.PlaySound;
 import hmysjiang.usefulstuffs.network.packet.SyncLightArrow;
 import hmysjiang.usefulstuffs.network.packet.UserPropertyUpdate;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -25,9 +27,11 @@ public class PacketHandler {
 		INSTANCE.registerMessage(KeyInput.Handler.class, KeyInput.class, disc++, Side.SERVER);
 		INSTANCE.registerMessage(BackpackPropertyUpdate.Handler.class, BackpackPropertyUpdate.class, disc++, Side.SERVER);
 		INSTANCE.registerMessage(UserPropertyUpdate.Handler.class, UserPropertyUpdate.class, disc++, Side.SERVER);
+		INSTANCE.registerMessage(BentoUpdateMode.Handler.class, BentoUpdateMode.class, disc++, Side.SERVER);
 		
 		INSTANCE.registerMessage(FieryRemoved.Handler.class, FieryRemoved.class, disc++, Side.CLIENT);
 		INSTANCE.registerMessage(SyncLightArrow.Handler.class, SyncLightArrow.class, disc++, Side.CLIENT);
+		INSTANCE.registerMessage(PlaySound.Handler.class, PlaySound.class, disc++, Side.CLIENT);
 	}
 	
 }
