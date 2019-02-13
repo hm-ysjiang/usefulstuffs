@@ -13,12 +13,15 @@ import hmysjiang.usefulstuffs.blocks.gluedbox.BlockGluedBox;
 import hmysjiang.usefulstuffs.blocks.lightbulb.BlockLightBulb;
 import hmysjiang.usefulstuffs.blocks.playerdetector.BlockPlayerDetector;
 import hmysjiang.usefulstuffs.blocks.portalmuffler.BlockPortalMuffler;
+import hmysjiang.usefulstuffs.blocks.pressureplates.BlockInvertedPressurePlate;
 import hmysjiang.usefulstuffs.blocks.raindetector.BlockRainDetector;
 import hmysjiang.usefulstuffs.blocks.tank.BlockTankFrame;
 import hmysjiang.usefulstuffs.blocks.tflipflop.BlockTFlipFlop;
 import hmysjiang.usefulstuffs.blocks.universaluser.BlockUniversalUser;
 import hmysjiang.usefulstuffs.blocks.well.BlockWell;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPressurePlate;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -48,6 +51,8 @@ public class ModBlocks {
 	public static Block universal_user;
 	public static Block filing_cabinet_nbt;
 	public static Block tank;
+	public static Block inverted_pressure_plate;
+	public static Block wooden_inverted_pressure_plate;
 	
 	public static void init() {
 		campfire = new BlockCampfire(ConfigManager.campfireEnabled);
@@ -66,6 +71,8 @@ public class ModBlocks {
 		universal_user = new BlockUniversalUser(ConfigManager.universalUserEnabled);
 		filing_cabinet_nbt = new BlockFilingCabinetNBT(ConfigManager.filingCabinetNbtEnabled);
 		tank = new BlockTankFrame(ConfigManager.tankItemEnabled);
+		inverted_pressure_plate = new BlockInvertedPressurePlate(Material.ROCK, BlockPressurePlate.Sensitivity.MOBS, hmysjiang.usefulstuffs.Reference.ModBlocks.INVERTED_PRESSURE_PLATE, ConfigManager.invertedPressurePlateEnabled);
+		wooden_inverted_pressure_plate = new BlockInvertedPressurePlate(Material.WOOD, BlockPressurePlate.Sensitivity.EVERYTHING, hmysjiang.usefulstuffs.Reference.ModBlocks.WOODEN_INVERTED_PRESSURE_PLATE, ConfigManager.invertedPressurePlateEnabled);
 	}
 	
 	@SubscribeEvent
@@ -115,6 +122,10 @@ public class ModBlocks {
 		}
 		if (ConfigManager.tankBlockEnabled) {
 			register(registry, tank);
+		}
+		if (ConfigManager.invertedPressurePlateEnabled) {
+			register(registry, inverted_pressure_plate);
+			register(registry, wooden_inverted_pressure_plate);
 		}
 	}
 	

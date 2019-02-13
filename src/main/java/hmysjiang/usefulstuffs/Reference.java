@@ -8,7 +8,7 @@ public class Reference {
 
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "2.5.4";
+	public static final String VERSION = "2.5.5";
 	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
 	public static final boolean TEST_MODE = false;
 	public static final GameProfile MOD_PROFILE = new GameProfile(UUID.fromString("9b607828-0f15-4ceb-ba58-708fa1f22009"), "UsefulStuffsFakePlayer");
@@ -75,7 +75,9 @@ public class Reference {
 		FIERY_LILY("fiery_lily"),
 		MILK_FERMENTER("milk_fermenter"),
 		UNIVERSAL_USER("universal_user"),
-		TANK("tank_block");
+		TANK("tank_block"),
+		INVERTED_PRESSURE_PLATE("inverted_pressure_plate"),
+		WOODEN_INVERTED_PRESSURE_PLATE("inverted_wooden_pressure_plate");
 		
 		private String unlocalizedName;
 		

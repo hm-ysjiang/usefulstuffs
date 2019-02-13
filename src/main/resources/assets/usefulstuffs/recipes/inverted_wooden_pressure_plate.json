@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:wooden_pressure_plate"
+        },
+        {
+            "item": "minecraft:redstone_torch"
+        }
+    ],
+    "result": {
+        "item": "usefulstuffs:inverted_wooden_pressure_plate"
+    }
+}

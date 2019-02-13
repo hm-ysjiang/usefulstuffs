@@ -93,6 +93,8 @@ tile.usefulstuffs.fiery_lily.name=Fiery Lily
 tile.usefulstuffs.milk_fermenter.name=Milk Fermenter
 tile.usefulstuffs.universal_user.name=Universal User
 tile.usefulstuffs.tank_block.name=Tank Frame
+tile.usefulstuffs.inverted_pressure_plate.name=Stone Pressure Plate (Inverted)
+tile.usefulstuffs.inverted_wooden_pressure_plate.name=Wooden Pressure Plate (Inverted)
 
 
 usefulstuffs.ingredient.tooltip=Crafting ingredient

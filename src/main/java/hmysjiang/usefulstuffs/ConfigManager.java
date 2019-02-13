@@ -95,6 +95,7 @@ public class ConfigManager {
 	public static boolean tankItemEnabled;
 	public static boolean tankBlockEnabled;
 	public static boolean fortressFinderEnabled;
+	public static boolean invertedPressurePlateEnabled;
 	
 	
 	public static Configuration getConfig() {
@@ -518,6 +519,12 @@ public class ConfigManager {
 		fortressFinderEnabled = propertyFortressFinderEnabled.getBoolean();
 		propertyFortressFinderEnabled.set(fortressFinderEnabled);
 		orderEnable.add(propertyFortressFinderEnabled.getName());
+		
+		Property propertyInvertedPressurePlateEnabled = config.get(CATEGORY_ENABLE, "enable_inverted_pressure_plate", true);
+		propertyInvertedPressurePlateEnabled.setComment("Enable Inverted Pressure Plates? DEFAULT=true");
+		invertedPressurePlateEnabled = propertyInvertedPressurePlateEnabled.getBoolean();
+		propertyInvertedPressurePlateEnabled.set(invertedPressurePlateEnabled);
+		orderEnable.add(propertyInvertedPressurePlateEnabled.getName());
 	}
 
 }
