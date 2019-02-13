@@ -44,7 +44,7 @@ public class EnchantmentFastDraw extends Enchantment {
 	
 	@SubscribeEvent
 	public void onArrowNock(ArrowNockEvent event) {
-		if (!players.contains(event.getEntityPlayer()))
+		if (!players.contains(event.getEntityPlayer()) && EnchantmentHelper.getEnchantmentLevel(INSTANCE, event.getBow()) > 0)
 			players.add(event.getEntityPlayer());
 	}
 	

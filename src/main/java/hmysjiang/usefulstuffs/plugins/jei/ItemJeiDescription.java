@@ -97,6 +97,8 @@ public class ItemJeiDescription {
 																 "usefulstuffs.tank_formation.jei");
 		registry.addIngredientInfo(new ItemStack(ModBlocks.tank), VanillaTypes.ITEM, "usefulstuffs.tank_block.jei", 
 																					 "usefulstuffs.tank_formation.jei");
+		registry.addIngredientInfo(new ItemStack(ModItems.fortress_finder), VanillaTypes.ITEM, "usefulstuffs.fortress_finder.jei_1", 
+																							   "usefulstuffs.fortress_finder.jei_2");
 	}
 	
 }

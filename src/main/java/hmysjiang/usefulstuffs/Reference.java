@@ -8,7 +8,7 @@ public class Reference {
 
 	public static final String MOD_ID = "usefulstuffs";
 	public static final String NAME = "Useful Stuffs";
-	public static final String VERSION = "2.5.3";
+	public static final String VERSION = "2.5.4";
 	public static final String ACCEPTED_MCVERSION = "[1.12.2]";
 	public static final boolean TEST_MODE = false;
 	public static final GameProfile MOD_PROFILE = new GameProfile(UUID.fromString("9b607828-0f15-4ceb-ba58-708fa1f22009"), "UsefulStuffsFakePlayer");
@@ -41,7 +41,8 @@ public class Reference {
 		UNIVERSAL_CORE("universal_core"),
 		POTATO_CHARM("potato_charm"),
 		STABILIZING_RING("stabilizing_ring"),
-		TANK_CONTAINER("tank_container");
+		TANK_CONTAINER("tank_container"),
+		FORTRESS_FINDER("fortress_compass");
 		
 		private String unlocalizedName;
 		

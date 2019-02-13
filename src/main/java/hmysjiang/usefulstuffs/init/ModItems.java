@@ -12,6 +12,7 @@ import hmysjiang.usefulstuffs.items.ItemBerry;
 import hmysjiang.usefulstuffs.items.ItemBuildingWand;
 import hmysjiang.usefulstuffs.items.ItemBuildingWandInfinite;
 import hmysjiang.usefulstuffs.items.ItemCheese;
+import hmysjiang.usefulstuffs.items.ItemFortressFinder;
 import hmysjiang.usefulstuffs.items.ItemInfiniteWater;
 import hmysjiang.usefulstuffs.items.ItemLightBattery;
 import hmysjiang.usefulstuffs.items.ItemLightBow;
@@ -70,6 +71,7 @@ public class ModItems {
 	public static Item charm_potato;
 	public static Item ring_stablizing;
 	public static Item tank_container;
+	public static Item fortress_finder;
 	
 	public static void init() {
 		water_blacklist = new ItemWaterBlackList();
@@ -99,6 +101,7 @@ public class ModItems {
 		charm_potato = new ItemPotatoCharm();
 		ring_stablizing = new ItemStabilizingRing();
 		tank_container = new ItemTankContainer();
+		fortress_finder = new ItemFortressFinder();
 	}
 	
 	@SubscribeEvent
@@ -170,6 +173,9 @@ public class ModItems {
 		if (ConfigManager.tankItemEnabled) {
 			register(registry, tank_container);
 		}
+		if (ConfigManager.fortressFinderEnabled) {
+			register(registry, fortress_finder);
+		}
 		register(registry, 
 				compact_storage_unit,
 				umbrella,
@@ -205,6 +211,7 @@ public class ModItems {
 		UsefulStuffs.proxy.registerItemRenders(universal_core);
 		UsefulStuffs.proxy.registerItemRenders(charm_potato);
 		UsefulStuffs.proxy.registerItemRenders(ring_stablizing);
+		UsefulStuffs.proxy.registerItemRenders(fortress_finder);
 		
 		for (EnumBerryColor color: EnumBerryColor.values())
 			UsefulStuffs.proxy.registerItemRenders(berry, color.getMetadata(), color.getDyeColorName());

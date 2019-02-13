@@ -6,8 +6,11 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
+import hmysjiang.usefulstuffs.client.gui.GuiBackpack;
 import hmysjiang.usefulstuffs.client.gui.GuiHandler;
+import hmysjiang.usefulstuffs.container.ContainerItem;
 import hmysjiang.usefulstuffs.utils.handler.KeyBindingHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,6 +75,20 @@ public class ItemBackpack extends Item implements IBauble {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(I18n.format("usefulstuffs.backpack.tooltip_normal"));
 		tooltip.add(TextFormatting.AQUA + I18n.format("usefulstuffs.backpack.tooltip", KeyBindingHandler.keybindings.get(0).getDisplayName()));
+		if (Minecraft.getMinecraft().currentScreen instanceof GuiBackpack && Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND) != stack) {
+			ItemStackHandler handler = new ItemStackHandler(54);
+			if (stack.hasTagCompound() && stack.getTagCompound().hasKey("Cont"))
+				handler.deserializeNBT(stack.getTagCompound().getCompoundTag("Cont"));
+			boolean flag = false;
+			for (int i = 0 ; i<handler.getSlots() ; i++) {
+				if (handler.getStackInSlot(i).getItem() instanceof ItemBackpack) {
+					flag = true;
+					break;
+				}
+			}
+			if (flag)
+				tooltip.add(TextFormatting.RED + I18n.format("usefulstuffs.backpack.tooltip_blocked"));
+		}
 	}
 	
 }

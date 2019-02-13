@@ -25,13 +25,13 @@ public class KeyBindingHandler {
 	
 	public static void init() {
 		keybindings = new ArrayList<KeyBinding>();
-		keybindings.add(new KeyBinding("key.usefulstuffs.switchinv.desc", Keyboard.KEY_X, "key.usefulstuffs.category"));
+		keybindings.add(new KeyBinding("key.usefulstuffs.useful.desc", Keyboard.KEY_X, "key.usefulstuffs.category"));
 		
 		registerKeyBindings();
 	}
 	
 	public static void registerKeyBindings() {
-		for (KeyBinding binding:keybindings) {
+		for (KeyBinding binding: keybindings) {
 			ClientRegistry.registerKeyBinding(binding);
 		}
 	}

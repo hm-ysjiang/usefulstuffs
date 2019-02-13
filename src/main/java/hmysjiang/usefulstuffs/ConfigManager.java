@@ -94,6 +94,7 @@ public class ConfigManager {
 	public static boolean stabilizingRingEnabled;
 	public static boolean tankItemEnabled;
 	public static boolean tankBlockEnabled;
+	public static boolean fortressFinderEnabled;
 	
 	
 	public static Configuration getConfig() {
@@ -511,6 +512,12 @@ public class ConfigManager {
 		tankBlockEnabled = propertyTankBlockEnabled.getBoolean() && tankItemEnabled;
 		propertyTankBlockEnabled.set(tankBlockEnabled);
 		orderEnable.add(propertyTankBlockEnabled.getName());
+		
+		Property propertyFortressFinderEnabled = config.get(CATEGORY_ENABLE, "enable_fortress_finder", true);
+		propertyFortressFinderEnabled.setComment("Enable Fortress Compass? DEFAULT=true");
+		fortressFinderEnabled = propertyFortressFinderEnabled.getBoolean();
+		propertyFortressFinderEnabled.set(fortressFinderEnabled);
+		orderEnable.add(propertyFortressFinderEnabled.getName());
 	}
 
 }

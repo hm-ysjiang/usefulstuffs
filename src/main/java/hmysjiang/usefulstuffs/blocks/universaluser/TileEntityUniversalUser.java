@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.blocks.universaluser;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 
+import hmysjiang.usefulstuffs.utils.TileEntityRotatable;
 import hmysjiang.usefulstuffs.utils.fakeplayer.FakePlayerHandler;
 import hmysjiang.usefulstuffs.utils.fakeplayer.USFakePlayer;
 import hmysjiang.usefulstuffs.utils.helper.WorldHelper;
@@ -15,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
@@ -38,7 +38,7 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityUniversalUser extends TileEntity implements ITickable {
+public class TileEntityUniversalUser extends TileEntityRotatable implements ITickable {
 	
 	private static Random rnd = new Random();
 	

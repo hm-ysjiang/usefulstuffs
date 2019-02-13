@@ -7,6 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 @ChestContainer
@@ -49,7 +50,19 @@ public class ContainerBackpack extends ContainerItem {
 		
 		@Override
 		public boolean isItemValid(ItemStack stackIn) {
-			return super.isItemValid(stackIn) && !(stackIn.getItem() instanceof ItemBackpack);
+			return super.isItemValid(stackIn) && checkHasBackpack(stackIn);
+		}
+		
+		// Return true if the stack should be able to insert to handler
+		private boolean checkHasBackpack(ItemStack stack) {
+			if (!(stack.getItem() instanceof ItemBackpack))
+				return true;
+			ItemStackHandler handler = getDeserializedHandler(stack, size);
+			for (int i = 0 ; i<handler.getSlots() ; i++) {
+				if (handler.getStackInSlot(i).getItem() instanceof ItemBackpack)
+					return false;
+			}
+			return true;
 		}
 		
 	}

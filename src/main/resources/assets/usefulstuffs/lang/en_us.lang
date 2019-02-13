@@ -60,6 +60,7 @@ item.usefulstuffs.tank_container_better_fill.name=Better Fluid Container (Fill)
 item.usefulstuffs.tank_container_advanced_fill.name=Advanced Fluid Container (Fill)
 item.usefulstuffs.tank_container_reinforced_fill.name=Reinforced Fluid Container (Fill)
 item.usefulstuffs.tank_container_extraordinary_fill.name=Extraordinary Fluid Container (Fill)
+item.usefulstuffs.fortress_compass.name=Fortress Compass
 
 
 tile.usefulstuffs.light_bulb.name=Light Bulb
@@ -132,6 +133,7 @@ usefulstuffs.player_detector.tooltip=Emits redstone signal when there is a playe
 usefulstuffs.fiery_lily_belt.tooltip=Immune to Fire Damage!
 usefulstuffs.umbrella.tooltip=When equipped on head, falling damage is reduced by 30%s
 usefulstuffs.backpack.tooltip=When equipped on bauble slot, press %s to open backpack
+usefulstuffs.backpack.tooltip_blocked=This backpack already has another backpack in it !
 usefulstuffs.backpack.tooltip_normal=Just a normal backpack
 usefulstuffs.backpack.tooltip_mining_1=Automatically collect mining resources
 usefulstuffs.backpack.tooltip_mining_2=Shift-Right click to open config gui, Equip on bauble slot to make Auto-Pickup work
@@ -163,6 +165,8 @@ usefulstuffs.tank_container.tooltip_5_p=Mode: Place
 usefulstuffs.tank_container.tooltip_5_f=Mode: Fill
 usefulstuffs.tank.tooltip_1=Work along with Fluid Containers, put them inside to form a tank
 usefulstuffs.tank.tooltip_2=Right click with a Fluid Container to insert, Shift-Right click with empty hand to take out, or use a pipe
+usefulstuffs.fortress_finder.tooltip_1=Leads you to the nearest nether fortress
+usefulstuffs.fortress_finder.tooltip_2=Right click in nether to update the compass
 
 
 usefulstuffs.waterfilter.jei_1=Prevent Well of Water Fall to insert water into a set of specific block's sides.
@@ -205,6 +209,8 @@ usefulstuffs.stabilizing_ring.jei=Remove the mining speed debuff when you are no
 usefulstuffs.tank_container.jei=Work as a big bucket, Shift-Right click to toggle mode.
 usefulstuffs.tank_block.jei=Work along with Fluid Containers.
 usefulstuffs.tank_formation.jei=Right click a Tank Frame with a Fluid Container or use a pipe to form a tank, Shift-Right click with empty hand to take the Fluid Container out.
+usefulstuffs.fortress_finder.jei_1=Leads you to the nearest nether fortress.
+usefulstuffs.fortress_finder.jei_2=Right click in nether to update the compass.
 
 
 category.jei.usefulstuffs.milk_fermenter.title=Milk Fermenter
@@ -242,15 +248,16 @@ usefulstuffs.gui.user.name=Universal User
 
 
 key.usefulstuffs.category=UsefulStuffs
-key.usefulstuffs.switchinv.desc=Useful Key
+key.usefulstuffs.useful.desc=Useful Key
 
 
 enchantment.usefulstuffs.xl.name=Frugal
+enchantment.usefulstuffs.xl.desc=Reduce the durability cost of Packing GLue
 enchantment.usefulstuffs.moonlight.name=Blessing of Artemis
+enchantment.usefulstuffs.moonlight.desc=Makes the light-using gadgets able to charge during the night
 enchantment.usefulstuffs.fast_draw.name=Fast Draw
+enchantment.usefulstuffs.fast_draw.desc=Increase the draw speed of bows
 
 
 usefulstuffs.potato_charm.statushint=Look at yourself. A couch potato.
-
-
 
