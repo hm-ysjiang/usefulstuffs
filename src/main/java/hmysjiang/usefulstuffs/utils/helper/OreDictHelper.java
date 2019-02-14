@@ -5,7 +5,7 @@ import java.util.List;
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.blocks.bush.EnumBerryColor;
 import hmysjiang.usefulstuffs.init.ModItems;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,9 +26,9 @@ public class OreDictHelper {
 	}
 	
 	private static void register() {
-		//berries
-		LogHelper.info("Registering ItemBerry-s to OreDictionary");
+		// berries
 		if (ConfigManager.berryEnabled) {
+			LogHelper.info("Registering ItemBerry-s to OreDictionary");
 			for (EnumBerryColor color: EnumBerryColor.values()) {
 				OreDictionary.registerOre("dye", new ItemStack(ModItems.berry, 1, color.getMetadata()));
 				OreDictionary.registerOre("listAllberry", new ItemStack(ModItems.berry, 1, color.getMetadata()));
@@ -53,6 +53,11 @@ public class OreDictHelper {
 			OreDictionary.registerOre("cropRaspberry", new ItemStack(ModItems.berry, 1, 14));
 			OreDictionary.registerOre("cropBlueberry", new ItemStack(ModItems.berry, 1, 11));
 			OreDictionary.registerOre("cropBlackberry", new ItemStack(ModItems.berry, 1, 15));
+		}
+		// skulls
+		if (ConfigManager.universalUserEnabled) {
+			LogHelper.info("Registering Skulls to OreDictionary");
+			OreDictionary.registerOre("itemSkull", new ItemStack(Items.SKULL, 1, OreDictionary.WILDCARD_VALUE));
 		}
 	}
 
