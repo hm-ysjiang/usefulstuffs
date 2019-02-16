@@ -34,6 +34,7 @@ public class ConfigManager {
 	public static int bushSpawnMinHeight;
 	public static int bushSpawnRate;
 	public static boolean bushDropsAfterMature;
+	public static boolean bushHasCollision;
 	public static int playerDetectorRange;
 	public static int portalMufflerRange;
 	public static int wellTransRate;
@@ -169,6 +170,12 @@ public class ConfigManager {
 		bushDropsAfterMature = propertyBushDropMature.getBoolean();
 		propertyBushDropMature.set(bushDropsAfterMature);
 		orderBlock.add(propertyBushDropMature.getName());
+		
+		Property propertyBushHasCollision = config.get(CATEGORY_BLOCK, "bush_has_collision", false);
+		propertyBushHasCollision.setComment("Set this to true if you want a collision bounding box on berry bushes. DEFAULT=false");
+		bushHasCollision = propertyBushHasCollision.getBoolean();
+		propertyBushHasCollision.set(bushHasCollision);
+		orderBlock.add(propertyBushHasCollision.getName());
 		
 		Property propertyPlayerDetectorRange = config.get(CATEGORY_BLOCK, "player_detector_range", 1);
 		propertyPlayerDetectorRange.setComment("The radius of the player detector. DEFAULT=1, MIN=1");

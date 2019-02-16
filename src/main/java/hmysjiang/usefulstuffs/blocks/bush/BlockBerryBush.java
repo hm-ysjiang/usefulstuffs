@@ -169,7 +169,7 @@ public class BlockBerryBush extends Block implements IGrowable, IPlantable {
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return NULL_AABB;
+		return ConfigManager.bushHasCollision ? BOUNDING_BOX : NULL_AABB;
 	}
 	
 	@Override

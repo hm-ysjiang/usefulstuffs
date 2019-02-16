@@ -45,7 +45,7 @@ public class ItemLightBattery extends Item implements ILightChargable, IBauble {
 		if (charge < amount) {
 			if (!simulate)
 				stack.setItemDamage(stack.getMaxDamage());
-			return amount - charge;
+			return charge;
 		}
 		if (!simulate)
 			stack.setItemDamage(stack.getItemDamage() + amount);

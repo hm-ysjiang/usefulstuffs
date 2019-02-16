@@ -2,6 +2,8 @@ package hmysjiang.usefulstuffs.items;
 
 import java.util.List;
 
+import baubles.api.cap.BaublesCapabilities;
+import baubles.api.cap.IBaublesItemHandler;
 import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import hmysjiang.usefulstuffs.UsefulStuffs;
@@ -79,8 +81,7 @@ public class ItemLightShooter extends Item {
 
 	public static int getAmmo(EntityPlayer player, ItemStack itemStackIn) {
 		if (ConfigManager.shooterAcceptBattery) {
-			ItemStack battery = InventoryHelper.findStackInPlayerInventoryContainBaubles(player, new ItemStack(ModItems.light_battery), true);
-			int charge = ItemLightBattery.getChargedEnergy(battery);
+			int charge = calculateInventoryLight(player);
 			if (charge >= ConfigManager.shooterUseBattery) 
 				return -1;
 		}
@@ -98,6 +99,50 @@ public class ItemLightShooter extends Item {
 		return ammo;
 	}
 	
+	public static int calculateInventoryLight(EntityPlayer player) {
+		int charge = 0;
+		IBaublesItemHandler handler = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
+		for (int i = 0 ; i<handler.getSlots() ; i++) 
+			if (handler.getStackInSlot(i).getItem() == ModItems.light_battery)
+				charge += ItemLightBattery.getChargedEnergy(handler.getStackInSlot(i));
+		for (ItemStack stack: player.inventory.mainInventory) 
+			if (stack.getItem() == ModItems.light_battery)
+				charge += ItemLightBattery.getChargedEnergy(stack);
+		for (ItemStack stack: player.inventory.offHandInventory) 
+			if (stack.getItem() == ModItems.light_battery)
+				charge += ItemLightBattery.getChargedEnergy(stack);
+		return charge;
+	}
+	
+	/***
+	 * Return true if success
+	 */
+	public static boolean tryDecreaseInventoryLight(EntityPlayer player) {
+		if (calculateInventoryLight(player) < ConfigManager.shooterUseBattery)
+			return false;
+		int charge = ConfigManager.shooterUseBattery;
+		IBaublesItemHandler handler = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
+		for (int i = 0 ; i<handler.getSlots() ; i++) {
+			if (charge <= 0)
+				break;
+			if (handler.getStackInSlot(i).getItem() == ModItems.light_battery)
+				charge -= ItemLightBattery.drainEnergy(handler.getStackInSlot(i), charge, false);
+		}
+		for (ItemStack stack: player.inventory.mainInventory) {
+			if (charge <= 0)
+				break;
+			if (stack.getItem() == ModItems.light_battery)
+				charge -= ItemLightBattery.drainEnergy(stack, charge, false);
+		}
+		for (ItemStack stack: player.inventory.offHandInventory) {
+			if (charge <= 0)
+				break;
+			if (stack.getItem() == ModItems.light_battery)
+				charge -= ItemLightBattery.drainEnergy(stack, charge, false);
+		}
+		return true;
+	}
+	
 	protected static ItemStackHandler getItemHandler(ItemStack itemStackIn, String key) {
 		ItemStackHandler handler = new ItemStackHandler(4);
 		if (itemStackIn.hasTagCompound() && itemStackIn.getTagCompound().hasKey("Cont"))
@@ -112,12 +157,8 @@ public class ItemLightShooter extends Item {
 
 	public static void decrAmmoCount(EntityPlayer player, ItemStack itemStackIn, int amount) {
 		if (ConfigManager.shooterAcceptBattery) {
-			ItemStack battery = InventoryHelper.findStackInPlayerInventoryContainBaubles(player, new ItemStack(ModItems.light_battery), true);
-			int charge = ItemLightBattery.getChargedEnergy(battery);
-			if (charge >= ConfigManager.shooterUseBattery) {
-				battery.setItemDamage(battery.getItemDamage() + ConfigManager.shooterUseBattery);
+			if (tryDecreaseInventoryLight(player))
 				return;
-			}
 		}
 		ItemStackHandler handler = getItemHandler(itemStackIn, "Cont");
 		for (int i = 0 ; i<handler.getSlots() ; i++)

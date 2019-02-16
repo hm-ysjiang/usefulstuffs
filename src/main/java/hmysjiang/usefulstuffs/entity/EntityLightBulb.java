@@ -22,19 +22,23 @@ public class EntityLightBulb extends EntityThrowable implements IProjectile {
 	private boolean fromBulb = false;
 	public EntityLightBulb(World worldIn) {
 		super(worldIn);
+		setSize(0.1F, 0.1F);
 	}
 
 	public EntityLightBulb(World worldIn, EntityLivingBase throwerIn) {
 		super(worldIn, throwerIn);
+		setSize(0.1F, 0.1F);
 	}
 	
 	public EntityLightBulb(World worldIn, double x, double y, double z) {
 		super(worldIn, x, y, z);
+		setSize(0.1F, 0.1F);
 	}
 	
 	public EntityLightBulb(World worldIn, EntityLivingBase throwerIn, boolean fromBulb) {
 		this(worldIn, throwerIn);
 		this.fromBulb = fromBulb;
+		setSize(0.1F, 0.1F);
 	}
 
 	@Override
