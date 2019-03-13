@@ -262,4 +262,5 @@ enchantment.usefulstuffs.fast_draw.desc=Increase the draw speed of bows
 
 
 usefulstuffs.potato_charm.statushint=Look at yourself. A couch potato.
+usefulstuffs.bedstatus=You can only sleep at night ( %s )
 

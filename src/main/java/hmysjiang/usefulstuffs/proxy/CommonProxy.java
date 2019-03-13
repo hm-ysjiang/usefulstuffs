@@ -22,6 +22,7 @@ import hmysjiang.usefulstuffs.init.ModItems;
 import hmysjiang.usefulstuffs.init.ModRecipe;
 import hmysjiang.usefulstuffs.network.PacketHandler;
 import hmysjiang.usefulstuffs.utils.fakeplayer.FakePlayerHandler;
+import hmysjiang.usefulstuffs.utils.handler.event.SleepTimeTipHandler;
 import hmysjiang.usefulstuffs.utils.helper.OreDictHelper;
 import hmysjiang.usefulstuffs.world.gen.BerryBushGenerator;
 import hmysjiang.usefulstuffs.world.gen.FieryLilyGenerator;
@@ -44,6 +45,7 @@ public class CommonProxy {
 		
 		MinecraftForge.EVENT_BUS.register(EnchantmentFastDraw.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(FakePlayerHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(SleepTimeTipHandler.INSTANCE);
 	}
 	
 	public void init() {

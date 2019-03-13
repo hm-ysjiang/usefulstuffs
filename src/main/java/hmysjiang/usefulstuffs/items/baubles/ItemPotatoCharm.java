@@ -27,6 +27,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -34,7 +35,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @EventBusSubscriber
 public class ItemPotatoCharm extends Item implements IBauble {
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority=EventPriority.HIGH)
 	public static void onPlayerTrySleep(PlayerSleepInBedEvent event) {
 		if (ConfigManager.charmPotatoEnabled) {
 			EntityPlayer player = event.getEntityPlayer();
