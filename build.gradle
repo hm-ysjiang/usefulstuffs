@@ -101,6 +101,6 @@ jar {
 
     manifest {
     
-        attributes 'FMLAT': 'MODID_at.cfg'
+        attributes 'FMLAT': 'usefulstuffs_at.cfg'
     }
 }
