@@ -259,6 +259,8 @@ enchantment.usefulstuffs.moonlight.name=Blessing of Artemis
 enchantment.usefulstuffs.moonlight.desc=Makes the light-using gadgets able to charge during the night
 enchantment.usefulstuffs.fast_draw.name=Fast Draw
 enchantment.usefulstuffs.fast_draw.desc=Increase the draw speed of bows
+enchantment.usefulstuffs.endest.name=Endest
+enchantment.usefulstuffs.endest.desc=End-er than the Enders. Arrows damage Endermen
 
 
 usefulstuffs.potato_charm.statushint=Look at yourself. A couch potato.

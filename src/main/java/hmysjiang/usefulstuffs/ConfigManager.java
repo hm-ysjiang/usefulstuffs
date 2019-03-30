@@ -21,11 +21,13 @@ public class ConfigManager {
 	private static List<String> orderItem;
 	private static List<String> orderGeneral;
 	private static List<String> orderEnable;
+	private static List<String> orderEnchant;
 	public static final String FILE_NAME = "usefulstuffs.cfg";
 	public static final String CATEGORY_BLOCK = "Blocks";
 	public static final String CATEGORY_ITEM = "Items";
 	public static final String CATEGORY_GENERAL = "General";
 	public static final String CATEGORY_ENABLE = "Enable";
+	public static final String CATEGORY_ENCHANT = "Enchantments";
 	
 	//Blocks
 	public static int bushGrowthChance;
@@ -98,6 +100,16 @@ public class ConfigManager {
 	public static boolean fortressFinderEnabled;
 	public static boolean invertedPressurePlateEnabled;
 	
+	//Enchantments
+	public static boolean enableXl;
+	public static boolean functionXl;
+	public static boolean enableMoonlight;
+	public static boolean functionMoonlight;
+	public static boolean enableFastdraw;
+	public static boolean functionFastdraw;
+	public static boolean enableEndest;
+	public static boolean functionEndest;
+	
 	
 	public static Configuration getConfig() {
 		return config;
@@ -114,17 +126,20 @@ public class ConfigManager {
 		orderItem = new ArrayList<String>();
 		orderGeneral = new ArrayList<String>();
 		orderEnable = new ArrayList<String>();
+		orderEnchant = new ArrayList<String>();
 		config.load();
 		
 		loadEnableProperties();
 		loadBlocksProperties();
 		loadItemsProperties();
 		loadGeneralProperties();
+		loadEnchantmentProperties();
 		
 		config.setCategoryPropertyOrder(CATEGORY_BLOCK, orderBlock);
 		config.setCategoryPropertyOrder(CATEGORY_ITEM, orderItem);
 		config.setCategoryPropertyOrder(CATEGORY_GENERAL, orderGeneral);
 		config.setCategoryPropertyOrder(CATEGORY_ENABLE, orderEnable);
+		config.setCategoryPropertyOrder(CATEGORY_ENCHANT, orderEnchant);
 		
 		if (config.hasChanged())
 			config.save();
@@ -532,6 +547,56 @@ public class ConfigManager {
 		invertedPressurePlateEnabled = propertyInvertedPressurePlateEnabled.getBoolean();
 		propertyInvertedPressurePlateEnabled.set(invertedPressurePlateEnabled);
 		orderEnable.add(propertyInvertedPressurePlateEnabled.getName());
+	}
+	
+	private static void loadEnchantmentProperties() {
+		Property propertyEnabledXl = config.get(CATEGORY_ENCHANT, "enable_frugal", true);
+		propertyEnabledXl.setComment("Enable Enchantment Frugal? DEFAULT=true, REQUIRE enable_glued to be true");
+		enableXl = propertyEnabledXl.getBoolean() && glueEnabled;
+		propertyEnabledXl.set(enableXl);
+		orderGeneral.add(propertyEnabledXl.getName());
+		
+		Property propertyFuncXl = config.get(CATEGORY_ENCHANT, "function_frugal", true);
+		propertyFuncXl.setComment("Enable functionality of Enchantment Frugal?(You may want this if you already have this enchantment in your save) DEFAULT=true, REQUIRE enable_frugal to be true");
+		functionXl = propertyFuncXl.getBoolean() && enableXl;
+		propertyFuncXl.set(functionXl);
+		orderGeneral.add(propertyFuncXl.getName());
+
+		Property propertyEnabledMoonlight = config.get(CATEGORY_ENCHANT, "enable_moonlight", true);
+		propertyEnabledMoonlight.setComment("Enable Enchantment Blessing of Artemis? DEFAULT=true, REQUIRE enable_light_bow to be true");
+		enableMoonlight = propertyEnabledMoonlight.getBoolean() && lightBowEnabled;
+		propertyEnabledMoonlight.set(enableMoonlight);
+		orderGeneral.add(propertyEnabledMoonlight.getName());
+		
+		Property propertyFuncMoonlight = config.get(CATEGORY_ENCHANT, "function_moonlight", true);
+		propertyFuncMoonlight.setComment("Enable functionality of Enchantment Blessing of Artemis?(You may want this if you already have this enchantment in your save) DEFAULT=true, REQUIRE enable_moonlight to be true");
+		functionMoonlight = propertyFuncMoonlight.getBoolean() && enableMoonlight;
+		propertyFuncMoonlight.set(functionMoonlight);
+		orderGeneral.add(propertyFuncMoonlight.getName());
+
+		Property propertyEnabledFastdraw = config.get(CATEGORY_ENCHANT, "enable_fastdraw", true);
+		propertyEnabledFastdraw.setComment("Enable Enchantment Fast Draw? DEFAULT=true");
+		enableFastdraw = propertyEnabledFastdraw.getBoolean();
+		propertyEnabledFastdraw.set(enableFastdraw);
+		orderGeneral.add(propertyEnabledFastdraw.getName());
+		
+		Property propertyFuncFastdraw = config.get(CATEGORY_ENCHANT, "function_fastdraw", true);
+		propertyFuncFastdraw.setComment("Enable functionality of Enchantment Fast Draw?(You may want this if you already have this enchantment in your save) DEFAULT=true, REQUIRE enable_fastdraw to be true");
+		functionFastdraw = propertyFuncFastdraw.getBoolean() && enableFastdraw;
+		propertyFuncFastdraw.set(functionFastdraw);
+		orderGeneral.add(propertyFuncFastdraw.getName());
+
+		Property propertyEnabledEndest = config.get(CATEGORY_ENCHANT, "enable_endest", true);
+		propertyEnabledEndest.setComment("Enable Enchantment Endest? DEFAULT=true");
+		enableEndest = propertyEnabledEndest.getBoolean();
+		propertyEnabledEndest.set(enableEndest);
+		orderGeneral.add(propertyEnabledEndest.getName());
+		
+		Property propertyFuncEndest = config.get(CATEGORY_ENCHANT, "function_endest", true);
+		propertyFuncEndest.setComment("Enable functionality of Enchantment Endest?(You may want this if you already have this enchantment in your save) DEFAULT=true, REQUIRE enable_endest to be true");
+		functionEndest = propertyFuncEndest.getBoolean() && enableEndest;
+		propertyFuncEndest.set(functionEndest);
+		orderGeneral.add(propertyFuncEndest.getName());
 	}
 
 }

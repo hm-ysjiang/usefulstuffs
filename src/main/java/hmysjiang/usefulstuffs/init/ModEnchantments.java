@@ -1,6 +1,7 @@
 package hmysjiang.usefulstuffs.init;
 
 import hmysjiang.usefulstuffs.ConfigManager;
+import hmysjiang.usefulstuffs.enchantment.EnchantmentEndest;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentFastDraw;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentMoonLight;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentXL;
@@ -14,11 +15,17 @@ public class ModEnchantments {
 	
 	@SubscribeEvent
 	public static void OnEnchantmentRegister(RegistryEvent.Register<Enchantment> event) {
-		if (ConfigManager.glueEnabled)
+		if (ConfigManager.enableXl)
 			event.getRegistry().register(EnchantmentXL.INSTANCE);
-		if (ConfigManager.lightBowEnabled || ConfigManager.lightBatteryEnabled)
+		if (ConfigManager.enableMoonlight) {
 			event.getRegistry().register(EnchantmentMoonLight.INSTANCE);
-		event.getRegistry().register(EnchantmentFastDraw.INSTANCE);
+		}
+		if (ConfigManager.enableFastdraw) {
+			event.getRegistry().register(EnchantmentFastDraw.INSTANCE);
+		}
+		if (ConfigManager.enableEndest) {
+			event.getRegistry().register(EnchantmentEndest.INSTANCE);
+		}
 	}
 	
 }

@@ -1,5 +1,6 @@
 package hmysjiang.usefulstuffs.utils;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.enchantment.EnchantmentMoonLight;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ public interface ILightChargable {
 		double angY = (double) world.getCelestialAngle(0) * DOUBLE_PI + HALF_PI;
 		if (angY >= DOUBLE_PI)
 			angY -= DOUBLE_PI;
-		int charge = getChargeAmount(angY, EnchantmentHelper.getEnchantmentLevel(EnchantmentMoonLight.INSTANCE, stack) > 0, ((double)(world.getRainStrength(0) * 5.0F) / 16.0D), ((double)(world.getThunderStrength(0) * 5.0F) / 16.0D));
+		int charge = getChargeAmount(angY, ConfigManager.functionMoonlight && EnchantmentHelper.getEnchantmentLevel(EnchantmentMoonLight.INSTANCE, stack) > 0, ((double)(world.getRainStrength(0) * 5.0F) / 16.0D), ((double)(world.getThunderStrength(0) * 5.0F) / 16.0D));
 		if (stack.isItemDamaged()) {
 			stack.setItemDamage(stack.getItemDamage() > charge ? stack.getItemDamage() - charge : 0);
 		}

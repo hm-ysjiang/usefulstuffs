@@ -3,6 +3,7 @@ package hmysjiang.usefulstuffs.enchantment;
 import java.util.ArrayList;
 import java.util.List;
 
+import hmysjiang.usefulstuffs.ConfigManager;
 import hmysjiang.usefulstuffs.Reference;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -44,25 +45,25 @@ public class EnchantmentFastDraw extends Enchantment {
 	
 	@SubscribeEvent
 	public void onArrowNock(ArrowNockEvent event) {
-		if (!players.contains(event.getEntityPlayer()) && EnchantmentHelper.getEnchantmentLevel(INSTANCE, event.getBow()) > 0)
+		if (ConfigManager.functionFastdraw && !players.contains(event.getEntityPlayer()) && EnchantmentHelper.getEnchantmentLevel(INSTANCE, event.getBow()) > 0)
 			players.add(event.getEntityPlayer());
 	}
 	
 	@SubscribeEvent
 	public void onArrowLoose(ArrowLooseEvent event) {
-		if (players.contains(event.getEntityPlayer()))
+		if (ConfigManager.functionFastdraw && players.contains(event.getEntityPlayer()))
 			players.remove(event.getEntityPlayer());
 	}
 	
 	@SubscribeEvent
 	public void onPlayerLogOut(PlayerLoggedOutEvent event) {
-		if (players.contains(event.player))
+		if (ConfigManager.functionFastdraw && players.contains(event.player))
 			players.remove(event.player);
 	}
 	
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent event) {
-		if (players.contains(event.player)) {
+		if (ConfigManager.functionFastdraw && players.contains(event.player)) {
 			if (!event.player.isHandActive() || EnchantmentHelper.getEnchantmentLevel(INSTANCE, event.player.getActiveItemStack()) <= 0)
 				players.remove(event.player);
 			else {

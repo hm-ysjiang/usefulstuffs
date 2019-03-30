@@ -72,7 +72,7 @@ public class ItemPackingGlue extends Item {
 				}
 				ItemStack stack = player.getHeldItem(hand);
 				float raw_cost = WorldHelper.getBlockDataDensity(world, pos, state, world.getTileEntity(pos));
-				Integer enchLevel = EnchantmentHelper.getEnchantments(stack).get(EnchantmentXL.INSTANCE);
+				Integer enchLevel = ConfigManager.functionXl ? EnchantmentHelper.getEnchantments(stack).get(EnchantmentXL.INSTANCE) : null;
 				if (enchLevel != null) {
 					if (enchLevel == 1) {
 						raw_cost /= 1.5;
