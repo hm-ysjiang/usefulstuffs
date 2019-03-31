@@ -67,7 +67,7 @@ public class EnchantmentEndest extends Enchantment {
 	
 	@SubscribeEvent(priority=EventPriority.LOW)
 	public static void onArrowImpact(ProjectileImpactEvent.Arrow event) {
-		if (ConfigManager.functionEndest && event.getArrow().getTags().contains(TAG) && event.getRayTraceResult().entityHit != null && event.getRayTraceResult().entityHit instanceof EntityEnderman) {
+		if (ConfigManager.functionEndest && !event.getArrow().world.isRemote && event.getArrow().getTags().contains(TAG) && event.getArrow().shootingEntity != null && event.getRayTraceResult().entityHit != null && event.getRayTraceResult().entityHit instanceof EntityEnderman) {
 			EntityArrow arrow = event.getArrow();
 			float f = MathHelper.sqrt(arrow.motionX * arrow.motionX + arrow.motionY * arrow.motionY + arrow.motionZ * arrow.motionZ);
 			int i = MathHelper.ceil((double)f * arrow.getDamage());
